@@ -1,0 +1,45 @@
+{
+  "date_kst": "2026-10-03T22:13:36.333263+09:00",
+  "purpose": "Native invocation and behavior smoke tests, not a cost-optimization experiment",
+  "versions": {
+    "codex": "codex-cli 0.160.0",
+    "claude": "2.1.286 (Claude Code)"
+  },
+  "files": [
+    {
+      "path": "/Users/luka/Desktop/ctf/suffice-patch/SKILL.md",
+      "sha256": "5de93a4da0a4a8fa7f7c790ee95ef539352ee6dd5c4be5fee8d3254bde5e8230"
+    },
+    {
+      "path": "/Users/luka/Desktop/ctf/suffice-patch/evals/tasks.py",
+      "sha256": "7584a98dec68ff64e5e7602a50f38680e9e03fb3cacbe5cd188deb2f622238e2"
+    },
+    {
+      "path": "/Users/luka/Desktop/ctf/suffice-patch/evals/run.py",
+      "sha256": "cef950667629e5475e0ae5176b1b570cabd6da9f523b30d35ac199d6ae477d9c"
+    },
+    {
+      "path": "/Users/luka/Desktop/ctf/suffice-patch/evals/summary.json",
+      "sha256": "a884ff836922b8ae5a73be3c4e3314a75e8b358b0df2e7f6b67c21c873f38d4b"
+    },
+    {
+      "path": "/Users/luka/Desktop/ctf/suffice-patch/README.md",
+      "sha256": "f12119414184c657f1f7e59ce0833f50a3bbe9a4a9d79505e46a7fbfc08e8499"
+    },
+    {
+      "path": "/Users/luka/.agents/skills/suffice-patch/SKILL.md",
+      "sha256": "5de93a4da0a4a8fa7f7c790ee95ef539352ee6dd5c4be5fee8d3254bde5e8230"
+    },
+    {
+      "path": "/Users/luka/.claude/skills/suffice-patch/SKILL.md",
+      "sha256": "5de93a4da0a4a8fa7f7c790ee95ef539352ee6dd5c4be5fee8d3254bde5e8230"
+    }
+  ],
+  "native_codex_control": "Host skill discovery on; user config, plugins, hooks, apps, memory, project docs and multi-agent off",
+  "native_claude_control": "User skill discovery; hooks off; no external MCP; only Read/Edit/Write/Bash/Glob/Grep/Skill tools",
+  "limits": [
+    "Small reused synthetic fixtures, not independent holdout",
+    "No matched baseline or efficiency claim",
+    "Automatic selection observations are not universal guarantees"
+  ]
+}

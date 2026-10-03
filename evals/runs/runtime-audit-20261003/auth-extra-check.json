@@ -1,0 +1,5 @@
+{
+  "returncode": 0,
+  "stdout": "PASS: 12 authorization/missing-note combinations; denied-state preservation; detached returns\n",
+  "stderr": ""
+}

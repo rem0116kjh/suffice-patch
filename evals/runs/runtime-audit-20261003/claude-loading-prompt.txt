@@ -1,0 +1,1 @@
+/suffice-patch Do not edit files. This is a native skill-loading check. Quote verbatim the first sentence after the SufficePatch heading and the final sentence of the loaded skill body. Do not guess from the name or description. If the body is not available, say BODY_UNAVAILABLE.

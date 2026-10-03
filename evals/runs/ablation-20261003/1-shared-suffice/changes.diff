@@ -1,0 +1,52 @@
+--- a/paging.py
++++ b/paging.py
+@@ -1,2 +1,6 @@
+ def page_size(raw):
+-    return min(int(raw), 100)
++    try:
++        size = int(raw)
++    except (TypeError, ValueError, OverflowError):
++        return 20
++    return min(size, 100) if size > 0 else 20
+--- a/test_paging.py
++++ b/test_paging.py
+@@ -0,0 +1,39 @@
++import unittest
++
++import api
++import export
++import web
++from paging import page_size
++
++
++class PageSizeTests(unittest.TestCase):
++    def test_normalization_for_all_callers(self):
++        cases = [(value, value) for value in range(1, 101)]
++        cases += [(str(value), value) for value in range(1, 101)]
++        cases += [
++            (101, 100),
++            ("1000", 100),
++            (None, 20),
++            ("", 20),
++            ("   ", 20),
++            ("bad", 20),
++            ("2.5", 20),
++            ("1e2", 20),
++            (0, 20),
++            ("0", 20),
++            (-1, 20),
++            ("-100", 20),
++        ]
++        callers = {
++            "paging": page_size,
++            "api": lambda value: api.limit({"limit": value}),
++            "web": web.limit,
++            "export": export.limit,
++        }
++        for name, caller in callers.items():
++            for value, expected in cases:
++                with self.subTest(caller=name, value=value):
++                    self.assertEqual(caller(value), expected)
++
++    def test_api_missing_limit(self):
++        self.assertEqual(api.limit({}), 20)

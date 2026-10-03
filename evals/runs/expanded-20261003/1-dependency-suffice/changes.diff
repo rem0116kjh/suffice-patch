@@ -1,0 +1,54 @@
+--- a/links.py
++++ b/links.py
+@@ -1,2 +1,12 @@
++from urllib.parse import urlencode
++
++
+ def with_query(url, params):
+-    return url + "?" + "&".join(f"{k}={v}" for k, v in params.items())
++    query = urlencode(params)
++    if not query:
++        return url
++    base, fragment_marker, fragment = url.partition("#")
++    separator = "&" if "?" in base else "?"
++    if "?" in base and base.endswith(("?", "&")):
++        separator = ""
++    return base + separator + query + fragment_marker + fragment
+--- a/test_links.py
++++ b/test_links.py
+@@ -0,0 +1,35 @@
++import unittest
++
++from links import with_query
++
++
++class WithQueryTests(unittest.TestCase):
++    def test_encodes_keys_and_values_in_mapping_order(self):
++        self.assertEqual(
++            with_query("/search", {"z & =": "café & x=y", "a": "雪 day"}),
++            "/search?z+%26+%3D=caf%C3%A9+%26+x%3Dy&a=%E9%9B%AA+day",
++        )
++
++    def test_preserves_existing_query_and_fragment(self):
++        self.assertEqual(
++            with_query("/search?raw=a%20b&raw=x=y#part?x&y", {"new": "a b"}),
++            "/search?raw=a%20b&raw=x=y&new=a+b#part?x&y",
++        )
++
++    def test_fragment_without_existing_query(self):
++        self.assertEqual(with_query("/search#part?x", {"a": 1}), "/search?a=1#part?x")
++        self.assertEqual(with_query("/search#", {"a": 1}), "/search?a=1#")
++
++    def test_existing_query_delimiter(self):
++        for url in ("/search?", "/search?old=1&"):
++            with self.subTest(url=url):
++                self.assertEqual(with_query(url, {"a": ""}), url + "a=")
++
++    def test_empty_mapping_preserves_url(self):
++        for url in ("/search", "/search?", "/search?raw=%20#"):
++            with self.subTest(url=url):
++                self.assertEqual(with_query(url, {}), url)
++
++
++if __name__ == "__main__":
++    unittest.main()

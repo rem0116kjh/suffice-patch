@@ -1,0 +1,33 @@
+{
+  "cli": "codex-cli 0.160.0",
+  "model": "gpt-6-astra",
+  "effort": "low",
+  "repeats": 2,
+  "arms": [
+    "baseline",
+    "suffice"
+  ],
+  "tasks": [
+    "trivial",
+    "localized",
+    "reuse",
+    "multifile",
+    "ambiguous",
+    "auth",
+    "dependency",
+    "refactor"
+  ],
+  "sources": [],
+  "skill_sha256": "e22a8a548524323e2b208d6603c7b29ea519f3ee130d54967aa87049865eb34e",
+  "workflow_bytes": {
+    "baseline": 0,
+    "suffice": 2250
+  },
+  "workflows": {
+    "baseline": "",
+    "suffice": "---\nname: suffice-patch\ndescription: Make focused coding changes using only the evidence, edits, and checks needed for safe completion. Use for bounded fixes and implementation work.\n---\n\n# SufficePatch\n\nUse the smallest evidence, change, and verification sufficient to safely satisfy\nthe request. Follow applicable project instructions and preserve unrelated work.\n\n**Fast path:** When the location is clear and the change is local, with no new\ndependency, architecture, public API, migration, or security boundary involved,\nread the relevant file, make the obvious edit, run the nearest meaningful check,\nand stop. Keep the plan mental. Batch independent state checks and relevant reads;\ndo not spend a separate call listing files whose paths are already known.\n\n**Search until sufficient, not certain.** Read direct dependencies or callers only\nto resolve a specific uncertainty. Before another search, identify what decision\nits result could change; otherwise omit it. Broaden scope when evidence exposes\nshared behavior or a safety risk.\n\nReuse existing code and established dependencies; otherwise prefer standard\nlibrary or native features. Add a helper, wrapper, dependency, configuration,\nrefactor, or abstraction only when necessary for the requested behavior.\n\n**Verify nearest, then stop.** Choose a check that could falsify the change;\nsyntax alone does not prove behavior. Run a pre-fix reproduction when the cause\nor regression coverage is uncertain, not ceremonially. Add necessary regression\ncoverage. Broaden checks for shared modules, public APIs, cross-module behavior,\nsecurity boundaries, data integrity, failed targeted checks, or project mandates.\nReview the patch while checking it; do not repeat passed checks without changed\ncode or unresolved risk.\n\nNever trade away authentication, authorization, trust-boundary validation,\nsecurity, data-loss prevention, transaction integrity, accessibility, required\nerror handling, or correctness tests.\n\nStop when the requested behavior and safety obligations have adequate evidence.\nReport the result, actual verification, and remaining limitations. No optional\ncleanup, documentation, extra review, or speculative features. An unresolved\nrequirement means incomplete, not success.\n"
+  },
+  "combined_scope": "Three source instruction files, NOT the full installed plugins or their hooks.",
+  "harness_sha256": "c6b8459bb26aa5f2103f8e3e9bebd2284d5bc4510e30d30fdcea8916b9a972d7",
+  "tasks_sha256": "7584a98dec68ff64e5e7602a50f38680e9e03fb3cacbe5cd188deb2f622238e2"
+}

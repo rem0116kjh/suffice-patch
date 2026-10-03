@@ -1,0 +1,71 @@
+{
+  "difference": "Final helper skips Git diff when source context is empty; ordinary fixture output remains byte-for-byte identical.",
+  "old_sha256": "c8af2d1232c2958e5f81fb02a987ce9b663d7e61d3177587f024bcd436b8c124",
+  "new_sha256": "b67f30fc48cb80db564a5e83bcadcb2722e946e816a5183a32f3476b76bfe674",
+  "runs": [
+    {
+      "run": "1-invoice-baseline",
+      "same_output": true
+    },
+    {
+      "run": "1-invoice-suffice",
+      "same_output": true
+    },
+    {
+      "run": "1-inventory-suffice",
+      "same_output": true
+    },
+    {
+      "run": "1-inventory-baseline",
+      "same_output": true
+    },
+    {
+      "run": "1-download-baseline",
+      "same_output": true
+    },
+    {
+      "run": "1-download-suffice",
+      "same_output": true
+    },
+    {
+      "run": "1-noop-suffice",
+      "same_output": true
+    },
+    {
+      "run": "1-noop-baseline",
+      "same_output": true
+    },
+    {
+      "run": "2-invoice-suffice",
+      "same_output": true
+    },
+    {
+      "run": "2-invoice-baseline",
+      "same_output": true
+    },
+    {
+      "run": "2-inventory-baseline",
+      "same_output": true
+    },
+    {
+      "run": "2-inventory-suffice",
+      "same_output": true
+    },
+    {
+      "run": "2-download-suffice",
+      "same_output": true
+    },
+    {
+      "run": "2-download-baseline",
+      "same_output": true
+    },
+    {
+      "run": "2-noop-baseline",
+      "same_output": true
+    },
+    {
+      "run": "2-noop-suffice",
+      "same_output": true
+    }
+  ]
+}

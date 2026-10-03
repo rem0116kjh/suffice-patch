@@ -1,0 +1,18 @@
+--- a/downloads.py
++++ b/downloads.py
+@@ -1,8 +1,13 @@
+ from pathlib import Path
+ 
+ def resolve_download(root, name):
++    name = Path(name)
++    if name.is_absolute():
++        raise ValueError("absolute name")
+     root = Path(root).resolve()
+     path = (root / name).resolve()
+-    if not str(path).startswith(str(root)):
+-        raise ValueError("outside root")
++    try:
++        path.relative_to(root)
++    except ValueError:
++        raise ValueError("outside root") from None
+     return path

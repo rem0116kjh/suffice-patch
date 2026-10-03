@@ -1,0 +1,77 @@
+--- a/settings.py
++++ b/settings.py
+@@ -1,5 +1,19 @@
+ import json
++import os
++import tempfile
++
+ 
+ def save_settings(path, data):
+-    with open(path, "w", encoding="utf-8") as f:
+-        json.dump(data, f, ensure_ascii=False)
++    temporary = None
++    try:
++        with tempfile.NamedTemporaryFile(
++            mode="w", encoding="utf-8", dir=os.path.dirname(path) or ".",
++            delete=False,
++        ) as f:
++            temporary = f.name
++            json.dump(data, f, ensure_ascii=False, allow_nan=False)
++        os.replace(temporary, path)
++        temporary = None
++    finally:
++        if temporary is not None:
++            os.unlink(temporary)
+--- a/test_settings.py
++++ b/test_settings.py
+@@ -0,0 +1,50 @@
++import json
++from pathlib import Path
++import tempfile
++import unittest
++from unittest.mock import patch
++
++import settings
++
++
++class SaveSettingsTests(unittest.TestCase):
++    def test_save_new_and_existing_files(self):
++        with tempfile.TemporaryDirectory(dir=".") as directory:
++            path = Path(directory) / "settings.json"
++            for data in ({"name": "한글 café"}, {"updated": [True, None, 3]}):
++                settings.save_settings(path, data)
++                self.assertEqual(json.loads(path.read_text(encoding="utf-8")), data)
++                self.assertEqual(set(Path(directory).iterdir()), {path})
++
++    def test_serialization_failures_preserve_destination(self):
++        for data, error in (({"bad": object()}, TypeError),
++                            ({"bad": float("nan")}, ValueError),
++                            ({"bad": "\ud800"}, UnicodeEncodeError)):
++            for existing in (False, True):
++                with self.subTest(data=data, existing=existing):
++                    with tempfile.TemporaryDirectory(dir=".") as directory:
++                        path = Path(directory) / "settings.json"
++                        if existing:
++                            path.write_bytes(b"original content")
++                        with self.assertRaises(error):
++                            settings.save_settings(path, data)
++                        if existing:
++                            self.assertEqual(path.read_bytes(), b"original content")
++                        self.assertEqual(set(Path(directory).iterdir()),
++                                         {path} if existing else set())
++
++    def test_replacement_failure_preserves_destination(self):
++        with tempfile.TemporaryDirectory(dir=".") as directory:
++            path = Path(directory) / "settings.json"
++            path.write_bytes(b"original content")
++            failure = OSError("replacement failed")
++            with patch("os.replace", side_effect=failure):
++                with self.assertRaises(OSError) as caught:
++                    settings.save_settings(str(path), {"new": "value"})
++            self.assertIs(caught.exception, failure)
++            self.assertEqual(path.read_bytes(), b"original content")
++            self.assertEqual(set(Path(directory).iterdir()), {path})
++
++
++if __name__ == "__main__":
++    unittest.main()

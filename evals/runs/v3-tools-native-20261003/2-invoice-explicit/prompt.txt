@@ -1,0 +1,7 @@
+$suffice-patch Fix invoice.total_cents(amounts). Each input is a decimal string in major currency units. Round each amount independently to the nearest cent, ties away from zero, then sum the integer cents. Avoid binary floating-point errors. Preserve the input list and return 0 for an empty list.
+
+Complete the coding task in this working directory. You may inspect,
+edit and run local checks. Preserve unrelated work. Do not commit, push, install
+dependencies, spawn agents, access other directories, or use the network.
+Use the available Python standard library for Python checks. Report what changed
+and what you actually verified. Do not read hidden evaluator files.

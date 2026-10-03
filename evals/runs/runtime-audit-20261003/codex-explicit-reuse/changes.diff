@@ -1,0 +1,23 @@
+--- a/api.py
++++ b/api.py
+@@ -1,2 +1,5 @@
++from labels import display_name
++
++
+ def customer_label(name):
+-    return {"label": name}
++    return {"label": display_name(name)}
+--- a/test_sample.py
++++ b/test_sample.py
+@@ -4,3 +4,11 @@
+ class Sample(unittest.TestCase):
+     def test_shape(self):
+         self.assertEqual(customer_label("Lee"), {"label": "Lee"})
++
++    def test_whitespace(self):
++        self.assertEqual(customer_label(" \tLee\n  Kim \t"), {"label": "Lee Kim"})
++
++    def test_empty_name(self):
++        for name in ("", " \t\n "):
++            with self.subTest(name=name):
++                self.assertEqual(customer_label(name), {"label": "Anonymous"})

@@ -1,0 +1,27 @@
+{
+  "cli": "codex-cli 0.160.0",
+  "model": "gpt-6-astra",
+  "effort": "low",
+  "repeats": 1,
+  "arms": [
+    "baseline",
+    "suffice"
+  ],
+  "tasks": [
+    "reuse",
+    "atomic"
+  ],
+  "sources": [],
+  "skill_sha256": "82d452be59554558cbe055d670c33aaf8e3cbcf7bca8bb4718cc8d90feb2cb12",
+  "workflow_bytes": {
+    "baseline": 0,
+    "suffice": 1346
+  },
+  "workflows": {
+    "baseline": "",
+    "suffice": "---\nname: suffice-patch\ndescription: Reduce tool round trips for localized maintenance in identified files or functions while preserving behavioral checks.\n---\n\n# SufficePatch\n\nFor a localized fix, prefer an inspection call followed by an edit-and-check call.\nExtra calls are appropriate when evidence, safety, or project instructions require them.\n\nThe inspection must return source contents, not just filenames. Start with the\nnamed file or module (`api.customer_label` suggests `api.py`); include relevant\nGit changes, project instructions, and known callers/tests. If locating files is\nnecessary, locate and read matching sources in that same call. Avoid unrelated files.\n\nOnce the change is understood, execute the edit, focused behavioral checks, and\nfinal diff sequentially in one tool request, stopping on failure. A small shell/Python\nreplacement must assert a unique exact old-text match before writing; otherwise use\nthe normal patch tool. Preserve unrelated work and never overwrite unseen contents.\nUse `python3 -B` for local Python checks to avoid creating bytecode cleanup work.\n\nIf already correct, verify without changes. Keep required tests; broaden checks for\nshared contracts, authorization, data integrity, unclear behavior, or failures.\nNever trade correctness for a call target. Report actual checks and unresolved limits.\n"
+  },
+  "combined_scope": "Three source instruction files, NOT the full installed plugins or their hooks.",
+  "harness_sha256": "cef950667629e5475e0ae5176b1b570cabd6da9f523b30d35ac199d6ae477d9c",
+  "tasks_sha256": "7584a98dec68ff64e5e7602a50f38680e9e03fb3cacbe5cd188deb2f622238e2"
+}

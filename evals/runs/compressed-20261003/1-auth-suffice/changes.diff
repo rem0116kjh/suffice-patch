@@ -1,0 +1,11 @@
+--- a/notes.py
++++ b/notes.py
+@@ -9,4 +9,7 @@
+     return dict(note)
+ 
+ def update_note(user_id, note_id, text):
+-    raise NotImplementedError
++    note = read_note(user_id, note_id)
++    note["text"] = text
++    NOTES[note_id]["text"] = text
++    return note

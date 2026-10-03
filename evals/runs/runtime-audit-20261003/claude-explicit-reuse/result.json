@@ -1,0 +1,166 @@
+{
+  "engine": "claude",
+  "task": "reuse",
+  "explicit_invocation": true,
+  "skill_body_injected_by_harness": false,
+  "returncode": 0,
+  "timed_out": false,
+  "duration_seconds": 21.75,
+  "checks": [
+    {
+      "passed": true,
+      "error": ""
+    },
+    {
+      "passed": true,
+      "error": ""
+    },
+    {
+      "passed": true,
+      "error": ""
+    }
+  ],
+  "unrelated_preserved": true,
+  "noop_preserved": true,
+  "success": true,
+  "loc_added": 3,
+  "loc_deleted": 1,
+  "test_loc_added": 0,
+  "test_loc_deleted": 0,
+  "files_modified": 1,
+  "modified_paths": [
+    "api.py"
+  ],
+  "runtime": {
+    "result": {
+      "duration_api_ms": 18883,
+      "stop_reason": "end_turn",
+      "session_id": "2a46c6f1-f6e8-4ce2-a2d1-9dea8bfbbc03",
+      "total_cost_usd": 0.3635016,
+      "usage": {
+        "input_tokens": 16,
+        "cache_creation_input_tokens": 35516,
+        "cache_read_input_tokens": 232548,
+        "output_tokens": 1640,
+        "output_tokens_details": {
+          "thinking_tokens": 77
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 35516,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "not_available",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 394,
+            "cache_read_input_tokens": 35348,
+            "cache_creation_input_tokens": 168,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 168
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "modelUsage": {
+        "claude-opus-5-5[1m]": {
+          "inputTokens": 16,
+          "outputTokens": 1640,
+          "cacheReadInputTokens": 232548,
+          "cacheCreationInputTokens": 35516,
+          "webSearchRequests": 0,
+          "costUSD": 0.3635016,
+          "contextWindow": 1000000,
+          "maxOutputTokens": 128000,
+          "thinkingTokens": 77,
+          "canonicalModel": "claude-opus-5-5",
+          "provider": "firstParty",
+          "costBasis": "list"
+        }
+      },
+      "permission_denials": [
+        {
+          "tool_name": "Bash",
+          "tool_use_id": "toolu_01WDhWDkR7gZkUWVRMg2AVvx",
+          "tool_input": {
+            "command": "for f in web.py labels.py reports.py test_sample.py legacy.md; do echo \"== $f\"; cat $f; done",
+            "description": "Show the related source files"
+          }
+        }
+      ],
+      "terminal_reason": "completed",
+      "fast_mode_state": "off",
+      "fast_mode_disabled_reason": "sdk_opt_in_required",
+      "subagent_stats": {
+        "spawned": 0,
+        "requested": {
+          "background": 0,
+          "foreground": 0,
+          "unset": 0
+        },
+        "started_in_background": 0,
+        "max_depth": 0,
+        "spawned_by_subagents": 0,
+        "completed": 0,
+        "failed": 0,
+        "killed": {
+          "parent": 0,
+          "user": 0,
+          "system": 0
+        },
+        "refused": {
+          "depth_limit": 0,
+          "concurrency_limit": 0,
+          "budget": 0
+        },
+        "by_type": {}
+      },
+      "is_error": false,
+      "num_turns": 10,
+      "subtype": "success",
+      "api_error_status": null,
+      "result": "`api.customer_label` now formats names the same way the web view does, and it still returns `{\"label\": ...}`.\n\n**Change:** I edited only `api.py`. It now calls `labels.display_name`, the same function the web view (`web.customer_heading`) uses, instead of returning the raw name. That function collapses runs of whitespace into single spaces, trims both ends, and uses `\"Anonymous\"` when the name is empty or only whitespace.\n\n**Checks:**\n- `python3 -m unittest test_sample` passes (1 test).\n- I compared `customer_label(n)` with `{\"label\": customer_heading(n)}` for `'Lee'`, `'  Ada   Lovelace '`, `''`, `'   '` and `'\\tBo\\nKim'`. They matched every time, giving `Lee`, `Ada Lovelace`, `Anonymous`, `Anonymous` and `Bo Kim`.\n- I deleted the `__pycache__/` folder the check created, so `api.py` is the only file that differs from before.\n\n**Limitation:** passing `None` or anything that isn't a string will raise an error, the same as in the web view. The request didn't say how to handle that, so I left it alone.",
+      "ttft_ms": 3879,
+      "type": "result",
+      "duration_ms": 20568,
+      "uuid": "d8008a2c-0995-470e-8159-620efce52b2c",
+      "ttft_stream_ms": 2181,
+      "time_to_request_ms": 1138,
+      "first_content_frame_ms": 2181,
+      "queued_turn_count": 0,
+      "result_index": 0
+    },
+    "native_skill_list_contains_target": true,
+    "native_slash_commands_contains_target": true,
+    "model": "claude-opus-5-5[1m]"
+  },
+  "skill_evidence": [],
+  "command": [
+    "claude",
+    "-p",
+    "--output-format",
+    "stream-json",
+    "--verbose",
+    "--no-session-persistence",
+    "--strict-mcp-config",
+    "--setting-sources",
+    "user",
+    "--settings",
+    "{\"disableAllHooks\": true}",
+    "--tools",
+    "Read,Edit,Write,Bash,Glob,Grep,Skill",
+    "--allowedTools",
+    "Read,Edit,Write,Bash(python3 *),Bash(git diff*),Bash(git status*),Skill",
+    "--permission-mode",
+    "acceptEdits"
+  ]
+}

@@ -1,0 +1,49 @@
+--- a/notes.py
++++ b/notes.py
+@@ -9,4 +9,7 @@
+     return dict(note)
+ 
+ def update_note(user_id, note_id, text):
+-    raise NotImplementedError
++    note = read_note(user_id, note_id)
++    NOTES[note_id]["text"] = text
++    note["text"] = text
++    return note
+--- a/test_notes.py
++++ b/test_notes.py
+@@ -0,0 +1,35 @@
++import copy
++import unittest
++
++import notes
++
++
++class UpdateNoteTests(unittest.TestCase):
++    def setUp(self):
++        original = notes.NOTES
++        notes.NOTES = {1: {"owner": 7, "text": "first"},
++                       2: {"owner": 8, "text": "private"}}
++        self.addCleanup(setattr, notes, "NOTES", original)
++
++    def test_owner_updates_note_and_receives_copy(self):
++        result = notes.update_note(7, 1, "updated")
++        self.assertEqual(result, {"owner": 7, "text": "updated"})
++        self.assertEqual(notes.read_note(7, 1), result)
++        self.assertEqual(notes.NOTES[2], {"owner": 8, "text": "private"})
++        result["text"] = "changed copy"
++        self.assertEqual(notes.NOTES[1]["text"], "updated")
++
++    def test_rejections_match_read_and_leave_all_notes_unchanged(self):
++        for user_id, note_id in [(None, 1), (None, 999), (8, 1), (7, 999)]:
++            with self.subTest(user_id=user_id, note_id=note_id):
++                before = copy.deepcopy(notes.NOTES)
++                with self.assertRaises((PermissionError, KeyError)) as read_error:
++                    notes.read_note(user_id, note_id)
++                with self.assertRaises(type(read_error.exception)) as update_error:
++                    notes.update_note(user_id, note_id, "rejected")
++                self.assertEqual(update_error.exception.args, read_error.exception.args)
++                self.assertEqual(notes.NOTES, before)
++
++
++if __name__ == "__main__":
++    unittest.main()

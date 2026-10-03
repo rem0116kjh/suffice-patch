@@ -1,0 +1,87 @@
+--- a/settings.py
++++ b/settings.py
+@@ -1,5 +1,19 @@
+ import json
++import os
++import tempfile
++
+ 
+ def save_settings(path, data):
+-    with open(path, "w", encoding="utf-8") as f:
+-        json.dump(data, f, ensure_ascii=False)
++    path = os.path.abspath(path)
++    temporary_path = None
++    try:
++        with tempfile.NamedTemporaryFile(
++            mode="w", encoding="utf-8", dir=os.path.dirname(path), delete=False
++        ) as f:
++            temporary_path = f.name
++            json.dump(data, f, ensure_ascii=False, allow_nan=False)
++        os.replace(temporary_path, path)
++        temporary_path = None
++    finally:
++        if temporary_path is not None:
++            os.unlink(temporary_path)
+--- a/test_settings.py
++++ b/test_settings.py
+@@ -0,0 +1,60 @@
++import json
++from pathlib import Path
++import tempfile
++import unittest
++from unittest.mock import patch
++
++from settings import save_settings
++
++
++class SaveSettingsTests(unittest.TestCase):
++    def test_saves_utf8_json_to_new_and_existing_files(self):
++        with tempfile.TemporaryDirectory(dir=".") as directory:
++            path = Path(directory) / "settings.json"
++            for data in ({"name": "한글 café"}, {"updated": [True, None, 42]}):
++                save_settings(path, data)
++                contents = path.read_bytes().decode("utf-8")
++                self.assertEqual(json.loads(contents), data)
++                self.assertEqual(contents, json.dumps(data, ensure_ascii=False))
++                self.assertEqual(list(path.parent.iterdir()), [path])
++
++    def test_serialization_failure_preserves_destination_and_cleans_up(self):
++        for existing in (False, True):
++            for value in (object(), float("nan"), float("inf")):
++                with self.subTest(existing=existing, value=value):
++                    with tempfile.TemporaryDirectory(dir=".") as directory:
++                        path = Path(directory) / "settings.json"
++                        original = b'{"old": true}\n'
++                        if existing:
++                            path.write_bytes(original)
++                        with self.assertRaises((TypeError, ValueError)):
++                            save_settings(path, {"first": 1, "invalid": value})
++                        if existing:
++                            self.assertEqual(path.read_bytes(), original)
++                        else:
++                            self.assertFalse(path.exists())
++                        self.assertEqual(list(path.parent.iterdir()), [path] if existing else [])
++
++    def test_replacement_failure_preserves_destination_and_cleans_up(self):
++        with tempfile.TemporaryDirectory(dir=".") as directory:
++            path = Path(directory) / "settings.json"
++            original = b'{"old": true}\n'
++            path.write_bytes(original)
++            failure = OSError("replacement failed")
++
++            def fail_replace(source, destination):
++                self.assertEqual(Path(source).parent, path.parent.resolve())
++                self.assertEqual(Path(destination), path.resolve())
++                self.assertEqual(json.loads(Path(source).read_text(encoding="utf-8")), {"new": True})
++                raise failure
++
++            with patch("settings.os.replace", side_effect=fail_replace):
++                with self.assertRaises(OSError) as raised:
++                    save_settings(str(path), {"new": True})
++            self.assertIs(raised.exception, failure)
++            self.assertEqual(path.read_bytes(), original)
++            self.assertEqual(list(path.parent.iterdir()), [path])
++
++
++if __name__ == "__main__":
++    unittest.main()

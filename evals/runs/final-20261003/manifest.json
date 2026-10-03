@@ -1,0 +1,25 @@
+{
+  "cli": "codex-cli 0.160.0",
+  "model": "gpt-6-astra",
+  "effort": "low",
+  "repeats": 1,
+  "arms": [
+    "suffice"
+  ],
+  "tasks": [
+    "reuse",
+    "native",
+    "shared",
+    "auth",
+    "atomic",
+    "noop"
+  ],
+  "sources": [],
+  "skill_sha256": "36f9f42bec37e9fc93ae981c3567e34e089c0ea564f10ce47fc9a5d938783ca5",
+  "workflow_bytes": {
+    "suffice": 4310
+  },
+  "combined_scope": "Three source instruction files, NOT the full installed plugins or their hooks.",
+  "harness_sha256": "bb4bc36dc5b0d8a3655e193f0ec8c8e56cba7dacb534bb0872159049acb6eb90",
+  "tasks_sha256": "15533796b36e5157b940688959cdd1496950ae88a993a57d9f3ef382b5cc8a9f"
+}

@@ -1,0 +1,8 @@
+--- a/api.py
++++ b/api.py
+@@ -1,2 +1,4 @@
++from labels import display_name
++
+ def customer_label(name):
+-    return {"label": name}
++    return {"label": display_name(name)}

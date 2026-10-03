@@ -1,0 +1,9 @@
+--- a/inventory.py
++++ b/inventory.py
+@@ -4,5 +4,6 @@
+             raise ValueError("positive quantity required")
+         if stock[sku] < qty:
+             raise ValueError("insufficient stock")
++    for sku, qty in requested.items():
+         stock[sku] -= qty
+     return dict(stock)

@@ -1,0 +1,8 @@
+--- a/banner.py
++++ b/banner.py
+@@ -1,4 +1,4 @@
+-TITLE = "Welome"
++TITLE = "Welcome"
+ SUBTITLE = "Your workspace"
+ 
+ def render():

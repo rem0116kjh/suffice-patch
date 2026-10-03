@@ -1,0 +1,7 @@
+Fix inventory.reserve_many(stock, requested): a missing SKU, nonpositive quantity, or insufficient stock must leave the entire input stock dictionary unchanged. Preserve KeyError for a missing SKU and ValueError for the other failures. On success mutate stock in place and return a detached copy, preserving unrequested entries. Quantities and stock counts are integers; requested is a dictionary.
+
+Complete the coding task in this working directory. You may inspect,
+edit and run local checks. Preserve unrelated work. Do not commit, push, install
+dependencies, spawn agents, access other directories, or use the network.
+Use the available Python standard library for Python checks. Report what changed
+and what you actually verified. Do not read hidden evaluator files.

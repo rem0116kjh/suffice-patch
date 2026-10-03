@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-03",
+  "installed": [
+    {
+      "path": "/Users/luka/.agents/skills/suffice-patch/SKILL.md",
+      "sha256": "5de93a4da0a4a8fa7f7c790ee95ef539352ee6dd5c4be5fee8d3254bde5e8230"
+    },
+    {
+      "path": "/Users/luka/.claude/skills/suffice-patch/SKILL.md",
+      "sha256": "5de93a4da0a4a8fa7f7c790ee95ef539352ee6dd5c4be5fee8d3254bde5e8230"
+    }
+  ],
+  "claude_runtime_eval": false,
+  "codex_native_discovery": {
+    "verified": true,
+    "method": "app-server skills/list with forceReload",
+    "skills": [
+      {
+        "name": "suffice-patch",
+        "description": "Complete focused coding changes with the smallest sufficient evidence, edit, and verification.",
+        "path": "/Users/luka/.agents/skills/suffice-patch/SKILL.md",
+        "scope": "user",
+        "enabled": true,
+        "pluginId": null
+      }
+    ]
+  },
+  "previous_v1_sha256": "36f9f42bec37e9fc93ae981c3567e34e089c0ea564f10ce47fc9a5d938783ca5",
+  "version": "v2 compressed (experimental; baseline cost target not met)",
+  "words": 158
+}

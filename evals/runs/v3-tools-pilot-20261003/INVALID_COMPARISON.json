@@ -1,0 +1,5 @@
+{
+  "valid_efficiency_comparison": false,
+  "reason": "skip_host_skill_discovery does not disable repo skills. Baseline auto-loaded the staged .agents skill and used its helper. Stopped the run and excluded this cohort from efficiency conclusions.",
+  "correction": "Stage the controlled-eval bundle outside native discovery roots, identically in both arms."
+}

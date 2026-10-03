@@ -1,0 +1,60 @@
+--- a/notes.py
++++ b/notes.py
+@@ -9,4 +9,7 @@
+     return dict(note)
+ 
+ def update_note(user_id, note_id, text):
+-    raise NotImplementedError
++    note = read_note(user_id, note_id)
++    NOTES[note_id]["text"] = text
++    note["text"] = text
++    return note
+--- a/test_notes.py
++++ b/test_notes.py
+@@ -0,0 +1,46 @@
++import copy
++import unittest
++from unittest.mock import patch
++
++import notes
++
++
++class UpdateNoteTests(unittest.TestCase):
++    def setUp(self):
++        self.stored = {
++            1: {"owner": 7, "text": "first"},
++            2: {"owner": 8, "text": "private"},
++        }
++        patcher = patch.object(notes, "NOTES", self.stored)
++        patcher.start()
++        self.addCleanup(patcher.stop)
++
++    def test_owner_updates_note_and_receives_copy(self):
++        updated = notes.update_note(7, 1, "updated")
++        self.assertEqual(updated, {"owner": 7, "text": "updated"})
++        self.assertEqual(notes.read_note(7, 1), updated)
++        self.assertEqual(self.stored[2], {"owner": 8, "text": "private"})
++        updated["text"] = "changed copy"
++        self.assertEqual(self.stored[1]["text"], "updated")
++
++    def test_rejections_match_read_and_preserve_all_notes(self):
++        for user_id, note_id, error, args in [
++            (None, 1, PermissionError, ("sign in",)),
++            (None, 99, PermissionError, ("sign in",)),
++            (8, 1, PermissionError, ("not your note",)),
++            (7, 2, PermissionError, ("not your note",)),
++            (7, 99, KeyError, (99,)),
++        ]:
++            with self.subTest(user_id=user_id, note_id=note_id):
++                before = copy.deepcopy(self.stored)
++                with self.assertRaises(error) as read_error:
++                    notes.read_note(user_id, note_id)
++                with self.assertRaises(error) as update_error:
++                    notes.update_note(user_id, note_id, "rejected")
++                self.assertEqual(read_error.exception.args, args)
++                self.assertEqual(update_error.exception.args, args)
++                self.assertEqual(self.stored, before)
++
++
++if __name__ == "__main__":
++    unittest.main()

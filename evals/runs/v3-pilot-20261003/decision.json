@@ -1,0 +1,16 @@
+{
+  "baseline": {
+    "successes": 2,
+    "attempts": 2,
+    "total_tokens": 109181,
+    "tool_calls": 8
+  },
+  "suffice": {
+    "successes": 2,
+    "attempts": 2,
+    "total_tokens": 113400,
+    "tool_calls": 6
+  },
+  "saving_percent": -3.8642254604738913,
+  "gate_passed": false
+}

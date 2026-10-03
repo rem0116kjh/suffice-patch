@@ -1,0 +1,47 @@
+--- a/prices.py
++++ b/prices.py
+@@ -2,6 +2,7 @@
+ CACHE = {}
+ 
+ def lookup(product, currency):
+-    if product not in CACHE:
+-        CACHE[product] = catalog.fetch(product, currency)
+-    return CACHE[product]
++    key = (product, currency)
++    if key not in CACHE:
++        CACHE[key] = catalog.fetch(product, currency)
++    return CACHE[key]
+--- a/test_prices.py
++++ b/test_prices.py
+@@ -0,0 +1,31 @@
++import unittest
++from unittest.mock import patch
++
++import catalog
++import prices
++import routes
++
++
++class PriceTests(unittest.TestCase):
++    def setUp(self):
++        prices.CACHE.clear()
++        self.addCleanup(prices.CACHE.clear)
++
++    def test_handler_caches_each_product_currency_combination(self):
++        with patch("prices.catalog.fetch", wraps=catalog.fetch) as fetch:
++            for _ in range(2):
++                for (product, currency), amount in catalog.PRICES.items():
++                    with self.subTest(product=product, currency=currency):
++                        self.assertEqual(
++                            routes.price({"product": product, "currency": currency}),
++                            {"amount": amount},
++                        )
++            self.assertEqual(fetch.call_count, len(catalog.PRICES))
++            for product, currency in catalog.PRICES:
++                self.assertEqual(fetch.call_args_list.count(
++                    unittest.mock.call(product, currency)
++                ), 1)
++
++
++if __name__ == "__main__":
++    unittest.main()

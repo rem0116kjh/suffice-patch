@@ -1,0 +1,16 @@
+--- a/links.py
++++ b/links.py
+@@ -1,2 +1,12 @@
++from urllib.parse import urlencode
++
++
+ def with_query(url, params):
+-    return url + "?" + "&".join(f"{k}={v}" for k, v in params.items())
++    query = urlencode(list(params.items()))
++    if not query:
++        return url
++    base, fragment_marker, fragment = url.partition("#")
++    separator = "&" if "?" in base else "?"
++    if "?" in base and base.endswith(("?", "&")):
++        separator = ""
++    return base + separator + query + fragment_marker + fragment

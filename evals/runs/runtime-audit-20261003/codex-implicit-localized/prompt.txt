@@ -1,0 +1,7 @@
+Fix chunks.split_chunks(items, size): positive integer sizes must include every item exactly once, in order, including a final partial chunk. Empty input returns []. Preserve ValueError for nonpositive size.
+
+Work only in this disposable fixture. You may read installed skill instructions
+when needed. Do not read sibling directories, hidden evaluator files, or other projects.
+Do not use network tools, install dependencies, spawn agents, commit or push.
+Use Python's standard library for local checks. Preserve unrelated work.
+Report actual changes and checks. Do not modify any installed skills or settings.

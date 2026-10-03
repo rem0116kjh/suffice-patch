@@ -1,0 +1,7 @@
+$suffice-patch Ensure tags.normalize returns unique, lexically sorted, trimmed nonempty tags, with case preserved. If the implementation already meets this contract, leave it unchanged. Do not add speculative features.
+
+Work only in this disposable fixture. You may read installed skill instructions
+when needed. Do not read sibling directories, hidden evaluator files, or other projects.
+Do not use network tools, install dependencies, spawn agents, commit or push.
+Use Python's standard library for local checks. Preserve unrelated work.
+Report actual changes and checks. Do not modify any installed skills or settings.

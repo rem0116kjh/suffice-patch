@@ -1,0 +1,60 @@
+--- a/links.py
++++ b/links.py
+@@ -1,2 +1,12 @@
++from urllib.parse import urlencode
++
++
+ def with_query(url, params):
+-    return url + "?" + "&".join(f"{k}={v}" for k, v in params.items())
++    query = urlencode(list(params.items()))
++    if not query:
++        return url
++    base, fragment_marker, fragment = url.partition("#")
++    separator = "&" if "?" in base else "?"
++    if base.endswith(("?", "&")) and "?" in base:
++        separator = ""
++    return base + separator + query + fragment_marker + fragment
+--- a/test_links.py
++++ b/test_links.py
+@@ -0,0 +1,41 @@
++import unittest
++from urllib.parse import parse_qsl, urlsplit
++
++from links import with_query
++
++
++class WithQueryTests(unittest.TestCase):
++    def test_encodes_keys_and_values_in_mapping_order(self):
++        params = {"z key&=": "café & x=y", "a": "서울"}
++        result = with_query("https://example.com/path", params)
++        self.assertEqual(
++            result,
++            "https://example.com/path?z+key%26%3D=caf%C3%A9+%26+x%3Dy"
++            "&a=%EC%84%9C%EC%9A%B8",
++        )
++        self.assertEqual(parse_qsl(urlsplit(result).query), list(params.items()))
++
++    def test_preserves_existing_query_and_fragment_verbatim(self):
++        self.assertEqual(
++            with_query("/path?old=a%20b&flag&old=%2f#section?x=1", {"q": "a&b"}),
++            "/path?old=a%20b&flag&old=%2f&q=a%26b#section?x=1",
++        )
++
++    def test_query_is_inserted_before_fragment(self):
++        self.assertEqual(with_query("/path#part?x", {"q": "a b"}),
++                         "/path?q=a+b#part?x")
++        self.assertEqual(with_query("/path#", {"q": "x"}), "/path?q=x#")
++
++    def test_existing_query_separator(self):
++        for url in ("/path?", "/path?old=1&"):
++            with self.subTest(url=url):
++                self.assertEqual(with_query(url, {"q": "x"}), url + "q=x")
++
++    def test_empty_mapping_leaves_url_unchanged(self):
++        for url in ("/path", "/path?", "/path?x=%20#"):
++            with self.subTest(url=url):
++                self.assertEqual(with_query(url, {}), url)
++
++
++if __name__ == "__main__":
++    unittest.main()

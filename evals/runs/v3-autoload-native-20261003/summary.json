@@ -1,0 +1,26 @@
+{
+  "baseline": {
+    "attempts": 4,
+    "successes": 4,
+    "tokens": 218696,
+    "median_tokens": 54656.5,
+    "calls": 16,
+    "seconds": 228.363,
+    "checks_passed": 12,
+    "checks_total": 12,
+    "helper_calls": 0
+  },
+  "implicit": {
+    "attempts": 4,
+    "successes": 4,
+    "tokens": 172548,
+    "median_tokens": 43205.0,
+    "calls": 19,
+    "seconds": 269.69,
+    "checks_passed": 12,
+    "checks_total": 12,
+    "helper_calls": 4,
+    "saving_percent": 21.101437612027652,
+    "median_saving_percent": 20.95176237044084
+  }
+}

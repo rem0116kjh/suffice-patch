@@ -1,0 +1,9 @@
+{
+  "first_sentence_matches": true,
+  "last_sentence_matches": true,
+  "tool_calls": 0,
+  "completed": true,
+  "response": "The skill body is available. Quoting verbatim:\n\n**First sentence after the SufficePatch heading:**\n> Use the smallest evidence, change, and verification sufficient to safely satisfy the request, then stop.\n\n**Final sentence of the loaded skill body:**\n> Report actual checks and unresolved limitations; incomplete is not success.\n\nNo files were read or edited.",
+  "evidence_note": "Body was absent from the test prompt, all model tools were disabled, and both non-description sentences matched installed SKILL.md.",
+  "passed": true
+}

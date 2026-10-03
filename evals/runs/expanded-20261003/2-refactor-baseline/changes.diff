@@ -1,0 +1,8 @@
+--- a/logs.py
++++ b/logs.py
+@@ -5,4 +5,4 @@
+     return f"[{stamp}] WARNING: {text}"
+ 
+ def error_line(stamp, text):
+-    return f"[{stamp}] ERROR {text}"
++    return f"[{stamp}] ERROR: {text}"

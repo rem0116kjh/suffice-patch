@@ -1,0 +1,18 @@
+[
+  {
+    "cwd": "/Users/luka/Desktop/ctf/suffice-patch",
+    "skills_total": 359,
+    "target": [
+      {
+        "name": "suffice-patch",
+        "description": "For localized Python fixes, batch reading this SKILL.md with running its scripts/collect_context.py on the named modules when automatically selected. Returns source, callers, tests, and Git changes for a focused fix.",
+        "path": "/Users/luka/.agents/skills/suffice-patch/SKILL.md",
+        "scope": "user",
+        "enabled": true,
+        "pluginId": null
+      }
+    ],
+    "target_errors": [],
+    "other_error_count": 0
+  }
+]

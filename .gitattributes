@@ -1,0 +1,2 @@
+# Preserve the leading space on blank context lines in recorded unified diffs.
+evals/runs/**/changes.diff -whitespace

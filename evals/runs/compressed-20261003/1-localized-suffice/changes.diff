@@ -1,0 +1,8 @@
+--- a/chunks.py
++++ b/chunks.py
+@@ -1,4 +1,4 @@
+ def split_chunks(items, size):
+     if size <= 0:
+         raise ValueError("positive size required")
+-    return [items[i:i + size] for i in range(0, len(items) - 1, size)]
++    return [items[i:i + size] for i in range(0, len(items), size)]

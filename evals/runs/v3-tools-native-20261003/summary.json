@@ -1,0 +1,39 @@
+{
+  "baseline": {
+    "attempts": 2,
+    "successes": 2,
+    "tokens": 110145,
+    "median_tokens": 55072.5,
+    "calls": 8,
+    "seconds": 132.386,
+    "checks_passed": 6,
+    "checks_total": 6,
+    "helper_calls": 0
+  },
+  "explicit": {
+    "attempts": 2,
+    "successes": 2,
+    "tokens": 86597,
+    "median_tokens": 43298.5,
+    "calls": 4,
+    "seconds": 131.455,
+    "checks_passed": 6,
+    "checks_total": 6,
+    "helper_calls": 2,
+    "saving_percent": 21.379091197966314,
+    "median_saving_percent": 21.379091197966314
+  },
+  "implicit": {
+    "attempts": 2,
+    "successes": 2,
+    "tokens": 113198,
+    "median_tokens": 56599.0,
+    "calls": 6,
+    "seconds": 136.993,
+    "checks_passed": 6,
+    "checks_total": 6,
+    "helper_calls": 2,
+    "saving_percent": -2.7718008080257928,
+    "median_saving_percent": -2.7718008080257928
+  }
+}

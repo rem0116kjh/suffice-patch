@@ -1,0 +1,30 @@
+{
+  "cli": "codex-cli 0.160.0",
+  "model": "gpt-6-astra",
+  "effort": "low",
+  "repeats": 2,
+  "arms": [
+    "suffice"
+  ],
+  "tasks": [
+    "trivial",
+    "localized",
+    "reuse",
+    "multifile",
+    "ambiguous",
+    "auth",
+    "dependency",
+    "refactor"
+  ],
+  "sources": [],
+  "skill_sha256": "5de93a4da0a4a8fa7f7c790ee95ef539352ee6dd5c4be5fee8d3254bde5e8230",
+  "workflow_bytes": {
+    "suffice": 1257
+  },
+  "workflows": {
+    "suffice": "---\nname: suffice-patch\ndescription: Complete focused coding changes with the smallest sufficient evidence, edit, and verification.\n---\n\n# SufficePatch\n\nUse the smallest evidence, change, and verification sufficient to safely satisfy\nthe request, then stop. Follow project instructions and preserve unrelated work.\n\nFast path: for a clear local change without new dependencies, architecture changes,\npublic API changes, migration, or security impact, read the relevant file, edit,\nrun the nearest meaningful check, and stop. Batch independent reads and checks.\n\nSearch only when the answer could change the implementation or safety decision.\nReuse existing code, dependencies, or standard/native facilities. Omit optional\nhelpers, refactoring, documentation, and features.\n\nCheck behavior, not just syntax. Broaden verification only for shared contracts, cross-module effects, security,\ndata integrity, failed checks, or project requirements. Never sacrifice\nauthentication, authorization, security validation, trust-boundary validation, data-loss prevention,\ntransaction integrity, accessibility, required error handling, or correctness\ntests. Review the patch with verification. Report actual checks and unresolved\nlimitations; incomplete is not success.\n"
+  },
+  "combined_scope": "Three source instruction files, NOT the full installed plugins or their hooks.",
+  "harness_sha256": "c6b8459bb26aa5f2103f8e3e9bebd2284d5bc4510e30d30fdcea8916b9a972d7",
+  "tasks_sha256": "7584a98dec68ff64e5e7602a50f38680e9e03fb3cacbe5cd188deb2f622238e2"
+}

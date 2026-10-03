@@ -1,0 +1,19 @@
+--- a/api.py
++++ b/api.py
+@@ -1,4 +1,4 @@
+ from money import format_total
+ 
+ def order_summary(order):
+-    return {"id": order["id"], "total": format_total(order["total"])}
++    return {"id": order["id"], "total": format_total(order["total"]), "currency": order["currency"]}
+--- a/csv_export.py
++++ b/csv_export.py
+@@ -5,6 +5,6 @@
+ def render_order(order):
+     out = io.StringIO()
+     writer = csv.writer(out)
+-    writer.writerow(["id", "total"])
+-    writer.writerow([order["id"], format_total(order["total"])])
++    writer.writerow(["id", "total", "currency"])
++    writer.writerow([order["id"], format_total(order["total"]), order["currency"]])
+     return out.getvalue()

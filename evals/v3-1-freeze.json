@@ -1,0 +1,8 @@
+{
+  "skill_sha256": "82d452be59554558cbe055d670c33aaf8e3cbcf7bca8bb4718cc8d90feb2cb12",
+  "words": 189,
+  "changes_from_v3": [
+    "Inspection returns source contents, including module-qualified targets.",
+    "Python checks use -B to avoid a cleanup-only call."
+  ]
+}

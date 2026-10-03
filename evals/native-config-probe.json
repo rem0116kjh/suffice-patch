@@ -1,0 +1,21 @@
+{
+  "command": [
+    "codex",
+    "app-server",
+    "--stdio",
+    "--strict-config",
+    "-c",
+    "skills.config=[{path=\"/Users/luka/.agents/skills/suffice-patch/SKILL.md\",enabled=false}]"
+  ],
+  "target": [
+    {
+      "name": "suffice-patch",
+      "description": "Complete focused coding changes with the smallest sufficient evidence, edit, and verification.",
+      "path": "/Users/luka/.agents/skills/suffice-patch/SKILL.md",
+      "scope": "user",
+      "enabled": false,
+      "pluginId": null
+    }
+  ],
+  "passed": true
+}

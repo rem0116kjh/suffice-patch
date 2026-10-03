@@ -1,0 +1,20 @@
+{
+  "baseline": {
+    "successes": 2,
+    "attempts": 2,
+    "total_tokens": 109333,
+    "median_tokens": 54666.5,
+    "tool_calls": 8,
+    "helper_calls": 0
+  },
+  "suffice": {
+    "successes": 2,
+    "attempts": 2,
+    "total_tokens": 86150,
+    "median_tokens": 43075.0,
+    "tool_calls": 4,
+    "helper_calls": 2
+  },
+  "saving_percent": 21.204028061061166,
+  "gate_passed": true
+}

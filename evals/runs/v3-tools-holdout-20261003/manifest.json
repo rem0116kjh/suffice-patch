@@ -1,0 +1,32 @@
+{
+  "model": "gpt-6-astra",
+  "effort": "low",
+  "tasks": [
+    "invoice",
+    "inventory",
+    "download",
+    "noop"
+  ],
+  "repeats": 2,
+  "skill": "---\nname: suffice-patch\ndescription: Inspect localized Python maintenance targets, local dependencies, callers, tests, and Git changes in one call, then make and verify a focused fix.\n---\n\n# SufficePatch\n\nFor localized Python maintenance, start with the bundled read-only inspector:\n\n```sh\npython3 -B <skill-dir>/scripts/collect_context.py target.py other_module\n```\n\n`<skill-dir>` is this skill's directory. Pass the named targets and any explicitly\nrequested counterpart, such as the web view. The inspector returns source,\nlocal imports, matching callers/tests, project instructions, and Git changes.\nUse its output directly; inspect the script itself only when debugging it.\nFollow reported limits or missing evidence with a targeted read.\n\nAfter inspection, execute the focused edit, behavioral checks, and final diff\nsequentially in one tool request when possible, stopping on failure. Assert a\nunique exact old-text match before a shell/Python replacement; otherwise use the\nnormal patch tool. Use `python3 -B` for checks. Preserve unrelated changes and\nleave already-correct code unchanged. Keep required project checks, authorization,\nand data-integrity tests. Broaden work when evidence requires it, never to meet a\ncall target. Report actual results and unresolved limits.\n",
+  "common": "Complete the coding task in this working directory. You may inspect,\nedit and run local checks. Preserve unrelated work. Do not commit, push, install\ndependencies, spawn agents, access other directories, or use the network.\nUse the available Python standard library for Python checks. Report what changed\nand what you actually verified. Do not read hidden evaluator files.\n",
+  "bundle_hashes": {
+    "SKILL.md": "45ada0031a9eb84cdb89a88c3f83f24dc6e7fc8e23e2dbb69110795c3031ac2c",
+    "scripts/collect_context.py": "c8af2d1232c2958e5f81fb02a987ce9b663d7e61d3177587f024bcd436b8c124"
+  },
+  "note": "Both arms receive identical hidden helper files; native discovery is off. Only suffice receives workflow and resolved skill-dir path.",
+  "sources": [
+    {
+      "path": "/Users/luka/Desktop/ctf/suffice-patch/evals/v3_tools_run.py",
+      "sha256": "ca40fc657e036273a794d921365bd0363b1ef5d5d35bbb3cdb28c81d4f272055"
+    },
+    {
+      "path": "/Users/luka/Desktop/ctf/suffice-patch/evals/run.py",
+      "sha256": "cef950667629e5475e0ae5176b1b570cabd6da9f523b30d35ac199d6ae477d9c"
+    },
+    {
+      "path": "/Users/luka/Desktop/ctf/suffice-patch/evals/v3_tasks.py",
+      "sha256": "7c4f15d02c0f1da233c071397e033fc1aadc816697a8284d1c98f228b4d982be"
+    }
+  ]
+}

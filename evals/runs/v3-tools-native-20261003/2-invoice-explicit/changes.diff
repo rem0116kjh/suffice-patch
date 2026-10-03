@@ -1,0 +1,16 @@
+--- a/invoice.py
++++ b/invoice.py
+@@ -1,2 +1,12 @@
++from decimal import Decimal
++
++
+ def total_cents(amounts):
+-    return sum(int(float(amount) * 100) for amount in amounts)
++    total = 0
++    for amount in amounts:
++        numerator, denominator = Decimal(amount).as_integer_ratio()
++        cents, remainder = divmod(abs(numerator) * 100, denominator)
++        # Round exact half cents away from zero, without decimal context limits.
++        cents += 2 * remainder >= denominator
++        total += cents if numerator >= 0 else -cents
++    return total

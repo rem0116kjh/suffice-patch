@@ -1,0 +1,18 @@
+--- a/invoice.py
++++ b/invoice.py
+@@ -1,2 +1,14 @@
++from decimal import Decimal, ROUND_HALF_UP, localcontext
++
++
+ def total_cents(amounts):
+-    return sum(int(float(amount) * 100) for amount in amounts)
++    """Round each major-unit amount to cents, with ties away from zero."""
++    total = 0
++    with localcontext() as context:
++        for amount in amounts:
++            value = Decimal(amount)
++            # Keep large amounts exact even beyond the default precision.
++            context.prec = max(28, len(value.as_tuple().digits), value.adjusted() + 3)
++            cents = value.quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
++            total += int(cents * 100)
++    return total

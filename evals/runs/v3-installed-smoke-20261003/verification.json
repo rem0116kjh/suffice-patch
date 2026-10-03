@@ -1,0 +1,56 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "engine": "codex",
+      "explicit": false,
+      "task_success": true,
+      "checks_passed": 3,
+      "installed_helper_path": "/Users/luka/.agents/skills/suffice-patch/scripts/collect_context.py",
+      "successful_helper_executions": 1,
+      "permission_denials": 0,
+      "evidence": [
+        {
+          "id": "item_4",
+          "type": "command_execution",
+          "command": "/bin/zsh -lc 'python3 -B /Users/luka/.agents/skills/suffice-patch/scripts/collect_context.py api.py web.py'",
+          "aggregated_output": "Caller/test search: 3 matching Python files (textual, not a complete call graph).\nROOT: /Users/luka/Desktop/ctf/suffice-patch/evals/runs/v3-installed-smoke-20261003/codex-implicit-reuse/workspace\nSources returned: 4; source bytes: 390\n\nFILE: api.py | requested target | SHA256: d96473838c298b4db1197e2467886eab5d87043d9af6652ceda3e75e8bd23379\ndef customer_label(name):\n    return {\"label\": name}\n\n\nFILE: web.py | requested target | SHA256: 30367038105e5856134c85881969d97d80efbe9c4851af89f5afaaa1afee8aa9\nfrom labels import display_name\n\ndef customer_heading(name):\n    return display_name(name)\n\n\nFILE: labels.py | local import | SHA256: a485ab4d905666ba441742002d0159bf345372ae436a88e088f28c135fd04910\ndef display_name(name):\n    return \" \".join(name.split()) or \"Anonymous\"\n\n\nFILE: test_sample.py | matching caller or test; textual match | SHA256: 66b2cc1012d82f36084360d87fe4465fb046b00e490d54949aeec8df8e1f8db7\nimport unittest\nfrom api import customer_label\n\nclass Sample(unittest.TestCase):\n    def test_shape(self):\n        self.assertEqual(customer_label(\"Lee\"), {\"label\": \"Lee\"})\n\n\nGIT STATUS:\n\n\nGIT DIFF:\n\n\nGIT STAGED DIFF:\n\n\nNo context limit was reached. Dynamic callers and non-Python tests may still require inspection.\n",
+          "exit_code": 0,
+          "status": "completed"
+        }
+      ]
+    },
+    {
+      "engine": "claude",
+      "explicit": true,
+      "task_success": true,
+      "checks_passed": 3,
+      "installed_helper_path": "/Users/luka/.claude/skills/suffice-patch/scripts/collect_context.py",
+      "successful_helper_executions": 1,
+      "permission_denials": 1,
+      "evidence": [
+        {
+          "call": {
+            "type": "tool_use",
+            "id": "toolu_01Wqi2kTGJaVRvPvTPmrXxN4",
+            "name": "Bash",
+            "input": {
+              "command": "ls -R | head -50 && python3 -B /Users/luka/.claude/skills/suffice-patch/scripts/collect_context.py api web",
+              "description": "List fixture and run context inspector"
+            },
+            "caller": {
+              "type": "direct"
+            }
+          },
+          "result": {
+            "tool_use_id": "toolu_01Wqi2kTGJaVRvPvTPmrXxN4",
+            "type": "tool_result",
+            "content": "api.py\nlabels.py\nlegacy.md\nreports.py\ntest_sample.py\ntheme.css\nweb.py\nCaller/test search: 3 matching Python files (textual, not a complete call graph).\nROOT: /Users/luka/Desktop/ctf/suffice-patch/evals/runs/v3-installed-smoke-20261003/claude-explicit-reuse/workspace\nSources returned: 4; source bytes: 390\n\nFILE: api.py | requested target | SHA256: d96473838c298b4db1197e2467886eab5d87043d9af6652ceda3e75e8bd23379\ndef customer_label(name):\n    return {\"label\": name}\n\n\nFILE: web.py | requested target | SHA256: 30367038105e5856134c85881969d97d80efbe9c4851af89f5afaaa1afee8aa9\nfrom labels import display_name\n\ndef customer_heading(name):\n    return display_name(name)\n\n\nFILE: labels.py | local import | SHA256: a485ab4d905666ba441742002d0159bf345372ae436a88e088f28c135fd04910\ndef display_name(name):\n    return \" \".join(name.split()) or \"Anonymous\"\n\n\nFILE: test_sample.py | matching caller or test; textual match | SHA256: 66b2cc1012d82f36084360d87fe4465fb046b00e490d54949aeec8df8e1f8db7\nimport unittest\nfrom api import customer_label\n\nclass Sample(unittest.TestCase):\n    def test_shape(self):\n        self.assertEqual(customer_label(\"Lee\"), {\"label\": \"Lee\"})\n\n\nGIT STATUS:\n\n\nGIT DIFF:\n\n\nGIT STAGED DIFF:\n\n\nNo context limit was reached. Dynamic callers and non-Python tests may still require inspection.",
+            "is_error": false
+          }
+        }
+      ]
+    }
+  ],
+  "note": "The reused v2 audit detector recognized SKILL.md reads/Skill calls only. The Claude explicit invocation directly called the installed helper, so its old skill_evidence array was empty. Raw successful helper tool call and matching result verify v3 usage. No extra model run was needed. One Claude compound-shell permission denial recovered through Read/Edit and permitted checks."
+}

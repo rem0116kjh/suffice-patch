@@ -1,0 +1,245 @@
+{
+  "checked_date": "2026-10-03",
+  "candidates": [
+    {
+      "name": "LeanAgent",
+      "query": "https://api.github.com/search/repositories?q=LeanAgent+in%3Aname&per_page=3&sort=stars",
+      "count": 16,
+      "examples": [
+        {
+          "name": "lean-dojo/LeanAgent",
+          "url": "https://github.com/lean-dojo/LeanAgent",
+          "description": "LeanAgent is a novel lifelong learning framework for formal theorem proving that continuously generalizes to and improves on ever-expanding mathematical knowledge without forgetting previously learned knowledge."
+        },
+        {
+          "name": "Pseudo-Lab/LeanAgent",
+          "url": "https://github.com/Pseudo-Lab/LeanAgent",
+          "description": null
+        },
+        {
+          "name": "Fibilisim-Tekno/leanagents",
+          "url": "https://github.com/Fibilisim-Tekno/leanagents",
+          "description": "Selective coding workflows with context budgets, bounded TypeScript fixes, and recorded test and review results. Active alpha."
+        }
+      ]
+    },
+    {
+      "name": "MinContext",
+      "query": "https://api.github.com/search/repositories?q=MinContext+in%3Aname&per_page=3&sort=stars",
+      "count": 5,
+      "examples": [
+        {
+          "name": "jimmyjames177414/mincontext",
+          "url": "https://github.com/jimmyjames177414/mincontext",
+          "description": "Delta debugging for AI failures. Shrink a failing agent context to the smallest reproducer someone else can run."
+        },
+        {
+          "name": "tarang07q/minContext",
+          "url": "https://github.com/tarang07q/minContext",
+          "description": null
+        },
+        {
+          "name": "ankushachwani/mincontext-app",
+          "url": "https://github.com/ankushachwani/mincontext-app",
+          "description": "Find the minimum set of files needed for any coding task in any GitHub repo."
+        }
+      ]
+    },
+    {
+      "name": "SmallStep",
+      "query": "https://api.github.com/search/repositories?q=SmallStep+in%3Aname&per_page=3&sort=stars",
+      "count": 303,
+      "examples": [
+        {
+          "name": "smallstep/certificates",
+          "url": "https://github.com/smallstep/certificates",
+          "description": "🛡️ A private certificate authority (X.509 & SSH) & ACME server for secure automated certificate management, so you can use TLS everywhere & SSO for SSH."
+        },
+        {
+          "name": "smallstep/cli",
+          "url": "https://github.com/smallstep/cli",
+          "description": "🧰  A zero trust swiss army knife for working with X509, OAuth, JWT, OATH OTP, etc."
+        },
+        {
+          "name": "smallstep/autocert",
+          "url": "https://github.com/smallstep/autocert",
+          "description": "⚓ A kubernetes add-on that automatically injects TLS/HTTPS certificates into your containers"
+        }
+      ]
+    },
+    {
+      "name": "JustEnough",
+      "query": "https://api.github.com/search/repositories?q=JustEnough+in%3Aname&per_page=3&sort=stars",
+      "count": 154,
+      "examples": [
+        {
+          "name": "mezz/JustEnoughItems",
+          "url": "https://github.com/mezz/JustEnoughItems",
+          "description": "Item and Recipe viewing mod for Minecraft"
+        },
+        {
+          "name": "deanwampler/JustEnoughScalaForSpark",
+          "url": "https://github.com/deanwampler/JustEnoughScalaForSpark",
+          "description": "A tutorial on the most important features and idioms of Scala that you need to use Spark's Scala APIs."
+        },
+        {
+          "name": "way2muchnoise/JustEnoughResources",
+          "url": "https://github.com/way2muchnoise/JustEnoughResources",
+          "description": "A rewrite of NotEnoughResources using JustEnoughItems"
+        }
+      ]
+    },
+    {
+      "name": "Needle",
+      "query": "https://api.github.com/search/repositories?q=Needle+in%3Aname&per_page=3&sort=stars",
+      "count": 5257,
+      "examples": [
+        {
+          "name": "cactus-compute/needle",
+          "url": "https://github.com/cactus-compute/needle",
+          "description": "Automation foundation model for tiny devices: 2-bit, 8-29 MB, tool calls, structured extraction and embeddings on phones, wearables, smart homes, robots, cars and microcontrollers."
+        },
+        {
+          "name": "gkamradt/needle-in-a-haystack",
+          "url": "https://github.com/gkamradt/needle-in-a-haystack",
+          "description": "Doing simple retrieval from LLM models at various context lengths to measure accuracy"
+        },
+        {
+          "name": "uber/needle",
+          "url": "https://github.com/uber/needle",
+          "description": "Compile-time safe Swift dependency injection framework"
+        }
+      ]
+    },
+    {
+      "name": "Occam",
+      "query": "https://api.github.com/search/repositories?q=Occam+in%3Aname&per_page=3&sort=stars",
+      "count": 607,
+      "examples": [
+        {
+          "name": "jhollinger/occams-record",
+          "url": "https://github.com/jhollinger/occams-record",
+          "description": "The missing high-efficiency query API for ActiveRecord"
+        },
+        {
+          "name": "changkun/occamy",
+          "url": "https://github.com/changkun/occamy",
+          "description": "🖥️ a modern remote desktop proxy written in Go"
+        },
+        {
+          "name": "Accio-Lab/occamy",
+          "url": "https://github.com/Accio-Lab/occamy",
+          "description": "Occamy model repo"
+        }
+      ]
+    },
+    {
+      "name": "LeanLoop",
+      "query": "https://api.github.com/search/repositories?q=LeanLoop+in%3Aname&per_page=3&sort=stars",
+      "count": 13,
+      "examples": [
+        {
+          "name": "Minerest/leanloop",
+          "url": "https://github.com/Minerest/leanloop",
+          "description": "AI Task Delegation, subsidize the cloud costs."
+        },
+        {
+          "name": "jianyao2204/leanloop",
+          "url": "https://github.com/jianyao2204/leanloop",
+          "description": null
+        },
+        {
+          "name": "raghavleekha7s/LeanLoop",
+          "url": "https://github.com/raghavleekha7s/LeanLoop",
+          "description": null
+        }
+      ]
+    },
+    {
+      "name": "Scopepin",
+      "query": "https://api.github.com/search/repositories?q=Scopepin+in%3Aname&per_page=3&sort=stars",
+      "count": 1,
+      "examples": [
+        {
+          "name": "juwonllee2024-dotcom/scopepin",
+          "url": "https://github.com/juwonllee2024-dotcom/scopepin",
+          "description": "Pin the exact browser context before an AI chat can use it."
+        }
+      ]
+    },
+    {
+      "name": "Patchlight",
+      "query": "https://api.github.com/search/repositories?q=Patchlight+in%3Aname&per_page=3&sort=stars",
+      "count": 55,
+      "examples": [
+        {
+          "name": "Keijinz/patchlight",
+          "url": "https://github.com/Keijinz/patchlight",
+          "description": null
+        },
+        {
+          "name": "OliverMD/patchlight",
+          "url": "https://github.com/OliverMD/patchlight",
+          "description": null
+        },
+        {
+          "name": "hocky0301/patchlight",
+          "url": "https://github.com/hocky0301/patchlight",
+          "description": "A browser block workshop: wire inputs, logic and outputs by hand, no device or account needed (an independent take on the MESH idea)"
+        }
+      ]
+    },
+    {
+      "name": "Proofstep",
+      "query": "https://api.github.com/search/repositories?q=Proofstep+in%3Aname&per_page=3&sort=stars",
+      "count": 3,
+      "examples": [
+        {
+          "name": "Brage1025/latex-proofsteps",
+          "url": "https://github.com/Brage1025/latex-proofsteps",
+          "description": null
+        },
+        {
+          "name": "ColorlessBoy/Proofstep",
+          "url": "https://github.com/ColorlessBoy/Proofstep",
+          "description": null
+        },
+        {
+          "name": "IlaKhan17/proofstep",
+          "url": "https://github.com/IlaKhan17/proofstep",
+          "description": "Evaluation CI, observability, and trajectory testing for production AI agents. The exit code your CI acts on and the verdict your dashboard shows are the same verdict."
+        }
+      ]
+    },
+    {
+      "name": "ScopeLatch",
+      "error": "HTTP Error 403: rate limit exceeded"
+    }
+  ],
+  "selected_name_checks": [
+    {
+      "url": "https://api.github.com/search/repositories?q=SufficePatch+in%3Aname&per_page=3",
+      "status": 403
+    },
+    {
+      "url": "https://registry.npmjs.org/suffice-patch",
+      "status": 404
+    },
+    {
+      "url": "https://pypi.org/pypi/suffice-patch/json",
+      "status": 404
+    },
+    {
+      "url": "https://api.github.com/search/repositories?q=SufficePatch+in%3Aname&per_page=3",
+      "status": 200,
+      "count": 0,
+      "examples": []
+    },
+    {
+      "url": "https://api.github.com/search/repositories?q=suffice-patch+in%3Aname&per_page=3",
+      "status": 200,
+      "count": 0,
+      "examples": []
+    }
+  ]
+}

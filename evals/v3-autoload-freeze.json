@@ -1,0 +1,7 @@
+{
+  "reason": "User explicitly kept automatic activation. Only description changes to expose the safe read-only entrypoint before body loading. Body and helper unchanged from native-tested candidate.",
+  "bundle_hashes": {
+    "SKILL.md": "f365978b6a24b55d5312dd551cfb7f0a5775595ffd6b8205162cb1df973f9ea1",
+    "scripts/collect_context.py": "b67f30fc48cb80db564a5e83bcadcb2722e946e816a5183a32f3476b76bfe674"
+  }
+}

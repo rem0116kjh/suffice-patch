@@ -1,0 +1,48 @@
+{
+  "cli": "codex-cli 0.160.0",
+  "model": "gpt-6-astra",
+  "effort": "low",
+  "repeats": 1,
+  "arms": [
+    "baseline",
+    "suffice",
+    "combined"
+  ],
+  "tasks": [
+    "reuse",
+    "native",
+    "shared",
+    "auth",
+    "atomic",
+    "noop"
+  ],
+  "sources": [
+    {
+      "commit": "ef648e01899ba3e8dc6371642deaaf64b4477775",
+      "path": "rules/common/development-workflow.md",
+      "sha256": "54beaad49cd4cdde7ae6b8c730c4f7acf599d16f4b11e1cb7602ff1f0867c85d",
+      "bytes": 2252
+    },
+    {
+      "commit": "ef648e01899ba3e8dc6371642deaaf64b4477775",
+      "path": "skills/verification-loop/SKILL.md",
+      "sha256": "503aebee7d414f559c4874600081a40b1e7aea269b58073c5c9660c6641b00a0",
+      "bytes": 2792
+    },
+    {
+      "commit": "c982cd411abb53323c4baa1baa3c2f020b8d0b08",
+      "path": "skills/ponytail/SKILL.md",
+      "sha256": "1316a2f3f95741d2300b116fe0c2d81ce4a9568656ed0a62643f54aaf09957f2",
+      "bytes": 6637
+    }
+  ],
+  "skill_sha256": "e69ed461e626507f807abfd46e57ad0cd7f832d5ab8f72b90a493c5f17f1efe9",
+  "workflow_bytes": {
+    "baseline": 0,
+    "suffice": 5120,
+    "combined": 11685
+  },
+  "combined_scope": "Three source instruction files, NOT the full installed plugins or their hooks.",
+  "harness_sha256": "095fede422557b9ebca94241fd84700254bf6140a7282bf46739540898d83a2b",
+  "tasks_sha256": "15533796b36e5157b940688959cdd1496950ae88a993a57d9f3ef382b5cc8a9f"
+}

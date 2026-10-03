@@ -1,0 +1,24 @@
+--- a/api.py
++++ b/api.py
+@@ -1,2 +1,5 @@
++from labels import display_name
++
++
+ def customer_label(name):
+-    return {"label": name}
++    return {"label": display_name(name)}
+--- a/test_sample.py
++++ b/test_sample.py
+@@ -4,3 +4,12 @@
+ class Sample(unittest.TestCase):
+     def test_shape(self):
+         self.assertEqual(customer_label("Lee"), {"label": "Lee"})
++
++    def test_name_formatting(self):
++        for name, expected in (
++            ("  Lee\t  Kim\n", "Lee Kim"),
++            ("", "Anonymous"),
++            (" \t\n", "Anonymous"),
++        ):
++            with self.subTest(name=name):
++                self.assertEqual(customer_label(name), {"label": expected})

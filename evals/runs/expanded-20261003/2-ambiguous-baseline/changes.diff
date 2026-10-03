@@ -1,0 +1,13 @@
+--- a/prices.py
++++ b/prices.py
+@@ -2,6 +2,7 @@
+ CACHE = {}
+ 
+ def lookup(product, currency):
+-    if product not in CACHE:
+-        CACHE[product] = catalog.fetch(product, currency)
+-    return CACHE[product]
++    key = (product, currency)
++    if key not in CACHE:
++        CACHE[key] = catalog.fetch(product, currency)
++    return CACHE[key]

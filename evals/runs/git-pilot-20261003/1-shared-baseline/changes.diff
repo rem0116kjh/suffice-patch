@@ -1,0 +1,52 @@
+--- a/paging.py
++++ b/paging.py
+@@ -1,2 +1,8 @@
+ def page_size(raw):
+-    return min(int(raw), 100)
++    if isinstance(raw, bool) or not isinstance(raw, (int, str)):
++        return 20
++    try:
++        size = int(raw)
++    except ValueError:
++        return 20
++    return min(size, 100) if size > 0 else 20
+--- a/test_paging.py
++++ b/test_paging.py
+@@ -0,0 +1,37 @@
++import unittest
++
++import api
++import export
++import web
++from paging import page_size
++
++
++class PageSizeTests(unittest.TestCase):
++    def assert_callers(self, raw, expected):
++        callers = (page_size, web.limit, export.limit,
++                   lambda value: api.limit({"limit": value}))
++        for caller in callers:
++            with self.subTest(raw=raw, caller=caller):
++                self.assertEqual(caller(raw), expected)
++
++    def test_valid_sizes(self):
++        for size in range(1, 101):
++            self.assert_callers(size, size)
++            self.assert_callers(str(size), size)
++
++    def test_large_sizes_are_capped(self):
++        for raw in (101, "101", 1000000, "1000000"):
++            self.assert_callers(raw, 100)
++
++    def test_invalid_and_nonpositive_sizes_default(self):
++        for raw in (None, "", " ", "abc", "1.5", "1e2", 0, "0",
++                    -1, "-1", -100, "-100", 1.5, float("inf"),
++                    float("nan"), True, False, [], {}):
++            self.assert_callers(raw, 20)
++
++    def test_missing_api_limit_defaults(self):
++        self.assertEqual(api.limit({}), 20)
++
++
++if __name__ == "__main__":
++    unittest.main()

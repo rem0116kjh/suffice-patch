@@ -1,0 +1,28 @@
+__pycache__/
+*.py[cod]
+
+# Preserve the recorded research evidence; ignore future experiment output.
+/evals/runs/*
+!/evals/runs/pilot-20261003/
+!/evals/runs/git-pilot-20261003/
+!/evals/runs/final-20261003/
+!/evals/runs/ablation-20261003/
+!/evals/runs/expanded-20261003/
+!/evals/runs/compressed-20261003/
+!/evals/runs/regression-20261003/
+!/evals/runs/runtime-audit-20261003/
+!/evals/runs/v3-pilot-20261003/
+!/evals/runs/v3-1-pilot-20261003/
+!/evals/runs/v3-tools-pilot-20261003/
+!/evals/runs/v3-tools-clean-pilot-20261003/
+!/evals/runs/v3-tools-holdout-20261003/
+!/evals/runs/v3-tools-native-20261003/
+!/evals/runs/v3-autoload-native-20261003/
+!/evals/runs/v3-installed-smoke-20261003/
+
+# Generated agent checkouts contain nested Git repositories and are reproducible.
+/evals/runs/**/workspace/
+
+# Temporary local validation runtime; not required to install or use the skill.
+/evals/v3-validation-python.txt
+.DS_Store

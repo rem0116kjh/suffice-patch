@@ -1,0 +1,25 @@
+{
+  "installed_at_utc": "2026-10-03T14:16:07.590248+00:00",
+  "candidate": "/Users/luka/Desktop/ctf/suffice-patch/candidates/v3-autoload/suffice-patch",
+  "bundle_hashes": {
+    "SKILL.md": "f365978b6a24b55d5312dd551cfb7f0a5775595ffd6b8205162cb1df973f9ea1",
+    "scripts/collect_context.py": "b67f30fc48cb80db564a5e83bcadcb2722e946e816a5183a32f3476b76bfe674"
+  },
+  "destinations": {
+    "workspace": "/Users/luka/Desktop/ctf/suffice-patch",
+    "codex": "/Users/luka/.agents/skills/suffice-patch",
+    "claude": "/Users/luka/.claude/skills/suffice-patch"
+  },
+  "previous_skill_sha256": "5de93a4da0a4a8fa7f7c790ee95ef539352ee6dd5c4be5fee8d3254bde5e8230",
+  "backup": "/Users/luka/Desktop/ctf/suffice-patch/evals/installation-v2-backup",
+  "automatic_selection": "kept enabled; no configuration changed",
+  "verification": {
+    "complete": true,
+    "installed_hashes_match_frozen_candidate": true,
+    "skill_validator": "3/3 passed",
+    "collector_tests": "5/5 passed",
+    "native_discovery": "Codex user skill enabled=true, no errors",
+    "native_smoke": "Codex automatic and Claude explicit: 2/2 task success, 6/6 independent assertion groups, installed helper executed in both",
+    "evidence": "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/v3-installed-smoke-20261003/verification.json"
+  }
+}

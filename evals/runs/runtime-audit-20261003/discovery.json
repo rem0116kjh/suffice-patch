@@ -1,0 +1,18 @@
+[
+  {
+    "cwd": "/Users/luka/Desktop/ctf/suffice-patch",
+    "skills_total": 359,
+    "target": [
+      {
+        "name": "suffice-patch",
+        "description": "Complete focused coding changes with the smallest sufficient evidence, edit, and verification.",
+        "path": "/Users/luka/.agents/skills/suffice-patch/SKILL.md",
+        "scope": "user",
+        "enabled": true,
+        "pluginId": null
+      }
+    ],
+    "target_errors": [],
+    "other_error_count": 0
+  }
+]

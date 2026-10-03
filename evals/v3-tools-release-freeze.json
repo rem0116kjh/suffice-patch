@@ -1,0 +1,8 @@
+{
+  "bundle_hashes": {
+    "SKILL.md": "45ada0031a9eb84cdb89a88c3f83f24dc6e7fc8e23e2dbb69110795c3031ac2c",
+    "scripts/collect_context.py": "c8af2d1232c2958e5f81fb02a987ce9b663d7e61d3177587f024bcd436b8c124"
+  },
+  "change_since_pilot": "Git pager, external diff, textconv, and fsmonitor are disabled for read-only inspection; tested with configured marker-writing Git helpers. Skill body unchanged.",
+  "new_tasks_unchanged": "7c4f15d02c0f1da233c071397e033fc1aadc816697a8284d1c98f228b4d982be"
+}

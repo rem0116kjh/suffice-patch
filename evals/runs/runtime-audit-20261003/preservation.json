@@ -1,0 +1,30 @@
+[
+  {
+    "path": "/Users/luka/Desktop/ctf/suffice-patch/SKILL.md",
+    "unchanged": true
+  },
+  {
+    "path": "/Users/luka/Desktop/ctf/suffice-patch/evals/tasks.py",
+    "unchanged": true
+  },
+  {
+    "path": "/Users/luka/Desktop/ctf/suffice-patch/evals/run.py",
+    "unchanged": true
+  },
+  {
+    "path": "/Users/luka/Desktop/ctf/suffice-patch/evals/summary.json",
+    "unchanged": true
+  },
+  {
+    "path": "/Users/luka/Desktop/ctf/suffice-patch/README.md",
+    "unchanged": true
+  },
+  {
+    "path": "/Users/luka/.agents/skills/suffice-patch/SKILL.md",
+    "unchanged": true
+  },
+  {
+    "path": "/Users/luka/.claude/skills/suffice-patch/SKILL.md",
+    "unchanged": true
+  }
+]

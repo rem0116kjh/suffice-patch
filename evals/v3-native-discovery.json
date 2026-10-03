@@ -1,0 +1,46 @@
+[
+  {
+    "expected_repo_enabled": false,
+    "target": [
+      {
+        "name": "suffice-patch",
+        "description": "Inspect localized Python maintenance targets, local dependencies, callers, tests, and Git changes in one call, then make and verify a focused fix.",
+        "path": "/private/var/folders/73/krw9m9bx40b6xkxngwlzh1lc0000gn/T/suffice-native-probe-qzev_6qi/.agents/skills/suffice-patch/SKILL.md",
+        "scope": "repo",
+        "enabled": false,
+        "pluginId": null
+      },
+      {
+        "name": "suffice-patch",
+        "description": "Complete focused coding changes with the smallest sufficient evidence, edit, and verification.",
+        "path": "/Users/luka/.agents/skills/suffice-patch/SKILL.md",
+        "scope": "user",
+        "enabled": false,
+        "pluginId": null
+      }
+    ],
+    "passed": true
+  },
+  {
+    "expected_repo_enabled": true,
+    "target": [
+      {
+        "name": "suffice-patch",
+        "description": "Inspect localized Python maintenance targets, local dependencies, callers, tests, and Git changes in one call, then make and verify a focused fix.",
+        "path": "/private/var/folders/73/krw9m9bx40b6xkxngwlzh1lc0000gn/T/suffice-native-probe-qzev_6qi/.agents/skills/suffice-patch/SKILL.md",
+        "scope": "repo",
+        "enabled": true,
+        "pluginId": null
+      },
+      {
+        "name": "suffice-patch",
+        "description": "Complete focused coding changes with the smallest sufficient evidence, edit, and verification.",
+        "path": "/Users/luka/.agents/skills/suffice-patch/SKILL.md",
+        "scope": "user",
+        "enabled": false,
+        "pluginId": null
+      }
+    ],
+    "passed": true
+  }
+]

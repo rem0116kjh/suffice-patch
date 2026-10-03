@@ -1,0 +1,24 @@
+--- a/settings.py
++++ b/settings.py
+@@ -1,5 +1,19 @@
+ import json
++import os
++import tempfile
++
+ 
+ def save_settings(path, data):
+-    with open(path, "w", encoding="utf-8") as f:
+-        json.dump(data, f, ensure_ascii=False)
++    parent = os.path.dirname(os.path.abspath(path))
++    temporary = tempfile.NamedTemporaryFile(
++        mode="w", encoding="utf-8", dir=parent, delete=False
++    )
++    try:
++        with temporary as f:
++            json.dump(data, f, ensure_ascii=False)
++        os.replace(temporary.name, path)
++    finally:
++        try:
++            os.unlink(temporary.name)
++        except FileNotFoundError:
++            pass

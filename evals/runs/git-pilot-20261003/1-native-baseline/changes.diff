@@ -1,0 +1,10 @@
+--- a/form.html
++++ b/form.html
+@@ -2,6 +2,6 @@
+ <html lang="en"><title>Due date</title>
+ <form method="get">
+ <label for="due">Due date</label>
+-<input id="due" name="due_date" type="text" required min="2026-01-01">
++<input id="due" name="due_date" type="date" required min="2026-01-01">
+ <button>Save</button>
+ </form></html>

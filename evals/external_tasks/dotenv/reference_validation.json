@@ -1,0 +1,686 @@
+{
+  "host": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "python": "Python 3.12.14",
+  "dependencies_freeze": [
+    "asttokens==3.0.2",
+    "click==8.5.0",
+    "executing==2.2.1",
+    "iniconfig==2.3.0",
+    "ipython==9.17.1",
+    "ipython_pygments_lexers==1.1.1",
+    "jedi==0.20.0",
+    "matplotlib-inline==0.2.2",
+    "packaging==26.3",
+    "parso==0.8.7",
+    "pexpect==4.9.0",
+    "pluggy==1.6.0",
+    "prompt_toolkit==3.0.53",
+    "psutil==7.2.2",
+    "ptyprocess==0.7.0",
+    "pure_eval==0.2.4",
+    "Pygments==2.21.0",
+    "pytest==9.1.1",
+    "python-dotenv==1.2.2",
+    "stack-data==0.6.3",
+    "traitlets==5.16.1",
+    "wcwidth==0.9.2"
+  ],
+  "base_commit": "751f8c148222e58aa173c83c4e5e6cfccb2cc124",
+  "reference_commit": "f7b18d9c72d1abcc2ad4023424b84f5bee30d266",
+  "predeclared_test_exclusion": "tests/test_cli.py::test_run_with_command_flags; GNU printenv --version unavailable on macOS BSD printenv",
+  "grader_sha256": "634d554716712688af6d1984cb6112a9e54c40e210e55f0ae7648dc2ac5853a5",
+  "base": {
+    "hidden": {
+      "command": [
+        "/tmp/suffice-dotenv-prep-py312-20261006/bin/python",
+        "-B",
+        "-"
+      ],
+      "returncode": 1,
+      "stdout": "{\"passed\": 25, \"total\": 65, \"failed\": 40, \"checks\": [{\"name\": \"roundtrip_0_always_append\", \"passed\": true}, {\"name\": \"roundtrip_0_always_replace\", \"passed\": true}, {\"name\": \"roundtrip_0_auto_append\", \"passed\": true}, {\"name\": \"roundtrip_0_auto_replace\", \"passed\": true}, {\"name\": \"roundtrip_1_always_append\", \"passed\": true}, {\"name\": \"roundtrip_1_always_replace\", \"passed\": true}, {\"name\": \"roundtrip_1_auto_append\", \"passed\": true}, {\"name\": \"roundtrip_1_auto_replace\", \"passed\": true}, {\"name\": \"roundtrip_2_always_append\", \"passed\": true}, {\"name\": \"roundtrip_2_always_replace\", \"passed\": true}, {\"name\": \"roundtrip_2_auto_append\", \"passed\": true}, {\"name\": \"roundtrip_2_auto_replace\", \"passed\": true}, {\"name\": \"roundtrip_3_always_append\", \"passed\": true}, {\"name\": \"roundtrip_3_always_replace\", \"passed\": true}, {\"name\": \"roundtrip_3_auto_append\", \"passed\": true}, {\"name\": \"roundtrip_3_auto_replace\", \"passed\": true}, {\"name\": \"roundtrip_4_always_append\", \"passed\": false, \"error\": \"AssertionError: actual={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': 'prefix\\\\\\\\suffix'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': 'prefix\\\\\\\\\\\\\\\\suffix'}\"}, {\"name\": \"roundtrip_4_always_replace\", \"passed\": false, \"error\": \"AssertionError: actual={'BEFORE': 'stable', 'VALUE': 'prefix\\\\\\\\suffix', 'AFTER': 'stable'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': 'prefix\\\\\\\\\\\\\\\\suffix'}\"}, {\"name\": \"roundtrip_4_auto_append\", \"passed\": false, \"error\": \"AssertionError: actual={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': 'prefix\\\\\\\\suffix'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': 'prefix\\\\\\\\\\\\\\\\suffix'}\"}, {\"name\": \"roundtrip_4_auto_replace\", \"passed\": false, \"error\": \"AssertionError: actual={'BEFORE': 'stable', 'VALUE': 'prefix\\\\\\\\suffix', 'AFTER': 'stable'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': 'prefix\\\\\\\\\\\\\\\\suffix'}\"}, {\"name\": \"roundtrip_5_always_append\", \"passed\": false, \"error\": \"AssertionError: actual={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': '\\\\\\\\server\\\\\\\\share\\\\\\\\'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': '\\\\\\\\\\\\\\\\server\\\\\\\\share\\\\\\\\'}\"}, {\"name\": \"roundtrip_5_always_replace\", \"passed\": false, \"error\": \"AssertionError: actual={'BEFORE': 'stable'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': '\\\\\\\\\\\\\\\\server\\\\\\\\share\\\\\\\\'}\"}, {\"name\": \"roundtrip_5_auto_append\", \"passed\": false, \"error\": \"AssertionError: actual={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': '\\\\\\\\server\\\\\\\\share\\\\\\\\'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': '\\\\\\\\\\\\\\\\server\\\\\\\\share\\\\\\\\'}\"}, {\"name\": \"roundtrip_5_auto_replace\", \"passed\": false, \"error\": \"AssertionError: actual={'BEFORE': 'stable'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': '\\\\\\\\\\\\\\\\server\\\\\\\\share\\\\\\\\'}\"}, {\"name\": \"roundtrip_6_always_append\", \"passed\": false, \"error\": \"AssertionError: actual={'BEFORE': 'stable', 'AFTER': 'stable'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': 'trailing\\\\\\\\', 'NEXT': 'after write'}\"}, {\"name\": \"roundtrip_6_always_replace\", \"passed\": false, \"error\": \"AssertionError: actual={'BEFORE': 'stable'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': 'trailing\\\\\\\\'}\"}, {\"name\": \"roundtrip_6_auto_append\", \"passed\": false, \"error\": \"AssertionError: actual={'BEFORE': 'stable', 'AFTER': 'stable'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': 'trailing\\\\\\\\', 'NEXT': 'after write'}\"}, {\"name\": \"roundtrip_6_auto_replace\", \"passed\": false, \"error\": \"AssertionError: actual={'BEFORE': 'stable'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': 'trailing\\\\\\\\'}\"}, {\"name\": \"roundtrip_7_always_append\", \"passed\": false, \"error\": \"AssertionError: actual={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': 'two trailing\\\\\\\\'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': 'two trailing\\\\\\\\\\\\\\\\'}\"}, {\"name\": \"roundtrip_7_always_replace\", \"passed\": false, \"error\": \"AssertionError: actual={'BEFORE': 'stable'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': 'two trailing\\\\\\\\\\\\\\\\'}\"}, {\"name\": \"roundtrip_7_auto_append\", \"passed\": false, \"error\": \"AssertionError: actual={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': 'two trailing\\\\\\\\'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': 'two trailing\\\\\\\\\\\\\\\\'}\"}, {\"name\": \"roundtrip_7_auto_replace\", \"passed\": false, \"error\": \"AssertionError: actual={'BEFORE': 'stable'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': 'two trailing\\\\\\\\\\\\\\\\'}\"}, {\"name\": \"roundtrip_8_always_append\", \"passed\": true}, {\"name\": \"roundtrip_8_always_replace\", \"passed\": true}, {\"name\": \"roundtrip_8_auto_append\", \"passed\": true}, {\"name\": \"roundtrip_8_auto_replace\", \"passed\": true}, {\"name\": \"roundtrip_9_always_append\", \"passed\": false, \"error\": \"AssertionError: actual={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': \\\"before\\\\\\\\'after\\\"}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': \\\"before\\\\\\\\\\\\\\\\'after\\\"}\"}, {\"name\": \"roundtrip_9_always_replace\", \"passed\": false, \"error\": \"AssertionError: actual={'BEFORE': 'stable', 'VALUE': \\\"before\\\\\\\\'after\\\", 'AFTER': 'stable'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': \\\"before\\\\\\\\\\\\\\\\'after\\\"}\"}, {\"name\": \"roundtrip_9_auto_append\", \"passed\": false, \"error\": \"AssertionError: actual={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': \\\"before\\\\\\\\'after\\\"}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': \\\"before\\\\\\\\\\\\\\\\'after\\\"}\"}, {\"name\": \"roundtrip_9_auto_replace\", \"passed\": false, \"error\": \"AssertionError: actual={'BEFORE': 'stable', 'VALUE': \\\"before\\\\\\\\'after\\\", 'AFTER': 'stable'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': \\\"before\\\\\\\\\\\\\\\\'after\\\"}\"}, {\"name\": \"roundtrip_10_always_append\", \"passed\": true}, {\"name\": \"roundtrip_10_always_replace\", \"passed\": true}, {\"name\": \"roundtrip_10_auto_append\", \"passed\": true}, {\"name\": \"roundtrip_10_auto_replace\", \"passed\": true}, {\"name\": \"roundtrip_11_always_append\", \"passed\": false, \"error\": \"AssertionError: actual={'BEFORE': 'stable', 'AFTER': 'stable'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': 'line one\\\\nline two\\\\\\\\', 'NEXT': 'after write'}\"}, {\"name\": \"roundtrip_11_always_replace\", \"passed\": false, \"error\": \"AssertionError: actual={'BEFORE': 'stable'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': 'line one\\\\nline two\\\\\\\\'}\"}, {\"name\": \"roundtrip_11_auto_append\", \"passed\": false, \"error\": \"AssertionError: actual={'BEFORE': 'stable', 'AFTER': 'stable'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': 'line one\\\\nline two\\\\\\\\', 'NEXT': 'after write'}\"}, {\"name\": \"roundtrip_11_auto_replace\", \"passed\": false, \"error\": \"AssertionError: actual={'BEFORE': 'stable'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': 'line one\\\\nline two\\\\\\\\'}\"}, {\"name\": \"roundtrip_12_always_append\", \"passed\": false, \"error\": \"AssertionError: actual={'BEFORE': 'stable', 'AFTER': 'stable'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': '한국어\\\\\\\\경로\\\\\\\\', 'NEXT': 'after write'}\"}, {\"name\": \"roundtrip_12_always_replace\", \"passed\": false, \"error\": \"AssertionError: actual={'BEFORE': 'stable'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': '한국어\\\\\\\\경로\\\\\\\\'}\"}, {\"name\": \"roundtrip_12_auto_append\", \"passed\": false, \"error\": \"AssertionError: actual={'BEFORE': 'stable', 'AFTER': 'stable'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': '한국어\\\\\\\\경로\\\\\\\\', 'NEXT': 'after write'}\"}, {\"name\": \"roundtrip_12_auto_replace\", \"passed\": false, \"error\": \"AssertionError: actual={'BEFORE': 'stable'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': '한국어\\\\\\\\경로\\\\\\\\'}\"}, {\"name\": \"parser_39_1_False\", \"passed\": false, \"error\": \"AssertionError: actual=[(None, None, True)], expected=[('FIRST', 'tail\\\\\\\\', False), ('SECOND', 'untouched', False)]\"}, {\"name\": \"parser_39_1_True\", \"passed\": false, \"error\": \"AssertionError: actual=[(None, None, True)], expected=[('FIRST', 'tail\\\\\\\\', False), ('SECOND', 'untouched', False)]\"}, {\"name\": \"parser_39_2_False\", \"passed\": false, \"error\": \"AssertionError: actual=[(None, None, True)], expected=[('FIRST', 'tail\\\\\\\\\\\\\\\\', False), ('SECOND', 'untouched', False)]\"}, {\"name\": \"parser_39_2_True\", \"passed\": false, \"error\": \"AssertionError: actual=[(None, None, True)], expected=[('FIRST', 'tail\\\\\\\\\\\\\\\\', False), ('SECOND', 'untouched', False)]\"}, {\"name\": \"parser_39_3_False\", \"passed\": false, \"error\": \"AssertionError: actual=[(None, None, True)], expected=[('FIRST', 'tail\\\\\\\\\\\\\\\\\\\\\\\\', False), ('SECOND', 'untouched', False)]\"}, {\"name\": \"parser_39_3_True\", \"passed\": false, \"error\": \"AssertionError: actual=[(None, None, True)], expected=[('FIRST', 'tail\\\\\\\\\\\\\\\\\\\\\\\\', False), ('SECOND', 'untouched', False)]\"}, {\"name\": \"parser_34_1_False\", \"passed\": false, \"error\": \"AssertionError: actual=[(None, None, True)], expected=[('FIRST', 'tail\\\\\\\\', False), ('SECOND', 'untouched', False)]\"}, {\"name\": \"parser_34_1_True\", \"passed\": false, \"error\": \"AssertionError: actual=[(None, None, True)], expected=[('FIRST', 'tail\\\\\\\\', False), ('SECOND', 'untouched', False)]\"}, {\"name\": \"parser_34_2_False\", \"passed\": false, \"error\": \"AssertionError: actual=[(None, None, True)], expected=[('FIRST', 'tail\\\\\\\\\\\\\\\\', False), ('SECOND', 'untouched', False)]\"}, {\"name\": \"parser_34_2_True\", \"passed\": false, \"error\": \"AssertionError: actual=[(None, None, True)], expected=[('FIRST', 'tail\\\\\\\\\\\\\\\\', False), ('SECOND', 'untouched', False)]\"}, {\"name\": \"parser_34_3_False\", \"passed\": false, \"error\": \"AssertionError: actual=[(None, None, True)], expected=[('FIRST', 'tail\\\\\\\\\\\\\\\\\\\\\\\\', False), ('SECOND', 'untouched', False)]\"}, {\"name\": \"parser_34_3_True\", \"passed\": false, \"error\": \"AssertionError: actual=[(None, None, True)], expected=[('FIRST', 'tail\\\\\\\\\\\\\\\\\\\\\\\\', False), ('SECOND', 'untouched', False)]\"}, {\"name\": \"never_quote_mode_preserved\", \"passed\": true}]}\n",
+      "stderr": "",
+      "parsed": {
+        "passed": 25,
+        "total": 65,
+        "failed": 40,
+        "checks": [
+          {
+            "name": "roundtrip_0_always_append",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_0_always_replace",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_0_auto_append",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_0_auto_replace",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_1_always_append",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_1_always_replace",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_1_auto_append",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_1_auto_replace",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_2_always_append",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_2_always_replace",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_2_auto_append",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_2_auto_replace",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_3_always_append",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_3_always_replace",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_3_auto_append",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_3_auto_replace",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_4_always_append",
+            "passed": false,
+            "error": "AssertionError: actual={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': 'prefix\\\\suffix'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': 'prefix\\\\\\\\suffix'}"
+          },
+          {
+            "name": "roundtrip_4_always_replace",
+            "passed": false,
+            "error": "AssertionError: actual={'BEFORE': 'stable', 'VALUE': 'prefix\\\\suffix', 'AFTER': 'stable'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': 'prefix\\\\\\\\suffix'}"
+          },
+          {
+            "name": "roundtrip_4_auto_append",
+            "passed": false,
+            "error": "AssertionError: actual={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': 'prefix\\\\suffix'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': 'prefix\\\\\\\\suffix'}"
+          },
+          {
+            "name": "roundtrip_4_auto_replace",
+            "passed": false,
+            "error": "AssertionError: actual={'BEFORE': 'stable', 'VALUE': 'prefix\\\\suffix', 'AFTER': 'stable'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': 'prefix\\\\\\\\suffix'}"
+          },
+          {
+            "name": "roundtrip_5_always_append",
+            "passed": false,
+            "error": "AssertionError: actual={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': '\\\\server\\\\share\\\\'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': '\\\\\\\\server\\\\share\\\\'}"
+          },
+          {
+            "name": "roundtrip_5_always_replace",
+            "passed": false,
+            "error": "AssertionError: actual={'BEFORE': 'stable'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': '\\\\\\\\server\\\\share\\\\'}"
+          },
+          {
+            "name": "roundtrip_5_auto_append",
+            "passed": false,
+            "error": "AssertionError: actual={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': '\\\\server\\\\share\\\\'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': '\\\\\\\\server\\\\share\\\\'}"
+          },
+          {
+            "name": "roundtrip_5_auto_replace",
+            "passed": false,
+            "error": "AssertionError: actual={'BEFORE': 'stable'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': '\\\\\\\\server\\\\share\\\\'}"
+          },
+          {
+            "name": "roundtrip_6_always_append",
+            "passed": false,
+            "error": "AssertionError: actual={'BEFORE': 'stable', 'AFTER': 'stable'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': 'trailing\\\\', 'NEXT': 'after write'}"
+          },
+          {
+            "name": "roundtrip_6_always_replace",
+            "passed": false,
+            "error": "AssertionError: actual={'BEFORE': 'stable'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': 'trailing\\\\'}"
+          },
+          {
+            "name": "roundtrip_6_auto_append",
+            "passed": false,
+            "error": "AssertionError: actual={'BEFORE': 'stable', 'AFTER': 'stable'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': 'trailing\\\\', 'NEXT': 'after write'}"
+          },
+          {
+            "name": "roundtrip_6_auto_replace",
+            "passed": false,
+            "error": "AssertionError: actual={'BEFORE': 'stable'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': 'trailing\\\\'}"
+          },
+          {
+            "name": "roundtrip_7_always_append",
+            "passed": false,
+            "error": "AssertionError: actual={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': 'two trailing\\\\'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': 'two trailing\\\\\\\\'}"
+          },
+          {
+            "name": "roundtrip_7_always_replace",
+            "passed": false,
+            "error": "AssertionError: actual={'BEFORE': 'stable'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': 'two trailing\\\\\\\\'}"
+          },
+          {
+            "name": "roundtrip_7_auto_append",
+            "passed": false,
+            "error": "AssertionError: actual={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': 'two trailing\\\\'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': 'two trailing\\\\\\\\'}"
+          },
+          {
+            "name": "roundtrip_7_auto_replace",
+            "passed": false,
+            "error": "AssertionError: actual={'BEFORE': 'stable'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': 'two trailing\\\\\\\\'}"
+          },
+          {
+            "name": "roundtrip_8_always_append",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_8_always_replace",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_8_auto_append",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_8_auto_replace",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_9_always_append",
+            "passed": false,
+            "error": "AssertionError: actual={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': \"before\\\\'after\"}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': \"before\\\\\\\\'after\"}"
+          },
+          {
+            "name": "roundtrip_9_always_replace",
+            "passed": false,
+            "error": "AssertionError: actual={'BEFORE': 'stable', 'VALUE': \"before\\\\'after\", 'AFTER': 'stable'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': \"before\\\\\\\\'after\"}"
+          },
+          {
+            "name": "roundtrip_9_auto_append",
+            "passed": false,
+            "error": "AssertionError: actual={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': \"before\\\\'after\"}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': \"before\\\\\\\\'after\"}"
+          },
+          {
+            "name": "roundtrip_9_auto_replace",
+            "passed": false,
+            "error": "AssertionError: actual={'BEFORE': 'stable', 'VALUE': \"before\\\\'after\", 'AFTER': 'stable'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': \"before\\\\\\\\'after\"}"
+          },
+          {
+            "name": "roundtrip_10_always_append",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_10_always_replace",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_10_auto_append",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_10_auto_replace",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_11_always_append",
+            "passed": false,
+            "error": "AssertionError: actual={'BEFORE': 'stable', 'AFTER': 'stable'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': 'line one\\nline two\\\\', 'NEXT': 'after write'}"
+          },
+          {
+            "name": "roundtrip_11_always_replace",
+            "passed": false,
+            "error": "AssertionError: actual={'BEFORE': 'stable'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': 'line one\\nline two\\\\'}"
+          },
+          {
+            "name": "roundtrip_11_auto_append",
+            "passed": false,
+            "error": "AssertionError: actual={'BEFORE': 'stable', 'AFTER': 'stable'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': 'line one\\nline two\\\\', 'NEXT': 'after write'}"
+          },
+          {
+            "name": "roundtrip_11_auto_replace",
+            "passed": false,
+            "error": "AssertionError: actual={'BEFORE': 'stable'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': 'line one\\nline two\\\\'}"
+          },
+          {
+            "name": "roundtrip_12_always_append",
+            "passed": false,
+            "error": "AssertionError: actual={'BEFORE': 'stable', 'AFTER': 'stable'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': '한국어\\\\경로\\\\', 'NEXT': 'after write'}"
+          },
+          {
+            "name": "roundtrip_12_always_replace",
+            "passed": false,
+            "error": "AssertionError: actual={'BEFORE': 'stable'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': '한국어\\\\경로\\\\'}"
+          },
+          {
+            "name": "roundtrip_12_auto_append",
+            "passed": false,
+            "error": "AssertionError: actual={'BEFORE': 'stable', 'AFTER': 'stable'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': '한국어\\\\경로\\\\', 'NEXT': 'after write'}"
+          },
+          {
+            "name": "roundtrip_12_auto_replace",
+            "passed": false,
+            "error": "AssertionError: actual={'BEFORE': 'stable'}, expected={'BEFORE': 'stable', 'AFTER': 'stable', 'VALUE': '한국어\\\\경로\\\\'}"
+          },
+          {
+            "name": "parser_39_1_False",
+            "passed": false,
+            "error": "AssertionError: actual=[(None, None, True)], expected=[('FIRST', 'tail\\\\', False), ('SECOND', 'untouched', False)]"
+          },
+          {
+            "name": "parser_39_1_True",
+            "passed": false,
+            "error": "AssertionError: actual=[(None, None, True)], expected=[('FIRST', 'tail\\\\', False), ('SECOND', 'untouched', False)]"
+          },
+          {
+            "name": "parser_39_2_False",
+            "passed": false,
+            "error": "AssertionError: actual=[(None, None, True)], expected=[('FIRST', 'tail\\\\\\\\', False), ('SECOND', 'untouched', False)]"
+          },
+          {
+            "name": "parser_39_2_True",
+            "passed": false,
+            "error": "AssertionError: actual=[(None, None, True)], expected=[('FIRST', 'tail\\\\\\\\', False), ('SECOND', 'untouched', False)]"
+          },
+          {
+            "name": "parser_39_3_False",
+            "passed": false,
+            "error": "AssertionError: actual=[(None, None, True)], expected=[('FIRST', 'tail\\\\\\\\\\\\', False), ('SECOND', 'untouched', False)]"
+          },
+          {
+            "name": "parser_39_3_True",
+            "passed": false,
+            "error": "AssertionError: actual=[(None, None, True)], expected=[('FIRST', 'tail\\\\\\\\\\\\', False), ('SECOND', 'untouched', False)]"
+          },
+          {
+            "name": "parser_34_1_False",
+            "passed": false,
+            "error": "AssertionError: actual=[(None, None, True)], expected=[('FIRST', 'tail\\\\', False), ('SECOND', 'untouched', False)]"
+          },
+          {
+            "name": "parser_34_1_True",
+            "passed": false,
+            "error": "AssertionError: actual=[(None, None, True)], expected=[('FIRST', 'tail\\\\', False), ('SECOND', 'untouched', False)]"
+          },
+          {
+            "name": "parser_34_2_False",
+            "passed": false,
+            "error": "AssertionError: actual=[(None, None, True)], expected=[('FIRST', 'tail\\\\\\\\', False), ('SECOND', 'untouched', False)]"
+          },
+          {
+            "name": "parser_34_2_True",
+            "passed": false,
+            "error": "AssertionError: actual=[(None, None, True)], expected=[('FIRST', 'tail\\\\\\\\', False), ('SECOND', 'untouched', False)]"
+          },
+          {
+            "name": "parser_34_3_False",
+            "passed": false,
+            "error": "AssertionError: actual=[(None, None, True)], expected=[('FIRST', 'tail\\\\\\\\\\\\', False), ('SECOND', 'untouched', False)]"
+          },
+          {
+            "name": "parser_34_3_True",
+            "passed": false,
+            "error": "AssertionError: actual=[(None, None, True)], expected=[('FIRST', 'tail\\\\\\\\\\\\', False), ('SECOND', 'untouched', False)]"
+          },
+          {
+            "name": "never_quote_mode_preserved",
+            "passed": true
+          }
+        ]
+      }
+    },
+    "full_upstream": {
+      "command": [
+        "/tmp/suffice-dotenv-prep-py312-20261006/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "--tb=short"
+      ],
+      "returncode": 1,
+      "stdout": "......................................F................................. [ 32%]\n........................................................................ [ 64%]\n........................................................................ [ 96%]\n.......                                                                  [100%]\n=================================== FAILURES ===================================\n_________________________ test_run_with_command_flags __________________________\ntests/test_cli.py:280: in test_run_with_command_flags\n    check_process(result, exit_code=0)\ntests/test_lib.py:37: in check_process\n    assert process.returncode == exit_code, (\nE   AssertionError: Unexpected exit code 1 (expected 0)\nE     stdout:\nE     \nE     stderr:\nE     printenv: illegal option -- -\nE     usage: printenv [name]\nE     \nE   assert 1 == 0\nE    +  where 1 = CompletedProcess(args=['dotenv', '--file', '/private/var/folders/73/krw9m9bx40b6xkxngwlzh1lc0000gn/T/pytest-of-luka/py...', 'printenv', '--version'], returncode=1, stdout='', stderr='printenv: illegal option -- -\\nusage: printenv [name]\\n').returncode\n=============================== warnings summary ===============================\ntests/test_cli.py: 28 warnings\n  /private/tmp/suffice-dotenv-prep-20261006/tests/conftest.py:8: DeprecationWarning: 'isolated_filesystem' is deprecated and will be removed in Click 9.0. Use 'tempfile.TemporaryDirectory' or pytest's 'tmp_path' fixture with absolute paths instead.\n    with runner.isolated_filesystem():\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ============================\nFAILED tests/test_cli.py::test_run_with_command_flags - AssertionError: Unexp...\n1 failed, 222 passed, 28 warnings in 1.60s\n",
+      "stderr": ""
+    },
+    "compatible_upstream": {
+      "command": [
+        "/tmp/suffice-dotenv-prep-py312-20261006/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-k",
+        "not test_run_with_command_flags"
+      ],
+      "returncode": 0,
+      "stdout": "........................................................................ [ 32%]\n........................................................................ [ 64%]\n........................................................................ [ 97%]\n......                                                                   [100%]\n=============================== warnings summary ===============================\ntests/test_cli.py: 28 warnings\n  /private/tmp/suffice-dotenv-prep-20261006/tests/conftest.py:8: DeprecationWarning: 'isolated_filesystem' is deprecated and will be removed in Click 9.0. Use 'tempfile.TemporaryDirectory' or pytest's 'tmp_path' fixture with absolute paths instead.\n    with runner.isolated_filesystem():\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n222 passed, 1 deselected, 28 warnings in 1.40s\n",
+      "stderr": ""
+    }
+  },
+  "reference": {
+    "hidden": {
+      "command": [
+        "/tmp/suffice-dotenv-prep-py312-20261006/bin/python",
+        "-B",
+        "-"
+      ],
+      "returncode": 0,
+      "stdout": "{\"passed\": 65, \"total\": 65, \"failed\": 0, \"checks\": [{\"name\": \"roundtrip_0_always_append\", \"passed\": true}, {\"name\": \"roundtrip_0_always_replace\", \"passed\": true}, {\"name\": \"roundtrip_0_auto_append\", \"passed\": true}, {\"name\": \"roundtrip_0_auto_replace\", \"passed\": true}, {\"name\": \"roundtrip_1_always_append\", \"passed\": true}, {\"name\": \"roundtrip_1_always_replace\", \"passed\": true}, {\"name\": \"roundtrip_1_auto_append\", \"passed\": true}, {\"name\": \"roundtrip_1_auto_replace\", \"passed\": true}, {\"name\": \"roundtrip_2_always_append\", \"passed\": true}, {\"name\": \"roundtrip_2_always_replace\", \"passed\": true}, {\"name\": \"roundtrip_2_auto_append\", \"passed\": true}, {\"name\": \"roundtrip_2_auto_replace\", \"passed\": true}, {\"name\": \"roundtrip_3_always_append\", \"passed\": true}, {\"name\": \"roundtrip_3_always_replace\", \"passed\": true}, {\"name\": \"roundtrip_3_auto_append\", \"passed\": true}, {\"name\": \"roundtrip_3_auto_replace\", \"passed\": true}, {\"name\": \"roundtrip_4_always_append\", \"passed\": true}, {\"name\": \"roundtrip_4_always_replace\", \"passed\": true}, {\"name\": \"roundtrip_4_auto_append\", \"passed\": true}, {\"name\": \"roundtrip_4_auto_replace\", \"passed\": true}, {\"name\": \"roundtrip_5_always_append\", \"passed\": true}, {\"name\": \"roundtrip_5_always_replace\", \"passed\": true}, {\"name\": \"roundtrip_5_auto_append\", \"passed\": true}, {\"name\": \"roundtrip_5_auto_replace\", \"passed\": true}, {\"name\": \"roundtrip_6_always_append\", \"passed\": true}, {\"name\": \"roundtrip_6_always_replace\", \"passed\": true}, {\"name\": \"roundtrip_6_auto_append\", \"passed\": true}, {\"name\": \"roundtrip_6_auto_replace\", \"passed\": true}, {\"name\": \"roundtrip_7_always_append\", \"passed\": true}, {\"name\": \"roundtrip_7_always_replace\", \"passed\": true}, {\"name\": \"roundtrip_7_auto_append\", \"passed\": true}, {\"name\": \"roundtrip_7_auto_replace\", \"passed\": true}, {\"name\": \"roundtrip_8_always_append\", \"passed\": true}, {\"name\": \"roundtrip_8_always_replace\", \"passed\": true}, {\"name\": \"roundtrip_8_auto_append\", \"passed\": true}, {\"name\": \"roundtrip_8_auto_replace\", \"passed\": true}, {\"name\": \"roundtrip_9_always_append\", \"passed\": true}, {\"name\": \"roundtrip_9_always_replace\", \"passed\": true}, {\"name\": \"roundtrip_9_auto_append\", \"passed\": true}, {\"name\": \"roundtrip_9_auto_replace\", \"passed\": true}, {\"name\": \"roundtrip_10_always_append\", \"passed\": true}, {\"name\": \"roundtrip_10_always_replace\", \"passed\": true}, {\"name\": \"roundtrip_10_auto_append\", \"passed\": true}, {\"name\": \"roundtrip_10_auto_replace\", \"passed\": true}, {\"name\": \"roundtrip_11_always_append\", \"passed\": true}, {\"name\": \"roundtrip_11_always_replace\", \"passed\": true}, {\"name\": \"roundtrip_11_auto_append\", \"passed\": true}, {\"name\": \"roundtrip_11_auto_replace\", \"passed\": true}, {\"name\": \"roundtrip_12_always_append\", \"passed\": true}, {\"name\": \"roundtrip_12_always_replace\", \"passed\": true}, {\"name\": \"roundtrip_12_auto_append\", \"passed\": true}, {\"name\": \"roundtrip_12_auto_replace\", \"passed\": true}, {\"name\": \"parser_39_1_False\", \"passed\": true}, {\"name\": \"parser_39_1_True\", \"passed\": true}, {\"name\": \"parser_39_2_False\", \"passed\": true}, {\"name\": \"parser_39_2_True\", \"passed\": true}, {\"name\": \"parser_39_3_False\", \"passed\": true}, {\"name\": \"parser_39_3_True\", \"passed\": true}, {\"name\": \"parser_34_1_False\", \"passed\": true}, {\"name\": \"parser_34_1_True\", \"passed\": true}, {\"name\": \"parser_34_2_False\", \"passed\": true}, {\"name\": \"parser_34_2_True\", \"passed\": true}, {\"name\": \"parser_34_3_False\", \"passed\": true}, {\"name\": \"parser_34_3_True\", \"passed\": true}, {\"name\": \"never_quote_mode_preserved\", \"passed\": true}]}\n",
+      "stderr": "",
+      "parsed": {
+        "passed": 65,
+        "total": 65,
+        "failed": 0,
+        "checks": [
+          {
+            "name": "roundtrip_0_always_append",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_0_always_replace",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_0_auto_append",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_0_auto_replace",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_1_always_append",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_1_always_replace",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_1_auto_append",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_1_auto_replace",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_2_always_append",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_2_always_replace",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_2_auto_append",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_2_auto_replace",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_3_always_append",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_3_always_replace",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_3_auto_append",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_3_auto_replace",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_4_always_append",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_4_always_replace",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_4_auto_append",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_4_auto_replace",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_5_always_append",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_5_always_replace",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_5_auto_append",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_5_auto_replace",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_6_always_append",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_6_always_replace",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_6_auto_append",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_6_auto_replace",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_7_always_append",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_7_always_replace",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_7_auto_append",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_7_auto_replace",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_8_always_append",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_8_always_replace",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_8_auto_append",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_8_auto_replace",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_9_always_append",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_9_always_replace",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_9_auto_append",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_9_auto_replace",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_10_always_append",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_10_always_replace",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_10_auto_append",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_10_auto_replace",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_11_always_append",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_11_always_replace",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_11_auto_append",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_11_auto_replace",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_12_always_append",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_12_always_replace",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_12_auto_append",
+            "passed": true
+          },
+          {
+            "name": "roundtrip_12_auto_replace",
+            "passed": true
+          },
+          {
+            "name": "parser_39_1_False",
+            "passed": true
+          },
+          {
+            "name": "parser_39_1_True",
+            "passed": true
+          },
+          {
+            "name": "parser_39_2_False",
+            "passed": true
+          },
+          {
+            "name": "parser_39_2_True",
+            "passed": true
+          },
+          {
+            "name": "parser_39_3_False",
+            "passed": true
+          },
+          {
+            "name": "parser_39_3_True",
+            "passed": true
+          },
+          {
+            "name": "parser_34_1_False",
+            "passed": true
+          },
+          {
+            "name": "parser_34_1_True",
+            "passed": true
+          },
+          {
+            "name": "parser_34_2_False",
+            "passed": true
+          },
+          {
+            "name": "parser_34_2_True",
+            "passed": true
+          },
+          {
+            "name": "parser_34_3_False",
+            "passed": true
+          },
+          {
+            "name": "parser_34_3_True",
+            "passed": true
+          },
+          {
+            "name": "never_quote_mode_preserved",
+            "passed": true
+          }
+        ]
+      }
+    },
+    "full_upstream": {
+      "command": [
+        "/tmp/suffice-dotenv-prep-py312-20261006/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "--tb=short"
+      ],
+      "returncode": 1,
+      "stdout": "......................................F................................. [ 29%]\n........................................................................ [ 59%]\n........................................................................ [ 89%]\n.........................                                                [100%]\n=================================== FAILURES ===================================\n_________________________ test_run_with_command_flags __________________________\ntests/test_cli.py:280: in test_run_with_command_flags\n    check_process(result, exit_code=0)\ntests/test_lib.py:37: in check_process\n    assert process.returncode == exit_code, (\nE   AssertionError: Unexpected exit code 1 (expected 0)\nE     stdout:\nE     \nE     stderr:\nE     printenv: illegal option -- -\nE     usage: printenv [name]\nE     \nE   assert 1 == 0\nE    +  where 1 = CompletedProcess(args=['dotenv', '--file', '/private/var/folders/73/krw9m9bx40b6xkxngwlzh1lc0000gn/T/pytest-of-luka/py...', 'printenv', '--version'], returncode=1, stdout='', stderr='printenv: illegal option -- -\\nusage: printenv [name]\\n').returncode\n=============================== warnings summary ===============================\ntests/test_cli.py: 28 warnings\n  /private/tmp/suffice-dotenv-prep-20261006/tests/conftest.py:8: DeprecationWarning: 'isolated_filesystem' is deprecated and will be removed in Click 9.0. Use 'tempfile.TemporaryDirectory' or pytest's 'tmp_path' fixture with absolute paths instead.\n    with runner.isolated_filesystem():\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ============================\nFAILED tests/test_cli.py::test_run_with_command_flags - AssertionError: Unexp...\n1 failed, 240 passed, 28 warnings in 1.31s\n",
+      "stderr": ""
+    },
+    "compatible_upstream": {
+      "command": [
+        "/tmp/suffice-dotenv-prep-py312-20261006/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-k",
+        "not test_run_with_command_flags"
+      ],
+      "returncode": 0,
+      "stdout": "........................................................................ [ 30%]\n........................................................................ [ 60%]\n........................................................................ [ 90%]\n........................                                                 [100%]\n=============================== warnings summary ===============================\ntests/test_cli.py: 28 warnings\n  /private/tmp/suffice-dotenv-prep-20261006/tests/conftest.py:8: DeprecationWarning: 'isolated_filesystem' is deprecated and will be removed in Click 9.0. Use 'tempfile.TemporaryDirectory' or pytest's 'tmp_path' fixture with absolute paths instead.\n    with runner.isolated_filesystem():\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n240 passed, 1 deselected, 28 warnings in 1.16s\n",
+      "stderr": ""
+    }
+  },
+  "repository_stats": {
+    "tracked_files": 46,
+    "tracked_python_files": 20,
+    "source_python_files": 8,
+    "tracked_bytes": 162285
+  }
+}

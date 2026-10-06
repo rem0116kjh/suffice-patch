@@ -1,0 +1,30 @@
+{
+  "id": "itsdangerous-expiration-noop",
+  "repo_url": "https://github.com/pallets/itsdangerous.git",
+  "base_commit": "37f09970fa32a330a6660ded3abdb264086531b5",
+  "reference_commit": "37f09970fa32a330a6660ded3abdb264086531b5",
+  "source_subdir": "src",
+  "prompt": "Verify the existing TimestampSigner.unsign expiration behavior in src/itsdangerous/timed.py: a valid signature is accepted when its age equals max_age, older signatures and signatures from the future raise SignatureExpired, and return_timestamp gives a timezone-aware UTC datetime with the original payload. The implementation may already satisfy this contract. Inspect and run existing relevant tests; if it already works, leave every file unchanged. Do not add tests, notes, or other files. Only change source if a contract violation is actually demonstrated.",
+  "allowed_source_paths": [],
+  "grader": "grader_noop.py",
+  "test_command": [
+    "{python}",
+    "-m",
+    "pytest",
+    "-q",
+    "tests"
+  ],
+  "dependencies": [
+    "pytest==8.3.5",
+    "freezegun==1.5.1"
+  ],
+  "expected_noop": true,
+  "prep_repo": "/tmp/suffice-itsdangerous-prep",
+  "provenance_urls": [
+    "https://github.com/pallets/itsdangerous/commit/37f09970fa32a330a6660ded3abdb264086531b5",
+    "https://github.com/pallets/itsdangerous/blob/37f09970fa32a330a6660ded3abdb264086531b5/src/itsdangerous/timed.py"
+  ],
+  "python_executable": "/tmp/suffice-itsdangerous-py312/bin/python",
+  "allow_new_tests": false,
+  "import_package": "itsdangerous"
+}

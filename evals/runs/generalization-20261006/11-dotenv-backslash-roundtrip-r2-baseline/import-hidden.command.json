@@ -1,0 +1,6 @@
+[
+  "/tmp/suffice-dotenv-prep-py312-20261006/bin/python",
+  "-B",
+  "-c",
+  "import importlib,json,pathlib; p=pathlib.Path(importlib.import_module('dotenv').__file__).resolve(); assert p.is_relative_to(pathlib.Path('/Users/luka/Desktop/ctf/suffice-patch/evals/runs/generalization-20261006/11-dotenv-backslash-roundtrip-r2-baseline/workspace/src').resolve()), str(p); print(json.dumps({\"import_origin\": str(p)}))"
+]

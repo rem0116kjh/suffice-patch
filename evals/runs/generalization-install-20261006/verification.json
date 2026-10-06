@@ -1,0 +1,163 @@
+{
+  "verification_date_kst": "2026-10-06",
+  "host": {
+    "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+    "machine": "arm64"
+  },
+  "candidate_hashes": {
+    "SKILL.md": "f365978b6a24b55d5312dd551cfb7f0a5775595ffd6b8205162cb1df973f9ea1",
+    "scripts/collect_context.py": "a2968d41be8c1fb5954d0399777ef122ab99bc201c67bc5d33cb9bf4ff91347e"
+  },
+  "test_file": {
+    "path": "/Users/luka/Desktop/ctf/suffice-patch/evals/test_inspect.py",
+    "sha256": "f759e9fe7060bc9fa0c48aca29ca2b83f9eb5873cb6b2455c47a6805deceee95"
+  },
+  "scope": "Isolated installation and helper portability, not model effectiveness",
+  "global_skill_installations_modified": false,
+  "linux": {
+    "tested": false,
+    "reason": "Docker daemon unavailable; infrastructure was not started for this check",
+    "docker_socket_exists": false
+  },
+  "interpreters": [
+    {
+      "name": "python312",
+      "executable": "/opt/homebrew/bin/python3.12",
+      "version": "Python 3.12.14",
+      "temporary_install_dir": "/private/var/folders/73/krw9m9bx40b6xkxngwlzh1lc0000gn/T/suffice-install-ptdwotl1/clean-install/suffice-patch",
+      "temporary_fixture_dir": "/private/var/folders/73/krw9m9bx40b6xkxngwlzh1lc0000gn/T/suffice-install-ptdwotl1/separate-project",
+      "temporary_directories_removed_after_check": true,
+      "installed_bundle_hashes": {
+        "SKILL.md": "f365978b6a24b55d5312dd551cfb7f0a5775595ffd6b8205162cb1df973f9ea1",
+        "scripts/collect_context.py": "a2968d41be8c1fb5954d0399777ef122ab99bc201c67bc5d33cb9bf4ff91347e"
+      },
+      "installed_bundle_preserved": true,
+      "smoke": {
+        "command": [
+          "/opt/homebrew/bin/python3.12",
+          "-B",
+          "/private/var/folders/73/krw9m9bx40b6xkxngwlzh1lc0000gn/T/suffice-install-ptdwotl1/clean-install/suffice-patch/scripts/collect_context.py",
+          "service.lookup"
+        ],
+        "returncode": 0,
+        "stdout": "Caller/test search: 2 matching Python files (textual, not a complete call graph).\nROOT: /private/var/folders/73/krw9m9bx40b6xkxngwlzh1lc0000gn/T/suffice-install-ptdwotl1/separate-project\nSources returned: 4; source bytes: 205\n\nFILE: service.py | requested target | SHA256: 6725a2101ab3dd9edd2e4eff5bb9de1a7cf22a941e56ebc34385897920a4ff8c\nfrom labels import normalize\ndef lookup(value):\n    return normalize(value)\n\n\nFILE: AGENTS.md | project instructions | SHA256: 5581dfe96538757a21c344180fb8f85a7b53aa6738de64260009138618623343\nPreserve all user changes.\n\n\nFILE: labels.py | local import | SHA256: 9dddc7b60600c6f6e45190da9fe055d16883d9d13c3ec00479245255c2978459\ndef normalize(value):\n    return value.strip()\n\n\nFILE: test_service.py | matching caller or test; textual match | SHA256: e786133c92506f6c53010bd8313eecabb8e8371f403fc500eeb40dacf9eec1af\nfrom service import lookup\nassert lookup(' x ') == 'x'\n\n\nGIT STATUS:\n?? AGENTS.md\n?? labels.py\n?? service.py\n?? test_service.py\n?? unrelated.py\n\n\nGIT DIFF:\n\n\nGIT STAGED DIFF:\n\n\nNo context limit was reached. Dynamic callers and non-Python tests may still require inspection.\n",
+        "stderr": "",
+        "expected_context_present": true,
+        "unrelated_source_omitted": true,
+        "fixture_preserved": true
+      },
+      "tests": {
+        "command": [
+          "/opt/homebrew/bin/python3.12",
+          "-B",
+          "-c",
+          "\nimport importlib.util\nimport json\nimport sys\nimport unittest\nfrom pathlib import Path\nspec = importlib.util.spec_from_file_location(\"external_inspector_tests\", sys.argv[1])\nmodule = importlib.util.module_from_spec(spec)\nspec.loader.exec_module(module)\nmodule.SCRIPT = Path(sys.argv[2]).resolve()\nsuite = unittest.defaultTestLoader.loadTestsFromModule(module)\nclass RecordingResult(unittest.TextTestResult):\n    def __init__(self, *args, **kwargs):\n        super().__init__(*args, **kwargs)\n        self.passed_ids = []\n    def addSuccess(self, test):\n        super().addSuccess(test)\n        self.passed_ids.append(test.id())\nresult = unittest.TextTestRunner(verbosity=2, resultclass=RecordingResult).run(suite)\nprint(json.dumps({\n    \"tests_run\": result.testsRun,\n    \"passed\": result.passed_ids,\n    \"failures\": [{\"test\": test.id(), \"details\": detail} for test, detail in result.failures],\n    \"errors\": [{\"test\": test.id(), \"details\": detail} for test, detail in result.errors],\n    \"skipped\": [{\"test\": test.id(), \"reason\": reason} for test, reason in result.skipped],\n    \"successful\": result.wasSuccessful(),\n}))\nraise SystemExit(not result.wasSuccessful())\n",
+          "/Users/luka/Desktop/ctf/suffice-patch/evals/test_inspect.py",
+          "/private/var/folders/73/krw9m9bx40b6xkxngwlzh1lc0000gn/T/suffice-install-ptdwotl1/clean-install/suffice-patch/scripts/collect_context.py"
+        ],
+        "returncode": 0,
+        "stdout": "{\"tests_run\": 12, \"passed\": [\"external_inspector_tests.InspectorTests.test_file_and_byte_limits_are_explicit\", \"external_inspector_tests.InspectorTests.test_full_file_budget_skips_caller_search_subprocess\", \"external_inspector_tests.InspectorTests.test_git_clean_and_process_filters_are_not_executed\", \"external_inspector_tests.InspectorTests.test_git_diff_treats_requested_wildcard_filename_literally\", \"external_inspector_tests.InspectorTests.test_git_external_diff_and_textconv_are_not_executed\", \"external_inspector_tests.InspectorTests.test_omitted_sources_are_not_reread_as_callers\", \"external_inspector_tests.InspectorTests.test_outside_and_symlink_targets_are_rejected\", \"external_inspector_tests.InspectorTests.test_relative_imports_and_nested_instructions\", \"external_inspector_tests.InspectorTests.test_repeated_imports_and_cycles_read_each_source_once\", \"external_inspector_tests.InspectorTests.test_ripgrep_config_cannot_execute_preprocessor\", \"external_inspector_tests.InspectorTests.test_sources_imports_callers_instructions_and_preservation\", \"external_inspector_tests.InspectorTests.test_stub_target_keeps_symbol_based_caller_search\"], \"failures\": [], \"errors\": [], \"skipped\": [], \"successful\": true}\n",
+        "stderr": "test_file_and_byte_limits_are_explicit (external_inspector_tests.InspectorTests.test_file_and_byte_limits_are_explicit) ... ok\ntest_full_file_budget_skips_caller_search_subprocess (external_inspector_tests.InspectorTests.test_full_file_budget_skips_caller_search_subprocess) ... ok\ntest_git_clean_and_process_filters_are_not_executed (external_inspector_tests.InspectorTests.test_git_clean_and_process_filters_are_not_executed) ... ok\ntest_git_diff_treats_requested_wildcard_filename_literally (external_inspector_tests.InspectorTests.test_git_diff_treats_requested_wildcard_filename_literally) ... ok\ntest_git_external_diff_and_textconv_are_not_executed (external_inspector_tests.InspectorTests.test_git_external_diff_and_textconv_are_not_executed) ... ok\ntest_omitted_sources_are_not_reread_as_callers (external_inspector_tests.InspectorTests.test_omitted_sources_are_not_reread_as_callers) ... ok\ntest_outside_and_symlink_targets_are_rejected (external_inspector_tests.InspectorTests.test_outside_and_symlink_targets_are_rejected) ... ok\ntest_relative_imports_and_nested_instructions (external_inspector_tests.InspectorTests.test_relative_imports_and_nested_instructions) ... ok\ntest_repeated_imports_and_cycles_read_each_source_once (external_inspector_tests.InspectorTests.test_repeated_imports_and_cycles_read_each_source_once) ... ok\ntest_ripgrep_config_cannot_execute_preprocessor (external_inspector_tests.InspectorTests.test_ripgrep_config_cannot_execute_preprocessor) ... ok\ntest_sources_imports_callers_instructions_and_preservation (external_inspector_tests.InspectorTests.test_sources_imports_callers_instructions_and_preservation) ... ok\ntest_stub_target_keeps_symbol_based_caller_search (external_inspector_tests.InspectorTests.test_stub_target_keeps_symbol_based_caller_search) ... ok\n\n----------------------------------------------------------------------\nRan 12 tests in 1.771s\n\nOK\n",
+        "summary": {
+          "tests_run": 12,
+          "passed": [
+            "external_inspector_tests.InspectorTests.test_file_and_byte_limits_are_explicit",
+            "external_inspector_tests.InspectorTests.test_full_file_budget_skips_caller_search_subprocess",
+            "external_inspector_tests.InspectorTests.test_git_clean_and_process_filters_are_not_executed",
+            "external_inspector_tests.InspectorTests.test_git_diff_treats_requested_wildcard_filename_literally",
+            "external_inspector_tests.InspectorTests.test_git_external_diff_and_textconv_are_not_executed",
+            "external_inspector_tests.InspectorTests.test_omitted_sources_are_not_reread_as_callers",
+            "external_inspector_tests.InspectorTests.test_outside_and_symlink_targets_are_rejected",
+            "external_inspector_tests.InspectorTests.test_relative_imports_and_nested_instructions",
+            "external_inspector_tests.InspectorTests.test_repeated_imports_and_cycles_read_each_source_once",
+            "external_inspector_tests.InspectorTests.test_ripgrep_config_cannot_execute_preprocessor",
+            "external_inspector_tests.InspectorTests.test_sources_imports_callers_instructions_and_preservation",
+            "external_inspector_tests.InspectorTests.test_stub_target_keeps_symbol_based_caller_search"
+          ],
+          "failures": [],
+          "errors": [],
+          "skipped": [],
+          "successful": true
+        }
+      }
+    },
+    {
+      "name": "python_default",
+      "executable": "/opt/homebrew/bin/python3",
+      "version": "Python 3.14.7",
+      "temporary_install_dir": "/private/var/folders/73/krw9m9bx40b6xkxngwlzh1lc0000gn/T/suffice-install-v38r2icb/clean-install/suffice-patch",
+      "temporary_fixture_dir": "/private/var/folders/73/krw9m9bx40b6xkxngwlzh1lc0000gn/T/suffice-install-v38r2icb/separate-project",
+      "temporary_directories_removed_after_check": true,
+      "installed_bundle_hashes": {
+        "SKILL.md": "f365978b6a24b55d5312dd551cfb7f0a5775595ffd6b8205162cb1df973f9ea1",
+        "scripts/collect_context.py": "a2968d41be8c1fb5954d0399777ef122ab99bc201c67bc5d33cb9bf4ff91347e"
+      },
+      "installed_bundle_preserved": true,
+      "smoke": {
+        "command": [
+          "/opt/homebrew/bin/python3",
+          "-B",
+          "/private/var/folders/73/krw9m9bx40b6xkxngwlzh1lc0000gn/T/suffice-install-v38r2icb/clean-install/suffice-patch/scripts/collect_context.py",
+          "service.lookup"
+        ],
+        "returncode": 0,
+        "stdout": "Caller/test search: 2 matching Python files (textual, not a complete call graph).\nROOT: /private/var/folders/73/krw9m9bx40b6xkxngwlzh1lc0000gn/T/suffice-install-v38r2icb/separate-project\nSources returned: 4; source bytes: 205\n\nFILE: service.py | requested target | SHA256: 6725a2101ab3dd9edd2e4eff5bb9de1a7cf22a941e56ebc34385897920a4ff8c\nfrom labels import normalize\ndef lookup(value):\n    return normalize(value)\n\n\nFILE: AGENTS.md | project instructions | SHA256: 5581dfe96538757a21c344180fb8f85a7b53aa6738de64260009138618623343\nPreserve all user changes.\n\n\nFILE: labels.py | local import | SHA256: 9dddc7b60600c6f6e45190da9fe055d16883d9d13c3ec00479245255c2978459\ndef normalize(value):\n    return value.strip()\n\n\nFILE: test_service.py | matching caller or test; textual match | SHA256: e786133c92506f6c53010bd8313eecabb8e8371f403fc500eeb40dacf9eec1af\nfrom service import lookup\nassert lookup(' x ') == 'x'\n\n\nGIT STATUS:\n?? AGENTS.md\n?? labels.py\n?? service.py\n?? test_service.py\n?? unrelated.py\n\n\nGIT DIFF:\n\n\nGIT STAGED DIFF:\n\n\nNo context limit was reached. Dynamic callers and non-Python tests may still require inspection.\n",
+        "stderr": "",
+        "expected_context_present": true,
+        "unrelated_source_omitted": true,
+        "fixture_preserved": true
+      },
+      "tests": {
+        "command": [
+          "/opt/homebrew/bin/python3",
+          "-B",
+          "-c",
+          "\nimport importlib.util\nimport json\nimport sys\nimport unittest\nfrom pathlib import Path\nspec = importlib.util.spec_from_file_location(\"external_inspector_tests\", sys.argv[1])\nmodule = importlib.util.module_from_spec(spec)\nspec.loader.exec_module(module)\nmodule.SCRIPT = Path(sys.argv[2]).resolve()\nsuite = unittest.defaultTestLoader.loadTestsFromModule(module)\nclass RecordingResult(unittest.TextTestResult):\n    def __init__(self, *args, **kwargs):\n        super().__init__(*args, **kwargs)\n        self.passed_ids = []\n    def addSuccess(self, test):\n        super().addSuccess(test)\n        self.passed_ids.append(test.id())\nresult = unittest.TextTestRunner(verbosity=2, resultclass=RecordingResult).run(suite)\nprint(json.dumps({\n    \"tests_run\": result.testsRun,\n    \"passed\": result.passed_ids,\n    \"failures\": [{\"test\": test.id(), \"details\": detail} for test, detail in result.failures],\n    \"errors\": [{\"test\": test.id(), \"details\": detail} for test, detail in result.errors],\n    \"skipped\": [{\"test\": test.id(), \"reason\": reason} for test, reason in result.skipped],\n    \"successful\": result.wasSuccessful(),\n}))\nraise SystemExit(not result.wasSuccessful())\n",
+          "/Users/luka/Desktop/ctf/suffice-patch/evals/test_inspect.py",
+          "/private/var/folders/73/krw9m9bx40b6xkxngwlzh1lc0000gn/T/suffice-install-v38r2icb/clean-install/suffice-patch/scripts/collect_context.py"
+        ],
+        "returncode": 0,
+        "stdout": "{\"tests_run\": 12, \"passed\": [\"external_inspector_tests.InspectorTests.test_file_and_byte_limits_are_explicit\", \"external_inspector_tests.InspectorTests.test_full_file_budget_skips_caller_search_subprocess\", \"external_inspector_tests.InspectorTests.test_git_clean_and_process_filters_are_not_executed\", \"external_inspector_tests.InspectorTests.test_git_diff_treats_requested_wildcard_filename_literally\", \"external_inspector_tests.InspectorTests.test_git_external_diff_and_textconv_are_not_executed\", \"external_inspector_tests.InspectorTests.test_omitted_sources_are_not_reread_as_callers\", \"external_inspector_tests.InspectorTests.test_outside_and_symlink_targets_are_rejected\", \"external_inspector_tests.InspectorTests.test_relative_imports_and_nested_instructions\", \"external_inspector_tests.InspectorTests.test_repeated_imports_and_cycles_read_each_source_once\", \"external_inspector_tests.InspectorTests.test_ripgrep_config_cannot_execute_preprocessor\", \"external_inspector_tests.InspectorTests.test_sources_imports_callers_instructions_and_preservation\", \"external_inspector_tests.InspectorTests.test_stub_target_keeps_symbol_based_caller_search\"], \"failures\": [], \"errors\": [], \"skipped\": [], \"successful\": true}\n",
+        "stderr": "test_file_and_byte_limits_are_explicit (external_inspector_tests.InspectorTests.test_file_and_byte_limits_are_explicit) ... ok\ntest_full_file_budget_skips_caller_search_subprocess (external_inspector_tests.InspectorTests.test_full_file_budget_skips_caller_search_subprocess) ... ok\ntest_git_clean_and_process_filters_are_not_executed (external_inspector_tests.InspectorTests.test_git_clean_and_process_filters_are_not_executed) ... ok\ntest_git_diff_treats_requested_wildcard_filename_literally (external_inspector_tests.InspectorTests.test_git_diff_treats_requested_wildcard_filename_literally) ... ok\ntest_git_external_diff_and_textconv_are_not_executed (external_inspector_tests.InspectorTests.test_git_external_diff_and_textconv_are_not_executed) ... ok\ntest_omitted_sources_are_not_reread_as_callers (external_inspector_tests.InspectorTests.test_omitted_sources_are_not_reread_as_callers) ... ok\ntest_outside_and_symlink_targets_are_rejected (external_inspector_tests.InspectorTests.test_outside_and_symlink_targets_are_rejected) ... ok\ntest_relative_imports_and_nested_instructions (external_inspector_tests.InspectorTests.test_relative_imports_and_nested_instructions) ... ok\ntest_repeated_imports_and_cycles_read_each_source_once (external_inspector_tests.InspectorTests.test_repeated_imports_and_cycles_read_each_source_once) ... ok\ntest_ripgrep_config_cannot_execute_preprocessor (external_inspector_tests.InspectorTests.test_ripgrep_config_cannot_execute_preprocessor) ... ok\ntest_sources_imports_callers_instructions_and_preservation (external_inspector_tests.InspectorTests.test_sources_imports_callers_instructions_and_preservation) ... ok\ntest_stub_target_keeps_symbol_based_caller_search (external_inspector_tests.InspectorTests.test_stub_target_keeps_symbol_based_caller_search) ... ok\n\n----------------------------------------------------------------------\nRan 12 tests in 1.933s\n\nOK\n",
+        "summary": {
+          "tests_run": 12,
+          "passed": [
+            "external_inspector_tests.InspectorTests.test_file_and_byte_limits_are_explicit",
+            "external_inspector_tests.InspectorTests.test_full_file_budget_skips_caller_search_subprocess",
+            "external_inspector_tests.InspectorTests.test_git_clean_and_process_filters_are_not_executed",
+            "external_inspector_tests.InspectorTests.test_git_diff_treats_requested_wildcard_filename_literally",
+            "external_inspector_tests.InspectorTests.test_git_external_diff_and_textconv_are_not_executed",
+            "external_inspector_tests.InspectorTests.test_omitted_sources_are_not_reread_as_callers",
+            "external_inspector_tests.InspectorTests.test_outside_and_symlink_targets_are_rejected",
+            "external_inspector_tests.InspectorTests.test_relative_imports_and_nested_instructions",
+            "external_inspector_tests.InspectorTests.test_repeated_imports_and_cycles_read_each_source_once",
+            "external_inspector_tests.InspectorTests.test_ripgrep_config_cannot_execute_preprocessor",
+            "external_inspector_tests.InspectorTests.test_sources_imports_callers_instructions_and_preservation",
+            "external_inspector_tests.InspectorTests.test_stub_target_keeps_symbol_based_caller_search"
+          ],
+          "failures": [],
+          "errors": [],
+          "skipped": [],
+          "successful": true
+        }
+      }
+    }
+  ],
+  "archive": {
+    "path": "/Users/luka/Desktop/ctf/suffice-patch/dist/suffice-patch.zip",
+    "sha256": "07cf0c8fdbe55742f305edaeb075149020aefe62b33a620ca2aebf70ea0de9c1",
+    "bytes": 4031,
+    "entries": [
+      "suffice-patch/SKILL.md",
+      "suffice-patch/scripts/collect_context.py"
+    ],
+    "entry_sha256": {
+      "SKILL.md": "f365978b6a24b55d5312dd551cfb7f0a5775595ffd6b8205162cb1df973f9ea1",
+      "scripts/collect_context.py": "a2968d41be8c1fb5954d0399777ef122ab99bc201c67bc5d33cb9bf4ff91347e"
+    },
+    "license_files_included": [],
+    "license_note": "No repository LICENSE file exists; no license was created"
+  },
+  "original_bundle_and_tests_unchanged": true,
+  "all_requested_checks_passed": true
+}

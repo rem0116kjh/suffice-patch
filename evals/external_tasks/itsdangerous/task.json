@@ -1,0 +1,33 @@
+{
+  "id": "itsdangerous-invalid-timestamp",
+  "repo_url": "https://github.com/pallets/itsdangerous.git",
+  "base_commit": "85b1e3b76e0e37473dc286450ada725cd02981b4",
+  "reference_commit": "37f09970fa32a330a6660ded3abdb264086531b5",
+  "source_subdir": "src",
+  "prompt": "Fix TimestampSigner.unsign in src/itsdangerous/timed.py. A tampered signature with a decodable integer timestamp outside Python's datetime year range currently leaks ValueError instead of producing the library's BadTimeSignature error. For those malformed timestamps, preserve the original unsigned payload and leave date_signed unset; validate should return False and TimedSerializer.loads should report the library error. Preserve ordinary valid signatures, timestamp metadata for normal bad signatures, and expiration behavior. Make the smallest source change necessary; do not modify existing tests or add files. Verify with the existing tests.",
+  "allowed_source_paths": [
+    "src/itsdangerous/timed.py"
+  ],
+  "grader": "grader.py",
+  "test_command": [
+    "{python}",
+    "-m",
+    "pytest",
+    "-q",
+    "tests"
+  ],
+  "dependencies": [
+    "pytest==8.3.5",
+    "freezegun==1.5.1"
+  ],
+  "expected_noop": false,
+  "prep_repo": "/tmp/suffice-itsdangerous-prep",
+  "provenance_urls": [
+    "https://github.com/pallets/itsdangerous/pull/296",
+    "https://github.com/pallets/itsdangerous/commit/85b1e3b76e0e37473dc286450ada725cd02981b4",
+    "https://github.com/pallets/itsdangerous/commit/37f09970fa32a330a6660ded3abdb264086531b5"
+  ],
+  "python_executable": "/tmp/suffice-itsdangerous-py312/bin/python",
+  "allow_new_tests": false,
+  "import_package": "itsdangerous"
+}

@@ -1,0 +1,610 @@
+{
+  "checks": {
+    "epoch:!=0!1.0.*:2!1": true,
+    "epoch:!=0!1.0.*:7!1": true,
+    "epoch:!=0!1.0.0.*:2!1.0": true,
+    "epoch:!=0!1.0.0.*:7!1.0": true,
+    "epoch:!=0!1.0.0.0.*:2!1": true,
+    "epoch:!=0!1.0.0.0.*:7!1": true,
+    "epoch:!=0!1.0.0.0.0.*:2!1.0": true,
+    "epoch:!=0!1.0.0.0.0.*:7!1.0": true,
+    "epoch:!=0!3.4.0.*:2!3.4": true,
+    "epoch:!=0!3.4.0.*:7!3.4": true,
+    "epoch:!=0!3.4.0.0.0.*:2!3.4": true,
+    "epoch:!=0!3.4.0.0.0.*:7!3.4": true,
+    "epoch:!=2!1.0.*:0!1": true,
+    "epoch:!=2!1.0.*:7!1": true,
+    "epoch:!=2!1.0.0.*:0!1.0": true,
+    "epoch:!=2!1.0.0.*:7!1.0": true,
+    "epoch:!=2!1.0.0.0.*:0!1": true,
+    "epoch:!=2!1.0.0.0.*:7!1": true,
+    "epoch:!=2!1.0.0.0.0.*:0!1.0": true,
+    "epoch:!=2!1.0.0.0.0.*:7!1.0": true,
+    "epoch:!=2!3.4.0.*:0!3.4": true,
+    "epoch:!=2!3.4.0.*:7!3.4": true,
+    "epoch:!=2!3.4.0.0.0.*:0!3.4": true,
+    "epoch:!=2!3.4.0.0.0.*:7!3.4": true,
+    "epoch:!=7!1.0.*:0!1": true,
+    "epoch:!=7!1.0.*:2!1": true,
+    "epoch:!=7!1.0.0.*:0!1.0": true,
+    "epoch:!=7!1.0.0.*:2!1.0": true,
+    "epoch:!=7!1.0.0.0.*:0!1": true,
+    "epoch:!=7!1.0.0.0.*:2!1": true,
+    "epoch:!=7!1.0.0.0.0.*:0!1.0": true,
+    "epoch:!=7!1.0.0.0.0.*:2!1.0": true,
+    "epoch:!=7!3.4.0.*:0!3.4": true,
+    "epoch:!=7!3.4.0.*:2!3.4": true,
+    "epoch:!=7!3.4.0.0.0.*:0!3.4": true,
+    "epoch:!=7!3.4.0.0.0.*:2!3.4": true,
+    "epoch:==0!1.0.*:2!1": true,
+    "epoch:==0!1.0.*:7!1": true,
+    "epoch:==0!1.0.0.*:2!1.0": true,
+    "epoch:==0!1.0.0.*:7!1.0": true,
+    "epoch:==0!1.0.0.0.*:2!1": true,
+    "epoch:==0!1.0.0.0.*:7!1": true,
+    "epoch:==0!1.0.0.0.0.*:2!1.0": true,
+    "epoch:==0!1.0.0.0.0.*:7!1.0": true,
+    "epoch:==0!3.4.0.*:2!3.4": true,
+    "epoch:==0!3.4.0.*:7!3.4": true,
+    "epoch:==0!3.4.0.0.0.*:2!3.4": true,
+    "epoch:==0!3.4.0.0.0.*:7!3.4": true,
+    "epoch:==2!1.0.*:0!1": true,
+    "epoch:==2!1.0.*:7!1": true,
+    "epoch:==2!1.0.0.*:0!1.0": true,
+    "epoch:==2!1.0.0.*:7!1.0": true,
+    "epoch:==2!1.0.0.0.*:0!1": true,
+    "epoch:==2!1.0.0.0.*:7!1": true,
+    "epoch:==2!1.0.0.0.0.*:0!1.0": true,
+    "epoch:==2!1.0.0.0.0.*:7!1.0": true,
+    "epoch:==2!3.4.0.*:0!3.4": true,
+    "epoch:==2!3.4.0.*:7!3.4": true,
+    "epoch:==2!3.4.0.0.0.*:0!3.4": true,
+    "epoch:==2!3.4.0.0.0.*:7!3.4": true,
+    "epoch:==7!1.0.*:0!1": true,
+    "epoch:==7!1.0.*:2!1": true,
+    "epoch:==7!1.0.0.*:0!1.0": true,
+    "epoch:==7!1.0.0.*:2!1.0": true,
+    "epoch:==7!1.0.0.0.*:0!1": true,
+    "epoch:==7!1.0.0.0.*:2!1": true,
+    "epoch:==7!1.0.0.0.0.*:0!1.0": true,
+    "epoch:==7!1.0.0.0.0.*:2!1.0": true,
+    "epoch:==7!3.4.0.*:0!3.4": true,
+    "epoch:==7!3.4.0.*:2!3.4": true,
+    "epoch:==7!3.4.0.0.0.*:0!3.4": true,
+    "epoch:==7!3.4.0.0.0.*:2!3.4": true,
+    "filter:long-epoch-exclusion": false,
+    "filter:long-epoch-prefix": false,
+    "imports_checkout": true,
+    "padding:!=0!1.0.*:0!1": true,
+    "padding:!=0!1.0.0.*:0!1.0": true,
+    "padding:!=0!1.0.0.0.*:0!1": true,
+    "padding:!=0!1.0.0.0.0.*:0!1.0": true,
+    "padding:!=0!3.4.0.*:0!3.4": true,
+    "padding:!=0!3.4.0.0.0.*:0!3.4": true,
+    "padding:!=2!1.0.*:2!1": false,
+    "padding:!=2!1.0.0.*:2!1.0": false,
+    "padding:!=2!1.0.0.0.*:2!1": false,
+    "padding:!=2!1.0.0.0.0.*:2!1.0": false,
+    "padding:!=2!3.4.0.*:2!3.4": false,
+    "padding:!=2!3.4.0.0.0.*:2!3.4": false,
+    "padding:!=7!1.0.*:7!1": false,
+    "padding:!=7!1.0.0.*:7!1.0": false,
+    "padding:!=7!1.0.0.0.*:7!1": false,
+    "padding:!=7!1.0.0.0.0.*:7!1.0": false,
+    "padding:!=7!3.4.0.*:7!3.4": false,
+    "padding:!=7!3.4.0.0.0.*:7!3.4": false,
+    "padding:==0!1.0.*:0!1": true,
+    "padding:==0!1.0.0.*:0!1.0": true,
+    "padding:==0!1.0.0.0.*:0!1": true,
+    "padding:==0!1.0.0.0.0.*:0!1.0": true,
+    "padding:==0!3.4.0.*:0!3.4": true,
+    "padding:==0!3.4.0.0.0.*:0!3.4": true,
+    "padding:==2!1.0.*:2!1": false,
+    "padding:==2!1.0.0.*:2!1.0": false,
+    "padding:==2!1.0.0.0.*:2!1": false,
+    "padding:==2!1.0.0.0.0.*:2!1.0": false,
+    "padding:==2!3.4.0.*:2!3.4": false,
+    "padding:==2!3.4.0.0.0.*:2!3.4": false,
+    "padding:==7!1.0.*:7!1": false,
+    "padding:==7!1.0.0.*:7!1.0": false,
+    "padding:==7!1.0.0.0.*:7!1": false,
+    "padding:==7!1.0.0.0.0.*:7!1.0": false,
+    "padding:==7!3.4.0.*:7!3.4": false,
+    "padding:==7!3.4.0.0.0.*:7!3.4": false,
+    "regression:==0!1.0.0.*:1:None": true,
+    "regression:==1.0.0.*:0!1:None": true,
+    "regression:==2!1.0.*:2!1.0+local.4:None": true,
+    "regression:==2!1.0.0.*:2!1.0.post1:None": false,
+    "regression:==2!1.0.0.*:2!1.0rc1:False": true,
+    "regression:==2!1.0.0.*:2!1.0rc1:True": false,
+    "regression:==2!1.0.0.0.*:2!1.0.0.1:None": true,
+    "regression:==2!1.0.0.0.*:2!1.0.0:None": false,
+    "regression:==2!1.0:2!1.0.0:None": true,
+    "regression:>=2!1.0:1!99.0:None": true,
+    "regression:~=1.4:1.9:None": true,
+    "regression:~=1.4:2.0:None": true,
+    "regression:~=2!1.4.5:2!1.4.9:None": true,
+    "regression:~=2!1.4.5:2!1.5.0:None": true,
+    "regression:~=2!1.4:2!1.9:None": true,
+    "regression:~=2!1.4:2!2.0:None": true,
+    "regression:~=2!1.4:3!1.4:None": true,
+    "regression:~=2!1.4rc1:2!1.4rc2:True": true,
+    "regression:~=2!1.4rc1:2!2.0rc1:True": true,
+    "set:!=0!1.0.*:0!1": true,
+    "set:!=0!1.0.0.*:0!1.0": true,
+    "set:!=0!1.0.0.0.*:0!1": true,
+    "set:!=0!1.0.0.0.0.*:0!1.0": true,
+    "set:!=0!3.4.0.*:0!3.4": true,
+    "set:!=0!3.4.0.0.0.*:0!3.4": true,
+    "set:!=2!1.0.*:2!1": false,
+    "set:!=2!1.0.0.*:2!1.0": false,
+    "set:!=2!1.0.0.0.*:2!1": false,
+    "set:!=2!1.0.0.0.0.*:2!1.0": false,
+    "set:!=2!3.4.0.*:2!3.4": false,
+    "set:!=2!3.4.0.0.0.*:2!3.4": false,
+    "set:!=7!1.0.*:7!1": false,
+    "set:!=7!1.0.0.*:7!1.0": false,
+    "set:!=7!1.0.0.0.*:7!1": false,
+    "set:!=7!1.0.0.0.0.*:7!1.0": false,
+    "set:!=7!3.4.0.*:7!3.4": false,
+    "set:!=7!3.4.0.0.0.*:7!3.4": false,
+    "set:==0!1.0.*:0!1": true,
+    "set:==0!1.0.0.*:0!1.0": true,
+    "set:==0!1.0.0.0.*:0!1": true,
+    "set:==0!1.0.0.0.0.*:0!1.0": true,
+    "set:==0!3.4.0.*:0!3.4": true,
+    "set:==0!3.4.0.0.0.*:0!3.4": true,
+    "set:==2!1.0.*:2!1": false,
+    "set:==2!1.0.0.*:2!1.0": false,
+    "set:==2!1.0.0.0.*:2!1": false,
+    "set:==2!1.0.0.0.0.*:2!1.0": false,
+    "set:==2!3.4.0.*:2!3.4": false,
+    "set:==2!3.4.0.0.0.*:2!3.4": false,
+    "set:==7!1.0.*:7!1": false,
+    "set:==7!1.0.0.*:7!1.0": false,
+    "set:==7!1.0.0.0.*:7!1": false,
+    "set:==7!1.0.0.0.0.*:7!1.0": false,
+    "set:==7!3.4.0.*:7!3.4": false,
+    "set:==7!3.4.0.0.0.*:7!3.4": false,
+    "version-object:!=0!1.0.*:0!1": true,
+    "version-object:!=0!1.0.0.*:0!1.0": true,
+    "version-object:!=0!1.0.0.0.*:0!1": true,
+    "version-object:!=0!1.0.0.0.0.*:0!1.0": true,
+    "version-object:!=0!3.4.0.*:0!3.4": true,
+    "version-object:!=0!3.4.0.0.0.*:0!3.4": true,
+    "version-object:!=2!1.0.*:2!1": false,
+    "version-object:!=2!1.0.0.*:2!1.0": false,
+    "version-object:!=2!1.0.0.0.*:2!1": false,
+    "version-object:!=2!1.0.0.0.0.*:2!1.0": false,
+    "version-object:!=2!3.4.0.*:2!3.4": false,
+    "version-object:!=2!3.4.0.0.0.*:2!3.4": false,
+    "version-object:!=7!1.0.*:7!1": false,
+    "version-object:!=7!1.0.0.*:7!1.0": false,
+    "version-object:!=7!1.0.0.0.*:7!1": false,
+    "version-object:!=7!1.0.0.0.0.*:7!1.0": false,
+    "version-object:!=7!3.4.0.*:7!3.4": false,
+    "version-object:!=7!3.4.0.0.0.*:7!3.4": false,
+    "version-object:==0!1.0.*:0!1": true,
+    "version-object:==0!1.0.0.*:0!1.0": true,
+    "version-object:==0!1.0.0.0.*:0!1": true,
+    "version-object:==0!1.0.0.0.0.*:0!1.0": true,
+    "version-object:==0!3.4.0.*:0!3.4": true,
+    "version-object:==0!3.4.0.0.0.*:0!3.4": true,
+    "version-object:==2!1.0.*:2!1": false,
+    "version-object:==2!1.0.0.*:2!1.0": false,
+    "version-object:==2!1.0.0.0.*:2!1": false,
+    "version-object:==2!1.0.0.0.0.*:2!1.0": false,
+    "version-object:==2!3.4.0.*:2!3.4": false,
+    "version-object:==2!3.4.0.0.0.*:2!3.4": false,
+    "version-object:==7!1.0.*:7!1": false,
+    "version-object:==7!1.0.0.*:7!1.0": false,
+    "version-object:==7!1.0.0.0.*:7!1": false,
+    "version-object:==7!1.0.0.0.0.*:7!1.0": false,
+    "version-object:==7!3.4.0.*:7!3.4": false,
+    "version-object:==7!3.4.0.0.0.*:7!3.4": false
+  },
+  "failed": 77,
+  "failures": [
+    {
+      "actual": false,
+      "expected": true,
+      "name": "padding:==2!1.0.*:2!1"
+    },
+    {
+      "actual": false,
+      "expected": true,
+      "name": "set:==2!1.0.*:2!1"
+    },
+    {
+      "actual": false,
+      "expected": true,
+      "name": "version-object:==2!1.0.*:2!1"
+    },
+    {
+      "actual": true,
+      "expected": false,
+      "name": "padding:!=2!1.0.*:2!1"
+    },
+    {
+      "actual": true,
+      "expected": false,
+      "name": "set:!=2!1.0.*:2!1"
+    },
+    {
+      "actual": true,
+      "expected": false,
+      "name": "version-object:!=2!1.0.*:2!1"
+    },
+    {
+      "actual": false,
+      "expected": true,
+      "name": "padding:==2!1.0.0.0.*:2!1"
+    },
+    {
+      "actual": false,
+      "expected": true,
+      "name": "set:==2!1.0.0.0.*:2!1"
+    },
+    {
+      "actual": false,
+      "expected": true,
+      "name": "version-object:==2!1.0.0.0.*:2!1"
+    },
+    {
+      "actual": true,
+      "expected": false,
+      "name": "padding:!=2!1.0.0.0.*:2!1"
+    },
+    {
+      "actual": true,
+      "expected": false,
+      "name": "set:!=2!1.0.0.0.*:2!1"
+    },
+    {
+      "actual": true,
+      "expected": false,
+      "name": "version-object:!=2!1.0.0.0.*:2!1"
+    },
+    {
+      "actual": false,
+      "expected": true,
+      "name": "padding:==2!1.0.0.*:2!1.0"
+    },
+    {
+      "actual": false,
+      "expected": true,
+      "name": "set:==2!1.0.0.*:2!1.0"
+    },
+    {
+      "actual": false,
+      "expected": true,
+      "name": "version-object:==2!1.0.0.*:2!1.0"
+    },
+    {
+      "actual": true,
+      "expected": false,
+      "name": "padding:!=2!1.0.0.*:2!1.0"
+    },
+    {
+      "actual": true,
+      "expected": false,
+      "name": "set:!=2!1.0.0.*:2!1.0"
+    },
+    {
+      "actual": true,
+      "expected": false,
+      "name": "version-object:!=2!1.0.0.*:2!1.0"
+    },
+    {
+      "actual": false,
+      "expected": true,
+      "name": "padding:==2!1.0.0.0.0.*:2!1.0"
+    },
+    {
+      "actual": false,
+      "expected": true,
+      "name": "set:==2!1.0.0.0.0.*:2!1.0"
+    },
+    {
+      "actual": false,
+      "expected": true,
+      "name": "version-object:==2!1.0.0.0.0.*:2!1.0"
+    },
+    {
+      "actual": true,
+      "expected": false,
+      "name": "padding:!=2!1.0.0.0.0.*:2!1.0"
+    },
+    {
+      "actual": true,
+      "expected": false,
+      "name": "set:!=2!1.0.0.0.0.*:2!1.0"
+    },
+    {
+      "actual": true,
+      "expected": false,
+      "name": "version-object:!=2!1.0.0.0.0.*:2!1.0"
+    },
+    {
+      "actual": false,
+      "expected": true,
+      "name": "padding:==2!3.4.0.*:2!3.4"
+    },
+    {
+      "actual": false,
+      "expected": true,
+      "name": "set:==2!3.4.0.*:2!3.4"
+    },
+    {
+      "actual": false,
+      "expected": true,
+      "name": "version-object:==2!3.4.0.*:2!3.4"
+    },
+    {
+      "actual": true,
+      "expected": false,
+      "name": "padding:!=2!3.4.0.*:2!3.4"
+    },
+    {
+      "actual": true,
+      "expected": false,
+      "name": "set:!=2!3.4.0.*:2!3.4"
+    },
+    {
+      "actual": true,
+      "expected": false,
+      "name": "version-object:!=2!3.4.0.*:2!3.4"
+    },
+    {
+      "actual": false,
+      "expected": true,
+      "name": "padding:==2!3.4.0.0.0.*:2!3.4"
+    },
+    {
+      "actual": false,
+      "expected": true,
+      "name": "set:==2!3.4.0.0.0.*:2!3.4"
+    },
+    {
+      "actual": false,
+      "expected": true,
+      "name": "version-object:==2!3.4.0.0.0.*:2!3.4"
+    },
+    {
+      "actual": true,
+      "expected": false,
+      "name": "padding:!=2!3.4.0.0.0.*:2!3.4"
+    },
+    {
+      "actual": true,
+      "expected": false,
+      "name": "set:!=2!3.4.0.0.0.*:2!3.4"
+    },
+    {
+      "actual": true,
+      "expected": false,
+      "name": "version-object:!=2!3.4.0.0.0.*:2!3.4"
+    },
+    {
+      "actual": false,
+      "expected": true,
+      "name": "padding:==7!1.0.*:7!1"
+    },
+    {
+      "actual": false,
+      "expected": true,
+      "name": "set:==7!1.0.*:7!1"
+    },
+    {
+      "actual": false,
+      "expected": true,
+      "name": "version-object:==7!1.0.*:7!1"
+    },
+    {
+      "actual": true,
+      "expected": false,
+      "name": "padding:!=7!1.0.*:7!1"
+    },
+    {
+      "actual": true,
+      "expected": false,
+      "name": "set:!=7!1.0.*:7!1"
+    },
+    {
+      "actual": true,
+      "expected": false,
+      "name": "version-object:!=7!1.0.*:7!1"
+    },
+    {
+      "actual": false,
+      "expected": true,
+      "name": "padding:==7!1.0.0.0.*:7!1"
+    },
+    {
+      "actual": false,
+      "expected": true,
+      "name": "set:==7!1.0.0.0.*:7!1"
+    },
+    {
+      "actual": false,
+      "expected": true,
+      "name": "version-object:==7!1.0.0.0.*:7!1"
+    },
+    {
+      "actual": true,
+      "expected": false,
+      "name": "padding:!=7!1.0.0.0.*:7!1"
+    },
+    {
+      "actual": true,
+      "expected": false,
+      "name": "set:!=7!1.0.0.0.*:7!1"
+    },
+    {
+      "actual": true,
+      "expected": false,
+      "name": "version-object:!=7!1.0.0.0.*:7!1"
+    },
+    {
+      "actual": false,
+      "expected": true,
+      "name": "padding:==7!1.0.0.*:7!1.0"
+    },
+    {
+      "actual": false,
+      "expected": true,
+      "name": "set:==7!1.0.0.*:7!1.0"
+    },
+    {
+      "actual": false,
+      "expected": true,
+      "name": "version-object:==7!1.0.0.*:7!1.0"
+    },
+    {
+      "actual": true,
+      "expected": false,
+      "name": "padding:!=7!1.0.0.*:7!1.0"
+    },
+    {
+      "actual": true,
+      "expected": false,
+      "name": "set:!=7!1.0.0.*:7!1.0"
+    },
+    {
+      "actual": true,
+      "expected": false,
+      "name": "version-object:!=7!1.0.0.*:7!1.0"
+    },
+    {
+      "actual": false,
+      "expected": true,
+      "name": "padding:==7!1.0.0.0.0.*:7!1.0"
+    },
+    {
+      "actual": false,
+      "expected": true,
+      "name": "set:==7!1.0.0.0.0.*:7!1.0"
+    },
+    {
+      "actual": false,
+      "expected": true,
+      "name": "version-object:==7!1.0.0.0.0.*:7!1.0"
+    },
+    {
+      "actual": true,
+      "expected": false,
+      "name": "padding:!=7!1.0.0.0.0.*:7!1.0"
+    },
+    {
+      "actual": true,
+      "expected": false,
+      "name": "set:!=7!1.0.0.0.0.*:7!1.0"
+    },
+    {
+      "actual": true,
+      "expected": false,
+      "name": "version-object:!=7!1.0.0.0.0.*:7!1.0"
+    },
+    {
+      "actual": false,
+      "expected": true,
+      "name": "padding:==7!3.4.0.*:7!3.4"
+    },
+    {
+      "actual": false,
+      "expected": true,
+      "name": "set:==7!3.4.0.*:7!3.4"
+    },
+    {
+      "actual": false,
+      "expected": true,
+      "name": "version-object:==7!3.4.0.*:7!3.4"
+    },
+    {
+      "actual": true,
+      "expected": false,
+      "name": "padding:!=7!3.4.0.*:7!3.4"
+    },
+    {
+      "actual": true,
+      "expected": false,
+      "name": "set:!=7!3.4.0.*:7!3.4"
+    },
+    {
+      "actual": true,
+      "expected": false,
+      "name": "version-object:!=7!3.4.0.*:7!3.4"
+    },
+    {
+      "actual": false,
+      "expected": true,
+      "name": "padding:==7!3.4.0.0.0.*:7!3.4"
+    },
+    {
+      "actual": false,
+      "expected": true,
+      "name": "set:==7!3.4.0.0.0.*:7!3.4"
+    },
+    {
+      "actual": false,
+      "expected": true,
+      "name": "version-object:==7!3.4.0.0.0.*:7!3.4"
+    },
+    {
+      "actual": true,
+      "expected": false,
+      "name": "padding:!=7!3.4.0.0.0.*:7!3.4"
+    },
+    {
+      "actual": true,
+      "expected": false,
+      "name": "set:!=7!3.4.0.0.0.*:7!3.4"
+    },
+    {
+      "actual": true,
+      "expected": false,
+      "name": "version-object:!=7!3.4.0.0.0.*:7!3.4"
+    },
+    {
+      "actual": false,
+      "expected": true,
+      "name": "regression:==2!1.0.0.0.*:2!1.0.0:None"
+    },
+    {
+      "actual": false,
+      "expected": true,
+      "name": "regression:==2!1.0.0.*:2!1.0rc1:True"
+    },
+    {
+      "actual": false,
+      "expected": true,
+      "name": "regression:==2!1.0.0.*:2!1.0.post1:None"
+    },
+    {
+      "actual": [],
+      "expected": [
+        "2!1",
+        "2!1.0.0"
+      ],
+      "name": "filter:long-epoch-prefix"
+    },
+    {
+      "actual": [
+        "1.0",
+        "2!1",
+        "2!1.0.0",
+        "2!1.0.1",
+        "3!1.0"
+      ],
+      "expected": [
+        "1.0",
+        "2!1.0.1",
+        "3!1.0"
+      ],
+      "name": "filter:long-epoch-exclusion"
+    }
+  ],
+  "imported_from": "/tmp/suffice-packaging-prep/src/packaging/__init__.py",
+  "passed": 125,
+  "total": 202
+}

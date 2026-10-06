@@ -1,0 +1,25 @@
+# Runtime package lock from evals/runs/generalization-20261006/manifest.json.
+# Frozen manifest SHA256: 2957a20db4c8956c52ab4aedc5f705e840314100801b11c2bfa77e156826f9a7
+# Python 3.12; includes direct and transitive packages recorded before model trials.
+# Excludes only the local python-dotenv @ file:// entry: prepare_external.py installs the exact pinned base checkout separately.
+asttokens==3.0.2
+click==8.5.0
+executing==2.2.1
+iniconfig==2.3.0
+ipython==9.17.1
+ipython_pygments_lexers==1.1.1
+jedi==0.20.0
+matplotlib-inline==0.2.2
+packaging==26.3
+parso==0.8.7
+pexpect==4.9.0
+pluggy==1.6.0
+prompt_toolkit==3.0.53
+psutil==7.2.2
+ptyprocess==0.7.0
+pure_eval==0.2.4
+Pygments==2.21.0
+pytest==9.1.1
+stack-data==0.6.3
+traitlets==5.16.1
+wcwidth==0.9.2

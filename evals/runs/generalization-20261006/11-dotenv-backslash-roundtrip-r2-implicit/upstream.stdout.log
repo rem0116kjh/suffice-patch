@@ -1,0 +1,12 @@
+........................................................................ [ 23%]
+........................................................................ [ 46%]
+........................................................................ [ 69%]
+........................................................................ [ 92%]
+......................                                                   [100%]
+=============================== warnings summary ===============================
+tests/test_cli.py: 28 warnings
+  /Users/luka/Desktop/ctf/suffice-patch/evals/runs/generalization-20261006/11-dotenv-backslash-roundtrip-r2-implicit/workspace/tests/conftest.py:8: DeprecationWarning: 'isolated_filesystem' is deprecated and will be removed in Click 9.0. Use 'tempfile.TemporaryDirectory' or pytest's 'tmp_path' fixture with absolute paths instead.
+    with runner.isolated_filesystem():
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+310 passed, 1 deselected, 28 warnings in 1.49s

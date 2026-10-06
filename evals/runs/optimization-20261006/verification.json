@@ -1,0 +1,16 @@
+{
+  "inspector_tests": {
+    "passed": 12,
+    "total": 12,
+    "command": "python3 -B -m unittest evals/test_inspect.py -v"
+  },
+  "grader_selftest_tasks": 4,
+  "final_sha256": "a2968d41be8c1fb5954d0399777ef122ab99bc201c67bc5d33cb9bf4ff91347e",
+  "microbenchmark_valid": true,
+  "final_helper_matches_evaluated_task_context": true,
+  "installed_copies_match": true,
+  "native_passes": 2,
+  "native_total": 2,
+  "independent_check_groups_per_arm": 3,
+  "documentation_links_valid": true
+}

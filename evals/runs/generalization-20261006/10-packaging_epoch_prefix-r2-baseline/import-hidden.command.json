@@ -1,0 +1,6 @@
+[
+  "/tmp/suffice-packaging-venv/bin/python",
+  "-B",
+  "-c",
+  "import importlib,json,pathlib; p=pathlib.Path(importlib.import_module('packaging').__file__).resolve(); assert p.is_relative_to(pathlib.Path('/Users/luka/Desktop/ctf/suffice-patch/evals/runs/generalization-20261006/10-packaging_epoch_prefix-r2-baseline/workspace/src').resolve()), str(p); print(json.dumps({\"import_origin\": str(p)}))"
+]

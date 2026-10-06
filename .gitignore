@@ -19,9 +19,14 @@ __pycache__/
 !/evals/runs/v3-tools-native-20261003/
 !/evals/runs/v3-autoload-native-20261003/
 !/evals/runs/v3-installed-smoke-20261003/
+!/evals/runs/optimization-20261006/
+!/evals/runs/optimization-native-20261006/
+!/evals/runs/generalization-20261006/
+!/evals/runs/generalization-install-20261006/
 
 # Generated agent checkouts contain nested Git repositories and are reproducible.
 /evals/runs/**/workspace/
+/evals/.external-environments/
 
 # Temporary local validation runtime; not required to install or use the skill.
 /evals/v3-validation-python.txt

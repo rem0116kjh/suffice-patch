@@ -1,0 +1,6 @@
+[
+  "/tmp/suffice-packaging-venv/bin/python",
+  "-m",
+  "pytest",
+  "-q"
+]

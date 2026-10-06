@@ -1,0 +1,40 @@
+{
+  "manifest_sha256": "2957a20db4c8956c52ab4aedc5f705e840314100801b11c2bfa77e156826f9a7",
+  "sources_match": true,
+  "discovery": {
+    "baseline": {
+      "workspaces": 12,
+      "active_skill_counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "implicit": {
+      "workspaces": 12,
+      "active_skill_counts": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    }
+  }
+}

@@ -1,0 +1,488 @@
+{
+  "version": 1,
+  "model": "gpt-6-astra",
+  "effort": "low",
+  "timeout": 300,
+  "repeats": 3,
+  "seed": 20261006,
+  "tasks": [
+    {
+      "id": "dotenv-backslash-roundtrip",
+      "repo_url": "https://github.com/theskumar/python-dotenv.git",
+      "base_commit": "751f8c148222e58aa173c83c4e5e6cfccb2cc124",
+      "reference_commit": "f7b18d9c72d1abcc2ad4023424b84f5bee30d266",
+      "source_subdir": "src",
+      "prompt": "Fix backslash round-trip corruption in python-dotenv. In src/dotenv/main.py, set_key() must preserve the exact value when a quoted value is written and read back through get_key()/dotenv_values(), including repeated backslashes, trailing backslashes, adjacent quotes, and multiline text. The quoted-value parsing in src/dotenv/parser.py must also keep subsequent assignments separate when a single- or double-quoted value ends in an escaped backslash. Preserve existing public APIs, quote modes, export handling, and unrelated file contents. You may modify only src/dotenv/main.py and src/dotenv/parser.py among preexisting files. Preserve all other preexisting files, including tests; you may add new test files. Run the relevant available tests and explain the fix briefly.",
+      "allowed_source_paths": [
+        "src/dotenv/main.py",
+        "src/dotenv/parser.py"
+      ],
+      "grader": "grader.py",
+      "test_command": [
+        "{python}",
+        "-m",
+        "pytest",
+        "-q",
+        "-k",
+        "not test_run_with_command_flags"
+      ],
+      "dependencies": [
+        "pytest==9.1.1",
+        "click==8.5.0",
+        "ipython==9.17.1"
+      ],
+      "expected_noop": false,
+      "prep_repo": "/tmp/suffice-dotenv-prep-20261006",
+      "python_executable": "/tmp/suffice-dotenv-prep-py312-20261006/bin/python",
+      "validation_python_version": "3.12.14",
+      "install_package": true,
+      "provenance_urls": [
+        "https://github.com/theskumar/python-dotenv/issues/661",
+        "https://github.com/theskumar/python-dotenv/commit/751f8c148222e58aa173c83c4e5e6cfccb2cc124",
+        "https://github.com/theskumar/python-dotenv/commit/f7b18d9c72d1abcc2ad4023424b84f5bee30d266"
+      ],
+      "platform_exclusions": [
+        {
+          "node": "tests/test_cli.py::test_run_with_command_flags",
+          "reason": "This historical test invokes GNU printenv --version; macOS BSD printenv has no --version. The complete unchanged base suite reports 222 passed and this 1 unrelated failure."
+        }
+      ],
+      "setup_notes": "Install the pinned base package into the isolated venv to create its dotenv console entry point. Prepend venv/bin to PATH and set an absolute PYTHONPATH to each candidate src directory, including for upstream tests and subprocesses. Judge source is supplied on stdin from outside the candidate workspace.",
+      "repository_stats": {
+        "tracked_files": 46,
+        "tracked_python_files": 20,
+        "source_python_files": 8,
+        "tracked_bytes": 162285
+      },
+      "allow_new_tests": true,
+      "import_package": "dotenv",
+      "environment": {
+        "python": "Python 3.12.14",
+        "pip_freeze": "asttokens==3.0.2\nclick==8.5.0\nexecuting==2.2.1\niniconfig==2.3.0\nipython==9.17.1\nipython_pygments_lexers==1.1.1\njedi==0.20.0\nmatplotlib-inline==0.2.2\npackaging==26.3\nparso==0.8.7\npexpect==4.9.0\npluggy==1.6.0\nprompt_toolkit==3.0.53\npsutil==7.2.2\nptyprocess==0.7.0\npure_eval==0.2.4\nPygments==2.21.0\npytest==9.1.1\npython-dotenv @ file:///tmp/suffice-dotenv-prep-20261006\nstack-data==0.6.3\ntraitlets==5.16.1\nwcwidth==0.9.2"
+      }
+    },
+    {
+      "id": "packaging_epoch_prefix",
+      "repo_url": "https://github.com/pypa/packaging.git",
+      "base_commit": "cc0c65cb43537491ba468da1ba9b9f49c932d9eb",
+      "reference_commit": "c52d2b30465ace6d11f54c01b6ea30419a94b5ef",
+      "source_subdir": "src",
+      "prompt": "Fix epoch-aware version prefix matching in src/packaging/specifiers.py, starting from Specifier._compare_equal and its related version handling. For example, Specifier('==7!3.4.0.0.*').contains('7!3.4') should be true because release components are zero-padded for prefix comparison. A different epoch must never match that prefix; != must give the corresponding exclusion result. Preserve existing behavior for ordinary versions, explicit zero epochs, suffixes, local versions, compatible-release specifiers (~=), and SpecifierSet. Make the localized production fix and run the relevant existing tests. Existing tests and repository instructions are immutable; you may add regression tests. Do not use the network or inspect external reference solutions.",
+      "allowed_source_paths": [
+        "src/packaging/specifiers.py"
+      ],
+      "grader": "grader.py",
+      "test_command": [
+        "{python}",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "dependencies": [
+        "pytest==8.3.5",
+        "pretend==1.0.9",
+        "iniconfig==2.3.0",
+        "pluggy==1.6.0",
+        "packaging==26.3"
+      ],
+      "expected_noop": false,
+      "prep_repo": "/tmp/suffice-packaging-prep",
+      "provenance_urls": [
+        "https://github.com/pypa/packaging/issues/683",
+        "https://github.com/pypa/packaging/pull/712",
+        "https://github.com/pypa/packaging/commit/c52d2b30465ace6d11f54c01b6ea30419a94b5ef"
+      ],
+      "tracked_files": 84,
+      "python_files": 31,
+      "python_executable": "/tmp/suffice-packaging-venv/bin/python",
+      "allow_new_tests": true,
+      "import_package": "packaging",
+      "environment": {
+        "python": "Python 3.12.14",
+        "pip_freeze": "iniconfig==2.3.0\npackaging==26.3\npluggy==1.6.0\npretend==1.0.9\npytest==8.3.5"
+      }
+    },
+    {
+      "id": "itsdangerous-invalid-timestamp",
+      "repo_url": "https://github.com/pallets/itsdangerous.git",
+      "base_commit": "85b1e3b76e0e37473dc286450ada725cd02981b4",
+      "reference_commit": "37f09970fa32a330a6660ded3abdb264086531b5",
+      "source_subdir": "src",
+      "prompt": "Fix TimestampSigner.unsign in src/itsdangerous/timed.py. A tampered signature with a decodable integer timestamp outside Python's datetime year range currently leaks ValueError instead of producing the library's BadTimeSignature error. For those malformed timestamps, preserve the original unsigned payload and leave date_signed unset; validate should return False and TimedSerializer.loads should report the library error. Preserve ordinary valid signatures, timestamp metadata for normal bad signatures, and expiration behavior. Make the smallest source change necessary; do not modify existing tests or add files. Verify with the existing tests.",
+      "allowed_source_paths": [
+        "src/itsdangerous/timed.py"
+      ],
+      "grader": "grader.py",
+      "test_command": [
+        "{python}",
+        "-m",
+        "pytest",
+        "-q",
+        "tests"
+      ],
+      "dependencies": [
+        "pytest==8.3.5",
+        "freezegun==1.5.1"
+      ],
+      "expected_noop": false,
+      "prep_repo": "/tmp/suffice-itsdangerous-prep",
+      "provenance_urls": [
+        "https://github.com/pallets/itsdangerous/pull/296",
+        "https://github.com/pallets/itsdangerous/commit/85b1e3b76e0e37473dc286450ada725cd02981b4",
+        "https://github.com/pallets/itsdangerous/commit/37f09970fa32a330a6660ded3abdb264086531b5"
+      ],
+      "python_executable": "/tmp/suffice-itsdangerous-py312/bin/python",
+      "allow_new_tests": false,
+      "import_package": "itsdangerous",
+      "environment": {
+        "python": "Python 3.12.14",
+        "pip_freeze": "freezegun==1.5.1\niniconfig==2.3.0\npackaging==26.3\npluggy==1.6.0\npytest==8.3.5\npython-dateutil==2.9.0.post0\nsix==1.17.0"
+      }
+    },
+    {
+      "id": "itsdangerous-expiration-noop",
+      "repo_url": "https://github.com/pallets/itsdangerous.git",
+      "base_commit": "37f09970fa32a330a6660ded3abdb264086531b5",
+      "reference_commit": "37f09970fa32a330a6660ded3abdb264086531b5",
+      "source_subdir": "src",
+      "prompt": "Verify the existing TimestampSigner.unsign expiration behavior in src/itsdangerous/timed.py: a valid signature is accepted when its age equals max_age, older signatures and signatures from the future raise SignatureExpired, and return_timestamp gives a timezone-aware UTC datetime with the original payload. The implementation may already satisfy this contract. Inspect and run existing relevant tests; if it already works, leave every file unchanged. Do not add tests, notes, or other files. Only change source if a contract violation is actually demonstrated.",
+      "allowed_source_paths": [],
+      "grader": "grader_noop.py",
+      "test_command": [
+        "{python}",
+        "-m",
+        "pytest",
+        "-q",
+        "tests"
+      ],
+      "dependencies": [
+        "pytest==8.3.5",
+        "freezegun==1.5.1"
+      ],
+      "expected_noop": true,
+      "prep_repo": "/tmp/suffice-itsdangerous-prep",
+      "provenance_urls": [
+        "https://github.com/pallets/itsdangerous/commit/37f09970fa32a330a6660ded3abdb264086531b5",
+        "https://github.com/pallets/itsdangerous/blob/37f09970fa32a330a6660ded3abdb264086531b5/src/itsdangerous/timed.py"
+      ],
+      "python_executable": "/tmp/suffice-itsdangerous-py312/bin/python",
+      "allow_new_tests": false,
+      "import_package": "itsdangerous",
+      "environment": {
+        "python": "Python 3.12.14",
+        "pip_freeze": "freezegun==1.5.1\niniconfig==2.3.0\npackaging==26.3\npluggy==1.6.0\npytest==8.3.5\npython-dateutil==2.9.0.post0\nsix==1.17.0"
+      }
+    }
+  ],
+  "schedule": [
+    {
+      "pair": 1,
+      "task": "packaging_epoch_prefix",
+      "repeat": 3,
+      "arm": "baseline",
+      "run": "01-packaging_epoch_prefix-r3-baseline"
+    },
+    {
+      "pair": 1,
+      "task": "packaging_epoch_prefix",
+      "repeat": 3,
+      "arm": "implicit",
+      "run": "01-packaging_epoch_prefix-r3-implicit"
+    },
+    {
+      "pair": 2,
+      "task": "dotenv-backslash-roundtrip",
+      "repeat": 3,
+      "arm": "implicit",
+      "run": "02-dotenv-backslash-roundtrip-r3-implicit"
+    },
+    {
+      "pair": 2,
+      "task": "dotenv-backslash-roundtrip",
+      "repeat": 3,
+      "arm": "baseline",
+      "run": "02-dotenv-backslash-roundtrip-r3-baseline"
+    },
+    {
+      "pair": 3,
+      "task": "itsdangerous-expiration-noop",
+      "repeat": 3,
+      "arm": "baseline",
+      "run": "03-itsdangerous-expiration-noop-r3-baseline"
+    },
+    {
+      "pair": 3,
+      "task": "itsdangerous-expiration-noop",
+      "repeat": 3,
+      "arm": "implicit",
+      "run": "03-itsdangerous-expiration-noop-r3-implicit"
+    },
+    {
+      "pair": 4,
+      "task": "dotenv-backslash-roundtrip",
+      "repeat": 1,
+      "arm": "implicit",
+      "run": "04-dotenv-backslash-roundtrip-r1-implicit"
+    },
+    {
+      "pair": 4,
+      "task": "dotenv-backslash-roundtrip",
+      "repeat": 1,
+      "arm": "baseline",
+      "run": "04-dotenv-backslash-roundtrip-r1-baseline"
+    },
+    {
+      "pair": 5,
+      "task": "itsdangerous-expiration-noop",
+      "repeat": 2,
+      "arm": "implicit",
+      "run": "05-itsdangerous-expiration-noop-r2-implicit"
+    },
+    {
+      "pair": 5,
+      "task": "itsdangerous-expiration-noop",
+      "repeat": 2,
+      "arm": "baseline",
+      "run": "05-itsdangerous-expiration-noop-r2-baseline"
+    },
+    {
+      "pair": 6,
+      "task": "itsdangerous-invalid-timestamp",
+      "repeat": 3,
+      "arm": "implicit",
+      "run": "06-itsdangerous-invalid-timestamp-r3-implicit"
+    },
+    {
+      "pair": 6,
+      "task": "itsdangerous-invalid-timestamp",
+      "repeat": 3,
+      "arm": "baseline",
+      "run": "06-itsdangerous-invalid-timestamp-r3-baseline"
+    },
+    {
+      "pair": 7,
+      "task": "itsdangerous-invalid-timestamp",
+      "repeat": 1,
+      "arm": "implicit",
+      "run": "07-itsdangerous-invalid-timestamp-r1-implicit"
+    },
+    {
+      "pair": 7,
+      "task": "itsdangerous-invalid-timestamp",
+      "repeat": 1,
+      "arm": "baseline",
+      "run": "07-itsdangerous-invalid-timestamp-r1-baseline"
+    },
+    {
+      "pair": 8,
+      "task": "packaging_epoch_prefix",
+      "repeat": 1,
+      "arm": "baseline",
+      "run": "08-packaging_epoch_prefix-r1-baseline"
+    },
+    {
+      "pair": 8,
+      "task": "packaging_epoch_prefix",
+      "repeat": 1,
+      "arm": "implicit",
+      "run": "08-packaging_epoch_prefix-r1-implicit"
+    },
+    {
+      "pair": 9,
+      "task": "itsdangerous-expiration-noop",
+      "repeat": 1,
+      "arm": "baseline",
+      "run": "09-itsdangerous-expiration-noop-r1-baseline"
+    },
+    {
+      "pair": 9,
+      "task": "itsdangerous-expiration-noop",
+      "repeat": 1,
+      "arm": "implicit",
+      "run": "09-itsdangerous-expiration-noop-r1-implicit"
+    },
+    {
+      "pair": 10,
+      "task": "packaging_epoch_prefix",
+      "repeat": 2,
+      "arm": "implicit",
+      "run": "10-packaging_epoch_prefix-r2-implicit"
+    },
+    {
+      "pair": 10,
+      "task": "packaging_epoch_prefix",
+      "repeat": 2,
+      "arm": "baseline",
+      "run": "10-packaging_epoch_prefix-r2-baseline"
+    },
+    {
+      "pair": 11,
+      "task": "dotenv-backslash-roundtrip",
+      "repeat": 2,
+      "arm": "baseline",
+      "run": "11-dotenv-backslash-roundtrip-r2-baseline"
+    },
+    {
+      "pair": 11,
+      "task": "dotenv-backslash-roundtrip",
+      "repeat": 2,
+      "arm": "implicit",
+      "run": "11-dotenv-backslash-roundtrip-r2-implicit"
+    },
+    {
+      "pair": 12,
+      "task": "itsdangerous-invalid-timestamp",
+      "repeat": 2,
+      "arm": "baseline",
+      "run": "12-itsdangerous-invalid-timestamp-r2-baseline"
+    },
+    {
+      "pair": 12,
+      "task": "itsdangerous-invalid-timestamp",
+      "repeat": 2,
+      "arm": "implicit",
+      "run": "12-itsdangerous-invalid-timestamp-r2-implicit"
+    }
+  ],
+  "sources": {
+    "assets/external_run.py": "f2d4a904aaf38240df2d5f54a52eb19af133268e052e192b5eaf4b9f2d177135",
+    "assets/GENERALIZATION_PLAN_20261006.md": "f0ff91d2773c5cd4df53d443cd2b929ac7032812fc6ec91107c44643a52b7251",
+    "assets/skill/SKILL.md": "f365978b6a24b55d5312dd551cfb7f0a5775595ffd6b8205162cb1df973f9ea1",
+    "assets/skill/scripts/collect_context.py": "a2968d41be8c1fb5954d0399777ef122ab99bc201c67bc5d33cb9bf4ff91347e",
+    "assets/dotenv-backslash-roundtrip/task.source.json": "05ef27c50f02ead7a4faba46daccc389ed7df8fcd14263b68522114a30ec50f5",
+    "assets/dotenv-backslash-roundtrip/grader.py": "634d554716712688af6d1984cb6112a9e54c40e210e55f0ae7648dc2ac5853a5",
+    "assets/dotenv-backslash-roundtrip/base.tar": "f1cfd4f07ed97fc5eeb87a2ec90108338f481f192b87b2f62119f9e9299e5376",
+    "assets/dotenv-backslash-roundtrip/reference.tar": "a8b3360484c7cae1b29f5127b2b8ef371fbd1645833b9aab7cb169db1da8d1f5",
+    "assets/dotenv-backslash-roundtrip/environment.json": "c2d33d7f9ba44f37fd4c161b8c27d8746ec159acd32864d7f839ad3d2b1e4fa2",
+    "assets/packaging_epoch_prefix/task.source.json": "7f670295f9cd5857cd8428acd158e290a4b7e941123683d1a1bd8b30a4c90e3a",
+    "assets/packaging_epoch_prefix/grader.py": "a7f9067c7f3e2554b0bfe50a98c25244f16884f4573e0c9ee274b23f97dd9940",
+    "assets/packaging_epoch_prefix/base.tar": "8add281f6c9bd5b9ec3783d77a1b37e04340b9b32013548f08a905a39d499804",
+    "assets/packaging_epoch_prefix/reference.tar": "6533bcf5d86891a83881833e254df4e763b520102fa73b81a8176633a9b9c9d8",
+    "assets/packaging_epoch_prefix/environment.json": "ea79c4628073802d2b5707c0e9e89ea5e0fe158c02692c92651c483a4666422d",
+    "assets/itsdangerous-invalid-timestamp/task.source.json": "ad47ccc2a23158d67600cde57d9b4ed341cce54e67814088e5859905e1d134ab",
+    "assets/itsdangerous-invalid-timestamp/grader.py": "fc785457ff06806c3437ded1884728543fb5ac85287e6f49ed963fce32100443",
+    "assets/itsdangerous-invalid-timestamp/base.tar": "83ac50e5b8e413c2beea39fcccb8033f60bf0ea096951f54e1371400e789ecea",
+    "assets/itsdangerous-invalid-timestamp/reference.tar": "26dcf7317a66ba04f63c1179c2875948bb800be63243a8c5074c1c30a90b95d3",
+    "assets/itsdangerous-invalid-timestamp/environment.json": "d09f2321e9b5be9c6ab860a034d01921499f6d6e39ab1ceb89981e5a866bd4d0",
+    "assets/itsdangerous-expiration-noop/task.source.json": "e142895a21bd7fdd832df0efaeb8c2eac577b120146feefc002c0ac41a00d985",
+    "assets/itsdangerous-expiration-noop/grader.py": "c8f8ba256e783bae4904b34607c0a386cba648dcbf420a248e299f50cfabdaf5",
+    "assets/itsdangerous-expiration-noop/base.tar": "26dcf7317a66ba04f63c1179c2875948bb800be63243a8c5074c1c30a90b95d3",
+    "assets/itsdangerous-expiration-noop/reference.tar": "26dcf7317a66ba04f63c1179c2875948bb800be63243a8c5074c1c30a90b95d3",
+    "assets/itsdangerous-expiration-noop/environment.json": "d09f2321e9b5be9c6ab860a034d01921499f6d6e39ab1ceb89981e5a866bd4d0",
+    "01-packaging_epoch_prefix-r3-baseline/before.json": "6bb980963e62f0fe1cce41b1d8a6559eeeabd39ca25b9ec8e651141fe3c58f7d",
+    "01-packaging_epoch_prefix-r3-baseline/prompt.txt": "c03bcaf8073b6426d3b4380cd2b3ce7a74e98aa24b080df27359a9cc00fbd802",
+    "01-packaging_epoch_prefix-r3-implicit/before.json": "6bb980963e62f0fe1cce41b1d8a6559eeeabd39ca25b9ec8e651141fe3c58f7d",
+    "01-packaging_epoch_prefix-r3-implicit/prompt.txt": "c03bcaf8073b6426d3b4380cd2b3ce7a74e98aa24b080df27359a9cc00fbd802",
+    "02-dotenv-backslash-roundtrip-r3-implicit/before.json": "dfcdf84b2179b63ccc1fd6d37529a62001ee49b0881d71c55fec52865759fbac",
+    "02-dotenv-backslash-roundtrip-r3-implicit/prompt.txt": "ed967dee644e564c0666e24248e92879e2b0bed0f1dd56bf3703acd0fba0e24c",
+    "02-dotenv-backslash-roundtrip-r3-baseline/before.json": "dfcdf84b2179b63ccc1fd6d37529a62001ee49b0881d71c55fec52865759fbac",
+    "02-dotenv-backslash-roundtrip-r3-baseline/prompt.txt": "ed967dee644e564c0666e24248e92879e2b0bed0f1dd56bf3703acd0fba0e24c",
+    "03-itsdangerous-expiration-noop-r3-baseline/before.json": "5352b2a4db9d5135f3e8d250d0ba8ae38422ce390323e8f474bc6c3b179855ea",
+    "03-itsdangerous-expiration-noop-r3-baseline/prompt.txt": "cd387bc98607a41f702b22e368c6ddda41182acafe66ca2bae83cdc4acfda8c7",
+    "03-itsdangerous-expiration-noop-r3-implicit/before.json": "5352b2a4db9d5135f3e8d250d0ba8ae38422ce390323e8f474bc6c3b179855ea",
+    "03-itsdangerous-expiration-noop-r3-implicit/prompt.txt": "cd387bc98607a41f702b22e368c6ddda41182acafe66ca2bae83cdc4acfda8c7",
+    "04-dotenv-backslash-roundtrip-r1-implicit/before.json": "dfcdf84b2179b63ccc1fd6d37529a62001ee49b0881d71c55fec52865759fbac",
+    "04-dotenv-backslash-roundtrip-r1-implicit/prompt.txt": "ed967dee644e564c0666e24248e92879e2b0bed0f1dd56bf3703acd0fba0e24c",
+    "04-dotenv-backslash-roundtrip-r1-baseline/before.json": "dfcdf84b2179b63ccc1fd6d37529a62001ee49b0881d71c55fec52865759fbac",
+    "04-dotenv-backslash-roundtrip-r1-baseline/prompt.txt": "ed967dee644e564c0666e24248e92879e2b0bed0f1dd56bf3703acd0fba0e24c",
+    "05-itsdangerous-expiration-noop-r2-implicit/before.json": "5352b2a4db9d5135f3e8d250d0ba8ae38422ce390323e8f474bc6c3b179855ea",
+    "05-itsdangerous-expiration-noop-r2-implicit/prompt.txt": "cd387bc98607a41f702b22e368c6ddda41182acafe66ca2bae83cdc4acfda8c7",
+    "05-itsdangerous-expiration-noop-r2-baseline/before.json": "5352b2a4db9d5135f3e8d250d0ba8ae38422ce390323e8f474bc6c3b179855ea",
+    "05-itsdangerous-expiration-noop-r2-baseline/prompt.txt": "cd387bc98607a41f702b22e368c6ddda41182acafe66ca2bae83cdc4acfda8c7",
+    "06-itsdangerous-invalid-timestamp-r3-implicit/before.json": "7e6b5206ee41f5b3d65db7cf885dbcc147b399d9ab40706866427b9993efcf96",
+    "06-itsdangerous-invalid-timestamp-r3-implicit/prompt.txt": "8fea6db5961610ce36702941b274c4bd7467816fc4b7deeebed629b5b5917d90",
+    "06-itsdangerous-invalid-timestamp-r3-baseline/before.json": "7e6b5206ee41f5b3d65db7cf885dbcc147b399d9ab40706866427b9993efcf96",
+    "06-itsdangerous-invalid-timestamp-r3-baseline/prompt.txt": "8fea6db5961610ce36702941b274c4bd7467816fc4b7deeebed629b5b5917d90",
+    "07-itsdangerous-invalid-timestamp-r1-implicit/before.json": "7e6b5206ee41f5b3d65db7cf885dbcc147b399d9ab40706866427b9993efcf96",
+    "07-itsdangerous-invalid-timestamp-r1-implicit/prompt.txt": "8fea6db5961610ce36702941b274c4bd7467816fc4b7deeebed629b5b5917d90",
+    "07-itsdangerous-invalid-timestamp-r1-baseline/before.json": "7e6b5206ee41f5b3d65db7cf885dbcc147b399d9ab40706866427b9993efcf96",
+    "07-itsdangerous-invalid-timestamp-r1-baseline/prompt.txt": "8fea6db5961610ce36702941b274c4bd7467816fc4b7deeebed629b5b5917d90",
+    "08-packaging_epoch_prefix-r1-baseline/before.json": "6bb980963e62f0fe1cce41b1d8a6559eeeabd39ca25b9ec8e651141fe3c58f7d",
+    "08-packaging_epoch_prefix-r1-baseline/prompt.txt": "c03bcaf8073b6426d3b4380cd2b3ce7a74e98aa24b080df27359a9cc00fbd802",
+    "08-packaging_epoch_prefix-r1-implicit/before.json": "6bb980963e62f0fe1cce41b1d8a6559eeeabd39ca25b9ec8e651141fe3c58f7d",
+    "08-packaging_epoch_prefix-r1-implicit/prompt.txt": "c03bcaf8073b6426d3b4380cd2b3ce7a74e98aa24b080df27359a9cc00fbd802",
+    "09-itsdangerous-expiration-noop-r1-baseline/before.json": "5352b2a4db9d5135f3e8d250d0ba8ae38422ce390323e8f474bc6c3b179855ea",
+    "09-itsdangerous-expiration-noop-r1-baseline/prompt.txt": "cd387bc98607a41f702b22e368c6ddda41182acafe66ca2bae83cdc4acfda8c7",
+    "09-itsdangerous-expiration-noop-r1-implicit/before.json": "5352b2a4db9d5135f3e8d250d0ba8ae38422ce390323e8f474bc6c3b179855ea",
+    "09-itsdangerous-expiration-noop-r1-implicit/prompt.txt": "cd387bc98607a41f702b22e368c6ddda41182acafe66ca2bae83cdc4acfda8c7",
+    "10-packaging_epoch_prefix-r2-implicit/before.json": "6bb980963e62f0fe1cce41b1d8a6559eeeabd39ca25b9ec8e651141fe3c58f7d",
+    "10-packaging_epoch_prefix-r2-implicit/prompt.txt": "c03bcaf8073b6426d3b4380cd2b3ce7a74e98aa24b080df27359a9cc00fbd802",
+    "10-packaging_epoch_prefix-r2-baseline/before.json": "6bb980963e62f0fe1cce41b1d8a6559eeeabd39ca25b9ec8e651141fe3c58f7d",
+    "10-packaging_epoch_prefix-r2-baseline/prompt.txt": "c03bcaf8073b6426d3b4380cd2b3ce7a74e98aa24b080df27359a9cc00fbd802",
+    "11-dotenv-backslash-roundtrip-r2-baseline/before.json": "dfcdf84b2179b63ccc1fd6d37529a62001ee49b0881d71c55fec52865759fbac",
+    "11-dotenv-backslash-roundtrip-r2-baseline/prompt.txt": "ed967dee644e564c0666e24248e92879e2b0bed0f1dd56bf3703acd0fba0e24c",
+    "11-dotenv-backslash-roundtrip-r2-implicit/before.json": "dfcdf84b2179b63ccc1fd6d37529a62001ee49b0881d71c55fec52865759fbac",
+    "11-dotenv-backslash-roundtrip-r2-implicit/prompt.txt": "ed967dee644e564c0666e24248e92879e2b0bed0f1dd56bf3703acd0fba0e24c",
+    "12-itsdangerous-invalid-timestamp-r2-baseline/before.json": "7e6b5206ee41f5b3d65db7cf885dbcc147b399d9ab40706866427b9993efcf96",
+    "12-itsdangerous-invalid-timestamp-r2-baseline/prompt.txt": "8fea6db5961610ce36702941b274c4bd7467816fc4b7deeebed629b5b5917d90",
+    "12-itsdangerous-invalid-timestamp-r2-implicit/before.json": "7e6b5206ee41f5b3d65db7cf885dbcc147b399d9ab40706866427b9993efcf96",
+    "12-itsdangerous-invalid-timestamp-r2-implicit/prompt.txt": "8fea6db5961610ce36702941b274c4bd7467816fc4b7deeebed629b5b5917d90"
+  },
+  "discovered_skill_paths": [
+    "/Users/luka/.agents/skills/cavecrew/SKILL.md",
+    "/Users/luka/.agents/skills/caveman-commit/SKILL.md",
+    "/Users/luka/.agents/skills/caveman-compress/SKILL.md",
+    "/Users/luka/.agents/skills/caveman-help/SKILL.md",
+    "/Users/luka/.agents/skills/caveman-review/SKILL.md",
+    "/Users/luka/.agents/skills/caveman-stats/SKILL.md",
+    "/Users/luka/.agents/skills/caveman/SKILL.md",
+    "/Users/luka/.agents/skills/fva-mcp-setup/SKILL.md",
+    "/Users/luka/.agents/skills/fva/SKILL.md",
+    "/Users/luka/.agents/skills/suffice-patch/SKILL.md",
+    "/Users/luka/.codex/skills/.system/imagegen/SKILL.md",
+    "/Users/luka/.codex/skills/.system/openai-docs/SKILL.md",
+    "/Users/luka/.codex/skills/.system/review-agent/SKILL.md",
+    "/Users/luka/.codex/skills/.system/skill-creator/SKILL.md",
+    "/Users/luka/.codex/skills/.system/skill-installer/SKILL.md",
+    "/Users/luka/.codex/skills/banner-design/SKILL.md",
+    "/Users/luka/.codex/skills/brand/SKILL.md",
+    "/Users/luka/.codex/skills/design-system/SKILL.md",
+    "/Users/luka/.codex/skills/design/SKILL.md",
+    "/Users/luka/.codex/skills/hatch-pet/SKILL.md",
+    "/Users/luka/.codex/skills/ui-styling/SKILL.md",
+    "/Users/luka/.codex/skills/ui-ux-pro-max/SKILL.md",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/generalization-20261006/01-packaging_epoch_prefix-r3-baseline/workspace/.agents/skills/suffice-patch/SKILL.md",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/generalization-20261006/01-packaging_epoch_prefix-r3-implicit/workspace/.agents/skills/suffice-patch/SKILL.md",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/generalization-20261006/02-dotenv-backslash-roundtrip-r3-baseline/workspace/.agents/skills/suffice-patch/SKILL.md",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/generalization-20261006/02-dotenv-backslash-roundtrip-r3-implicit/workspace/.agents/skills/suffice-patch/SKILL.md",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/generalization-20261006/03-itsdangerous-expiration-noop-r3-baseline/workspace/.agents/skills/suffice-patch/SKILL.md",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/generalization-20261006/03-itsdangerous-expiration-noop-r3-implicit/workspace/.agents/skills/suffice-patch/SKILL.md",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/generalization-20261006/04-dotenv-backslash-roundtrip-r1-baseline/workspace/.agents/skills/suffice-patch/SKILL.md",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/generalization-20261006/04-dotenv-backslash-roundtrip-r1-implicit/workspace/.agents/skills/suffice-patch/SKILL.md",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/generalization-20261006/05-itsdangerous-expiration-noop-r2-baseline/workspace/.agents/skills/suffice-patch/SKILL.md",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/generalization-20261006/05-itsdangerous-expiration-noop-r2-implicit/workspace/.agents/skills/suffice-patch/SKILL.md",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/generalization-20261006/06-itsdangerous-invalid-timestamp-r3-baseline/workspace/.agents/skills/suffice-patch/SKILL.md",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/generalization-20261006/06-itsdangerous-invalid-timestamp-r3-implicit/workspace/.agents/skills/suffice-patch/SKILL.md",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/generalization-20261006/07-itsdangerous-invalid-timestamp-r1-baseline/workspace/.agents/skills/suffice-patch/SKILL.md",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/generalization-20261006/07-itsdangerous-invalid-timestamp-r1-implicit/workspace/.agents/skills/suffice-patch/SKILL.md",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/generalization-20261006/08-packaging_epoch_prefix-r1-baseline/workspace/.agents/skills/suffice-patch/SKILL.md",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/generalization-20261006/08-packaging_epoch_prefix-r1-implicit/workspace/.agents/skills/suffice-patch/SKILL.md",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/generalization-20261006/09-itsdangerous-expiration-noop-r1-baseline/workspace/.agents/skills/suffice-patch/SKILL.md",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/generalization-20261006/09-itsdangerous-expiration-noop-r1-implicit/workspace/.agents/skills/suffice-patch/SKILL.md",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/generalization-20261006/10-packaging_epoch_prefix-r2-baseline/workspace/.agents/skills/suffice-patch/SKILL.md",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/generalization-20261006/10-packaging_epoch_prefix-r2-implicit/workspace/.agents/skills/suffice-patch/SKILL.md",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/generalization-20261006/11-dotenv-backslash-roundtrip-r2-baseline/workspace/.agents/skills/suffice-patch/SKILL.md",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/generalization-20261006/11-dotenv-backslash-roundtrip-r2-implicit/workspace/.agents/skills/suffice-patch/SKILL.md",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/generalization-20261006/12-itsdangerous-invalid-timestamp-r2-baseline/workspace/.agents/skills/suffice-patch/SKILL.md",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/generalization-20261006/12-itsdangerous-invalid-timestamp-r2-implicit/workspace/.agents/skills/suffice-patch/SKILL.md"
+  ],
+  "config": {
+    "approval_policy": "never",
+    "web_search": "disabled",
+    "project_doc_max_bytes": 0,
+    "suppress_unstable_features_warning": true,
+    "features.skip_host_skill_discovery": false,
+    "features.plugins": false,
+    "features.hooks": false,
+    "features.apps": false,
+    "features.memories": false,
+    "features.multi_agent": false,
+    "sandbox_workspace_write.network_access": false
+  },
+  "cli": "codex-cli 0.160.0",
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "harness_python": "3.14.7 (main, Aug  5 2026, 10:29:49) [Clang 21.0.0 (clang-2100.3.34.2)]",
+  "prepared_at_utc": "2026-10-06T06:15:08Z",
+  "discovery_passed": true,
+  "actual_usd": null
+}

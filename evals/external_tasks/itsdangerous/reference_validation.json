@@ -1,0 +1,87 @@
+{
+  "python": "Python 3.12.14",
+  "dependencies": [
+    "freezegun==1.5.1",
+    "iniconfig==2.3.0",
+    "packaging==26.3",
+    "pluggy==1.6.0",
+    "pytest==8.3.5",
+    "python-dateutil==2.9.0.post0",
+    "six==1.17.0"
+  ],
+  "repo": "/tmp/suffice-itsdangerous-prep",
+  "base_commit": "85b1e3b76e0e37473dc286450ada725cd02981b4",
+  "reference_commit": "37f09970fa32a330a6660ded3abdb264086531b5",
+  "tracked_files": 57,
+  "python_files": 16,
+  "production_python_files": 8,
+  "base": {
+    "hidden_grader": {
+      "command": [
+        "/tmp/suffice-itsdangerous-py312/bin/python",
+        "-"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"<stdin>\", line 30, in <module>\n  File \"<stdin>\", line 16, in rejected\n  File \"<stdin>\", line 30, in <lambda>\n  File \"/tmp/suffice-itsdangerous-prep/src/itsdangerous/timed.py\", line 127, in unsign\n    ts_dt = self.timestamp_to_datetime(ts_int)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/suffice-itsdangerous-prep/src/itsdangerous/timed.py\", line 47, in timestamp_to_datetime\n    return datetime.fromtimestamp(ts, tz=timezone.utc)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: year 10000 is out of range\n"
+    },
+    "upstream_suite": {
+      "command": [
+        "/tmp/suffice-itsdangerous-py312/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests"
+      ],
+      "returncode": 1,
+      "stdout": "........................................................................ [ 24%]\n......................................................................F. [ 48%]\n........................................................................ [ 72%]\n........................................................................ [ 96%]\n.........                                                                [100%]\n=================================== FAILURES ===================================\n_____________ TestTimestampSigner.test_malformed_future_timestamp ______________\n\nself = <test_itsdangerous.test_timed.TestTimestampSigner object at 0x1072e6870>\nsigner = <itsdangerous.timed.TimestampSigner object at 0x1074248c0>\n\n    @pytest.mark.skipif(\n        sys.platform == \"win32\", reason=\"Freezegun Invalid argument occurs on Windows\"\n    )\n    def test_malformed_future_timestamp(self, signer):\n        signed = b\"value.TgPVoaGhoQ.AGBfQ6G6cr07byTRt0zAdPljHOY\"\n    \n        with pytest.raises(BadTimeSignature) as exc_info:\n>           signer.unsign(signed)\n\ntests/test_itsdangerous/test_timed.py:77: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n/tmp/suffice-itsdangerous-prep/src/itsdangerous/timed.py:127: in unsign\n    ts_dt = self.timestamp_to_datetime(ts_int)\n/tmp/suffice-itsdangerous-prep/src/itsdangerous/timed.py:47: in timestamp_to_datetime\n    return datetime.fromtimestamp(ts, tz=timezone.utc)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ncls = <class 'freezegun.api.FakeDatetime'>, t = 21959264258072993\ntz = datetime.timezone.utc\n\n    @classmethod\n    def fromtimestamp(cls, t: float, tz: Optional[datetime.tzinfo]=None) -> \"FakeDatetime\":\n        if tz is None:\n            tz = dateutil.tz.tzoffset(\"freezegun\", cls._tz_offset())\n            result = real_datetime.fromtimestamp(t, tz=tz).replace(tzinfo=None)\n        else:\n>           result = real_datetime.fromtimestamp(t, tz)\nE           ValueError: year 695863352 is out of range\n\n../suffice-itsdangerous-py312/lib/python3.12/site-packages/freezegun/api.py:392: ValueError\n=========================== short test summary info ============================\nFAILED tests/test_itsdangerous/test_timed.py::TestTimestampSigner::test_malformed_future_timestamp\n1 failed, 296 passed in 0.53s\n",
+      "stderr": ""
+    }
+  },
+  "reference": {
+    "hidden_grader": {
+      "command": [
+        "/tmp/suffice-itsdangerous-py312/bin/python",
+        "-"
+      ],
+      "returncode": 0,
+      "stdout": "{\"passed\": 30, \"total\": 30}\n",
+      "stderr": ""
+    },
+    "upstream_suite": {
+      "command": [
+        "/tmp/suffice-itsdangerous-py312/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests"
+      ],
+      "returncode": 0,
+      "stdout": "........................................................................ [ 24%]\n........................................................................ [ 48%]\n........................................................................ [ 72%]\n........................................................................ [ 96%]\n.........                                                                [100%]\n297 passed in 0.43s\n",
+      "stderr": ""
+    }
+  },
+  "noop": {
+    "hidden_grader": {
+      "command": [
+        "/tmp/suffice-itsdangerous-py312/bin/python",
+        "-"
+      ],
+      "returncode": 0,
+      "stdout": "{\"passed\": 52, \"total\": 52}\n",
+      "stderr": ""
+    },
+    "upstream_suite": {
+      "command": [
+        "/tmp/suffice-itsdangerous-py312/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests"
+      ],
+      "returncode": 0,
+      "stdout": "........................................................................ [ 24%]\n........................................................................ [ 48%]\n........................................................................ [ 72%]\n........................................................................ [ 96%]\n.........                                                                [100%]\n297 passed in 0.43s\n",
+      "stderr": ""
+    }
+  }
+}

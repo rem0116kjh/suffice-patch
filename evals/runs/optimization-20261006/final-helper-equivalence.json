@@ -1,0 +1,8 @@
+{
+  "evaluated_sha256": "76c6314d8574b1514b827c1d45c425dfd0182e3cab8aa7ee8097c9e182ffc54c",
+  "final_sha256": "a2968d41be8c1fb5954d0399777ef122ab99bc201c67bc5d33cb9bf4ff91347e",
+  "task": "inventory",
+  "exact_stdout_equivalent": true,
+  "stdout_sha256": "2e1e64ff4cb6f16c270a83292fe473f4314f27a9675bab389edf070ed3c3c868",
+  "note": "Final change restores symbol parsing for requested non-.py files only. This direct helper check is not a repeated model run."
+}

@@ -1,0 +1,437 @@
+{
+  ".agents/skills/suffice-patch/SKILL.md": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "f365978b6a24b55d5312dd551cfb7f0a5775595ffd6b8205162cb1df973f9ea1"
+  },
+  ".agents/skills/suffice-patch/scripts/collect_context.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "a2968d41be8c1fb5954d0399777ef122ab99bc201c67bc5d33cb9bf4ff91347e"
+  },
+  ".flake8": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "998e83fdc87aee2e18cf6587ec0c8e23c867d5a15295c5eef4b7c2a3610b8df1"
+  },
+  ".github/workflows/docs.yml": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "b463139e40762db13eea962fd4b5803e205eb6be93380dacca1aebf929ca7d01"
+  },
+  ".github/workflows/lint.yml": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "8ea43d725c67277a8848cec89726aa6859ce94eba96deadda59cdde806185c0d"
+  },
+  ".github/workflows/test.yml": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "d7103c13abf1a81e88a09a9075af03953055cdbe36f6159b118cd2889a0a909e"
+  },
+  ".gitignore": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "026f6aba7a057f58e6f70ee800b2d58416fbbc40984b45ce13cd23a8db6f450c"
+  },
+  ".pre-commit-config.yaml": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "c0b38449a13e697faf94f4a2dba16d8b8c663acbfb4a7f1dd5611666048ad73a"
+  },
+  ".readthedocs.yml": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "c1ac1376ae8e68e8efd317e878029ed81de6921e6eb93a290be017b2518db554"
+  },
+  "CHANGELOG.rst": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "31156751526601c9876d680b1d827c6b81f0a3e5f9716c99f707831d6bb465aa"
+  },
+  "CONTRIBUTING.rst": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "ac3e94b9f72b3937c785378721425c79c353ef0b5b6ad916fe8a8f5b45484e1a"
+  },
+  "LICENSE": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "cad1ef5bd340d73e074ba614d26f7deaca5c7940c3d8c34852e65c4909686c48"
+  },
+  "LICENSE.APACHE": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594"
+  },
+  "LICENSE.BSD": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "b70e7e9b742f1cc6f948b34c16aa39ffece94196364bc88ff0d2180f0028fac5"
+  },
+  "LOCAL_NOTES.md": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "9ce3991c2f3a29d0f226a8ea92c0108dbac43abfa626c7cde7c7838352e5d0ce"
+  },
+  "README.rst": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "1111b670f3b989bbcb2098a00db13b27e5f69b5e52c7c66e4520ef2cdfa37733"
+  },
+  "SECURITY.md": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "60654ddbe8516c46522a951df800d64ffa5b2a0d6a443a094cb51ef76d44be13"
+  },
+  "docs/Makefile": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "fa00a62495826ebc2a20da0b06aeadf8ddc38014c91b1917cab0766fca7788c2"
+  },
+  "docs/changelog.rst": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "bd8b3e8b5551105b987eb3f26cc72889cf471457ed78d12d93870ab39e1ec311"
+  },
+  "docs/conf.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "2a2912fefbca9bd92453d447d586e8698048538f0723b8b878f783e18587b5ea"
+  },
+  "docs/development/getting-started.rst": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "76de236951e4f9ed7d65a370fbb16f13fde4b6ee414126e90a9ac4db86cc8d3b"
+  },
+  "docs/development/index.rst": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "fb5097f81ef39ca8abb77a00fd65afc367a07526657e71cde4f6a30738ba3e3a"
+  },
+  "docs/development/release-process.rst": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "106b97582775ac23bbb8b1338e1fac4b53c1dd515fe584516452bba28d04d42f"
+  },
+  "docs/development/reviewing-patches.rst": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "da62db0cae8605759c446843edd694b10a8dc9a5aaf5e70cf45e3f14c34e2d6f"
+  },
+  "docs/development/submitting-patches.rst": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "d76c2a9c15d597245861203248b801b2de8c290bd7dcaeb7b5b2f13fda0b0d2f"
+  },
+  "docs/index.rst": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "cf90da81ff9f869bd3e0e393a42cadf539760cc150a8e1be67eacb1a21c1875a"
+  },
+  "docs/markers.rst": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "38e3f73d084b9f9230bcdc0c0820e4e758da9a2550ad11d03f9bf11bdaf66af0"
+  },
+  "docs/metadata.rst": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "97965480bfd18832b3c6020dbf4c95d3f65896b46a5a977f1d4d4041a49c36a7"
+  },
+  "docs/requirements.rst": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "cd36c8a5ac0549f05a384bdb876619bc57ff2110cccaa1c5bfb9699f6e2b7d73"
+  },
+  "docs/requirements.txt": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "265a5ca3cdcaeec62049c3f144ac25dbe5c1d1f0c5be6aec96b04ed921a34d8a"
+  },
+  "docs/security.rst": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "57c8b6c681751e740ada0a69c4c820c71ff0121cd69708ced9d4f8f42edc89ea"
+  },
+  "docs/specifiers.rst": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "b6f621d9bb96b44b27b3f1de185e0beb15cc8dd0c143fdb39c521f1cefada360"
+  },
+  "docs/tags.rst": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "122f38c65aa95645dedf1645fe0eeb984ccf919d335c2a3ef154ab9f27555435"
+  },
+  "docs/utils.rst": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "3b276b6aa789447a95896bbce7826e1d1c9c1f927f3cd892334c600018882eb3"
+  },
+  "docs/version.rst": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "7b85b501973e91a6ff0b9c6f54360ebb07e376e6474c5e2d689359ce94cdc790"
+  },
+  "noxfile.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "e1ad931f430790ac088ba013cf29f7a53dce5051d3d37d425ddca231ecc5d5f9"
+  },
+  "pyproject.toml": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "d2b05405c542c262cfe74dadde4d4d58a9cdf615af7eab1b4c1534e7642070d1"
+  },
+  "src/packaging/__init__.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "2a00427c7cfdbe084df43b72682531c9ec1f7b956b8d50ed89ab40d66e8287b4"
+  },
+  "src/packaging/_elffile.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "85b98af0e0fa67b7d8ea1c229c7114703d5bcbb73390688d62eed28671449369"
+  },
+  "src/packaging/_manylinux.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "46aea9a570311fc5c5b4d7fab42f81fb548abaf08e0cf06f702a12ba532d6ed9"
+  },
+  "src/packaging/_musllinux.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "92098118b1726e9cbceb4f7e293bf39addb30a108f598be1a790563f8257edd1"
+  },
+  "src/packaging/_parser.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "e4384aff3609138538cb34a4804053e05eed4f6c59e8f931e204912b2bd79de4"
+  },
+  "src/packaging/_structures.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "ab77953666d62461bf4b40e2b7f4b7028f2a42acffe4f6135c500a0597b9cabe"
+  },
+  "src/packaging/_tokenizer.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "6a50ad6f05e138502614667a050fb0093485a11009db3fb2b087fbfff31327f9"
+  },
+  "src/packaging/markers.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "787fadc52db3ab51dd3694ddf4b71951c548c1ec0088d53482b9aae708ca9ce9"
+  },
+  "src/packaging/metadata.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "4e8c6320d3a64a7f266c479745254d32274426c3d46071181679cde0c6aabc7d"
+  },
+  "src/packaging/py.typed": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "src/packaging/requirements.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "c2cc06e265c74a013dc38363367952be02c6a3ac98bdf1d51059d686e1265f18"
+  },
+  "src/packaging/specifiers.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "64ea6a2ffc3f2a3e9917f396765890533844c879436e2ebdf3d92bfac179187b"
+  },
+  "src/packaging/tags.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "a641ba810dbc465852d3d573ca65615691ab585e5da075df2b55711bd71d8686"
+  },
+  "src/packaging/utils.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "5e07663f7cb1f7ec101058ceecebcc8fd46311fe49951e4714547af6fed243d1"
+  },
+  "src/packaging/version.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "5e34412cd2b5ed430380b78ff141e7ab0898dd37528b4df1150511b5e736d750"
+  },
+  "tasks/__init__.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "0056ad4ade924b9a503a59e9f7ad176420ad6ef4458a5cc6908ad08236f9dab6"
+  },
+  "tasks/check.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "4ddc954151271d7d2a49619a015ad4945116f998eaa2aa9ae799bcdf5bd5d4de"
+  },
+  "tasks/paths.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "2048afe6c8505347d3d216a14cd713c7283593b92f9644895c056b83deb75e42"
+  },
+  "tasks/requirements.txt": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "62ebe3b944dee42b38eec94079ac1f4aeb494f3092e3660ea298e50f745699fa"
+  },
+  "tests/__init__.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "b3da0a090db2705757a0445d4b58a669fb9e4a406c2fd92f6f27e085a6ae67d6"
+  },
+  "tests/hello-world.c": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "d2f746f760c010b1225914636628b90e9150b066b6128e3c0845b48a98d61cc2"
+  },
+  "tests/manylinux/build.sh": {
+    "kind": "file",
+    "mode": 493,
+    "sha256": "f6930bfb34d37f7753987d55113cff4454f80cce7762911cfa3f420d6856ac0a"
+  },
+  "tests/manylinux/hello-world-armv7l-armel": {
+    "kind": "file",
+    "mode": 493,
+    "sha256": "d0946e4b30a9d67f5ee811dddf6227376b2e9e09ac1d7836c7fec9c4825fb7f3"
+  },
+  "tests/manylinux/hello-world-armv7l-armhf": {
+    "kind": "file",
+    "mode": 493,
+    "sha256": "67e5fd8dc9298c96b97aa42f68036f86e707077e4850c5112440fd79d890c560"
+  },
+  "tests/manylinux/hello-world-invalid-class": {
+    "kind": "file",
+    "mode": 493,
+    "sha256": "1ae2af7c78f88a20d4cd69e3d0daaa91444caa0dc9d18c6cc313931524f4b00c"
+  },
+  "tests/manylinux/hello-world-invalid-data": {
+    "kind": "file",
+    "mode": 493,
+    "sha256": "22e7fb680271534efb9f187ba7113e5f4ba93f4e9cda164891d88f1d958d02cf"
+  },
+  "tests/manylinux/hello-world-invalid-magic": {
+    "kind": "file",
+    "mode": 493,
+    "sha256": "7add6a4ffe6d82ee55c8fdbc76151298fa5750149f09d77862195507ecb66504"
+  },
+  "tests/manylinux/hello-world-s390x-s390x": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "9c62fa176e3ade50bedf2f57e96c16a9ad7c3b541530f33944158e6001894572"
+  },
+  "tests/manylinux/hello-world-too-short": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "57dca6651be6c3977755336a3533c633c22e4ff6bd99f21f313517e2e0433d68"
+  },
+  "tests/manylinux/hello-world-x86_64-amd64": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "bf76a3af4839959dce2f88862fafe0696cc05910d230afc2ea4845df8f8e1c21"
+  },
+  "tests/manylinux/hello-world-x86_64-i386": {
+    "kind": "file",
+    "mode": 493,
+    "sha256": "73d1f60fad7910e928e0185b8ff43eb795d81f33952a13a463e4ef407b5aad1d"
+  },
+  "tests/manylinux/hello-world-x86_64-x32": {
+    "kind": "file",
+    "mode": 493,
+    "sha256": "3e9bbb13d68a7ac99a71e019b6b5ebfc296704bc01cc07475e8b9f088ee813ba"
+  },
+  "tests/metadata/everything.metadata": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "2c91e1a8871638e5ad22fde0e11ac71cb33cf5ad570f508a07489987770e0406"
+  },
+  "tests/musllinux/build.sh": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "88eae04b8c1d59330117030af4ab083c98532bcb6bfcc2fef6bd75b0536dda03"
+  },
+  "tests/musllinux/glibc-x86_64": {
+    "kind": "file",
+    "mode": 493,
+    "sha256": "af74c4504c0f8c13e14d45374991ea4065687d53991473f8e017ec46a17e8b70"
+  },
+  "tests/musllinux/musl-aarch64": {
+    "kind": "file",
+    "mode": 493,
+    "sha256": "296ef64fa17fe7a8ae48af17f45effd52e023653552435f9a6cc8159ad656e94"
+  },
+  "tests/musllinux/musl-i386": {
+    "kind": "file",
+    "mode": 493,
+    "sha256": "762f5b4b06a2539f3bdcb43c674e68bfe183c36a0453b6c1aefed7ac7e36f060"
+  },
+  "tests/musllinux/musl-x86_64": {
+    "kind": "file",
+    "mode": 493,
+    "sha256": "03c992f2c9a4aaaddb5aae577b6c69ab76975dd9ecda3f600492d8e9347ce5b3"
+  },
+  "tests/requirements.txt": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "082bbac677fcd08ad93f7d48a8d973b121a746f71a3fd1c07a075da039fc805e"
+  },
+  "tests/test_elffile.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "0269e0d7eee9bdcb83f3a8694d8ba104ae7f2f912b81927fbbd57083aa33e1d5"
+  },
+  "tests/test_manylinux.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "6820e76d82bc4587908a13eb5b68a0d29c118bb5066bfbf493f5a95b88f3c7e1"
+  },
+  "tests/test_markers.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "e5fad54e213135a444657ac33e84de9f7ab7e87ff06d65fffcdf09b892254e04"
+  },
+  "tests/test_metadata.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "aefe4cf0bad8248fb5bfbcae8f41472d95c92e42d3ef0aab846c32e314418e7d"
+  },
+  "tests/test_musllinux.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "fab9fc07161c9654feeb1406b93d052e7a443bd8d4c815b299889ed3b9b24564"
+  },
+  "tests/test_requirements.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "ced9f3561df19859356b5dbcbb337cf17164567bca9d41b92b99a608491a08bd"
+  },
+  "tests/test_specifiers.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "179d4af97f51c83fd9d9bd111fb20b13fe9098e442eb580f1fb4f42dde5db583"
+  },
+  "tests/test_structures.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "b903fe62ad2244bfdf8d57da3b618fdc0110eaf4143846989142ac5f8a531470"
+  },
+  "tests/test_tags.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "9c56c2b38654ace43a7329e3503d3e456afe37e0075ee8c8f67beebd04f708e7"
+  },
+  "tests/test_utils.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "58d2a9339bdbe66206c57b451f0b6374315b25ee0b72269cf4f3969dad3769db"
+  },
+  "tests/test_version.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "f9ca597041c20421fc376099e39852a0ff1034f0a170d86c313d60fa434a34b7"
+  }
+}

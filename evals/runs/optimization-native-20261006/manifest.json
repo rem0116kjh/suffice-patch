@@ -1,0 +1,35 @@
+{
+  "model": "gpt-6-astra",
+  "effort": "low",
+  "repeats": 1,
+  "tasks": [
+    "inventory"
+  ],
+  "arms": [
+    "baseline",
+    "implicit"
+  ],
+  "bundle_hashes": {
+    "SKILL.md": "f365978b6a24b55d5312dd551cfb7f0a5775595ffd6b8205162cb1df973f9ea1",
+    "scripts/collect_context.py": "76c6314d8574b1514b827c1d45c425dfd0182e3cab8aa7ee8097c9e182ffc54c"
+  },
+  "sources": [
+    {
+      "path": "/Users/luka/Desktop/ctf/suffice-patch/evals/v3_native.py",
+      "sha256": "d240f72944b023dec841c8efbeee44c58567fa2b3f66649887e2bfc2bb894fa0"
+    },
+    {
+      "path": "/Users/luka/Desktop/ctf/suffice-patch/evals/run.py",
+      "sha256": "cef950667629e5475e0ae5176b1b570cabd6da9f523b30d35ac199d6ae477d9c"
+    },
+    {
+      "path": "/Users/luka/Desktop/ctf/suffice-patch/evals/v3_tasks.py",
+      "sha256": "7c4f15d02c0f1da233c071397e033fc1aadc816697a8284d1c98f228b4d982be"
+    },
+    {
+      "path": "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/optimization-20261006/bundle/SKILL.md",
+      "sha256": "f365978b6a24b55d5312dd551cfb7f0a5775595ffd6b8205162cb1df973f9ea1"
+    }
+  ],
+  "note": "Native repo skill, host copy disabled per invocation. User installation unchanged."
+}

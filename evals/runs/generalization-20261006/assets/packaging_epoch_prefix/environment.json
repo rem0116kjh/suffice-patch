@@ -1,0 +1,4 @@
+{
+  "python": "Python 3.12.14",
+  "pip_freeze": "iniconfig==2.3.0\npackaging==26.3\npluggy==1.6.0\npretend==1.0.9\npytest==8.3.5"
+}

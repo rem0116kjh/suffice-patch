@@ -1,0 +1,37 @@
+{
+  "id": "packaging_epoch_prefix",
+  "repo_url": "https://github.com/pypa/packaging.git",
+  "base_commit": "cc0c65cb43537491ba468da1ba9b9f49c932d9eb",
+  "reference_commit": "c52d2b30465ace6d11f54c01b6ea30419a94b5ef",
+  "source_subdir": "src",
+  "prompt": "Fix epoch-aware version prefix matching in src/packaging/specifiers.py, starting from Specifier._compare_equal and its related version handling. For example, Specifier('==7!3.4.0.0.*').contains('7!3.4') should be true because release components are zero-padded for prefix comparison. A different epoch must never match that prefix; != must give the corresponding exclusion result. Preserve existing behavior for ordinary versions, explicit zero epochs, suffixes, local versions, compatible-release specifiers (~=), and SpecifierSet. Make the localized production fix and run the relevant existing tests. Existing tests and repository instructions are immutable; you may add regression tests. Do not use the network or inspect external reference solutions.",
+  "allowed_source_paths": [
+    "src/packaging/specifiers.py"
+  ],
+  "grader": "grader.py",
+  "test_command": [
+    "{python}",
+    "-m",
+    "pytest",
+    "-q"
+  ],
+  "dependencies": [
+    "pytest==8.3.5",
+    "pretend==1.0.9",
+    "iniconfig==2.3.0",
+    "pluggy==1.6.0",
+    "packaging==26.3"
+  ],
+  "expected_noop": false,
+  "prep_repo": "/tmp/suffice-packaging-prep",
+  "provenance_urls": [
+    "https://github.com/pypa/packaging/issues/683",
+    "https://github.com/pypa/packaging/pull/712",
+    "https://github.com/pypa/packaging/commit/c52d2b30465ace6d11f54c01b6ea30419a94b5ef"
+  ],
+  "tracked_files": 84,
+  "python_files": 31,
+  "python_executable": "/tmp/suffice-packaging-venv/bin/python",
+  "allow_new_tests": true,
+  "import_package": "packaging"
+}

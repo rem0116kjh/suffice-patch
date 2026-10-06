@@ -1,0 +1,84 @@
+--- a/src/dotenv/main.py
++++ b/src/dotenv/main.py
+@@ -216,7 +216,9 @@
+     )
+ 
+     if quote:
+-        value_out = "'{}'".format(value_to_set.replace("'", "\\'"))
++        value_out = "'{}'".format(
++            value_to_set.replace("\\", "\\\\").replace("'", "\\'")
++        )
+     else:
+         value_out = value_to_set
+     if export:
+--- a/src/dotenv/parser.py
++++ b/src/dotenv/parser.py
+@@ -22,8 +22,8 @@
+ _single_quoted_key = make_regex(r"'([^']+)'")
+ _unquoted_key = make_regex(r"([^=\#\s]+)")
+ _equal_sign = make_regex(r"(=[^\S\r\n]*)")
+-_single_quoted_value = make_regex(r"'((?:\\'|[^'])*)'")
+-_double_quoted_value = make_regex(r'"((?:\\"|[^"])*)"')
++_single_quoted_value = make_regex(r"'((?:\\[\\']|[^'\\]|\\(?![\\']))*)'")
++_double_quoted_value = make_regex(r'"((?:\\[\\"]|[^"\\]|\\(?![\\"]))*)"')
+ _unquoted_value = make_regex(r"([^\r\n]*)")
+ _comment = make_regex(r"(?:[^\S\r\n]*#[^\r\n]*)?")
+ _end_of_line = make_regex(r"[^\S\r\n]*(?:\r\n|\n|\r|$)")
+--- a/tests/test_backslash_roundtrip.py
++++ b/tests/test_backslash_roundtrip.py
+@@ -0,0 +1,55 @@
++import io
++
++import pytest
++
++from dotenv import dotenv_values, get_key, set_key
++from dotenv.parser import Binding, Original, parse_stream
++
++
++@pytest.mark.parametrize("quote_mode", ["always", "auto"])
++@pytest.mark.parametrize("export", [False, True])
++@pytest.mark.parametrize(
++    "value",
++    [
++        "\\" * count + suffix
++        for count in range(1, 5)
++        for suffix in ["", "path", "'", "''", '"', "'\"", "\nnext\\"]
++    ]
++    + [r"C:\new\test", r"\\server\share", "한글\\\n'quoted'\\"],
++)
++def test_quoted_backslash_roundtrip(tmp_path, quote_mode, export, value):
++    path = tmp_path / ".env"
++    prefix = "# keep this comment\nBEFORE=unchanged\n"
++    suffix = "AFTER='unchanged' # keep spacing\n"
++    path.write_text(prefix + "VALUE=old\n" + suffix, encoding="utf-8")
++
++    for _ in range(2):
++        assert set_key(path, "VALUE", value, quote_mode, export) == (
++            True, "VALUE", value
++        )
++        assert get_key(path, "VALUE") == value
++        assert dotenv_values(path) == {
++            "BEFORE": "unchanged", "VALUE": value, "AFTER": "unchanged"
++        }
++        content = path.read_text(encoding="utf-8")
++        assert content.startswith(prefix + ("export " if export else "") + "VALUE='")
++        assert content.endswith(suffix)
++
++
++@pytest.mark.parametrize("quote", ["'", '"'])
++@pytest.mark.parametrize("count", range(1, 5))
++@pytest.mark.parametrize("newline", ["\n", "\r\n", "\r"])
++def test_escaped_backslash_keeps_assignments_separate(quote, count, newline):
++    first = "export A=" + quote + "\\" * (2 * count) + quote + " # tail" + newline
++    second = "B=" + quote + "next" + quote + newline
++    assert list(parse_stream(io.StringIO(first + second))) == [
++        Binding("A", "\\" * count, Original(first, 1), False),
++        Binding("B", "next", Original(second, 2), False),
++    ]
++
++
++@pytest.mark.parametrize("quote", ["'", '"'])
++def test_unknown_escape_and_multiline_remain_literal(quote):
++    value = "\\q\\\nnext"
++    source = "A=" + quote + value + quote + "\nB=next\n"
++    assert dotenv_values(stream=io.StringIO(source)) == {"A": value, "B": "next"}

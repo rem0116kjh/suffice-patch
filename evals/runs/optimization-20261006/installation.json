@@ -1,0 +1,18 @@
+[
+  {
+    "installation": "codex",
+    "path": "/Users/luka/.agents/skills/suffice-patch/scripts/collect_context.py",
+    "before_sha256": "b67f30fc48cb80db564a5e83bcadcb2722e946e816a5183a32f3476b76bfe674",
+    "after_sha256": "a2968d41be8c1fb5954d0399777ef122ab99bc201c67bc5d33cb9bf4ff91347e",
+    "backup": "evals/runs/optimization-20261006/installation-backup/codex/scripts/collect_context.py",
+    "metadata_preserved": true
+  },
+  {
+    "installation": "claude",
+    "path": "/Users/luka/.claude/skills/suffice-patch/scripts/collect_context.py",
+    "before_sha256": "b67f30fc48cb80db564a5e83bcadcb2722e946e816a5183a32f3476b76bfe674",
+    "after_sha256": "a2968d41be8c1fb5954d0399777ef122ab99bc201c67bc5d33cb9bf4ff91347e",
+    "backup": "evals/runs/optimization-20261006/installation-backup/claude/scripts/collect_context.py",
+    "metadata_preserved": true
+  }
+]

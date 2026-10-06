@@ -1,0 +1,51 @@
+{
+  "id": "dotenv-backslash-roundtrip",
+  "repo_url": "https://github.com/theskumar/python-dotenv.git",
+  "base_commit": "751f8c148222e58aa173c83c4e5e6cfccb2cc124",
+  "reference_commit": "f7b18d9c72d1abcc2ad4023424b84f5bee30d266",
+  "source_subdir": "src",
+  "prompt": "Fix backslash round-trip corruption in python-dotenv. In src/dotenv/main.py, set_key() must preserve the exact value when a quoted value is written and read back through get_key()/dotenv_values(), including repeated backslashes, trailing backslashes, adjacent quotes, and multiline text. The quoted-value parsing in src/dotenv/parser.py must also keep subsequent assignments separate when a single- or double-quoted value ends in an escaped backslash. Preserve existing public APIs, quote modes, export handling, and unrelated file contents. You may modify only src/dotenv/main.py and src/dotenv/parser.py among preexisting files. Preserve all other preexisting files, including tests; you may add new test files. Run the relevant available tests and explain the fix briefly.",
+  "allowed_source_paths": [
+    "src/dotenv/main.py",
+    "src/dotenv/parser.py"
+  ],
+  "grader": "grader.py",
+  "test_command": [
+    "{python}",
+    "-m",
+    "pytest",
+    "-q",
+    "-k",
+    "not test_run_with_command_flags"
+  ],
+  "dependencies": [
+    "pytest==9.1.1",
+    "click==8.5.0",
+    "ipython==9.17.1"
+  ],
+  "expected_noop": false,
+  "prep_repo": "/tmp/suffice-dotenv-prep-20261006",
+  "python_executable": "/tmp/suffice-dotenv-prep-py312-20261006/bin/python",
+  "validation_python_version": "3.12.14",
+  "install_package": true,
+  "provenance_urls": [
+    "https://github.com/theskumar/python-dotenv/issues/661",
+    "https://github.com/theskumar/python-dotenv/commit/751f8c148222e58aa173c83c4e5e6cfccb2cc124",
+    "https://github.com/theskumar/python-dotenv/commit/f7b18d9c72d1abcc2ad4023424b84f5bee30d266"
+  ],
+  "platform_exclusions": [
+    {
+      "node": "tests/test_cli.py::test_run_with_command_flags",
+      "reason": "This historical test invokes GNU printenv --version; macOS BSD printenv has no --version. The complete unchanged base suite reports 222 passed and this 1 unrelated failure."
+    }
+  ],
+  "setup_notes": "Install the pinned base package into the isolated venv to create its dotenv console entry point. Prepend venv/bin to PATH and set an absolute PYTHONPATH to each candidate src directory, including for upstream tests and subprocesses. Judge source is supplied on stdin from outside the candidate workspace.",
+  "repository_stats": {
+    "tracked_files": 46,
+    "tracked_python_files": 20,
+    "source_python_files": 8,
+    "tracked_bytes": 162285
+  },
+  "allow_new_tests": true,
+  "import_package": "dotenv"
+}

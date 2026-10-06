@@ -1,0 +1,1590 @@
+{
+  "schema_version": 1,
+  "methodology": {
+    "bootstrap_seed": 20261006,
+    "bootstrap_samples": 10000,
+    "primary": "Median of all paired ratios within each task, then equal-task geometric mean; failures remain included",
+    "repo_cluster": "Resample projects with replacement, retaining every task median in each selected project",
+    "interval": "Percentile 95%, linear interpolation; descriptive convenience-sample intervals, not population guarantees",
+    "token_definition": "total_tokens = input_tokens + output_tokens; cached_input_tokens is already included in input_tokens"
+  },
+  "completion": {
+    "planned_attempts": 24,
+    "recorded_attempts": 24,
+    "unfinished_attempts": 0,
+    "unfinished_cases": [],
+    "invalid_comparisons": 0,
+    "missing_metric_attempts": [],
+    "duplicate_keys": [],
+    "unexpected_keys": [],
+    "malformed_status_keys": [],
+    "complete": true,
+    "matches_frozen_design": true
+  },
+  "accuracy": {
+    "overall_non_decreased": true,
+    "per_task_non_decreased": true,
+    "baseline_successes": 12,
+    "implicit_successes": 12,
+    "gate_passed": true
+  },
+  "arms": {
+    "baseline": {
+      "recorded_attempts": 12,
+      "planned_attempts": 12,
+      "successes": 12,
+      "invalid_comparisons": 0,
+      "metrics": {
+        "total_tokens": {
+          "sum": 1176381,
+          "observed_attempts": 12,
+          "missing_recorded_attempts": 0
+        },
+        "input_tokens": {
+          "sum": 1160331,
+          "observed_attempts": 12,
+          "missing_recorded_attempts": 0
+        },
+        "cached_input_tokens": {
+          "sum": 921088,
+          "observed_attempts": 12,
+          "missing_recorded_attempts": 0
+        },
+        "uncached_input_tokens": {
+          "sum": 239243,
+          "observed_attempts": 12,
+          "missing_recorded_attempts": 0
+        },
+        "output_tokens": {
+          "sum": 16050,
+          "observed_attempts": 12,
+          "missing_recorded_attempts": 0
+        },
+        "tool_calls": {
+          "sum": 82,
+          "observed_attempts": 12,
+          "missing_recorded_attempts": 0
+        },
+        "duration_seconds": {
+          "sum": 756.894313,
+          "observed_attempts": 12,
+          "missing_recorded_attempts": 0
+        }
+      }
+    },
+    "implicit": {
+      "recorded_attempts": 12,
+      "planned_attempts": 12,
+      "successes": 12,
+      "invalid_comparisons": 0,
+      "metrics": {
+        "total_tokens": {
+          "sum": 1450245,
+          "observed_attempts": 12,
+          "missing_recorded_attempts": 0
+        },
+        "input_tokens": {
+          "sum": 1435584,
+          "observed_attempts": 12,
+          "missing_recorded_attempts": 0
+        },
+        "cached_input_tokens": {
+          "sum": 1108992,
+          "observed_attempts": 12,
+          "missing_recorded_attempts": 0
+        },
+        "uncached_input_tokens": {
+          "sum": 326592,
+          "observed_attempts": 12,
+          "missing_recorded_attempts": 0
+        },
+        "output_tokens": {
+          "sum": 14661,
+          "observed_attempts": 12,
+          "missing_recorded_attempts": 0
+        },
+        "tool_calls": {
+          "sum": 79,
+          "observed_attempts": 12,
+          "missing_recorded_attempts": 0
+        },
+        "duration_seconds": {
+          "sum": 611.212883,
+          "observed_attempts": 12,
+          "missing_recorded_attempts": 0
+        }
+      }
+    }
+  },
+  "tasks": [
+    {
+      "id": "dotenv-backslash-roundtrip",
+      "repo_url": "https://github.com/theskumar/python-dotenv.git",
+      "expected_noop": false,
+      "platform_exclusions": [
+        {
+          "node": "tests/test_cli.py::test_run_with_command_flags",
+          "reason": "This historical test invokes GNU printenv --version; macOS BSD printenv has no --version. The complete unchanged base suite reports 222 passed and this 1 unrelated failure."
+        }
+      ],
+      "arms": {
+        "baseline": {
+          "recorded_attempts": 3,
+          "planned_attempts": 3,
+          "successes": 3,
+          "invalid_comparisons": 0,
+          "metrics": {
+            "total_tokens": {
+              "sum": 347208,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "input_tokens": {
+              "sum": 341447,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "cached_input_tokens": {
+              "sum": 267392,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "uncached_input_tokens": {
+              "sum": 74055,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "output_tokens": {
+              "sum": 5761,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "tool_calls": {
+              "sum": 24,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "duration_seconds": {
+              "sum": 234.57607000000002,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            }
+          }
+        },
+        "implicit": {
+          "recorded_attempts": 3,
+          "planned_attempts": 3,
+          "successes": 3,
+          "invalid_comparisons": 0,
+          "metrics": {
+            "total_tokens": {
+              "sum": 450068,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "input_tokens": {
+              "sum": 444868,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "cached_input_tokens": {
+              "sum": 345344,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "uncached_input_tokens": {
+              "sum": 99524,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "output_tokens": {
+              "sum": 5200,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "tool_calls": {
+              "sum": 19,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "duration_seconds": {
+              "sum": 200.20842299999998,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            }
+          }
+        }
+      },
+      "pairs": [
+        {
+          "repeat": 1,
+          "both_recorded_once": true,
+          "comparison_valid": true,
+          "ratios_implicit_over_baseline": {
+            "total_tokens": 1.0132541027367052,
+            "input_tokens": 1.0142315809293678,
+            "cached_input_tokens": 0.9553001277139208,
+            "uncached_input_tokens": 1.2310657513124563,
+            "output_tokens": 0.9432584269662921,
+            "tool_calls": 0.75,
+            "duration_seconds": 0.8328618141824355
+          }
+        },
+        {
+          "repeat": 2,
+          "both_recorded_once": true,
+          "comparison_valid": true,
+          "ratios_implicit_over_baseline": {
+            "total_tokens": 1.2014886846099908,
+            "input_tokens": 1.2070627135111418,
+            "cached_input_tokens": 1.1792336217552535,
+            "uncached_input_tokens": 1.3267569363681675,
+            "output_tokens": 0.8707577870757787,
+            "tool_calls": 0.6666666666666666,
+            "duration_seconds": 0.8807673204351685
+          }
+        },
+        {
+          "repeat": 3,
+          "both_recorded_once": true,
+          "comparison_valid": true,
+          "ratios_implicit_over_baseline": {
+            "total_tokens": 1.850452452770281,
+            "input_tokens": 1.8705822409560424,
+            "cached_input_tokens": 2.004024144869215,
+            "uncached_input_tokens": 1.497273526824978,
+            "output_tokens": 0.9005464480874317,
+            "tool_calls": 1.0,
+            "duration_seconds": 0.8393485500298086
+          }
+        }
+      ],
+      "task_median_ratios": {
+        "total_tokens": 1.2014886846099908,
+        "input_tokens": 1.2070627135111418,
+        "cached_input_tokens": 1.1792336217552535,
+        "uncached_input_tokens": 1.3267569363681675,
+        "output_tokens": 0.9005464480874317,
+        "tool_calls": 0.75,
+        "duration_seconds": 0.8393485500298086
+      },
+      "observed_paired_ratios": {
+        "total_tokens": 3,
+        "input_tokens": 3,
+        "cached_input_tokens": 3,
+        "uncached_input_tokens": 3,
+        "output_tokens": 3,
+        "tool_calls": 3,
+        "duration_seconds": 3
+      },
+      "accuracy_non_decreased": true
+    },
+    {
+      "id": "packaging_epoch_prefix",
+      "repo_url": "https://github.com/pypa/packaging.git",
+      "expected_noop": false,
+      "platform_exclusions": [],
+      "arms": {
+        "baseline": {
+          "recorded_attempts": 3,
+          "planned_attempts": 3,
+          "successes": 3,
+          "invalid_comparisons": 0,
+          "metrics": {
+            "total_tokens": {
+              "sum": 400958,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "input_tokens": {
+              "sum": 394541,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "cached_input_tokens": {
+              "sum": 321024,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "uncached_input_tokens": {
+              "sum": 73517,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "output_tokens": {
+              "sum": 6417,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "tool_calls": {
+              "sum": 28,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "duration_seconds": {
+              "sum": 264.616819,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            }
+          }
+        },
+        "implicit": {
+          "recorded_attempts": 3,
+          "planned_attempts": 3,
+          "successes": 3,
+          "invalid_comparisons": 0,
+          "metrics": {
+            "total_tokens": {
+              "sum": 517823,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "input_tokens": {
+              "sum": 512234,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "cached_input_tokens": {
+              "sum": 430208,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "uncached_input_tokens": {
+              "sum": 82026,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "output_tokens": {
+              "sum": 5589,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "tool_calls": {
+              "sum": 25,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "duration_seconds": {
+              "sum": 223.773859,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            }
+          }
+        }
+      },
+      "pairs": [
+        {
+          "repeat": 1,
+          "both_recorded_once": true,
+          "comparison_valid": true,
+          "ratios_implicit_over_baseline": {
+            "total_tokens": 1.3973100045720368,
+            "input_tokens": 1.4035399945985998,
+            "cached_input_tokens": 1.4381054897739505,
+            "uncached_input_tokens": 1.24232202392626,
+            "output_tokens": 0.976123595505618,
+            "tool_calls": 0.9,
+            "duration_seconds": 0.8070996901365576
+          }
+        },
+        {
+          "repeat": 2,
+          "both_recorded_once": true,
+          "comparison_valid": true,
+          "ratios_implicit_over_baseline": {
+            "total_tokens": 1.4924085485774223,
+            "input_tokens": 1.505751629331529,
+            "cached_input_tokens": 1.5836972343522562,
+            "uncached_input_tokens": 1.2246103363412633,
+            "output_tokens": 0.77501196744854,
+            "tool_calls": 0.75,
+            "duration_seconds": 0.9013744839553474
+          }
+        },
+        {
+          "repeat": 3,
+          "both_recorded_once": true,
+          "comparison_valid": true,
+          "ratios_implicit_over_baseline": {
+            "total_tokens": 1.0164845368187987,
+            "input_tokens": 1.0189742994383897,
+            "cached_input_tokens": 1.0504484304932735,
+            "uncached_input_tokens": 0.8669740292699433,
+            "output_tokens": 0.8599452554744526,
+            "tool_calls": 1.0,
+            "duration_seconds": 0.8324622143647169
+          }
+        }
+      ],
+      "task_median_ratios": {
+        "total_tokens": 1.3973100045720368,
+        "input_tokens": 1.4035399945985998,
+        "cached_input_tokens": 1.4381054897739505,
+        "uncached_input_tokens": 1.2246103363412633,
+        "output_tokens": 0.8599452554744526,
+        "tool_calls": 0.9,
+        "duration_seconds": 0.8324622143647169
+      },
+      "observed_paired_ratios": {
+        "total_tokens": 3,
+        "input_tokens": 3,
+        "cached_input_tokens": 3,
+        "uncached_input_tokens": 3,
+        "output_tokens": 3,
+        "tool_calls": 3,
+        "duration_seconds": 3
+      },
+      "accuracy_non_decreased": true
+    },
+    {
+      "id": "itsdangerous-invalid-timestamp",
+      "repo_url": "https://github.com/pallets/itsdangerous.git",
+      "expected_noop": false,
+      "platform_exclusions": [],
+      "arms": {
+        "baseline": {
+          "recorded_attempts": 3,
+          "planned_attempts": 3,
+          "successes": 3,
+          "invalid_comparisons": 0,
+          "metrics": {
+            "total_tokens": {
+              "sum": 215397,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "input_tokens": {
+              "sum": 213039,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "cached_input_tokens": {
+              "sum": 171776,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "uncached_input_tokens": {
+              "sum": 41263,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "output_tokens": {
+              "sum": 2358,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "tool_calls": {
+              "sum": 17,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "duration_seconds": {
+              "sum": 128.390578,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            }
+          }
+        },
+        "implicit": {
+          "recorded_attempts": 3,
+          "planned_attempts": 3,
+          "successes": 3,
+          "invalid_comparisons": 0,
+          "metrics": {
+            "total_tokens": {
+              "sum": 241643,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "input_tokens": {
+              "sum": 239342,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "cached_input_tokens": {
+              "sum": 166784,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "uncached_input_tokens": {
+              "sum": 72558,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "output_tokens": {
+              "sum": 2301,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "tool_calls": {
+              "sum": 20,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "duration_seconds": {
+              "sum": 94.219912,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            }
+          }
+        }
+      },
+      "pairs": [
+        {
+          "repeat": 1,
+          "both_recorded_once": true,
+          "comparison_valid": true,
+          "ratios_implicit_over_baseline": {
+            "total_tokens": 1.0855801475519786,
+            "input_tokens": 1.0853274730045037,
+            "cached_input_tokens": 0.9863945578231292,
+            "uncached_input_tokens": 1.4087329163771138,
+            "output_tokens": 1.1079136690647482,
+            "tool_calls": 1.3333333333333333,
+            "duration_seconds": 0.8948260498181158
+          }
+        },
+        {
+          "repeat": 2,
+          "both_recorded_once": true,
+          "comparison_valid": true,
+          "ratios_implicit_over_baseline": {
+            "total_tokens": 1.0990057031880411,
+            "input_tokens": 1.104504304667896,
+            "cached_input_tokens": 1.0069605568445477,
+            "uncached_input_tokens": 1.4217414372457702,
+            "output_tokens": 0.6967545638945233,
+            "tool_calls": 1.0,
+            "duration_seconds": 0.6774160992221503
+          }
+        },
+        {
+          "repeat": 3,
+          "both_recorded_once": true,
+          "comparison_valid": true,
+          "ratios_implicit_over_baseline": {
+            "total_tokens": 1.1864314188690388,
+            "input_tokens": 1.1856619835694726,
+            "cached_input_tokens": 0.9234042553191489,
+            "uncached_input_tokens": 3.4293230944254836,
+            "output_tokens": 1.2825278810408922,
+            "tool_calls": 1.2,
+            "duration_seconds": 0.6158013246484068
+          }
+        }
+      ],
+      "task_median_ratios": {
+        "total_tokens": 1.0990057031880411,
+        "input_tokens": 1.104504304667896,
+        "cached_input_tokens": 0.9863945578231292,
+        "uncached_input_tokens": 1.4217414372457702,
+        "output_tokens": 1.1079136690647482,
+        "tool_calls": 1.2,
+        "duration_seconds": 0.6774160992221503
+      },
+      "observed_paired_ratios": {
+        "total_tokens": 3,
+        "input_tokens": 3,
+        "cached_input_tokens": 3,
+        "uncached_input_tokens": 3,
+        "output_tokens": 3,
+        "tool_calls": 3,
+        "duration_seconds": 3
+      },
+      "accuracy_non_decreased": true
+    },
+    {
+      "id": "itsdangerous-expiration-noop",
+      "repo_url": "https://github.com/pallets/itsdangerous.git",
+      "expected_noop": true,
+      "platform_exclusions": [],
+      "arms": {
+        "baseline": {
+          "recorded_attempts": 3,
+          "planned_attempts": 3,
+          "successes": 3,
+          "invalid_comparisons": 0,
+          "metrics": {
+            "total_tokens": {
+              "sum": 212818,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "input_tokens": {
+              "sum": 211304,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "cached_input_tokens": {
+              "sum": 160896,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "uncached_input_tokens": {
+              "sum": 50408,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "output_tokens": {
+              "sum": 1514,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "tool_calls": {
+              "sum": 13,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "duration_seconds": {
+              "sum": 129.310846,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            }
+          }
+        },
+        "implicit": {
+          "recorded_attempts": 3,
+          "planned_attempts": 3,
+          "successes": 3,
+          "invalid_comparisons": 0,
+          "metrics": {
+            "total_tokens": {
+              "sum": 240711,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "input_tokens": {
+              "sum": 239140,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "cached_input_tokens": {
+              "sum": 166656,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "uncached_input_tokens": {
+              "sum": 72484,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "output_tokens": {
+              "sum": 1571,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "tool_calls": {
+              "sum": 15,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "duration_seconds": {
+              "sum": 93.010689,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            }
+          }
+        }
+      },
+      "pairs": [
+        {
+          "repeat": 1,
+          "both_recorded_once": true,
+          "comparison_valid": true,
+          "ratios_implicit_over_baseline": {
+            "total_tokens": 1.115751623013208,
+            "input_tokens": 1.1171544577905599,
+            "cached_input_tokens": 1.0236966824644549,
+            "uncached_input_tokens": 1.415582880113502,
+            "output_tokens": 0.9314814814814815,
+            "tool_calls": 1.0,
+            "duration_seconds": 0.8071272318538074
+          }
+        },
+        {
+          "repeat": 2,
+          "both_recorded_once": true,
+          "comparison_valid": true,
+          "ratios_implicit_over_baseline": {
+            "total_tokens": 1.1399152114099613,
+            "input_tokens": 1.1394429063788916,
+            "cached_input_tokens": 1.0403800475059382,
+            "uncached_input_tokens": 1.4551691506978945,
+            "output_tokens": 1.2159090909090908,
+            "tool_calls": 1.25,
+            "duration_seconds": 0.6655251605866495
+          }
+        },
+        {
+          "repeat": 3,
+          "both_recorded_once": true,
+          "comparison_valid": true,
+          "ratios_implicit_over_baseline": {
+            "total_tokens": 1.1376836399942947,
+            "input_tokens": 1.1387547430148326,
+            "cached_input_tokens": 1.0434782608695652,
+            "uncached_input_tokens": 1.4431982633863965,
+            "output_tokens": 0.99812734082397,
+            "tool_calls": 1.25,
+            "duration_seconds": 0.6807413338659424
+          }
+        }
+      ],
+      "task_median_ratios": {
+        "total_tokens": 1.1376836399942947,
+        "input_tokens": 1.1387547430148326,
+        "cached_input_tokens": 1.0403800475059382,
+        "uncached_input_tokens": 1.4431982633863965,
+        "output_tokens": 0.99812734082397,
+        "tool_calls": 1.25,
+        "duration_seconds": 0.6807413338659424
+      },
+      "observed_paired_ratios": {
+        "total_tokens": 3,
+        "input_tokens": 3,
+        "cached_input_tokens": 3,
+        "uncached_input_tokens": 3,
+        "output_tokens": 3,
+        "tool_calls": 3,
+        "duration_seconds": 3
+      },
+      "accuracy_non_decreased": true
+    }
+  ],
+  "groups": {
+    "bug_only": {
+      "task_ids": [
+        "dotenv-backslash-roundtrip",
+        "itsdangerous-invalid-timestamp",
+        "packaging_epoch_prefix"
+      ],
+      "arms": {
+        "baseline": {
+          "recorded_attempts": 9,
+          "planned_attempts": 9,
+          "successes": 9,
+          "invalid_comparisons": 0,
+          "metrics": {
+            "total_tokens": {
+              "sum": 963563,
+              "observed_attempts": 9,
+              "missing_recorded_attempts": 0
+            },
+            "input_tokens": {
+              "sum": 949027,
+              "observed_attempts": 9,
+              "missing_recorded_attempts": 0
+            },
+            "cached_input_tokens": {
+              "sum": 760192,
+              "observed_attempts": 9,
+              "missing_recorded_attempts": 0
+            },
+            "uncached_input_tokens": {
+              "sum": 188835,
+              "observed_attempts": 9,
+              "missing_recorded_attempts": 0
+            },
+            "output_tokens": {
+              "sum": 14536,
+              "observed_attempts": 9,
+              "missing_recorded_attempts": 0
+            },
+            "tool_calls": {
+              "sum": 69,
+              "observed_attempts": 9,
+              "missing_recorded_attempts": 0
+            },
+            "duration_seconds": {
+              "sum": 627.583467,
+              "observed_attempts": 9,
+              "missing_recorded_attempts": 0
+            }
+          }
+        },
+        "implicit": {
+          "recorded_attempts": 9,
+          "planned_attempts": 9,
+          "successes": 9,
+          "invalid_comparisons": 0,
+          "metrics": {
+            "total_tokens": {
+              "sum": 1209534,
+              "observed_attempts": 9,
+              "missing_recorded_attempts": 0
+            },
+            "input_tokens": {
+              "sum": 1196444,
+              "observed_attempts": 9,
+              "missing_recorded_attempts": 0
+            },
+            "cached_input_tokens": {
+              "sum": 942336,
+              "observed_attempts": 9,
+              "missing_recorded_attempts": 0
+            },
+            "uncached_input_tokens": {
+              "sum": 254108,
+              "observed_attempts": 9,
+              "missing_recorded_attempts": 0
+            },
+            "output_tokens": {
+              "sum": 13090,
+              "observed_attempts": 9,
+              "missing_recorded_attempts": 0
+            },
+            "tool_calls": {
+              "sum": 64,
+              "observed_attempts": 9,
+              "missing_recorded_attempts": 0
+            },
+            "duration_seconds": {
+              "sum": 518.202194,
+              "observed_attempts": 9,
+              "missing_recorded_attempts": 0
+            }
+          }
+        }
+      },
+      "equal_task_geometric_mean_ratios": {
+        "total_tokens": 1.2265091710381335,
+        "input_tokens": 1.2322741741602419,
+        "cached_input_tokens": 1.1870811850423841,
+        "uncached_input_tokens": 1.3219143070471797,
+        "output_tokens": 0.9502275423956204,
+        "tool_calls": 0.9321697517861577,
+        "duration_seconds": 0.7793289259966008
+      }
+    },
+    "noop": {
+      "task_ids": [
+        "itsdangerous-expiration-noop"
+      ],
+      "arms": {
+        "baseline": {
+          "recorded_attempts": 3,
+          "planned_attempts": 3,
+          "successes": 3,
+          "invalid_comparisons": 0,
+          "metrics": {
+            "total_tokens": {
+              "sum": 212818,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "input_tokens": {
+              "sum": 211304,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "cached_input_tokens": {
+              "sum": 160896,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "uncached_input_tokens": {
+              "sum": 50408,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "output_tokens": {
+              "sum": 1514,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "tool_calls": {
+              "sum": 13,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "duration_seconds": {
+              "sum": 129.310846,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            }
+          }
+        },
+        "implicit": {
+          "recorded_attempts": 3,
+          "planned_attempts": 3,
+          "successes": 3,
+          "invalid_comparisons": 0,
+          "metrics": {
+            "total_tokens": {
+              "sum": 240711,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "input_tokens": {
+              "sum": 239140,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "cached_input_tokens": {
+              "sum": 166656,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "uncached_input_tokens": {
+              "sum": 72484,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "output_tokens": {
+              "sum": 1571,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "tool_calls": {
+              "sum": 15,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            },
+            "duration_seconds": {
+              "sum": 93.010689,
+              "observed_attempts": 3,
+              "missing_recorded_attempts": 0
+            }
+          }
+        }
+      },
+      "equal_task_geometric_mean_ratios": {
+        "total_tokens": 1.1376836399942947,
+        "input_tokens": 1.1387547430148326,
+        "cached_input_tokens": 1.0403800475059382,
+        "uncached_input_tokens": 1.4431982633863965,
+        "output_tokens": 0.99812734082397,
+        "tool_calls": 1.25,
+        "duration_seconds": 0.6807413338659424
+      }
+    }
+  },
+  "metrics": {
+    "total_tokens": {
+      "task_median_ratios": {
+        "dotenv-backslash-roundtrip": 1.2014886846099908,
+        "packaging_epoch_prefix": 1.3973100045720368,
+        "itsdangerous-invalid-timestamp": 1.0990057031880411,
+        "itsdangerous-expiration-noop": 1.1376836399942947
+      },
+      "tasks_with_complete_ratios": 4,
+      "equal_task_geometric_mean_ratio": 1.203672887334263,
+      "task_ci95": [
+        1.1181774495926218,
+        1.3273179103737753
+      ],
+      "repo_cluster_ci95": [
+        1.1181774495926218,
+        1.3973100045720368
+      ]
+    },
+    "input_tokens": {
+      "task_median_ratios": {
+        "dotenv-backslash-roundtrip": 1.2070627135111418,
+        "packaging_epoch_prefix": 1.4035399945985998,
+        "itsdangerous-invalid-timestamp": 1.104504304667896,
+        "itsdangerous-expiration-noop": 1.1387547430148326
+      },
+      "tasks_with_complete_ratios": 4,
+      "equal_task_geometric_mean_ratio": 1.208197853253921,
+      "task_ci95": [
+        1.1214987809270531,
+        1.3320672292174276
+      ],
+      "repo_cluster_ci95": [
+        1.1214987809270531,
+        1.4035399945985998
+      ]
+    },
+    "cached_input_tokens": {
+      "task_median_ratios": {
+        "dotenv-backslash-roundtrip": 1.1792336217552535,
+        "packaging_epoch_prefix": 1.4381054897739505,
+        "itsdangerous-invalid-timestamp": 0.9863945578231292,
+        "itsdangerous-expiration-noop": 1.0403800475059382
+      },
+      "tasks_with_complete_ratios": 4,
+      "equal_task_geometric_mean_ratio": 1.148572251369876,
+      "task_ci95": [
+        1.0130277473631342,
+        1.3262978382884831
+      ],
+      "repo_cluster_ci95": [
+        1.0130277473631342,
+        1.4381054897739505
+      ]
+    },
+    "uncached_input_tokens": {
+      "task_median_ratios": {
+        "dotenv-backslash-roundtrip": 1.3267569363681675,
+        "packaging_epoch_prefix": 1.2246103363412633,
+        "itsdangerous-invalid-timestamp": 1.4217414372457702,
+        "itsdangerous-expiration-noop": 1.4431982633863965
+      },
+      "tasks_with_complete_ratios": 4,
+      "equal_task_geometric_mean_ratio": 1.351244616308755,
+      "task_ci95": [
+        1.2711698860654466,
+        1.4324296747895078
+      ],
+      "repo_cluster_ci95": [
+        1.2246103363412633,
+        1.4324296747895078
+      ]
+    },
+    "output_tokens": {
+      "task_median_ratios": {
+        "dotenv-backslash-roundtrip": 0.9005464480874317,
+        "packaging_epoch_prefix": 0.8599452554744526,
+        "itsdangerous-invalid-timestamp": 1.1079136690647482,
+        "itsdangerous-expiration-noop": 0.99812734082397
+      },
+      "tasks_with_complete_ratios": 4,
+      "equal_task_geometric_mean_ratio": 0.9619825601087767,
+      "task_ci95": [
+        0.8800117302440674,
+        1.051976334269237
+      ],
+      "repo_cluster_ci95": [
+        0.8599452554744526,
+        1.051588762000681
+      ]
+    },
+    "tool_calls": {
+      "task_median_ratios": {
+        "dotenv-backslash-roundtrip": 0.75,
+        "packaging_epoch_prefix": 0.9,
+        "itsdangerous-invalid-timestamp": 1.2,
+        "itsdangerous-expiration-noop": 1.25
+      },
+      "tasks_with_complete_ratios": 4,
+      "equal_task_geometric_mean_ratio": 1.003110457464633,
+      "task_ci95": [
+        0.8215838362577492,
+        1.224744871391589
+      ],
+      "repo_cluster_ci95": [
+        0.75,
+        1.224744871391589
+      ]
+    },
+    "duration_seconds": {
+      "task_median_ratios": {
+        "dotenv-backslash-roundtrip": 0.8393485500298086,
+        "packaging_epoch_prefix": 0.8324622143647169,
+        "itsdangerous-invalid-timestamp": 0.6774160992221503,
+        "itsdangerous-expiration-noop": 0.6807413338659424
+      },
+      "tasks_with_complete_ratios": 4,
+      "equal_task_geometric_mean_ratio": 0.7534182352157361,
+      "task_ci95": [
+        0.6790766812126228,
+        0.835898290811525
+      ],
+      "repo_cluster_ci95": [
+        0.6790766812126228,
+        0.8393485500298086
+      ]
+    }
+  },
+  "gates": {
+    "tokens": {
+      "passed": false,
+      "ratio_cutoff": 0.9,
+      "required_ci_upper_below": 1.0,
+      "reasons": [
+        "ratio_threshold_not_met",
+        "task_bootstrap_upper_not_below_one"
+      ]
+    },
+    "latency": {
+      "passed": true,
+      "ratio_cutoff": 0.95,
+      "required_ci_upper_below": 1.0,
+      "reasons": []
+    }
+  },
+  "helper": {
+    "successful_implicit_attempts": 12,
+    "planned_implicit_attempts": 12,
+    "recorded_implicit_attempts": 12,
+    "success_rate_over_all_planned_implicit": 1.0,
+    "success_rate_over_all_recorded_implicit": 1.0,
+    "note": "All implicit attempts are the denominator, including failures and non-selection; unfinished attempts remain unknown"
+  },
+  "actual_cost": {
+    "measured": false,
+    "usd": null
+  },
+  "attempts": [
+    {
+      "task": "packaging_epoch_prefix",
+      "repeat": 3,
+      "arm": "baseline",
+      "recorded": true,
+      "record_count": 1,
+      "success": true,
+      "comparison_valid": true,
+      "helper_success": false,
+      "metrics": {
+        "total_tokens": 140010,
+        "input_tokens": 137818,
+        "cached_input_tokens": 114176,
+        "uncached_input_tokens": 23642,
+        "output_tokens": 2192,
+        "tool_calls": 10,
+        "duration_seconds": 92.007716
+      }
+    },
+    {
+      "task": "packaging_epoch_prefix",
+      "repeat": 3,
+      "arm": "implicit",
+      "recorded": true,
+      "record_count": 1,
+      "success": true,
+      "comparison_valid": true,
+      "helper_success": true,
+      "metrics": {
+        "total_tokens": 142318,
+        "input_tokens": 140433,
+        "cached_input_tokens": 119936,
+        "uncached_input_tokens": 20497,
+        "output_tokens": 1885,
+        "tool_calls": 10,
+        "duration_seconds": 76.592947
+      }
+    },
+    {
+      "task": "dotenv-backslash-roundtrip",
+      "repeat": 3,
+      "arm": "implicit",
+      "recorded": true,
+      "record_count": 1,
+      "success": true,
+      "comparison_valid": true,
+      "helper_success": true,
+      "metrics": {
+        "total_tokens": 163184,
+        "input_tokens": 161536,
+        "cached_input_tokens": 127488,
+        "uncached_input_tokens": 34048,
+        "output_tokens": 1648,
+        "tool_calls": 7,
+        "duration_seconds": 57.355139
+      }
+    },
+    {
+      "task": "dotenv-backslash-roundtrip",
+      "repeat": 3,
+      "arm": "baseline",
+      "recorded": true,
+      "record_count": 1,
+      "success": true,
+      "comparison_valid": true,
+      "helper_success": false,
+      "metrics": {
+        "total_tokens": 88186,
+        "input_tokens": 86356,
+        "cached_input_tokens": 63616,
+        "uncached_input_tokens": 22740,
+        "output_tokens": 1830,
+        "tool_calls": 7,
+        "duration_seconds": 68.332922
+      }
+    },
+    {
+      "task": "itsdangerous-expiration-noop",
+      "repeat": 3,
+      "arm": "baseline",
+      "recorded": true,
+      "record_count": 1,
+      "success": true,
+      "comparison_valid": true,
+      "helper_success": false,
+      "metrics": {
+        "total_tokens": 70110,
+        "input_tokens": 69576,
+        "cached_input_tokens": 52992,
+        "uncached_input_tokens": 16584,
+        "output_tokens": 534,
+        "tool_calls": 4,
+        "duration_seconds": 45.972431
+      }
+    },
+    {
+      "task": "itsdangerous-expiration-noop",
+      "repeat": 3,
+      "arm": "implicit",
+      "recorded": true,
+      "record_count": 1,
+      "success": true,
+      "comparison_valid": true,
+      "helper_success": true,
+      "metrics": {
+        "total_tokens": 79763,
+        "input_tokens": 79230,
+        "cached_input_tokens": 55296,
+        "uncached_input_tokens": 23934,
+        "output_tokens": 533,
+        "tool_calls": 5,
+        "duration_seconds": 31.295334
+      }
+    },
+    {
+      "task": "dotenv-backslash-roundtrip",
+      "repeat": 1,
+      "arm": "implicit",
+      "recorded": true,
+      "record_count": 1,
+      "success": true,
+      "comparison_valid": true,
+      "helper_success": true,
+      "metrics": {
+        "total_tokens": 130956,
+        "input_tokens": 129277,
+        "cached_input_tokens": 95744,
+        "uncached_input_tokens": 33533,
+        "output_tokens": 1679,
+        "tool_calls": 6,
+        "duration_seconds": 62.035823
+      }
+    },
+    {
+      "task": "dotenv-backslash-roundtrip",
+      "repeat": 1,
+      "arm": "baseline",
+      "recorded": true,
+      "record_count": 1,
+      "success": true,
+      "comparison_valid": true,
+      "helper_success": false,
+      "metrics": {
+        "total_tokens": 129243,
+        "input_tokens": 127463,
+        "cached_input_tokens": 100224,
+        "uncached_input_tokens": 27239,
+        "output_tokens": 1780,
+        "tool_calls": 8,
+        "duration_seconds": 74.485133
+      }
+    },
+    {
+      "task": "itsdangerous-expiration-noop",
+      "repeat": 2,
+      "arm": "implicit",
+      "recorded": true,
+      "record_count": 1,
+      "success": true,
+      "comparison_valid": true,
+      "helper_success": true,
+      "metrics": {
+        "total_tokens": 81203,
+        "input_tokens": 80668,
+        "cached_input_tokens": 56064,
+        "uncached_input_tokens": 24604,
+        "output_tokens": 535,
+        "tool_calls": 5,
+        "duration_seconds": 26.081762
+      }
+    },
+    {
+      "task": "itsdangerous-expiration-noop",
+      "repeat": 2,
+      "arm": "baseline",
+      "recorded": true,
+      "record_count": 1,
+      "success": true,
+      "comparison_valid": true,
+      "helper_success": false,
+      "metrics": {
+        "total_tokens": 71236,
+        "input_tokens": 70796,
+        "cached_input_tokens": 53888,
+        "uncached_input_tokens": 16908,
+        "output_tokens": 440,
+        "tool_calls": 4,
+        "duration_seconds": 39.189746
+      }
+    },
+    {
+      "task": "itsdangerous-invalid-timestamp",
+      "repeat": 3,
+      "arm": "implicit",
+      "recorded": true,
+      "record_count": 1,
+      "success": true,
+      "comparison_valid": true,
+      "helper_success": true,
+      "metrics": {
+        "total_tokens": 80357,
+        "input_tokens": 79667,
+        "cached_input_tokens": 55552,
+        "uncached_input_tokens": 24115,
+        "output_tokens": 690,
+        "tool_calls": 6,
+        "duration_seconds": 24.565233
+      }
+    },
+    {
+      "task": "itsdangerous-invalid-timestamp",
+      "repeat": 3,
+      "arm": "baseline",
+      "recorded": true,
+      "record_count": 1,
+      "success": true,
+      "comparison_valid": true,
+      "helper_success": false,
+      "metrics": {
+        "total_tokens": 67730,
+        "input_tokens": 67192,
+        "cached_input_tokens": 60160,
+        "uncached_input_tokens": 7032,
+        "output_tokens": 538,
+        "tool_calls": 5,
+        "duration_seconds": 39.891491
+      }
+    },
+    {
+      "task": "itsdangerous-invalid-timestamp",
+      "repeat": 1,
+      "arm": "implicit",
+      "recorded": true,
+      "record_count": 1,
+      "success": true,
+      "comparison_valid": true,
+      "helper_success": true,
+      "metrics": {
+        "total_tokens": 80930,
+        "input_tokens": 80006,
+        "cached_input_tokens": 55680,
+        "uncached_input_tokens": 24326,
+        "output_tokens": 924,
+        "tool_calls": 8,
+        "duration_seconds": 39.940065
+      }
+    },
+    {
+      "task": "itsdangerous-invalid-timestamp",
+      "repeat": 1,
+      "arm": "baseline",
+      "recorded": true,
+      "record_count": 1,
+      "success": true,
+      "comparison_valid": true,
+      "helper_success": false,
+      "metrics": {
+        "total_tokens": 74550,
+        "input_tokens": 73716,
+        "cached_input_tokens": 56448,
+        "uncached_input_tokens": 17268,
+        "output_tokens": 834,
+        "tool_calls": 6,
+        "duration_seconds": 44.634446
+      }
+    },
+    {
+      "task": "packaging_epoch_prefix",
+      "repeat": 1,
+      "arm": "baseline",
+      "recorded": true,
+      "record_count": 1,
+      "success": true,
+      "comparison_valid": true,
+      "helper_success": false,
+      "metrics": {
+        "total_tokens": 146543,
+        "input_tokens": 144407,
+        "cached_input_tokens": 118912,
+        "uncached_input_tokens": 25495,
+        "output_tokens": 2136,
+        "tool_calls": 10,
+        "duration_seconds": 89.149271
+      }
+    },
+    {
+      "task": "packaging_epoch_prefix",
+      "repeat": 1,
+      "arm": "implicit",
+      "recorded": true,
+      "record_count": 1,
+      "success": true,
+      "comparison_valid": true,
+      "helper_success": true,
+      "metrics": {
+        "total_tokens": 204766,
+        "input_tokens": 202681,
+        "cached_input_tokens": 171008,
+        "uncached_input_tokens": 31673,
+        "output_tokens": 2085,
+        "tool_calls": 9,
+        "duration_seconds": 71.952349
+      }
+    },
+    {
+      "task": "itsdangerous-expiration-noop",
+      "repeat": 1,
+      "arm": "baseline",
+      "recorded": true,
+      "record_count": 1,
+      "success": true,
+      "comparison_valid": true,
+      "helper_success": false,
+      "metrics": {
+        "total_tokens": 71472,
+        "input_tokens": 70932,
+        "cached_input_tokens": 54016,
+        "uncached_input_tokens": 16916,
+        "output_tokens": 540,
+        "tool_calls": 5,
+        "duration_seconds": 44.148669
+      }
+    },
+    {
+      "task": "itsdangerous-expiration-noop",
+      "repeat": 1,
+      "arm": "implicit",
+      "recorded": true,
+      "record_count": 1,
+      "success": true,
+      "comparison_valid": true,
+      "helper_success": true,
+      "metrics": {
+        "total_tokens": 79745,
+        "input_tokens": 79242,
+        "cached_input_tokens": 55296,
+        "uncached_input_tokens": 23946,
+        "output_tokens": 503,
+        "tool_calls": 5,
+        "duration_seconds": 35.633593
+      }
+    },
+    {
+      "task": "packaging_epoch_prefix",
+      "repeat": 2,
+      "arm": "implicit",
+      "recorded": true,
+      "record_count": 1,
+      "success": true,
+      "comparison_valid": true,
+      "helper_success": true,
+      "metrics": {
+        "total_tokens": 170739,
+        "input_tokens": 169120,
+        "cached_input_tokens": 139264,
+        "uncached_input_tokens": 29856,
+        "output_tokens": 1619,
+        "tool_calls": 6,
+        "duration_seconds": 75.228563
+      }
+    },
+    {
+      "task": "packaging_epoch_prefix",
+      "repeat": 2,
+      "arm": "baseline",
+      "recorded": true,
+      "record_count": 1,
+      "success": true,
+      "comparison_valid": true,
+      "helper_success": false,
+      "metrics": {
+        "total_tokens": 114405,
+        "input_tokens": 112316,
+        "cached_input_tokens": 87936,
+        "uncached_input_tokens": 24380,
+        "output_tokens": 2089,
+        "tool_calls": 8,
+        "duration_seconds": 83.459832
+      }
+    },
+    {
+      "task": "dotenv-backslash-roundtrip",
+      "repeat": 2,
+      "arm": "baseline",
+      "recorded": true,
+      "record_count": 1,
+      "success": true,
+      "comparison_valid": true,
+      "helper_success": false,
+      "metrics": {
+        "total_tokens": 129779,
+        "input_tokens": 127628,
+        "cached_input_tokens": 103552,
+        "uncached_input_tokens": 24076,
+        "output_tokens": 2151,
+        "tool_calls": 9,
+        "duration_seconds": 91.758015
+      }
+    },
+    {
+      "task": "dotenv-backslash-roundtrip",
+      "repeat": 2,
+      "arm": "implicit",
+      "recorded": true,
+      "record_count": 1,
+      "success": true,
+      "comparison_valid": true,
+      "helper_success": true,
+      "metrics": {
+        "total_tokens": 155928,
+        "input_tokens": 154055,
+        "cached_input_tokens": 122112,
+        "uncached_input_tokens": 31943,
+        "output_tokens": 1873,
+        "tool_calls": 6,
+        "duration_seconds": 80.817461
+      }
+    },
+    {
+      "task": "itsdangerous-invalid-timestamp",
+      "repeat": 2,
+      "arm": "baseline",
+      "recorded": true,
+      "record_count": 1,
+      "success": true,
+      "comparison_valid": true,
+      "helper_success": false,
+      "metrics": {
+        "total_tokens": 73117,
+        "input_tokens": 72131,
+        "cached_input_tokens": 55168,
+        "uncached_input_tokens": 16963,
+        "output_tokens": 986,
+        "tool_calls": 6,
+        "duration_seconds": 43.864641
+      }
+    },
+    {
+      "task": "itsdangerous-invalid-timestamp",
+      "repeat": 2,
+      "arm": "implicit",
+      "recorded": true,
+      "record_count": 1,
+      "success": true,
+      "comparison_valid": true,
+      "helper_success": true,
+      "metrics": {
+        "total_tokens": 80356,
+        "input_tokens": 79669,
+        "cached_input_tokens": 55552,
+        "uncached_input_tokens": 24117,
+        "output_tokens": 687,
+        "tool_calls": 6,
+        "duration_seconds": 29.714614
+      }
+    }
+  ],
+  "limits": [
+    "Three small Python projects, named localized tasks, one computer/model/configuration; no other-user or broad language/platform claim",
+    "Historical public fixes may occur in model training data",
+    "Four tasks are not 24 independent tasks; one project's two tasks are dependent",
+    "Repeated runs are not independent human users; bootstrap intervals are descriptive",
+    "Failed attempts and automatic non-selection remain in accuracy, totals, and paired ratios",
+    "No actual billing or monetary savings were measured"
+  ],
+  "input_sha256": {
+    "manifest.json": "2957a20db4c8956c52ab4aedc5f705e840314100801b11c2bfa77e156826f9a7",
+    "results.json": "08b7097ad91896c9c9cf2a9737031a6c98d5f1b414faa8b8a8bbc691f6f0eb1b"
+  },
+  "summarizer_sha256": "6b183ed98e0bc4e04c0ed2d3975d9161848b039f45c75870f8fa7549f71291de"
+}

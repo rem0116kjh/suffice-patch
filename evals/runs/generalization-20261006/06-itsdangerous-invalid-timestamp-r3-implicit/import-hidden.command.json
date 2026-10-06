@@ -1,0 +1,6 @@
+[
+  "/tmp/suffice-itsdangerous-py312/bin/python",
+  "-B",
+  "-c",
+  "import importlib,json,pathlib; p=pathlib.Path(importlib.import_module('itsdangerous').__file__).resolve(); assert p.is_relative_to(pathlib.Path('/Users/luka/Desktop/ctf/suffice-patch/evals/runs/generalization-20261006/06-itsdangerous-invalid-timestamp-r3-implicit/workspace/src').resolve()), str(p); print(json.dumps({\"import_origin\": str(p)}))"
+]

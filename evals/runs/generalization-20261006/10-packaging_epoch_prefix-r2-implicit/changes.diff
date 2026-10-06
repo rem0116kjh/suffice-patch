@@ -1,0 +1,65 @@
+--- a/src/packaging/specifiers.py
++++ b/src/packaging/specifiers.py
+@@ -404,6 +404,16 @@
+             )
+             # Get the normalized version string ignoring the trailing .*
+             normalized_spec = canonicalize_version(spec[:-2], strip_trailing_zero=False)
++
++            # Compare epochs separately so they do not interfere with release
++            # zero-padding. Canonicalization omits an explicit zero epoch.
++            prospective_epoch, _, normalized_prospective = (
++                normalized_prospective.rpartition("!")
++            )
++            spec_epoch, _, normalized_spec = normalized_spec.rpartition("!")
++            if prospective_epoch != spec_epoch:
++                return False
++
+             # Split the spec out by dots, and pretend that there is an implicit
+             # dot in between a release segment and a pre-release segment.
+             split_spec = _version_split(normalized_spec)
+--- a/tests/test_epoch_prefix_regression.py
++++ b/tests/test_epoch_prefix_regression.py
+@@ -0,0 +1,43 @@
++import pytest
++
++from packaging.specifiers import Specifier, SpecifierSet
++
++
++@pytest.mark.parametrize("specifier_type", [Specifier, SpecifierSet])
++@pytest.mark.parametrize("operator", ["==", "!="])
++@pytest.mark.parametrize(
++    "prefix, version, matches",
++    [
++        ("7!3.4.0.0", "7!3.4", True),
++        ("7!3.4.0.0", "7!3.4.0.0.5", True),
++        ("7!3.4.0.0", "7!3.4.0.1", False),
++        ("7!3.4.0.0", "8!3.4", False),
++        ("7!3.4.0.0", "3.4", False),
++        ("3.4.0.0", "7!3.4", False),
++        ("3.4.0.0", "3.4", True),
++        ("0!3.4.0.0", "3.4", True),
++        ("3.4.0.0", "0!3.4", True),
++        ("07!03.04.0.0", "7!3.4", True),
++    ],
++)
++def test_epoch_prefix(specifier_type, operator, prefix, version, matches):
++    expected = matches if operator == "==" else not matches
++    assert specifier_type(operator + prefix + ".*").contains(version) is expected
++
++
++@pytest.mark.parametrize("specifier_type", [Specifier, SpecifierSet])
++@pytest.mark.parametrize("suffix", ["a1", "rc1", ".dev1", ".post1", "+local.1"])
++def test_epoch_prefix_suffixes(specifier_type, suffix):
++    version = "7!3" + suffix
++    assert specifier_type("==7!3.0.0.*").contains(version, prereleases=True)
++    assert not specifier_type("!=7!3.0.0.*").contains(version, prereleases=True)
++
++
++@pytest.mark.parametrize("specifier_type", [Specifier, SpecifierSet])
++@pytest.mark.parametrize(
++    "version, matches",
++    [("7!3.4", True), ("7!3.4.0.1", True), ("7!3.4.1", False),
++     ("8!3.4", False), ("7!3.3", False)],
++)
++def test_epoch_compatible_release(specifier_type, version, matches):
++    assert specifier_type("~=7!3.4.0.0").contains(version) is matches

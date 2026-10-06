@@ -1,0 +1,302 @@
+{
+  ".agents/skills/suffice-patch/SKILL.md": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "f365978b6a24b55d5312dd551cfb7f0a5775595ffd6b8205162cb1df973f9ea1"
+  },
+  ".agents/skills/suffice-patch/scripts/collect_context.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "a2968d41be8c1fb5954d0399777ef122ab99bc201c67bc5d33cb9bf4ff91347e"
+  },
+  ".editorconfig": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "759961cac46ae6f8b823e4b377435d2e04311e7026e462976ff54c352eee6f2b"
+  },
+  ".github/ISSUE_TEMPLATE/bug-report.md": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "e6d1426b6b411756b6e19f5e5295d3d7b612096d6fb2031d75fc2c95c0c7adf4"
+  },
+  ".github/ISSUE_TEMPLATE/config.yml": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "c295e44a6d6bb0d90f671c76bd3085e86f3b68c003b8caa629e4037a32fd82ae"
+  },
+  ".github/ISSUE_TEMPLATE/feature-request.md": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "ea4803f6beac34770cc6e97d814000b660ee3e6b5a9aef0b3c30a8253327ddbe"
+  },
+  ".github/dependabot.yml": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "fe27cc0e9c91980474bf2e6c4bbb7c035bb71b781c7fff67a4fa142fbe6c4eed"
+  },
+  ".github/pull_request_template.md": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "37497840677a8fe41c0e24ec7dde8b298a728fcbf94dc62eee29326bbd49ca84"
+  },
+  ".github/workflows/lock.yaml": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "5fc1d4f5675af21028d0991a4e4031a24b595bc752ec26f64e57a29baf6dd0ba"
+  },
+  ".github/workflows/tests.yaml": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "826ac9315b8a5f799d1c5c1ed0e539d4c712d00c3d3efafe06a0331055e9f20a"
+  },
+  ".gitignore": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "27f5ca86a6e30159debc29b33f611eeb28d95c8910b3bcd5afe57ee66d2990fe"
+  },
+  ".pre-commit-config.yaml": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "317dd46df0c651b3846672a6eb9cd2bd99fb9ee2c4180403067b0b6bff6cd8dc"
+  },
+  ".readthedocs.yaml": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "dd47a46c7c3027f89216b0a9c2f2ea91275cc7dd2717f6a271a661a29beb2b1a"
+  },
+  "CHANGES.rst": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "fa4d7fbd92dd461bfc15d237409b114bc2d087b4981fb8336d06be431d77c3fa"
+  },
+  "CONTRIBUTING.rst": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "9355bae3827b3917a1c61efc0799ee98702d6fe66bc06a6125eb9ae56b0da20e"
+  },
+  "LICENSE.rst": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "63af09891b6be8ad1a4252ed43af0f4efba7fc948e228367bed7f3c5ae0b09d7"
+  },
+  "LOCAL_NOTES.md": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "9ce3991c2f3a29d0f226a8ea92c0108dbac43abfa626c7cde7c7838352e5d0ce"
+  },
+  "MANIFEST.in": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "7b13fa618256b9f1ad4ff5a53aca230e21902a1d2a7372d34e1fab2d3e62d52b"
+  },
+  "README.rst": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "a8c9013818a4c5ddfd21540fad0ca8d1e79564320be6620b34d8d0b0ac054e5e"
+  },
+  "docs/Makefile": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "ffa975e0794eed8baca37b894e2cf2e689c354cd8ea5980dc2c80b18f96ac37b"
+  },
+  "docs/_static/itsdangerous-logo-sidebar.png": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "6149a2fc980de448cdf4d027647ffdf13f34da49794be753b079fe8cc1dab404"
+  },
+  "docs/_static/itsdangerous-logo.png": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "5abfe1d072faeeafe8788042259b3bf715032cb1ebb4a0f6a30ef688552e6159"
+  },
+  "docs/changes.rst": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "94c7e3657f8795af8f66d20fb6208f83df46bce9cab9b82d2c16ad961a87f7e0"
+  },
+  "docs/concepts.rst": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "6d042175f626cbc4b4e23fcb8eba7f15727f387f7afcd20c2a32c3f7db14e095"
+  },
+  "docs/conf.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "e9c9a774550ec6be222e0c22bd567e3bd9c8a62108ecc15440664c7293c56421"
+  },
+  "docs/encoding.rst": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "6ba9be2255834de862aa33ad234ba65f47c52e459c7b0ae8deee60924c923ff2"
+  },
+  "docs/exceptions.rst": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "c6d9476f5d1f039a7e2524872073d1c19e98e5336b3d61b7235c00a91b13968b"
+  },
+  "docs/index.rst": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "f34927b5e59d05de4d09cf41279c41e565a41da3424579770ff213d4670f79f9"
+  },
+  "docs/license.rst": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "c9362a7258a11c84a8f7e825ccbbb5c425c6fc02368d3aee6494533fb99ba1f4"
+  },
+  "docs/make.bat": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "89a52884548ce62dd8ea6f58710e767ce865c08d47faeb3c79e0cec8b6174e77"
+  },
+  "docs/serializer.rst": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "5bd1b914ee53d300abd18b3a9b7b0b81ff39d787c0ff8d8c8008500126a339e5"
+  },
+  "docs/signer.rst": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "37402951e0ddc75a8dd3019d9d1f9bbc2425f0bbf5b270838d1a9d9dcdf7366f"
+  },
+  "docs/timed.rst": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "6ec021e674528785b208a68c150022a07a2c36dedf5cbe0c1a50250cc7b34d6b"
+  },
+  "docs/url_safe.rst": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "2cf2c8d47eab05cf8e19f703c49cf2764e0142aa2d094680d3057c02fee17dbf"
+  },
+  "requirements/dev.in": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "4a55617a2d5ae90a3dcd50b0bb9055f55e77462c93af8d6b98e6d66c3a683a1c"
+  },
+  "requirements/dev.txt": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "9145bb9beacb66cc8afbadf3f7e8c072720ab612829bcdf3798183fa6cbc9175"
+  },
+  "requirements/docs.in": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "f3055b0a0237af41169b1bc0a0aa5c7680f2561205a9b0a26294aba71477e04d"
+  },
+  "requirements/docs.txt": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "e9176c806bef70ffc3f125ad50e0b8c185ff17b09feef50495fb298086d091ce"
+  },
+  "requirements/tests.in": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "f3399bf96daae93fb7adfa70d9fea1fac7eb27c9b29641e2ec4c28dbbdc748cb"
+  },
+  "requirements/tests.txt": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "b92045676485e00d0a9bc0d616c43ddd648d79b1f8e5c5caf0c9e04fc29d152c"
+  },
+  "requirements/typing.in": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "33eff4300845d30859eace31f902fc365134650e4521b5c9cd299db7d426133e"
+  },
+  "requirements/typing.txt": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "2547f0b8b24813999134631da0a7af2a791e6c550b188857ea965bd97e787901"
+  },
+  "setup.cfg": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "f8900d9b83279befe78c40cadb0c17aeb83bcfbeb5d664ce808e0186e331fd5f"
+  },
+  "setup.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "8aa2813abd149d4452ece61db88878318dc440e5e7a9b6313d1a2d126b998a4d"
+  },
+  "src/itsdangerous/__init__.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "8b92dbebbcded5744cf602bc1346fe3c753b0e5bc3f0a06e2b6e3a1017d055a8"
+  },
+  "src/itsdangerous/_json.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "c0886cffbfbf5d9a259b2afe26f28d8b2fcb80071f7af611d2a84255d948860f"
+  },
+  "src/itsdangerous/encoding.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "a6087ceac9c70bbe9d3cb3429cf96b8d1e526982ff33c1fe81646288b35b8425"
+  },
+  "src/itsdangerous/exc.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "545c663f694ca12245ab134ccd6a27aacdf944e208e3e7ef0817c6d2fd5391bb"
+  },
+  "src/itsdangerous/py.typed": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "src/itsdangerous/serializer.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "ce0675f94ef4e631c3a6deb6c7fa662c976bc842833406ede54909b6791c092c"
+  },
+  "src/itsdangerous/signer.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "4141f4897d229fe393a6d3005ca539cd633098e0979f57ec0ecb9b5e219d14de"
+  },
+  "src/itsdangerous/timed.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "9536bd17310882368a2e4d26001f56ce79ba4ccdcc20ac02cdfb2c7efc82cbbf"
+  },
+  "src/itsdangerous/url_safe.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "e5b0b88d228e8d6351916ac5b1e89f5955d49c79cf83038b44e8e23b06fe79ea"
+  },
+  "tests/test_itsdangerous/__init__.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "tests/test_itsdangerous/test_encoding.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "af71dbee0825fc8ae947b6c789b05f2331afe60efae2aee5145727446385c3f0"
+  },
+  "tests/test_itsdangerous/test_serializer.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "5ef59b554372efb4ae56b77ecbcef3e1c7f3c25eb7b9b0fd19697565833334ff"
+  },
+  "tests/test_itsdangerous/test_signer.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "219c2a399adc874f14534d1311e950c1e29b2c7d05d037770701b2af258b97a2"
+  },
+  "tests/test_itsdangerous/test_timed.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "16b7af71ba9fb4f0df39f968a6aa7c3ceed8455e424738835a6cffb011773a37"
+  },
+  "tests/test_itsdangerous/test_url_safe.py": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "64d2afc9ab467f209549841f0d87125243d646e011c725818eda8e75ad4d830d"
+  },
+  "tox.ini": {
+    "kind": "file",
+    "mode": 420,
+    "sha256": "43a326933d7d1963d7ae5910fda8b840b8b9b29828b79172f3e3ac12c13f7975"
+  }
+}

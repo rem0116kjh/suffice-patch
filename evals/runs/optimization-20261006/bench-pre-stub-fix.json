@@ -1,0 +1,1495 @@
+{
+  "benchmark": "isolated inspector subprocess microbenchmark; not an agent or skill quality evaluation",
+  "created_utc": "2026-10-06T05:54:56.218575+00:00",
+  "environment": {
+    "python": "3.14.7 (main, Aug  5 2026, 10:29:49) [Clang 21.0.0 (clang-2100.3.34.2)]",
+    "executable": "/opt/homebrew/opt/python@3.14/bin/python3.14",
+    "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+    "machine": "arm64",
+    "git": "git version 2.55.0",
+    "rg": "ripgrep 15.2.0 (rev e89fff89ac)"
+  },
+  "parameters": {
+    "repetitions": 7,
+    "warmup": 1,
+    "callers": 2000,
+    "seed": 20261006,
+    "timeout_seconds": 30
+  },
+  "method": "Freeze script bytes, warm each variant, then alternate paired execution order; include interpreter startup, search, and Git subprocesses. Fixtures share one root per case. Use medians; preserve every sample. Filesystem cache is warm and not reset.",
+  "scripts": {
+    "before": {
+      "path": "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/optimization-20261006/collect_context.before.py",
+      "sha256": "b67f30fc48cb80db564a5e83bcadcb2722e946e816a5183a32f3476b76bfe674"
+    },
+    "after": {
+      "path": "/Users/luka/Desktop/ctf/suffice-patch/scripts/collect_context.py",
+      "sha256": "76c6314d8574b1514b827c1d45c425dfd0182e3cab8aa7ee8097c9e182ffc54c"
+    }
+  },
+  "cases": [
+    {
+      "name": "small",
+      "fixture": {
+        "python_files": 5,
+        "tracked_fixture": true,
+        "target": "api.customer_label",
+        "repeated_import_statements": 0,
+        "textual_callers_created": 2
+      },
+      "arguments": [
+        "api.customer_label"
+      ],
+      "before": {
+        "median_seconds": 0.094523292,
+        "min_seconds": 0.091657083,
+        "max_seconds": 0.112300458,
+        "stdout_bytes": [
+          1631
+        ],
+        "stdout_stable": true,
+        "source_context_stable": true
+      },
+      "after": {
+        "median_seconds": 0.102803458,
+        "min_seconds": 0.097641458,
+        "max_seconds": 0.116990958,
+        "stdout_bytes": [
+          1631
+        ],
+        "stdout_stable": true,
+        "source_context_stable": true
+      },
+      "median_time_reduction_percent": -8.759921311246766,
+      "comparison": {
+        "stdout_equivalent": true,
+        "source_context_equivalent": true,
+        "difference": "identical stdout",
+        "before_search_reporting": [
+          "Caller/test search: 3 matching Python files (textual, not a complete call graph)."
+        ],
+        "after_search_reporting": [
+          "Caller/test search: 3 matching Python files (textual, not a complete call graph)."
+        ]
+      },
+      "all_runs_succeeded": true,
+      "raw_runs": [
+        {
+          "elapsed_ns": 100446625,
+          "returncode": 0,
+          "stdout_bytes": 1631,
+          "stdout_sha256": "8e927edbf7900ffe1415207a4973f18b4b2a49e19d4882d47c80d89ec3e58042",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "warmup",
+          "pair": 0,
+          "position": 0,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 100137542,
+          "returncode": 0,
+          "stdout_bytes": 1631,
+          "stdout_sha256": "8e927edbf7900ffe1415207a4973f18b4b2a49e19d4882d47c80d89ec3e58042",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "warmup",
+          "pair": 0,
+          "position": 1,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 93045833,
+          "returncode": 0,
+          "stdout_bytes": 1631,
+          "stdout_sha256": "8e927edbf7900ffe1415207a4973f18b4b2a49e19d4882d47c80d89ec3e58042",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 0,
+          "position": 0,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 99726209,
+          "returncode": 0,
+          "stdout_bytes": 1631,
+          "stdout_sha256": "8e927edbf7900ffe1415207a4973f18b4b2a49e19d4882d47c80d89ec3e58042",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 0,
+          "position": 1,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 104062250,
+          "returncode": 0,
+          "stdout_bytes": 1631,
+          "stdout_sha256": "8e927edbf7900ffe1415207a4973f18b4b2a49e19d4882d47c80d89ec3e58042",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 1,
+          "position": 0,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 91657083,
+          "returncode": 0,
+          "stdout_bytes": 1631,
+          "stdout_sha256": "8e927edbf7900ffe1415207a4973f18b4b2a49e19d4882d47c80d89ec3e58042",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 1,
+          "position": 1,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 98086833,
+          "returncode": 0,
+          "stdout_bytes": 1631,
+          "stdout_sha256": "8e927edbf7900ffe1415207a4973f18b4b2a49e19d4882d47c80d89ec3e58042",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 2,
+          "position": 0,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 116990958,
+          "returncode": 0,
+          "stdout_bytes": 1631,
+          "stdout_sha256": "8e927edbf7900ffe1415207a4973f18b4b2a49e19d4882d47c80d89ec3e58042",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 2,
+          "position": 1,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 106259209,
+          "returncode": 0,
+          "stdout_bytes": 1631,
+          "stdout_sha256": "8e927edbf7900ffe1415207a4973f18b4b2a49e19d4882d47c80d89ec3e58042",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 3,
+          "position": 0,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 94523292,
+          "returncode": 0,
+          "stdout_bytes": 1631,
+          "stdout_sha256": "8e927edbf7900ffe1415207a4973f18b4b2a49e19d4882d47c80d89ec3e58042",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 3,
+          "position": 1,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 92485417,
+          "returncode": 0,
+          "stdout_bytes": 1631,
+          "stdout_sha256": "8e927edbf7900ffe1415207a4973f18b4b2a49e19d4882d47c80d89ec3e58042",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 4,
+          "position": 0,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 102803458,
+          "returncode": 0,
+          "stdout_bytes": 1631,
+          "stdout_sha256": "8e927edbf7900ffe1415207a4973f18b4b2a49e19d4882d47c80d89ec3e58042",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 4,
+          "position": 1,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 102704250,
+          "returncode": 0,
+          "stdout_bytes": 1631,
+          "stdout_sha256": "8e927edbf7900ffe1415207a4973f18b4b2a49e19d4882d47c80d89ec3e58042",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 5,
+          "position": 0,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 112300458,
+          "returncode": 0,
+          "stdout_bytes": 1631,
+          "stdout_sha256": "8e927edbf7900ffe1415207a4973f18b4b2a49e19d4882d47c80d89ec3e58042",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 5,
+          "position": 1,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 106352583,
+          "returncode": 0,
+          "stdout_bytes": 1631,
+          "stdout_sha256": "8e927edbf7900ffe1415207a4973f18b4b2a49e19d4882d47c80d89ec3e58042",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 6,
+          "position": 0,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 97641458,
+          "returncode": 0,
+          "stdout_bytes": 1631,
+          "stdout_sha256": "8e927edbf7900ffe1415207a4973f18b4b2a49e19d4882d47c80d89ec3e58042",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 6,
+          "position": 1,
+          "variant": "after"
+        }
+      ]
+    },
+    {
+      "name": "repeated_imports",
+      "fixture": {
+        "python_files": 5,
+        "tracked_fixture": true,
+        "target": "api.customer_label",
+        "repeated_import_statements": 2000,
+        "textual_callers_created": 2
+      },
+      "arguments": [
+        "api.customer_label"
+      ],
+      "before": {
+        "median_seconds": 0.208973334,
+        "min_seconds": 0.200552792,
+        "max_seconds": 0.2331365,
+        "stdout_bytes": [
+          29619
+        ],
+        "stdout_stable": true,
+        "source_context_stable": true
+      },
+      "after": {
+        "median_seconds": 0.122744667,
+        "min_seconds": 0.117369041,
+        "max_seconds": 0.145541,
+        "stdout_bytes": [
+          29619
+        ],
+        "stdout_stable": true,
+        "source_context_stable": true
+      },
+      "median_time_reduction_percent": 41.26300009167677,
+      "comparison": {
+        "stdout_equivalent": true,
+        "source_context_equivalent": true,
+        "difference": "identical stdout",
+        "before_search_reporting": [
+          "Caller/test search: 3 matching Python files (textual, not a complete call graph)."
+        ],
+        "after_search_reporting": [
+          "Caller/test search: 3 matching Python files (textual, not a complete call graph)."
+        ]
+      },
+      "all_runs_succeeded": true,
+      "raw_runs": [
+        {
+          "elapsed_ns": 132497250,
+          "returncode": 0,
+          "stdout_bytes": 29619,
+          "stdout_sha256": "37a18b911cd86dcbfc3d73682f565833ca6ab6c917fde02e89d66cb546d757fc",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "99aa8316297293ef1018b97fc1ba23fea30714d989d4dce2ca1871e6ace037eb",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "warmup",
+          "pair": 0,
+          "position": 0,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 225664500,
+          "returncode": 0,
+          "stdout_bytes": 29619,
+          "stdout_sha256": "37a18b911cd86dcbfc3d73682f565833ca6ab6c917fde02e89d66cb546d757fc",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "99aa8316297293ef1018b97fc1ba23fea30714d989d4dce2ca1871e6ace037eb",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "warmup",
+          "pair": 0,
+          "position": 1,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 130870208,
+          "returncode": 0,
+          "stdout_bytes": 29619,
+          "stdout_sha256": "37a18b911cd86dcbfc3d73682f565833ca6ab6c917fde02e89d66cb546d757fc",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "99aa8316297293ef1018b97fc1ba23fea30714d989d4dce2ca1871e6ace037eb",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 0,
+          "position": 0,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 208973334,
+          "returncode": 0,
+          "stdout_bytes": 29619,
+          "stdout_sha256": "37a18b911cd86dcbfc3d73682f565833ca6ab6c917fde02e89d66cb546d757fc",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "99aa8316297293ef1018b97fc1ba23fea30714d989d4dce2ca1871e6ace037eb",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 0,
+          "position": 1,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 216903958,
+          "returncode": 0,
+          "stdout_bytes": 29619,
+          "stdout_sha256": "37a18b911cd86dcbfc3d73682f565833ca6ab6c917fde02e89d66cb546d757fc",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "99aa8316297293ef1018b97fc1ba23fea30714d989d4dce2ca1871e6ace037eb",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 1,
+          "position": 0,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 117649000,
+          "returncode": 0,
+          "stdout_bytes": 29619,
+          "stdout_sha256": "37a18b911cd86dcbfc3d73682f565833ca6ab6c917fde02e89d66cb546d757fc",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "99aa8316297293ef1018b97fc1ba23fea30714d989d4dce2ca1871e6ace037eb",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 1,
+          "position": 1,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 118983875,
+          "returncode": 0,
+          "stdout_bytes": 29619,
+          "stdout_sha256": "37a18b911cd86dcbfc3d73682f565833ca6ab6c917fde02e89d66cb546d757fc",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "99aa8316297293ef1018b97fc1ba23fea30714d989d4dce2ca1871e6ace037eb",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 2,
+          "position": 0,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 200552792,
+          "returncode": 0,
+          "stdout_bytes": 29619,
+          "stdout_sha256": "37a18b911cd86dcbfc3d73682f565833ca6ab6c917fde02e89d66cb546d757fc",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "99aa8316297293ef1018b97fc1ba23fea30714d989d4dce2ca1871e6ace037eb",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 2,
+          "position": 1,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 219610833,
+          "returncode": 0,
+          "stdout_bytes": 29619,
+          "stdout_sha256": "37a18b911cd86dcbfc3d73682f565833ca6ab6c917fde02e89d66cb546d757fc",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "99aa8316297293ef1018b97fc1ba23fea30714d989d4dce2ca1871e6ace037eb",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 3,
+          "position": 0,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 122744667,
+          "returncode": 0,
+          "stdout_bytes": 29619,
+          "stdout_sha256": "37a18b911cd86dcbfc3d73682f565833ca6ab6c917fde02e89d66cb546d757fc",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "99aa8316297293ef1018b97fc1ba23fea30714d989d4dce2ca1871e6ace037eb",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 3,
+          "position": 1,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 117369041,
+          "returncode": 0,
+          "stdout_bytes": 29619,
+          "stdout_sha256": "37a18b911cd86dcbfc3d73682f565833ca6ab6c917fde02e89d66cb546d757fc",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "99aa8316297293ef1018b97fc1ba23fea30714d989d4dce2ca1871e6ace037eb",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 4,
+          "position": 0,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 201243083,
+          "returncode": 0,
+          "stdout_bytes": 29619,
+          "stdout_sha256": "37a18b911cd86dcbfc3d73682f565833ca6ab6c917fde02e89d66cb546d757fc",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "99aa8316297293ef1018b97fc1ba23fea30714d989d4dce2ca1871e6ace037eb",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 4,
+          "position": 1,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 206250958,
+          "returncode": 0,
+          "stdout_bytes": 29619,
+          "stdout_sha256": "37a18b911cd86dcbfc3d73682f565833ca6ab6c917fde02e89d66cb546d757fc",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "99aa8316297293ef1018b97fc1ba23fea30714d989d4dce2ca1871e6ace037eb",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 5,
+          "position": 0,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 124460834,
+          "returncode": 0,
+          "stdout_bytes": 29619,
+          "stdout_sha256": "37a18b911cd86dcbfc3d73682f565833ca6ab6c917fde02e89d66cb546d757fc",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "99aa8316297293ef1018b97fc1ba23fea30714d989d4dce2ca1871e6ace037eb",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 5,
+          "position": 1,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 145541000,
+          "returncode": 0,
+          "stdout_bytes": 29619,
+          "stdout_sha256": "37a18b911cd86dcbfc3d73682f565833ca6ab6c917fde02e89d66cb546d757fc",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "99aa8316297293ef1018b97fc1ba23fea30714d989d4dce2ca1871e6ace037eb",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 6,
+          "position": 0,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 233136500,
+          "returncode": 0,
+          "stdout_bytes": 29619,
+          "stdout_sha256": "37a18b911cd86dcbfc3d73682f565833ca6ab6c917fde02e89d66cb546d757fc",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "99aa8316297293ef1018b97fc1ba23fea30714d989d4dce2ca1871e6ace037eb",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 6,
+          "position": 1,
+          "variant": "before"
+        }
+      ]
+    },
+    {
+      "name": "many_callers",
+      "fixture": {
+        "python_files": 2005,
+        "tracked_fixture": true,
+        "target": "api.customer_label",
+        "repeated_import_statements": 0,
+        "textual_callers_created": 2000
+      },
+      "arguments": [
+        "api.customer_label"
+      ],
+      "before": {
+        "median_seconds": 0.582017875,
+        "min_seconds": 0.575984333,
+        "max_seconds": 0.675458417,
+        "stdout_bytes": [
+          4492
+        ],
+        "stdout_stable": true,
+        "source_context_stable": true
+      },
+      "after": {
+        "median_seconds": 0.256217042,
+        "min_seconds": 0.234238375,
+        "max_seconds": 0.346421666,
+        "stdout_bytes": [
+          4492
+        ],
+        "stdout_stable": true,
+        "source_context_stable": true
+      },
+      "median_time_reduction_percent": 55.97780532084173,
+      "comparison": {
+        "stdout_equivalent": true,
+        "source_context_equivalent": true,
+        "difference": "identical stdout",
+        "before_search_reporting": [
+          "Caller/test search: 2003 matching Python files (textual, not a complete call graph)."
+        ],
+        "after_search_reporting": [
+          "Caller/test search: 2003 matching Python files (textual, not a complete call graph)."
+        ]
+      },
+      "all_runs_succeeded": true,
+      "raw_runs": [
+        {
+          "elapsed_ns": 873272167,
+          "returncode": 0,
+          "stdout_bytes": 4492,
+          "stdout_sha256": "5b77632257cb87a879afa1b9cf7ed36a14afb6aa837da04292309d3bedde817f",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "callers/caller_00000.py": "1b026c4ffa4c5089a19f6bde019327100ad1528de6de1c6ee16ae85a9478b78c",
+            "callers/caller_00001.py": "1c279c0298c53344c2756ed276b863bb056ee07fd27e42faf429d4962509871f",
+            "callers/caller_00002.py": "abd6b8e2af4e13814fe5d825c7fbeb574b444b1adef8b14a3c2adb943bef9f65",
+            "callers/caller_00003.py": "c834fc80028da91cfc89c212291eb01dd6a0ad079fd0a9e47d44705504114a44",
+            "callers/caller_00004.py": "d907042fdcdd7a2a5f79548bb1370c55e6b0fb4f6573b707a4b7fdd9e46d8392",
+            "callers/caller_00005.py": "22192d39178e025bbd971680ca42fa8095d458114183dc1fcf23cafaba0e0355",
+            "callers/caller_00006.py": "f7858354ffa4f468c92b1d2b9a6610165408caf8e1481d0ca3fca5cb20186472",
+            "callers/caller_00007.py": "48a37b70e2b65d5f75a2d1656accc134c269b08258693c6fab3a99cfcb0854d8",
+            "callers/caller_00008.py": "3adbc1ec73f682b5377ea3ac6e59dbe76f37ae77c3f21e5aae5ad2e56c51efcc",
+            "callers/caller_00009.py": "ec30e6e8f64568dadeb672c09b5b5bb557e8605d70462dc940e221c1d4386ffd",
+            "callers/caller_00010.py": "011044868652d85735056faf84cba6367884905e2a7bad7b2dc85dad6aa49419",
+            "callers/caller_00011.py": "70d91fb8a805788929c4756bb58a1cc2070159359841a4b693b76e2029f62b29",
+            "callers/caller_00012.py": "0124a38311f2149098694301aa39a9a559de18be7b3767d8e2ddd267189daefb"
+          },
+          "phase": "warmup",
+          "pair": 0,
+          "position": 0,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 274570375,
+          "returncode": 0,
+          "stdout_bytes": 4492,
+          "stdout_sha256": "5b77632257cb87a879afa1b9cf7ed36a14afb6aa837da04292309d3bedde817f",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "callers/caller_00000.py": "1b026c4ffa4c5089a19f6bde019327100ad1528de6de1c6ee16ae85a9478b78c",
+            "callers/caller_00001.py": "1c279c0298c53344c2756ed276b863bb056ee07fd27e42faf429d4962509871f",
+            "callers/caller_00002.py": "abd6b8e2af4e13814fe5d825c7fbeb574b444b1adef8b14a3c2adb943bef9f65",
+            "callers/caller_00003.py": "c834fc80028da91cfc89c212291eb01dd6a0ad079fd0a9e47d44705504114a44",
+            "callers/caller_00004.py": "d907042fdcdd7a2a5f79548bb1370c55e6b0fb4f6573b707a4b7fdd9e46d8392",
+            "callers/caller_00005.py": "22192d39178e025bbd971680ca42fa8095d458114183dc1fcf23cafaba0e0355",
+            "callers/caller_00006.py": "f7858354ffa4f468c92b1d2b9a6610165408caf8e1481d0ca3fca5cb20186472",
+            "callers/caller_00007.py": "48a37b70e2b65d5f75a2d1656accc134c269b08258693c6fab3a99cfcb0854d8",
+            "callers/caller_00008.py": "3adbc1ec73f682b5377ea3ac6e59dbe76f37ae77c3f21e5aae5ad2e56c51efcc",
+            "callers/caller_00009.py": "ec30e6e8f64568dadeb672c09b5b5bb557e8605d70462dc940e221c1d4386ffd",
+            "callers/caller_00010.py": "011044868652d85735056faf84cba6367884905e2a7bad7b2dc85dad6aa49419",
+            "callers/caller_00011.py": "70d91fb8a805788929c4756bb58a1cc2070159359841a4b693b76e2029f62b29",
+            "callers/caller_00012.py": "0124a38311f2149098694301aa39a9a559de18be7b3767d8e2ddd267189daefb"
+          },
+          "phase": "warmup",
+          "pair": 0,
+          "position": 1,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 575984333,
+          "returncode": 0,
+          "stdout_bytes": 4492,
+          "stdout_sha256": "5b77632257cb87a879afa1b9cf7ed36a14afb6aa837da04292309d3bedde817f",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "callers/caller_00000.py": "1b026c4ffa4c5089a19f6bde019327100ad1528de6de1c6ee16ae85a9478b78c",
+            "callers/caller_00001.py": "1c279c0298c53344c2756ed276b863bb056ee07fd27e42faf429d4962509871f",
+            "callers/caller_00002.py": "abd6b8e2af4e13814fe5d825c7fbeb574b444b1adef8b14a3c2adb943bef9f65",
+            "callers/caller_00003.py": "c834fc80028da91cfc89c212291eb01dd6a0ad079fd0a9e47d44705504114a44",
+            "callers/caller_00004.py": "d907042fdcdd7a2a5f79548bb1370c55e6b0fb4f6573b707a4b7fdd9e46d8392",
+            "callers/caller_00005.py": "22192d39178e025bbd971680ca42fa8095d458114183dc1fcf23cafaba0e0355",
+            "callers/caller_00006.py": "f7858354ffa4f468c92b1d2b9a6610165408caf8e1481d0ca3fca5cb20186472",
+            "callers/caller_00007.py": "48a37b70e2b65d5f75a2d1656accc134c269b08258693c6fab3a99cfcb0854d8",
+            "callers/caller_00008.py": "3adbc1ec73f682b5377ea3ac6e59dbe76f37ae77c3f21e5aae5ad2e56c51efcc",
+            "callers/caller_00009.py": "ec30e6e8f64568dadeb672c09b5b5bb557e8605d70462dc940e221c1d4386ffd",
+            "callers/caller_00010.py": "011044868652d85735056faf84cba6367884905e2a7bad7b2dc85dad6aa49419",
+            "callers/caller_00011.py": "70d91fb8a805788929c4756bb58a1cc2070159359841a4b693b76e2029f62b29",
+            "callers/caller_00012.py": "0124a38311f2149098694301aa39a9a559de18be7b3767d8e2ddd267189daefb"
+          },
+          "phase": "measured",
+          "pair": 0,
+          "position": 0,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 273331541,
+          "returncode": 0,
+          "stdout_bytes": 4492,
+          "stdout_sha256": "5b77632257cb87a879afa1b9cf7ed36a14afb6aa837da04292309d3bedde817f",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "callers/caller_00000.py": "1b026c4ffa4c5089a19f6bde019327100ad1528de6de1c6ee16ae85a9478b78c",
+            "callers/caller_00001.py": "1c279c0298c53344c2756ed276b863bb056ee07fd27e42faf429d4962509871f",
+            "callers/caller_00002.py": "abd6b8e2af4e13814fe5d825c7fbeb574b444b1adef8b14a3c2adb943bef9f65",
+            "callers/caller_00003.py": "c834fc80028da91cfc89c212291eb01dd6a0ad079fd0a9e47d44705504114a44",
+            "callers/caller_00004.py": "d907042fdcdd7a2a5f79548bb1370c55e6b0fb4f6573b707a4b7fdd9e46d8392",
+            "callers/caller_00005.py": "22192d39178e025bbd971680ca42fa8095d458114183dc1fcf23cafaba0e0355",
+            "callers/caller_00006.py": "f7858354ffa4f468c92b1d2b9a6610165408caf8e1481d0ca3fca5cb20186472",
+            "callers/caller_00007.py": "48a37b70e2b65d5f75a2d1656accc134c269b08258693c6fab3a99cfcb0854d8",
+            "callers/caller_00008.py": "3adbc1ec73f682b5377ea3ac6e59dbe76f37ae77c3f21e5aae5ad2e56c51efcc",
+            "callers/caller_00009.py": "ec30e6e8f64568dadeb672c09b5b5bb557e8605d70462dc940e221c1d4386ffd",
+            "callers/caller_00010.py": "011044868652d85735056faf84cba6367884905e2a7bad7b2dc85dad6aa49419",
+            "callers/caller_00011.py": "70d91fb8a805788929c4756bb58a1cc2070159359841a4b693b76e2029f62b29",
+            "callers/caller_00012.py": "0124a38311f2149098694301aa39a9a559de18be7b3767d8e2ddd267189daefb"
+          },
+          "phase": "measured",
+          "pair": 0,
+          "position": 1,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 302120292,
+          "returncode": 0,
+          "stdout_bytes": 4492,
+          "stdout_sha256": "5b77632257cb87a879afa1b9cf7ed36a14afb6aa837da04292309d3bedde817f",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "callers/caller_00000.py": "1b026c4ffa4c5089a19f6bde019327100ad1528de6de1c6ee16ae85a9478b78c",
+            "callers/caller_00001.py": "1c279c0298c53344c2756ed276b863bb056ee07fd27e42faf429d4962509871f",
+            "callers/caller_00002.py": "abd6b8e2af4e13814fe5d825c7fbeb574b444b1adef8b14a3c2adb943bef9f65",
+            "callers/caller_00003.py": "c834fc80028da91cfc89c212291eb01dd6a0ad079fd0a9e47d44705504114a44",
+            "callers/caller_00004.py": "d907042fdcdd7a2a5f79548bb1370c55e6b0fb4f6573b707a4b7fdd9e46d8392",
+            "callers/caller_00005.py": "22192d39178e025bbd971680ca42fa8095d458114183dc1fcf23cafaba0e0355",
+            "callers/caller_00006.py": "f7858354ffa4f468c92b1d2b9a6610165408caf8e1481d0ca3fca5cb20186472",
+            "callers/caller_00007.py": "48a37b70e2b65d5f75a2d1656accc134c269b08258693c6fab3a99cfcb0854d8",
+            "callers/caller_00008.py": "3adbc1ec73f682b5377ea3ac6e59dbe76f37ae77c3f21e5aae5ad2e56c51efcc",
+            "callers/caller_00009.py": "ec30e6e8f64568dadeb672c09b5b5bb557e8605d70462dc940e221c1d4386ffd",
+            "callers/caller_00010.py": "011044868652d85735056faf84cba6367884905e2a7bad7b2dc85dad6aa49419",
+            "callers/caller_00011.py": "70d91fb8a805788929c4756bb58a1cc2070159359841a4b693b76e2029f62b29",
+            "callers/caller_00012.py": "0124a38311f2149098694301aa39a9a559de18be7b3767d8e2ddd267189daefb"
+          },
+          "phase": "measured",
+          "pair": 1,
+          "position": 0,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 608814458,
+          "returncode": 0,
+          "stdout_bytes": 4492,
+          "stdout_sha256": "5b77632257cb87a879afa1b9cf7ed36a14afb6aa837da04292309d3bedde817f",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "callers/caller_00000.py": "1b026c4ffa4c5089a19f6bde019327100ad1528de6de1c6ee16ae85a9478b78c",
+            "callers/caller_00001.py": "1c279c0298c53344c2756ed276b863bb056ee07fd27e42faf429d4962509871f",
+            "callers/caller_00002.py": "abd6b8e2af4e13814fe5d825c7fbeb574b444b1adef8b14a3c2adb943bef9f65",
+            "callers/caller_00003.py": "c834fc80028da91cfc89c212291eb01dd6a0ad079fd0a9e47d44705504114a44",
+            "callers/caller_00004.py": "d907042fdcdd7a2a5f79548bb1370c55e6b0fb4f6573b707a4b7fdd9e46d8392",
+            "callers/caller_00005.py": "22192d39178e025bbd971680ca42fa8095d458114183dc1fcf23cafaba0e0355",
+            "callers/caller_00006.py": "f7858354ffa4f468c92b1d2b9a6610165408caf8e1481d0ca3fca5cb20186472",
+            "callers/caller_00007.py": "48a37b70e2b65d5f75a2d1656accc134c269b08258693c6fab3a99cfcb0854d8",
+            "callers/caller_00008.py": "3adbc1ec73f682b5377ea3ac6e59dbe76f37ae77c3f21e5aae5ad2e56c51efcc",
+            "callers/caller_00009.py": "ec30e6e8f64568dadeb672c09b5b5bb557e8605d70462dc940e221c1d4386ffd",
+            "callers/caller_00010.py": "011044868652d85735056faf84cba6367884905e2a7bad7b2dc85dad6aa49419",
+            "callers/caller_00011.py": "70d91fb8a805788929c4756bb58a1cc2070159359841a4b693b76e2029f62b29",
+            "callers/caller_00012.py": "0124a38311f2149098694301aa39a9a559de18be7b3767d8e2ddd267189daefb"
+          },
+          "phase": "measured",
+          "pair": 1,
+          "position": 1,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 675458417,
+          "returncode": 0,
+          "stdout_bytes": 4492,
+          "stdout_sha256": "5b77632257cb87a879afa1b9cf7ed36a14afb6aa837da04292309d3bedde817f",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "callers/caller_00000.py": "1b026c4ffa4c5089a19f6bde019327100ad1528de6de1c6ee16ae85a9478b78c",
+            "callers/caller_00001.py": "1c279c0298c53344c2756ed276b863bb056ee07fd27e42faf429d4962509871f",
+            "callers/caller_00002.py": "abd6b8e2af4e13814fe5d825c7fbeb574b444b1adef8b14a3c2adb943bef9f65",
+            "callers/caller_00003.py": "c834fc80028da91cfc89c212291eb01dd6a0ad079fd0a9e47d44705504114a44",
+            "callers/caller_00004.py": "d907042fdcdd7a2a5f79548bb1370c55e6b0fb4f6573b707a4b7fdd9e46d8392",
+            "callers/caller_00005.py": "22192d39178e025bbd971680ca42fa8095d458114183dc1fcf23cafaba0e0355",
+            "callers/caller_00006.py": "f7858354ffa4f468c92b1d2b9a6610165408caf8e1481d0ca3fca5cb20186472",
+            "callers/caller_00007.py": "48a37b70e2b65d5f75a2d1656accc134c269b08258693c6fab3a99cfcb0854d8",
+            "callers/caller_00008.py": "3adbc1ec73f682b5377ea3ac6e59dbe76f37ae77c3f21e5aae5ad2e56c51efcc",
+            "callers/caller_00009.py": "ec30e6e8f64568dadeb672c09b5b5bb557e8605d70462dc940e221c1d4386ffd",
+            "callers/caller_00010.py": "011044868652d85735056faf84cba6367884905e2a7bad7b2dc85dad6aa49419",
+            "callers/caller_00011.py": "70d91fb8a805788929c4756bb58a1cc2070159359841a4b693b76e2029f62b29",
+            "callers/caller_00012.py": "0124a38311f2149098694301aa39a9a559de18be7b3767d8e2ddd267189daefb"
+          },
+          "phase": "measured",
+          "pair": 2,
+          "position": 0,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 346421666,
+          "returncode": 0,
+          "stdout_bytes": 4492,
+          "stdout_sha256": "5b77632257cb87a879afa1b9cf7ed36a14afb6aa837da04292309d3bedde817f",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "callers/caller_00000.py": "1b026c4ffa4c5089a19f6bde019327100ad1528de6de1c6ee16ae85a9478b78c",
+            "callers/caller_00001.py": "1c279c0298c53344c2756ed276b863bb056ee07fd27e42faf429d4962509871f",
+            "callers/caller_00002.py": "abd6b8e2af4e13814fe5d825c7fbeb574b444b1adef8b14a3c2adb943bef9f65",
+            "callers/caller_00003.py": "c834fc80028da91cfc89c212291eb01dd6a0ad079fd0a9e47d44705504114a44",
+            "callers/caller_00004.py": "d907042fdcdd7a2a5f79548bb1370c55e6b0fb4f6573b707a4b7fdd9e46d8392",
+            "callers/caller_00005.py": "22192d39178e025bbd971680ca42fa8095d458114183dc1fcf23cafaba0e0355",
+            "callers/caller_00006.py": "f7858354ffa4f468c92b1d2b9a6610165408caf8e1481d0ca3fca5cb20186472",
+            "callers/caller_00007.py": "48a37b70e2b65d5f75a2d1656accc134c269b08258693c6fab3a99cfcb0854d8",
+            "callers/caller_00008.py": "3adbc1ec73f682b5377ea3ac6e59dbe76f37ae77c3f21e5aae5ad2e56c51efcc",
+            "callers/caller_00009.py": "ec30e6e8f64568dadeb672c09b5b5bb557e8605d70462dc940e221c1d4386ffd",
+            "callers/caller_00010.py": "011044868652d85735056faf84cba6367884905e2a7bad7b2dc85dad6aa49419",
+            "callers/caller_00011.py": "70d91fb8a805788929c4756bb58a1cc2070159359841a4b693b76e2029f62b29",
+            "callers/caller_00012.py": "0124a38311f2149098694301aa39a9a559de18be7b3767d8e2ddd267189daefb"
+          },
+          "phase": "measured",
+          "pair": 2,
+          "position": 1,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 242767375,
+          "returncode": 0,
+          "stdout_bytes": 4492,
+          "stdout_sha256": "5b77632257cb87a879afa1b9cf7ed36a14afb6aa837da04292309d3bedde817f",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "callers/caller_00000.py": "1b026c4ffa4c5089a19f6bde019327100ad1528de6de1c6ee16ae85a9478b78c",
+            "callers/caller_00001.py": "1c279c0298c53344c2756ed276b863bb056ee07fd27e42faf429d4962509871f",
+            "callers/caller_00002.py": "abd6b8e2af4e13814fe5d825c7fbeb574b444b1adef8b14a3c2adb943bef9f65",
+            "callers/caller_00003.py": "c834fc80028da91cfc89c212291eb01dd6a0ad079fd0a9e47d44705504114a44",
+            "callers/caller_00004.py": "d907042fdcdd7a2a5f79548bb1370c55e6b0fb4f6573b707a4b7fdd9e46d8392",
+            "callers/caller_00005.py": "22192d39178e025bbd971680ca42fa8095d458114183dc1fcf23cafaba0e0355",
+            "callers/caller_00006.py": "f7858354ffa4f468c92b1d2b9a6610165408caf8e1481d0ca3fca5cb20186472",
+            "callers/caller_00007.py": "48a37b70e2b65d5f75a2d1656accc134c269b08258693c6fab3a99cfcb0854d8",
+            "callers/caller_00008.py": "3adbc1ec73f682b5377ea3ac6e59dbe76f37ae77c3f21e5aae5ad2e56c51efcc",
+            "callers/caller_00009.py": "ec30e6e8f64568dadeb672c09b5b5bb557e8605d70462dc940e221c1d4386ffd",
+            "callers/caller_00010.py": "011044868652d85735056faf84cba6367884905e2a7bad7b2dc85dad6aa49419",
+            "callers/caller_00011.py": "70d91fb8a805788929c4756bb58a1cc2070159359841a4b693b76e2029f62b29",
+            "callers/caller_00012.py": "0124a38311f2149098694301aa39a9a559de18be7b3767d8e2ddd267189daefb"
+          },
+          "phase": "measured",
+          "pair": 3,
+          "position": 0,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 580827542,
+          "returncode": 0,
+          "stdout_bytes": 4492,
+          "stdout_sha256": "5b77632257cb87a879afa1b9cf7ed36a14afb6aa837da04292309d3bedde817f",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "callers/caller_00000.py": "1b026c4ffa4c5089a19f6bde019327100ad1528de6de1c6ee16ae85a9478b78c",
+            "callers/caller_00001.py": "1c279c0298c53344c2756ed276b863bb056ee07fd27e42faf429d4962509871f",
+            "callers/caller_00002.py": "abd6b8e2af4e13814fe5d825c7fbeb574b444b1adef8b14a3c2adb943bef9f65",
+            "callers/caller_00003.py": "c834fc80028da91cfc89c212291eb01dd6a0ad079fd0a9e47d44705504114a44",
+            "callers/caller_00004.py": "d907042fdcdd7a2a5f79548bb1370c55e6b0fb4f6573b707a4b7fdd9e46d8392",
+            "callers/caller_00005.py": "22192d39178e025bbd971680ca42fa8095d458114183dc1fcf23cafaba0e0355",
+            "callers/caller_00006.py": "f7858354ffa4f468c92b1d2b9a6610165408caf8e1481d0ca3fca5cb20186472",
+            "callers/caller_00007.py": "48a37b70e2b65d5f75a2d1656accc134c269b08258693c6fab3a99cfcb0854d8",
+            "callers/caller_00008.py": "3adbc1ec73f682b5377ea3ac6e59dbe76f37ae77c3f21e5aae5ad2e56c51efcc",
+            "callers/caller_00009.py": "ec30e6e8f64568dadeb672c09b5b5bb557e8605d70462dc940e221c1d4386ffd",
+            "callers/caller_00010.py": "011044868652d85735056faf84cba6367884905e2a7bad7b2dc85dad6aa49419",
+            "callers/caller_00011.py": "70d91fb8a805788929c4756bb58a1cc2070159359841a4b693b76e2029f62b29",
+            "callers/caller_00012.py": "0124a38311f2149098694301aa39a9a559de18be7b3767d8e2ddd267189daefb"
+          },
+          "phase": "measured",
+          "pair": 3,
+          "position": 1,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 616185042,
+          "returncode": 0,
+          "stdout_bytes": 4492,
+          "stdout_sha256": "5b77632257cb87a879afa1b9cf7ed36a14afb6aa837da04292309d3bedde817f",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "callers/caller_00000.py": "1b026c4ffa4c5089a19f6bde019327100ad1528de6de1c6ee16ae85a9478b78c",
+            "callers/caller_00001.py": "1c279c0298c53344c2756ed276b863bb056ee07fd27e42faf429d4962509871f",
+            "callers/caller_00002.py": "abd6b8e2af4e13814fe5d825c7fbeb574b444b1adef8b14a3c2adb943bef9f65",
+            "callers/caller_00003.py": "c834fc80028da91cfc89c212291eb01dd6a0ad079fd0a9e47d44705504114a44",
+            "callers/caller_00004.py": "d907042fdcdd7a2a5f79548bb1370c55e6b0fb4f6573b707a4b7fdd9e46d8392",
+            "callers/caller_00005.py": "22192d39178e025bbd971680ca42fa8095d458114183dc1fcf23cafaba0e0355",
+            "callers/caller_00006.py": "f7858354ffa4f468c92b1d2b9a6610165408caf8e1481d0ca3fca5cb20186472",
+            "callers/caller_00007.py": "48a37b70e2b65d5f75a2d1656accc134c269b08258693c6fab3a99cfcb0854d8",
+            "callers/caller_00008.py": "3adbc1ec73f682b5377ea3ac6e59dbe76f37ae77c3f21e5aae5ad2e56c51efcc",
+            "callers/caller_00009.py": "ec30e6e8f64568dadeb672c09b5b5bb557e8605d70462dc940e221c1d4386ffd",
+            "callers/caller_00010.py": "011044868652d85735056faf84cba6367884905e2a7bad7b2dc85dad6aa49419",
+            "callers/caller_00011.py": "70d91fb8a805788929c4756bb58a1cc2070159359841a4b693b76e2029f62b29",
+            "callers/caller_00012.py": "0124a38311f2149098694301aa39a9a559de18be7b3767d8e2ddd267189daefb"
+          },
+          "phase": "measured",
+          "pair": 4,
+          "position": 0,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 256217042,
+          "returncode": 0,
+          "stdout_bytes": 4492,
+          "stdout_sha256": "5b77632257cb87a879afa1b9cf7ed36a14afb6aa837da04292309d3bedde817f",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "callers/caller_00000.py": "1b026c4ffa4c5089a19f6bde019327100ad1528de6de1c6ee16ae85a9478b78c",
+            "callers/caller_00001.py": "1c279c0298c53344c2756ed276b863bb056ee07fd27e42faf429d4962509871f",
+            "callers/caller_00002.py": "abd6b8e2af4e13814fe5d825c7fbeb574b444b1adef8b14a3c2adb943bef9f65",
+            "callers/caller_00003.py": "c834fc80028da91cfc89c212291eb01dd6a0ad079fd0a9e47d44705504114a44",
+            "callers/caller_00004.py": "d907042fdcdd7a2a5f79548bb1370c55e6b0fb4f6573b707a4b7fdd9e46d8392",
+            "callers/caller_00005.py": "22192d39178e025bbd971680ca42fa8095d458114183dc1fcf23cafaba0e0355",
+            "callers/caller_00006.py": "f7858354ffa4f468c92b1d2b9a6610165408caf8e1481d0ca3fca5cb20186472",
+            "callers/caller_00007.py": "48a37b70e2b65d5f75a2d1656accc134c269b08258693c6fab3a99cfcb0854d8",
+            "callers/caller_00008.py": "3adbc1ec73f682b5377ea3ac6e59dbe76f37ae77c3f21e5aae5ad2e56c51efcc",
+            "callers/caller_00009.py": "ec30e6e8f64568dadeb672c09b5b5bb557e8605d70462dc940e221c1d4386ffd",
+            "callers/caller_00010.py": "011044868652d85735056faf84cba6367884905e2a7bad7b2dc85dad6aa49419",
+            "callers/caller_00011.py": "70d91fb8a805788929c4756bb58a1cc2070159359841a4b693b76e2029f62b29",
+            "callers/caller_00012.py": "0124a38311f2149098694301aa39a9a559de18be7b3767d8e2ddd267189daefb"
+          },
+          "phase": "measured",
+          "pair": 4,
+          "position": 1,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 256052667,
+          "returncode": 0,
+          "stdout_bytes": 4492,
+          "stdout_sha256": "5b77632257cb87a879afa1b9cf7ed36a14afb6aa837da04292309d3bedde817f",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "callers/caller_00000.py": "1b026c4ffa4c5089a19f6bde019327100ad1528de6de1c6ee16ae85a9478b78c",
+            "callers/caller_00001.py": "1c279c0298c53344c2756ed276b863bb056ee07fd27e42faf429d4962509871f",
+            "callers/caller_00002.py": "abd6b8e2af4e13814fe5d825c7fbeb574b444b1adef8b14a3c2adb943bef9f65",
+            "callers/caller_00003.py": "c834fc80028da91cfc89c212291eb01dd6a0ad079fd0a9e47d44705504114a44",
+            "callers/caller_00004.py": "d907042fdcdd7a2a5f79548bb1370c55e6b0fb4f6573b707a4b7fdd9e46d8392",
+            "callers/caller_00005.py": "22192d39178e025bbd971680ca42fa8095d458114183dc1fcf23cafaba0e0355",
+            "callers/caller_00006.py": "f7858354ffa4f468c92b1d2b9a6610165408caf8e1481d0ca3fca5cb20186472",
+            "callers/caller_00007.py": "48a37b70e2b65d5f75a2d1656accc134c269b08258693c6fab3a99cfcb0854d8",
+            "callers/caller_00008.py": "3adbc1ec73f682b5377ea3ac6e59dbe76f37ae77c3f21e5aae5ad2e56c51efcc",
+            "callers/caller_00009.py": "ec30e6e8f64568dadeb672c09b5b5bb557e8605d70462dc940e221c1d4386ffd",
+            "callers/caller_00010.py": "011044868652d85735056faf84cba6367884905e2a7bad7b2dc85dad6aa49419",
+            "callers/caller_00011.py": "70d91fb8a805788929c4756bb58a1cc2070159359841a4b693b76e2029f62b29",
+            "callers/caller_00012.py": "0124a38311f2149098694301aa39a9a559de18be7b3767d8e2ddd267189daefb"
+          },
+          "phase": "measured",
+          "pair": 5,
+          "position": 0,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 580484708,
+          "returncode": 0,
+          "stdout_bytes": 4492,
+          "stdout_sha256": "5b77632257cb87a879afa1b9cf7ed36a14afb6aa837da04292309d3bedde817f",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "callers/caller_00000.py": "1b026c4ffa4c5089a19f6bde019327100ad1528de6de1c6ee16ae85a9478b78c",
+            "callers/caller_00001.py": "1c279c0298c53344c2756ed276b863bb056ee07fd27e42faf429d4962509871f",
+            "callers/caller_00002.py": "abd6b8e2af4e13814fe5d825c7fbeb574b444b1adef8b14a3c2adb943bef9f65",
+            "callers/caller_00003.py": "c834fc80028da91cfc89c212291eb01dd6a0ad079fd0a9e47d44705504114a44",
+            "callers/caller_00004.py": "d907042fdcdd7a2a5f79548bb1370c55e6b0fb4f6573b707a4b7fdd9e46d8392",
+            "callers/caller_00005.py": "22192d39178e025bbd971680ca42fa8095d458114183dc1fcf23cafaba0e0355",
+            "callers/caller_00006.py": "f7858354ffa4f468c92b1d2b9a6610165408caf8e1481d0ca3fca5cb20186472",
+            "callers/caller_00007.py": "48a37b70e2b65d5f75a2d1656accc134c269b08258693c6fab3a99cfcb0854d8",
+            "callers/caller_00008.py": "3adbc1ec73f682b5377ea3ac6e59dbe76f37ae77c3f21e5aae5ad2e56c51efcc",
+            "callers/caller_00009.py": "ec30e6e8f64568dadeb672c09b5b5bb557e8605d70462dc940e221c1d4386ffd",
+            "callers/caller_00010.py": "011044868652d85735056faf84cba6367884905e2a7bad7b2dc85dad6aa49419",
+            "callers/caller_00011.py": "70d91fb8a805788929c4756bb58a1cc2070159359841a4b693b76e2029f62b29",
+            "callers/caller_00012.py": "0124a38311f2149098694301aa39a9a559de18be7b3767d8e2ddd267189daefb"
+          },
+          "phase": "measured",
+          "pair": 5,
+          "position": 1,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 582017875,
+          "returncode": 0,
+          "stdout_bytes": 4492,
+          "stdout_sha256": "5b77632257cb87a879afa1b9cf7ed36a14afb6aa837da04292309d3bedde817f",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "callers/caller_00000.py": "1b026c4ffa4c5089a19f6bde019327100ad1528de6de1c6ee16ae85a9478b78c",
+            "callers/caller_00001.py": "1c279c0298c53344c2756ed276b863bb056ee07fd27e42faf429d4962509871f",
+            "callers/caller_00002.py": "abd6b8e2af4e13814fe5d825c7fbeb574b444b1adef8b14a3c2adb943bef9f65",
+            "callers/caller_00003.py": "c834fc80028da91cfc89c212291eb01dd6a0ad079fd0a9e47d44705504114a44",
+            "callers/caller_00004.py": "d907042fdcdd7a2a5f79548bb1370c55e6b0fb4f6573b707a4b7fdd9e46d8392",
+            "callers/caller_00005.py": "22192d39178e025bbd971680ca42fa8095d458114183dc1fcf23cafaba0e0355",
+            "callers/caller_00006.py": "f7858354ffa4f468c92b1d2b9a6610165408caf8e1481d0ca3fca5cb20186472",
+            "callers/caller_00007.py": "48a37b70e2b65d5f75a2d1656accc134c269b08258693c6fab3a99cfcb0854d8",
+            "callers/caller_00008.py": "3adbc1ec73f682b5377ea3ac6e59dbe76f37ae77c3f21e5aae5ad2e56c51efcc",
+            "callers/caller_00009.py": "ec30e6e8f64568dadeb672c09b5b5bb557e8605d70462dc940e221c1d4386ffd",
+            "callers/caller_00010.py": "011044868652d85735056faf84cba6367884905e2a7bad7b2dc85dad6aa49419",
+            "callers/caller_00011.py": "70d91fb8a805788929c4756bb58a1cc2070159359841a4b693b76e2029f62b29",
+            "callers/caller_00012.py": "0124a38311f2149098694301aa39a9a559de18be7b3767d8e2ddd267189daefb"
+          },
+          "phase": "measured",
+          "pair": 6,
+          "position": 0,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 234238375,
+          "returncode": 0,
+          "stdout_bytes": 4492,
+          "stdout_sha256": "5b77632257cb87a879afa1b9cf7ed36a14afb6aa837da04292309d3bedde817f",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "callers/caller_00000.py": "1b026c4ffa4c5089a19f6bde019327100ad1528de6de1c6ee16ae85a9478b78c",
+            "callers/caller_00001.py": "1c279c0298c53344c2756ed276b863bb056ee07fd27e42faf429d4962509871f",
+            "callers/caller_00002.py": "abd6b8e2af4e13814fe5d825c7fbeb574b444b1adef8b14a3c2adb943bef9f65",
+            "callers/caller_00003.py": "c834fc80028da91cfc89c212291eb01dd6a0ad079fd0a9e47d44705504114a44",
+            "callers/caller_00004.py": "d907042fdcdd7a2a5f79548bb1370c55e6b0fb4f6573b707a4b7fdd9e46d8392",
+            "callers/caller_00005.py": "22192d39178e025bbd971680ca42fa8095d458114183dc1fcf23cafaba0e0355",
+            "callers/caller_00006.py": "f7858354ffa4f468c92b1d2b9a6610165408caf8e1481d0ca3fca5cb20186472",
+            "callers/caller_00007.py": "48a37b70e2b65d5f75a2d1656accc134c269b08258693c6fab3a99cfcb0854d8",
+            "callers/caller_00008.py": "3adbc1ec73f682b5377ea3ac6e59dbe76f37ae77c3f21e5aae5ad2e56c51efcc",
+            "callers/caller_00009.py": "ec30e6e8f64568dadeb672c09b5b5bb557e8605d70462dc940e221c1d4386ffd",
+            "callers/caller_00010.py": "011044868652d85735056faf84cba6367884905e2a7bad7b2dc85dad6aa49419",
+            "callers/caller_00011.py": "70d91fb8a805788929c4756bb58a1cc2070159359841a4b693b76e2029f62b29",
+            "callers/caller_00012.py": "0124a38311f2149098694301aa39a9a559de18be7b3767d8e2ddd267189daefb"
+          },
+          "phase": "measured",
+          "pair": 6,
+          "position": 1,
+          "variant": "after"
+        }
+      ]
+    },
+    {
+      "name": "file_limit",
+      "fixture": {
+        "python_files": 2005,
+        "tracked_fixture": true,
+        "target": "api.customer_label",
+        "repeated_import_statements": 0,
+        "textual_callers_created": 2000
+      },
+      "arguments": [
+        "--max-files",
+        "1",
+        "api.customer_label"
+      ],
+      "before": {
+        "median_seconds": 0.620074042,
+        "min_seconds": 0.566029458,
+        "max_seconds": 0.721881458,
+        "stdout_bytes": [
+          577
+        ],
+        "stdout_stable": true,
+        "source_context_stable": true
+      },
+      "after": {
+        "median_seconds": 0.093013791,
+        "min_seconds": 0.087083375,
+        "max_seconds": 0.098629792,
+        "stdout_bytes": [
+          570
+        ],
+        "stdout_stable": true,
+        "source_context_stable": true
+      },
+      "median_time_reduction_percent": 84.99956703557669,
+      "comparison": {
+        "stdout_equivalent": false,
+        "source_context_equivalent": true,
+        "difference": "caller-search reporting only; source and remaining output are identical",
+        "before_search_reporting": [
+          "Caller/test search: 2003 matching Python files (textual, not a complete call graph)."
+        ],
+        "after_search_reporting": [
+          "File limit reached; caller/test search skipped. Additional context may exist."
+        ]
+      },
+      "all_runs_succeeded": true,
+      "raw_runs": [
+        {
+          "elapsed_ns": 106227834,
+          "returncode": 0,
+          "stdout_bytes": 570,
+          "stdout_sha256": "79e13c0c4a591d87d0eb72e5fcc8289f4dbc80b14c5256332cf76699da5c99de",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d"
+          },
+          "phase": "warmup",
+          "pair": 0,
+          "position": 0,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 587750833,
+          "returncode": 0,
+          "stdout_bytes": 577,
+          "stdout_sha256": "2f66c6681f99f57197d1d32035d8e75475beab492634fd8a9b0b72f657416255",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d"
+          },
+          "phase": "warmup",
+          "pair": 0,
+          "position": 1,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 95040042,
+          "returncode": 0,
+          "stdout_bytes": 570,
+          "stdout_sha256": "79e13c0c4a591d87d0eb72e5fcc8289f4dbc80b14c5256332cf76699da5c99de",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d"
+          },
+          "phase": "measured",
+          "pair": 0,
+          "position": 0,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 721881458,
+          "returncode": 0,
+          "stdout_bytes": 577,
+          "stdout_sha256": "2f66c6681f99f57197d1d32035d8e75475beab492634fd8a9b0b72f657416255",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d"
+          },
+          "phase": "measured",
+          "pair": 0,
+          "position": 1,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 649391875,
+          "returncode": 0,
+          "stdout_bytes": 577,
+          "stdout_sha256": "2f66c6681f99f57197d1d32035d8e75475beab492634fd8a9b0b72f657416255",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d"
+          },
+          "phase": "measured",
+          "pair": 1,
+          "position": 0,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 93013791,
+          "returncode": 0,
+          "stdout_bytes": 570,
+          "stdout_sha256": "79e13c0c4a591d87d0eb72e5fcc8289f4dbc80b14c5256332cf76699da5c99de",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d"
+          },
+          "phase": "measured",
+          "pair": 1,
+          "position": 1,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 90146167,
+          "returncode": 0,
+          "stdout_bytes": 570,
+          "stdout_sha256": "79e13c0c4a591d87d0eb72e5fcc8289f4dbc80b14c5256332cf76699da5c99de",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d"
+          },
+          "phase": "measured",
+          "pair": 2,
+          "position": 0,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 566029458,
+          "returncode": 0,
+          "stdout_bytes": 577,
+          "stdout_sha256": "2f66c6681f99f57197d1d32035d8e75475beab492634fd8a9b0b72f657416255",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d"
+          },
+          "phase": "measured",
+          "pair": 2,
+          "position": 1,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 573540667,
+          "returncode": 0,
+          "stdout_bytes": 577,
+          "stdout_sha256": "2f66c6681f99f57197d1d32035d8e75475beab492634fd8a9b0b72f657416255",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d"
+          },
+          "phase": "measured",
+          "pair": 3,
+          "position": 0,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 92931541,
+          "returncode": 0,
+          "stdout_bytes": 570,
+          "stdout_sha256": "79e13c0c4a591d87d0eb72e5fcc8289f4dbc80b14c5256332cf76699da5c99de",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d"
+          },
+          "phase": "measured",
+          "pair": 3,
+          "position": 1,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 87083375,
+          "returncode": 0,
+          "stdout_bytes": 570,
+          "stdout_sha256": "79e13c0c4a591d87d0eb72e5fcc8289f4dbc80b14c5256332cf76699da5c99de",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d"
+          },
+          "phase": "measured",
+          "pair": 4,
+          "position": 0,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 576454292,
+          "returncode": 0,
+          "stdout_bytes": 577,
+          "stdout_sha256": "2f66c6681f99f57197d1d32035d8e75475beab492634fd8a9b0b72f657416255",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d"
+          },
+          "phase": "measured",
+          "pair": 4,
+          "position": 1,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 620074042,
+          "returncode": 0,
+          "stdout_bytes": 577,
+          "stdout_sha256": "2f66c6681f99f57197d1d32035d8e75475beab492634fd8a9b0b72f657416255",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d"
+          },
+          "phase": "measured",
+          "pair": 5,
+          "position": 0,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 97031458,
+          "returncode": 0,
+          "stdout_bytes": 570,
+          "stdout_sha256": "79e13c0c4a591d87d0eb72e5fcc8289f4dbc80b14c5256332cf76699da5c99de",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d"
+          },
+          "phase": "measured",
+          "pair": 5,
+          "position": 1,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 98629792,
+          "returncode": 0,
+          "stdout_bytes": 570,
+          "stdout_sha256": "79e13c0c4a591d87d0eb72e5fcc8289f4dbc80b14c5256332cf76699da5c99de",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d"
+          },
+          "phase": "measured",
+          "pair": 6,
+          "position": 0,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 626843666,
+          "returncode": 0,
+          "stdout_bytes": 577,
+          "stdout_sha256": "2f66c6681f99f57197d1d32035d8e75475beab492634fd8a9b0b72f657416255",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d"
+          },
+          "phase": "measured",
+          "pair": 6,
+          "position": 1,
+          "variant": "before"
+        }
+      ],
+      "output_samples": {
+        "after": "ROOT: /private/var/folders/73/krw9m9bx40b6xkxngwlzh1lc0000gn/T/suffice-inspector-bench-l08ypczq/many_callers\nSources returned: 1; source bytes: 91\n\nFILE: api.py | requested target | SHA256: 936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d\nfrom labels import display_name\n\ndef customer_label(value):\n    return display_name(value)\n\n\nGIT STATUS:\n M labels.py\n M unrelated.py\n\n\nGIT DIFF:\n\n\nGIT STAGED DIFF:\n\n\nLIMITS / FOLLOW-UP:\nFile limit reached; additional context may exist.\nFile limit reached; caller/test search skipped. Additional context may exist.\n",
+        "before": "Caller/test search: 2003 matching Python files (textual, not a complete call graph).\nROOT: /private/var/folders/73/krw9m9bx40b6xkxngwlzh1lc0000gn/T/suffice-inspector-bench-l08ypczq/many_callers\nSources returned: 1; source bytes: 91\n\nFILE: api.py | requested target | SHA256: 936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d\nfrom labels import display_name\n\ndef customer_label(value):\n    return display_name(value)\n\n\nGIT STATUS:\n M labels.py\n M unrelated.py\n\n\nGIT DIFF:\n\n\nGIT STAGED DIFF:\n\n\nLIMITS / FOLLOW-UP:\nFile limit reached; additional context may exist.\n"
+      }
+    }
+  ],
+  "valid": true
+}

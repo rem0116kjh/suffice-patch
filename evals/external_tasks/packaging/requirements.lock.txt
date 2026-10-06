@@ -1,0 +1,8 @@
+# Runtime package lock from evals/runs/generalization-20261006/manifest.json.
+# Frozen manifest SHA256: 2957a20db4c8956c52ab4aedc5f705e840314100801b11c2bfa77e156826f9a7
+# Python 3.12; includes direct and transitive packages recorded before model trials.
+iniconfig==2.3.0
+packaging==26.3
+pluggy==1.6.0
+pretend==1.0.9
+pytest==8.3.5

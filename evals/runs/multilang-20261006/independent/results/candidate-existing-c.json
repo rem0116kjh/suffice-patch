@@ -1,0 +1,11 @@
+{
+  "name": "candidate-existing-c",
+  "command": [
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/results/candidate-build/existing_c"
+  ],
+  "cwd": "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo",
+  "returncode": 0,
+  "seconds": 0.225,
+  "stdout": "C_BASELINE_OK groups=5\n",
+  "stderr": ""
+}

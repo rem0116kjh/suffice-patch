@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.16)
+project(order_quote C)
+add_library(order_quote src/money.c src/quote.c)
+target_include_directories(order_quote PUBLIC include)
+add_executable(test_quote tests/test_quote.c)
+target_link_libraries(test_quote PRIVATE order_quote)
+enable_testing()
+add_test(NAME quote COMMAND test_quote)

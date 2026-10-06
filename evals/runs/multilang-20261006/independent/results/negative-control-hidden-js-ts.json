@@ -1,0 +1,85 @@
+{
+  "name": "negative-control-hidden-js-ts",
+  "command": [
+    "/opt/homebrew/bin/node",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/check_js.mjs",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/results/unchanged-baseline"
+  ],
+  "cwd": "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/results/unchanged-baseline",
+  "returncode": 1,
+  "seconds": 0.167,
+  "stdout": "{\"passed\":10,\"total\":15,\"failed\":5,\"checks\":[{\"name\":\"below_threshold\",\"passed\":true},{\"name\":\"at_threshold\",\"passed\":false,\"error\":\"AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\\n+ actual - expected\\n\\n  {\\n+   shippingCents: 500,\\n-   shippingCents: 0,\\n    subtotalCents: 10000,\\n+   totalCents: 10500\\n-   totalCents: 10000\\n  }\\n\"},{\"name\":\"above_threshold\",\"passed\":false,\"error\":\"AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\\n+ actual - expected\\n\\n  {\\n+   shippingCents: 500,\\n-   shippingCents: 0,\\n    subtotalCents: 10001,\\n+   totalCents: 10501\\n-   totalCents: 10001\\n  }\\n\"},{\"name\":\"threshold_from_multiple_lines\",\"passed\":false,\"error\":\"AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\\n+ actual - expected\\n\\n  {\\n+   shippingCents: 500,\\n-   shippingCents: 0,\\n    subtotalCents: 10000,\\n+   totalCents: 10500\\n-   totalCents: 10000\\n  }\\n\"},{\"name\":\"threshold_from_quantity\",\"passed\":false,\"error\":\"AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\\n+ actual - expected\\n\\n  {\\n+   shippingCents: 500,\\n-   shippingCents: 0,\\n    subtotalCents: 10000,\\n+   totalCents: 10500\\n-   totalCents: 10000\\n  }\\n\"},{\"name\":\"below_from_quantity\",\"passed\":true},{\"name\":\"empty\",\"passed\":true},{\"name\":\"zero_price\",\"passed\":true},{\"name\":\"maximum_representable_subtotal\",\"passed\":false,\"error\":\"RangeError: amount overflow\"},{\"name\":\"invalid_quantity\",\"passed\":true},{\"name\":\"invalid_after_free_shipping_line\",\"passed\":true},{\"name\":\"negative_price\",\"passed\":true},{\"name\":\"fractional_price\",\"passed\":true},{\"name\":\"multiplication_overflow\",\"passed\":true},{\"name\":\"summation_overflow\",\"passed\":true}]}\n",
+  "stderr": "",
+  "checks": {
+    "passed": 10,
+    "total": 15,
+    "failed": 5,
+    "checks": [
+      {
+        "name": "below_threshold",
+        "passed": true
+      },
+      {
+        "name": "at_threshold",
+        "passed": false,
+        "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   shippingCents: 500,\n-   shippingCents: 0,\n    subtotalCents: 10000,\n+   totalCents: 10500\n-   totalCents: 10000\n  }\n"
+      },
+      {
+        "name": "above_threshold",
+        "passed": false,
+        "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   shippingCents: 500,\n-   shippingCents: 0,\n    subtotalCents: 10001,\n+   totalCents: 10501\n-   totalCents: 10001\n  }\n"
+      },
+      {
+        "name": "threshold_from_multiple_lines",
+        "passed": false,
+        "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   shippingCents: 500,\n-   shippingCents: 0,\n    subtotalCents: 10000,\n+   totalCents: 10500\n-   totalCents: 10000\n  }\n"
+      },
+      {
+        "name": "threshold_from_quantity",
+        "passed": false,
+        "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   shippingCents: 500,\n-   shippingCents: 0,\n    subtotalCents: 10000,\n+   totalCents: 10500\n-   totalCents: 10000\n  }\n"
+      },
+      {
+        "name": "below_from_quantity",
+        "passed": true
+      },
+      {
+        "name": "empty",
+        "passed": true
+      },
+      {
+        "name": "zero_price",
+        "passed": true
+      },
+      {
+        "name": "maximum_representable_subtotal",
+        "passed": false,
+        "error": "RangeError: amount overflow"
+      },
+      {
+        "name": "invalid_quantity",
+        "passed": true
+      },
+      {
+        "name": "invalid_after_free_shipping_line",
+        "passed": true
+      },
+      {
+        "name": "negative_price",
+        "passed": true
+      },
+      {
+        "name": "fractional_price",
+        "passed": true
+      },
+      {
+        "name": "multiplication_overflow",
+        "passed": true
+      },
+      {
+        "name": "summation_overflow",
+        "passed": true
+      }
+    ]
+  }
+}

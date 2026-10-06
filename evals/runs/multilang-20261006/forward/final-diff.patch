@@ -1,0 +1,59 @@
+diff --git a/LOCAL_NOTES.md b/LOCAL_NOTES.md
+index c6bf7d2..00f94f2 100644
+--- a/LOCAL_NOTES.md
++++ b/LOCAL_NOTES.md
+@@ -1 +1,2 @@
+ User draft: keep this file and its edits.
++Pending user note: do not erase.
+diff --git a/apps/storefront/src/quote.js b/apps/storefront/src/quote.js
+index 5927a69..86e8938 100644
+--- a/apps/storefront/src/quote.js
++++ b/apps/storefront/src/quote.js
+@@ -2,7 +2,7 @@ import { checkedSubtotal } from "../../../packages/money/src/amount.ts";
+ 
+ export function quote(lines) {
+   const subtotalCents = checkedSubtotal(lines);
+-  const shippingCents = subtotalCents === 0 ? 0 : 500;
++  const shippingCents = subtotalCents > 0 && subtotalCents < 10000 ? 500 : 0;
+   const totalCents = subtotalCents + shippingCents;
+   if (!Number.isSafeInteger(totalCents)) throw new RangeError("amount overflow");
+   return { subtotalCents, shippingCents, totalCents };
+diff --git a/native/order-c/src/quote.c b/native/order-c/src/quote.c
+index 8c90858..3e649d8 100644
+--- a/native/order-c/src/quote.c
++++ b/native/order-c/src/quote.c
+@@ -5,7 +5,7 @@ int make_quote(const order_line *lines, size_t count, order_quote *result) {
+     uint64_t subtotal;
+     int status = money_subtotal(lines, count, &subtotal);
+     if (status) return status;
+-    uint64_t shipping = subtotal == 0 ? 0 : 500;
++    uint64_t shipping = subtotal > 0 && subtotal < 10000 ? 500 : 0;
+     if (subtotal > UINT64_MAX - shipping) return -2;
+     *result = (order_quote){subtotal, shipping, subtotal + shipping};
+     return 0;
+diff --git a/services/order-go/quote/quote.go b/services/order-go/quote/quote.go
+index 5b9a5c4..5194057 100644
+--- a/services/order-go/quote/quote.go
++++ b/services/order-go/quote/quote.go
+@@ -12,7 +12,7 @@ func Calculate(lines []Line) (Quote, error) {
+     subtotal, err := money.Subtotal(lines)
+     if err != nil { return Quote{}, err }
+     var shipping uint64
+-    if subtotal != 0 { shipping = 500 }
++    if subtotal > 0 && subtotal < 10000 { shipping = 500 }
+     if subtotal > ^uint64(0) - shipping { return Quote{}, errors.New("amount overflow") }
+     return Quote{subtotal, shipping, subtotal + shipping}, nil
+ }
+diff --git a/services/order-java/src/example/order/QuoteService.java b/services/order-java/src/example/order/QuoteService.java
+index 91f48a0..4c47dfe 100644
+--- a/services/order-java/src/example/order/QuoteService.java
++++ b/services/order-java/src/example/order/QuoteService.java
+@@ -4,7 +4,7 @@ public final class QuoteService {
+     public record Quote(long subtotalCents, long shippingCents, long totalCents) {}
+     public static Quote quote(List<Line> lines) {
+         long subtotal = Money.subtotal(lines);
+-        long shipping = subtotal == 0 ? 0 : 500;
++        long shipping = subtotal > 0 && subtotal < 10000 ? 500 : 0;
+         return new Quote(subtotal, shipping, Math.addExact(subtotal, shipping));
+     }
+ }

@@ -1,0 +1,23 @@
+✔ empty order (1.098917ms)
+✔ ordinary order and unchanged input (0.591708ms)
+✔ zero price (0.09125ms)
+✔ invalid quantity (0.264791ms)
+✔ multiplication overflow (0.083583ms)
+✔ shipping for 1 cents (0.862916ms)
+✔ shipping for 9999 cents (0.077208ms)
+✔ shipping for 10000 cents (0.053125ms)
+✔ shipping for 10001 cents (0.052833ms)
+✔ shipping for 9007199254740991 cents (0.059333ms)
+✔ threshold uses the checked aggregate without changing input (0.076042ms)
+✔ free shipping still validates later lines and aggregate overflow (0.221541ms)
+✔ typed immutable lines (0.492208ms)
+✔ negative price rejected (0.211917ms)
+✔ fractional price rejected (0.11175ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 181.314833

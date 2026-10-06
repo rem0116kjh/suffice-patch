@@ -22,7 +22,7 @@ import time
 
 ROOT = Path(__file__).resolve().parents[1]
 CACHE_DIRS = {'.git', '__pycache__', '.pytest_cache', '.mypy_cache', '.ruff_cache'}
-BUNDLE = ('SKILL.md', 'scripts/collect_context.py')
+BUNDLE = ('SKILL.md', 'scripts/collect_context.py', 'scripts/context_languages.py')
 CONFIG = {'approval_policy': 'never', 'web_search': 'disabled', 'project_doc_max_bytes': 0,
           'suppress_unstable_features_warning': True, 'features.skip_host_skill_discovery': False,
           'features.plugins': False, 'features.hooks': False, 'features.apps': False,
@@ -301,7 +301,7 @@ def prepare(args):
             expected = ['suffice-patch'] if arm == 'implicit' else []
             if sorted(s['name'] for s in active) != expected or any(s['path'] not in enabled for s in active):
                 raise RuntimeError('Skill isolation failed: ' + str(active))
-    manifest = {'version': 1, 'model': args.model, 'effort': args.effort, 'timeout': args.timeout,
+    manifest = {'version': 2, 'bundle_files': list(BUNDLE), 'model': args.model, 'effort': args.effort, 'timeout': args.timeout,
                 'repeats': args.repeats, 'seed': args.seed, 'tasks': tasks, 'schedule': schedule,
                 'sources': sources, 'discovered_skill_paths': discovered, 'config': CONFIG,
                 'cli': checked(['codex', '--version']), 'platform': platform.platform(),

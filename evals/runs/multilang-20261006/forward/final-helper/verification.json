@@ -1,0 +1,165 @@
+{
+  "collections": {
+    "c": {
+      "files": {
+        "native/order-c/src/quote.c": "2bfbd30d0b84f63bc5b215a6c39da5fc2702f59eb5ab8a8840cb6e305d2568a1",
+        "AGENTS.md": "b0e91b337c5b5c95b55c28a2e8e93c314942fef72f889c920576c98b1cd7e417",
+        "native/order-c/CMakeLists.txt": "63ec089d383feb6388d96d57877a051ab0468322c4fb7cf03c7773b4526a7a8f",
+        "native/order-c/include/quote.h": "420865800e4e585c9dce18e76beba688c9ca75cc0b261182bbef05461ffd36d1",
+        "native/order-c/include/money.h": "fe8f641a5ef6b4c99c1c52178b4162aabae435ddc95bede153aa2570a300d958",
+        "native/order-c/tests/test_quote.c": "d60d4cd570a4bdc1050976bd190024f3d1b42ac9f43aff132fc14f2b072eae17",
+        "native/order-c/tests/test_shipping_threshold.c": "e3501b87cb08234bc9eb3a80cd0950bdf137e749c9129ac6574f72343a0564fd"
+      },
+      "local_notes_status_visible": true,
+      "draft_status_visible": true,
+      "file_limit_reached": false,
+      "source_hash_mismatches": []
+    },
+    "c_dependencies": {
+      "files": {
+        "native/order-c/src/money.c": "22757d20e53d3f4411877c0ce816c189dfe74288c449cb47ec79d1bbabe3d7ff",
+        "AGENTS.md": "b0e91b337c5b5c95b55c28a2e8e93c314942fef72f889c920576c98b1cd7e417",
+        "native/order-c/CMakeLists.txt": "63ec089d383feb6388d96d57877a051ab0468322c4fb7cf03c7773b4526a7a8f",
+        "native/order-c/include/money.h": "fe8f641a5ef6b4c99c1c52178b4162aabae435ddc95bede153aa2570a300d958",
+        "native/order-c/include/quote.h": "420865800e4e585c9dce18e76beba688c9ca75cc0b261182bbef05461ffd36d1",
+        "native/order-c/src/quote.c": "2bfbd30d0b84f63bc5b215a6c39da5fc2702f59eb5ab8a8840cb6e305d2568a1"
+      },
+      "local_notes_status_visible": true,
+      "draft_status_visible": true,
+      "file_limit_reached": false,
+      "source_hash_mismatches": []
+    },
+    "combined": {
+      "files": {
+        "apps/storefront/src/quote.js": "8660c1d46b35c838ae6fa2df6fd65c19e17caae56a5beea3aa0a0e77d8fcb690",
+        "services/order-go/quote/quote.go": "d037ed2c151240eb5b6707d0d870b5d87afa57b238a1bbbf9f74b68eda5b171b",
+        "native/order-c/src/quote.c": "2bfbd30d0b84f63bc5b215a6c39da5fc2702f59eb5ab8a8840cb6e305d2568a1",
+        "services/order-java/src/example/order/QuoteService.java": "26283a74f05136a6e7f4928d6aa83a43f74cf1475b02006645dc661b89bdcf58",
+        "AGENTS.md": "b0e91b337c5b5c95b55c28a2e8e93c314942fef72f889c920576c98b1cd7e417",
+        "apps/storefront/package.json": "5e2a3babe743cdc632b45cea710ac2dad74a0ba108e2f45c4b97c7b267fd3746",
+        "package.json": "14b87a234edd4b6092b28bd65ffead71e16a7a818197f9223c68146349929f8c",
+        "services/order-go/go.mod": "e5cb41423749876d62cd6507cb541313b445c05119b6b1d5835a17196d0fcd6b",
+        "go.work": "c1f12068070634b0fe54a3d8614ee0925a1e9f86b46d512885fc825ef7f71b88",
+        "native/order-c/CMakeLists.txt": "63ec089d383feb6388d96d57877a051ab0468322c4fb7cf03c7773b4526a7a8f",
+        "packages/money/src/amount.ts": "72975f03baac577e36411c34e0d2601c0d945dfad332a4aa080c10a8f532b22f",
+        "services/order-go/internal/money/sum.go": "efec56360840de5d13f79c132c41fea5000b3d0bd8065c6cd69c322102cf3482",
+        "native/order-c/include/quote.h": "420865800e4e585c9dce18e76beba688c9ca75cc0b261182bbef05461ffd36d1",
+        "native/order-c/include/money.h": "fe8f641a5ef6b4c99c1c52178b4162aabae435ddc95bede153aa2570a300d958",
+        "apps/storefront/test/quote.test.js": "2a816be987f23c198a298e4ef644485c2bc3d4081c06cf167efdb878b60d480d",
+        "apps/storefront/test/shipping-threshold.test.js": "8f47f3e5aab4f8951d87de857913cc0ee751c48970dbea2385d9739aa39b3411"
+      },
+      "local_notes_status_visible": true,
+      "draft_status_visible": true,
+      "file_limit_reached": true,
+      "source_hash_mismatches": []
+    },
+    "go": {
+      "files": {
+        "services/order-go/quote/quote.go": "d037ed2c151240eb5b6707d0d870b5d87afa57b238a1bbbf9f74b68eda5b171b",
+        "AGENTS.md": "b0e91b337c5b5c95b55c28a2e8e93c314942fef72f889c920576c98b1cd7e417",
+        "services/order-go/go.mod": "e5cb41423749876d62cd6507cb541313b445c05119b6b1d5835a17196d0fcd6b",
+        "go.work": "c1f12068070634b0fe54a3d8614ee0925a1e9f86b46d512885fc825ef7f71b88",
+        "services/order-go/internal/money/sum.go": "efec56360840de5d13f79c132c41fea5000b3d0bd8065c6cd69c322102cf3482",
+        "services/order-go/quote/quote_test.go": "8f6c58b2c89963e970bc3aea40a0cbf51b13ee274a45378762011277a71700b7",
+        "services/order-go/quote/shipping_threshold_test.go": "b8ad06b025c8227bb13d80f3ba8da820eedc39b2e0aa3d6a00cfdc68671ea268"
+      },
+      "local_notes_status_visible": true,
+      "draft_status_visible": true,
+      "file_limit_reached": false,
+      "source_hash_mismatches": []
+    },
+    "java": {
+      "files": {
+        "services/order-java/src/example/order/QuoteService.java": "26283a74f05136a6e7f4928d6aa83a43f74cf1475b02006645dc661b89bdcf58",
+        "AGENTS.md": "b0e91b337c5b5c95b55c28a2e8e93c314942fef72f889c920576c98b1cd7e417",
+        "services/order-java/tests/example/order/QuoteTests.java": "cacc53ff11c1d68b78aed106c2cda4edcd261755adf8b5bff815c2a1c428bd4f",
+        "services/order-java/tests/example/order/ShippingThresholdTests.java": "3166a3eb06aadecf2fe637e5fd3194be25cbabebf1a50e3e3e5936726b65bab9"
+      },
+      "local_notes_status_visible": true,
+      "draft_status_visible": true,
+      "file_limit_reached": false,
+      "source_hash_mismatches": []
+    },
+    "java_dependencies": {
+      "files": {
+        "services/order-java/src/example/order/Money.java": "b47ca2fcbb42223c393a4935c2246e6b0abdbac7111a07a99a02501723baf64c",
+        "services/order-java/src/example/order/Line.java": "78a8a9c586350fa729a0cc19e6e25b22327d0ddae93cb4f82a486c32585f9240",
+        "AGENTS.md": "b0e91b337c5b5c95b55c28a2e8e93c314942fef72f889c920576c98b1cd7e417",
+        "services/order-java/src/example/order/QuoteService.java": "26283a74f05136a6e7f4928d6aa83a43f74cf1475b02006645dc661b89bdcf58",
+        "services/order-java/tests/example/order/QuoteTests.java": "cacc53ff11c1d68b78aed106c2cda4edcd261755adf8b5bff815c2a1c428bd4f",
+        "services/order-java/tests/example/order/ShippingThresholdTests.java": "3166a3eb06aadecf2fe637e5fd3194be25cbabebf1a50e3e3e5936726b65bab9"
+      },
+      "local_notes_status_visible": true,
+      "draft_status_visible": true,
+      "file_limit_reached": false,
+      "source_hash_mismatches": []
+    },
+    "javascript_typescript": {
+      "files": {
+        "apps/storefront/src/quote.js": "8660c1d46b35c838ae6fa2df6fd65c19e17caae56a5beea3aa0a0e77d8fcb690",
+        "AGENTS.md": "b0e91b337c5b5c95b55c28a2e8e93c314942fef72f889c920576c98b1cd7e417",
+        "apps/storefront/package.json": "5e2a3babe743cdc632b45cea710ac2dad74a0ba108e2f45c4b97c7b267fd3746",
+        "package.json": "14b87a234edd4b6092b28bd65ffead71e16a7a818197f9223c68146349929f8c",
+        "packages/money/src/amount.ts": "72975f03baac577e36411c34e0d2601c0d945dfad332a4aa080c10a8f532b22f",
+        "apps/storefront/test/quote.test.js": "2a816be987f23c198a298e4ef644485c2bc3d4081c06cf167efdb878b60d480d",
+        "apps/storefront/test/shipping-threshold.test.js": "8f47f3e5aab4f8951d87de857913cc0ee751c48970dbea2385d9739aa39b3411"
+      },
+      "local_notes_status_visible": true,
+      "draft_status_visible": true,
+      "file_limit_reached": false,
+      "source_hash_mismatches": []
+    },
+    "javascript_typescript_dependencies": {
+      "files": {
+        "packages/money/src/amount.ts": "72975f03baac577e36411c34e0d2601c0d945dfad332a4aa080c10a8f532b22f",
+        "packages/money/test/amount.test.ts": "971c4de5b30fc7ea670d64457269300f711063ecee0af91a7b039c20f8501378",
+        "AGENTS.md": "b0e91b337c5b5c95b55c28a2e8e93c314942fef72f889c920576c98b1cd7e417",
+        "packages/money/package.json": "bd9a064c97066793038f34903eaeb1d245d5fb2ffeecabfb6f8592dcabf5ff8b",
+        "package.json": "14b87a234edd4b6092b28bd65ffead71e16a7a818197f9223c68146349929f8c",
+        "apps/storefront/src/quote.js": "8660c1d46b35c838ae6fa2df6fd65c19e17caae56a5beea3aa0a0e77d8fcb690",
+        "apps/storefront/test/quote.test.js": "2a816be987f23c198a298e4ef644485c2bc3d4081c06cf167efdb878b60d480d",
+        "apps/storefront/test/shipping-threshold.test.js": "8f47f3e5aab4f8951d87de857913cc0ee751c48970dbea2385d9739aa39b3411"
+      },
+      "local_notes_status_visible": true,
+      "draft_status_visible": true,
+      "file_limit_reached": false,
+      "source_hash_mismatches": []
+    }
+  },
+  "required_files": [
+    "apps/storefront/src/quote.js",
+    "apps/storefront/test/quote.test.js",
+    "apps/storefront/test/shipping-threshold.test.js",
+    "packages/money/src/amount.ts",
+    "packages/money/test/amount.test.ts",
+    "services/order-go/quote/quote.go",
+    "services/order-go/quote/quote_test.go",
+    "services/order-go/quote/shipping_threshold_test.go",
+    "services/order-go/internal/money/sum.go",
+    "native/order-c/src/quote.c",
+    "native/order-c/src/money.c",
+    "native/order-c/include/quote.h",
+    "native/order-c/include/money.h",
+    "native/order-c/tests/test_quote.c",
+    "native/order-c/tests/test_shipping_threshold.c",
+    "services/order-java/src/example/order/QuoteService.java",
+    "services/order-java/src/example/order/Money.java",
+    "services/order-java/src/example/order/Line.java",
+    "services/order-java/tests/example/order/QuoteTests.java",
+    "services/order-java/tests/example/order/ShippingThresholdTests.java"
+  ],
+  "missing_required_files_after_followups": [],
+  "file_contents_unchanged": true,
+  "git_status_unchanged": true,
+  "previous_forward_hash_changes": [],
+  "previous_forward_hash_added": [],
+  "previous_forward_hash_removed": [],
+  "all_sources_match_recorded_hashes": true,
+  "all_collections_show_user_status": true,
+  "changed_behavior_visible_in_context": {
+    "javascript_typescript": true,
+    "go": true,
+    "c": true,
+    "java": true
+  }
+}

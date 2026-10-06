@@ -1,0 +1,16 @@
+{
+  "command": [
+    "python3",
+    "-B",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/bundle-final/scripts/collect_context.py",
+    "packages/money/src/amount.ts",
+    "packages/money/test/amount.test.ts",
+    "--scope",
+    "packages/money",
+    "--scope",
+    "apps/storefront"
+  ],
+  "cwd": "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo",
+  "returncode": 0,
+  "seconds": 0.19
+}

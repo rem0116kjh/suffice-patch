@@ -1,0 +1,18 @@
+{
+  "name": "java_compile",
+  "command": [
+    "/opt/homebrew/opt/openjdk@21/bin/javac",
+    "-d",
+    "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/forward-evidence/build/java",
+    "services/order-java/src/example/order/Line.java",
+    "services/order-java/src/example/order/Money.java",
+    "services/order-java/src/example/order/QuoteService.java",
+    "services/order-java/tests/example/order/QuoteTests.java",
+    "services/order-java/tests/example/order/ShippingThresholdTests.java"
+  ],
+  "cwd": "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo",
+  "returncode": 0,
+  "seconds": 0.861,
+  "stdout": "",
+  "stderr": ""
+}

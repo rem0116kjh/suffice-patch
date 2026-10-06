@@ -1,0 +1,19 @@
+{
+  "changed_existing_files": [
+    "apps/storefront/src/quote.js",
+    "native/order-c/src/quote.c",
+    "services/order-go/quote/quote.go",
+    "services/order-java/src/example/order/QuoteService.java"
+  ],
+  "added_files": [
+    "apps/storefront/test/shipping-threshold.test.js",
+    "native/order-c/tests/test_shipping_threshold.c",
+    "services/order-go/quote/shipping_threshold_test.go",
+    "services/order-java/tests/example/order/ShippingThresholdTests.java"
+  ],
+  "removed_files": [],
+  "other_existing_files_unchanged": true,
+  "user_dirty_and_untracked_preserved": true,
+  "existing_tests_and_helpers_preserved": true,
+  "rust_sources_preserved": true
+}

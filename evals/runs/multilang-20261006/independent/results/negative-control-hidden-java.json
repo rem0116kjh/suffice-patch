@@ -1,0 +1,78 @@
+{
+  "name": "negative-control-hidden-java",
+  "command": [
+    "/opt/homebrew/opt/openjdk@21/bin/java",
+    "-ea",
+    "-cp",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/results/negative-control-build/java",
+    "IndependentQuoteCheck"
+  ],
+  "cwd": "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/results/unchanged-baseline",
+  "returncode": 1,
+  "seconds": 0.067,
+  "stdout": "{\"passed\":9,\"total\":14,\"failed\":5,\"checks\":[{\"name\":\"below_threshold\",\"passed\":true},{\"name\":\"at_threshold\",\"passed\":false},{\"name\":\"above_threshold\",\"passed\":false},{\"name\":\"threshold_from_multiple_lines\",\"passed\":false},{\"name\":\"threshold_from_quantity\",\"passed\":false},{\"name\":\"below_from_quantity\",\"passed\":true},{\"name\":\"empty\",\"passed\":true},{\"name\":\"zero_price\",\"passed\":true},{\"name\":\"maximum_representable_subtotal\",\"passed\":false},{\"name\":\"invalid_quantity\",\"passed\":true},{\"name\":\"invalid_after_free_shipping_line\",\"passed\":true},{\"name\":\"negative_price\",\"passed\":true},{\"name\":\"multiplication_overflow\",\"passed\":true},{\"name\":\"summation_overflow\",\"passed\":true}]}\n",
+  "stderr": "",
+  "checks": {
+    "passed": 9,
+    "total": 14,
+    "failed": 5,
+    "checks": [
+      {
+        "name": "below_threshold",
+        "passed": true
+      },
+      {
+        "name": "at_threshold",
+        "passed": false
+      },
+      {
+        "name": "above_threshold",
+        "passed": false
+      },
+      {
+        "name": "threshold_from_multiple_lines",
+        "passed": false
+      },
+      {
+        "name": "threshold_from_quantity",
+        "passed": false
+      },
+      {
+        "name": "below_from_quantity",
+        "passed": true
+      },
+      {
+        "name": "empty",
+        "passed": true
+      },
+      {
+        "name": "zero_price",
+        "passed": true
+      },
+      {
+        "name": "maximum_representable_subtotal",
+        "passed": false
+      },
+      {
+        "name": "invalid_quantity",
+        "passed": true
+      },
+      {
+        "name": "invalid_after_free_shipping_line",
+        "passed": true
+      },
+      {
+        "name": "negative_price",
+        "passed": true
+      },
+      {
+        "name": "multiplication_overflow",
+        "passed": true
+      },
+      {
+        "name": "summation_overflow",
+        "passed": true
+      }
+    ]
+  }
+}

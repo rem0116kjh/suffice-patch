@@ -1,0 +1,11 @@
+{
+  "name": "c_threshold_execute",
+  "command": [
+    "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/forward-evidence/build/test_shipping_threshold"
+  ],
+  "cwd": "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo",
+  "returncode": 0,
+  "seconds": 0.228,
+  "stdout": "C_THRESHOLD_OK groups=4 boundary_cases=5\n",
+  "stderr": ""
+}

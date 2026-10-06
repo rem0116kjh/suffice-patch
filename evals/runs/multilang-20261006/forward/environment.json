@@ -1,0 +1,12 @@
+{
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "machine": "arm64",
+  "rustc": null,
+  "cargo": null,
+  "go_env": {
+    "GOPROXY": "off",
+    "GOSUMDB": "off",
+    "GOTOOLCHAIN": "local",
+    "GOCACHE": "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/forward-evidence/go-cache"
+  }
+}

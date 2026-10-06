@@ -1,0 +1,15 @@
+{
+  "name": "java_execute",
+  "command": [
+    "/opt/homebrew/opt/openjdk@21/bin/java",
+    "-ea",
+    "-cp",
+    "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/forward-evidence/build/java",
+    "example.order.QuoteTests"
+  ],
+  "cwd": "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo",
+  "returncode": 0,
+  "seconds": 0.077,
+  "stdout": "JAVA_BASELINE_OK groups=5\n",
+  "stderr": ""
+}

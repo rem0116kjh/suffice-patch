@@ -1,0 +1,112 @@
+Caller/test search: 5 matching files (textual, not a complete call graph).
+ROOT: /private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo
+Sources returned: 6; source bytes: 2247
+Languages: c
+
+FILE: native/order-c/src/money.c | requested target | SHA256: 22757d20e53d3f4411877c0ce816c189dfe74288c449cb47ec79d1bbabe3d7ff
+#include "../include/money.h"
+
+int money_subtotal(const order_line *lines, size_t count, uint64_t *result) {
+    if (!result || (count && !lines)) return -1;
+    uint64_t total = 0;
+    for (size_t i = 0; i < count; ++i) {
+        if (!lines[i].quantity) return -1;
+        if (lines[i].price_cents > UINT64_MAX / lines[i].quantity) return -2;
+        uint64_t amount = lines[i].price_cents * lines[i].quantity;
+        if (total > UINT64_MAX - amount) return -2;
+        total += amount;
+    }
+    *result = total;
+    return 0;
+}
+
+
+FILE: AGENTS.md | project instructions | SHA256: b0e91b337c5b5c95b55c28a2e8e93c314942fef72f889c920576c98b1cd7e417
+Keep unrelated user files and changes intact. Do not edit existing tests to satisfy new behavior.
+This is a dependency-free synthetic multi-language fixture, not an external project benchmark.
+JS/TS: node --test apps/storefront/test/quote.test.js packages/money/test/amount.test.ts
+Go: cd services/order-go && GOPROXY=off GOSUMDB=off GOTOOLCHAIN=local go test ./...
+Native C and Java compile commands are recorded outside this checkout in evidence.
+
+
+FILE: native/order-c/CMakeLists.txt | project manifest; inspect declared checks without executing it | SHA256: 63ec089d383feb6388d96d57877a051ab0468322c4fb7cf03c7773b4526a7a8f
+cmake_minimum_required(VERSION 3.16)
+project(order_quote C)
+add_library(order_quote src/money.c src/quote.c)
+target_include_directories(order_quote PUBLIC include)
+add_executable(test_quote tests/test_quote.c)
+target_link_libraries(test_quote PRIVATE order_quote)
+enable_testing()
+add_test(NAME quote COMMAND test_quote)
+
+
+FILE: native/order-c/include/money.h | local import | SHA256: fe8f641a5ef6b4c99c1c52178b4162aabae435ddc95bede153aa2570a300d958
+#ifndef ORDER_MONEY_H
+#define ORDER_MONEY_H
+#include <stddef.h>
+#include <stdint.h>
+typedef struct { uint64_t price_cents; uint64_t quantity; } order_line;
+int money_subtotal(const order_line *lines, size_t count, uint64_t *result);
+#endif
+
+
+FILE: native/order-c/include/quote.h | matching caller or test; textual match | SHA256: 420865800e4e585c9dce18e76beba688c9ca75cc0b261182bbef05461ffd36d1
+#ifndef ORDER_QUOTE_H
+#define ORDER_QUOTE_H
+#include "money.h"
+typedef struct { uint64_t subtotal_cents; uint64_t shipping_cents; uint64_t total_cents; } order_quote;
+int make_quote(const order_line *lines, size_t count, order_quote *result);
+#endif
+
+
+FILE: native/order-c/src/quote.c | matching caller or test; textual match | SHA256: 2bfbd30d0b84f63bc5b215a6c39da5fc2702f59eb5ab8a8840cb6e305d2568a1
+#include "../include/quote.h"
+
+int make_quote(const order_line *lines, size_t count, order_quote *result) {
+    if (!result) return -1;
+    uint64_t subtotal;
+    int status = money_subtotal(lines, count, &subtotal);
+    if (status) return status;
+    uint64_t shipping = subtotal > 0 && subtotal < 10000 ? 500 : 0;
+    if (subtotal > UINT64_MAX - shipping) return -2;
+    *result = (order_quote){subtotal, shipping, subtotal + shipping};
+    return 0;
+}
+
+
+GIT STATUS:
+ M LOCAL_NOTES.md
+ M apps/storefront/src/quote.js
+ M native/order-c/src/quote.c
+ M services/order-go/quote/quote.go
+ M services/order-java/src/example/order/QuoteService.java
+?? DRAFT.txt
+?? apps/storefront/test/shipping-threshold.test.js
+?? native/order-c/tests/test_shipping_threshold.c
+?? services/order-go/quote/shipping_threshold_test.go
+?? services/order-java/tests/example/order/ShippingThresholdTests.java
+
+
+GIT DIFF:
+diff --git a/native/order-c/src/quote.c b/native/order-c/src/quote.c
+index 8c90858..3e649d8 100644
+--- a/native/order-c/src/quote.c
++++ b/native/order-c/src/quote.c
+@@ -5,7 +5,7 @@ int make_quote(const order_line *lines, size_t count, order_quote *result) {
+     uint64_t subtotal;
+     int status = money_subtotal(lines, count, &subtotal);
+     if (status) return status;
+-    uint64_t shipping = subtotal == 0 ? 0 : 500;
++    uint64_t shipping = subtotal > 0 && subtotal < 10000 ? 500 : 0;
+     if (subtotal > UINT64_MAX - shipping) return -2;
+     *result = (order_quote){subtotal, shipping, subtotal + shipping};
+     return 0;
+
+
+GIT STAGED DIFF:
+
+
+LIMITS / FOLLOW-UP:
+C/C++ quoted includes and function parameter spans up to 2048 characters only; compiler paths, conditionals and macros are not evaluated.
+docs uses textual symbol/reference hints only; imports and call graphs are not resolved.
+References are textual candidates, not a complete call graph. Dynamic imports, aliases, generated code, and external packages may need targeted follow-up.

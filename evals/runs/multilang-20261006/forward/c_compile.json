@@ -1,0 +1,20 @@
+{
+  "name": "c_compile",
+  "command": [
+    "/usr/bin/clang",
+    "-std=c17",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "native/order-c/src/money.c",
+    "native/order-c/src/quote.c",
+    "native/order-c/tests/test_quote.c",
+    "-o",
+    "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/forward-evidence/build/test_quote"
+  ],
+  "cwd": "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo",
+  "returncode": 0,
+  "seconds": 0.126,
+  "stdout": "",
+  "stderr": ""
+}

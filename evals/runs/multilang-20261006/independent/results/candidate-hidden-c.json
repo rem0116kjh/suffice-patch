@@ -1,0 +1,78 @@
+{
+  "name": "candidate-hidden-c",
+  "command": [
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/results/candidate-build/check_c"
+  ],
+  "cwd": "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo",
+  "returncode": 0,
+  "seconds": 0.235,
+  "stdout": "{\"checks\":[{\"name\":\"below_threshold\",\"passed\":true},{\"name\":\"at_threshold\",\"passed\":true},{\"name\":\"above_threshold\",\"passed\":true},{\"name\":\"threshold_from_multiple_lines\",\"passed\":true},{\"name\":\"threshold_from_quantity\",\"passed\":true},{\"name\":\"below_from_quantity\",\"passed\":true},{\"name\":\"empty\",\"passed\":true},{\"name\":\"zero_price\",\"passed\":true},{\"name\":\"maximum_representable_subtotal\",\"passed\":true},{\"name\":\"invalid_quantity\",\"passed\":true},{\"name\":\"invalid_after_free_shipping_line\",\"passed\":true},{\"name\":\"multiplication_overflow\",\"passed\":true},{\"name\":\"summation_overflow\",\"passed\":true},{\"name\":\"null_output\",\"passed\":true},{\"name\":\"null_nonempty_input\",\"passed\":true}],\"passed\":15,\"total\":15,\"failed\":0}\n",
+  "stderr": "",
+  "checks": {
+    "checks": [
+      {
+        "name": "below_threshold",
+        "passed": true
+      },
+      {
+        "name": "at_threshold",
+        "passed": true
+      },
+      {
+        "name": "above_threshold",
+        "passed": true
+      },
+      {
+        "name": "threshold_from_multiple_lines",
+        "passed": true
+      },
+      {
+        "name": "threshold_from_quantity",
+        "passed": true
+      },
+      {
+        "name": "below_from_quantity",
+        "passed": true
+      },
+      {
+        "name": "empty",
+        "passed": true
+      },
+      {
+        "name": "zero_price",
+        "passed": true
+      },
+      {
+        "name": "maximum_representable_subtotal",
+        "passed": true
+      },
+      {
+        "name": "invalid_quantity",
+        "passed": true
+      },
+      {
+        "name": "invalid_after_free_shipping_line",
+        "passed": true
+      },
+      {
+        "name": "multiplication_overflow",
+        "passed": true
+      },
+      {
+        "name": "summation_overflow",
+        "passed": true
+      },
+      {
+        "name": "null_output",
+        "passed": true
+      },
+      {
+        "name": "null_nonempty_input",
+        "passed": true
+      }
+    ],
+    "passed": 15,
+    "total": 15,
+    "failed": 0
+  }
+}

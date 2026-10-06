@@ -1,0 +1,19 @@
+{
+  "name": "candidate-compile-java",
+  "command": [
+    "/opt/homebrew/opt/openjdk@21/bin/javac",
+    "-d",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/results/candidate-build/java",
+    "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo/services/order-java/src/example/order/Line.java",
+    "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo/services/order-java/src/example/order/Money.java",
+    "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo/services/order-java/src/example/order/QuoteService.java",
+    "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo/services/order-java/tests/example/order/QuoteTests.java",
+    "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo/services/order-java/tests/example/order/ShippingThresholdTests.java",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/IndependentQuoteCheck.java"
+  ],
+  "cwd": "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo",
+  "returncode": 0,
+  "seconds": 0.396,
+  "stdout": "",
+  "stderr": ""
+}

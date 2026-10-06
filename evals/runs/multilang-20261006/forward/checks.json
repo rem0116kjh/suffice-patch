@@ -1,0 +1,155 @@
+[
+  {
+    "name": "javascript_typescript",
+    "command": [
+      "/opt/homebrew/bin/node",
+      "--test",
+      "apps/storefront/test/quote.test.js",
+      "packages/money/test/amount.test.ts",
+      "apps/storefront/test/shipping-threshold.test.js"
+    ],
+    "cwd": "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo",
+    "returncode": 0,
+    "seconds": 0.312,
+    "stdout": "\u2714 empty order (1.098917ms)\n\u2714 ordinary order and unchanged input (0.591708ms)\n\u2714 zero price (0.09125ms)\n\u2714 invalid quantity (0.264791ms)\n\u2714 multiplication overflow (0.083583ms)\n\u2714 shipping for 1 cents (0.862916ms)\n\u2714 shipping for 9999 cents (0.077208ms)\n\u2714 shipping for 10000 cents (0.053125ms)\n\u2714 shipping for 10001 cents (0.052833ms)\n\u2714 shipping for 9007199254740991 cents (0.059333ms)\n\u2714 threshold uses the checked aggregate without changing input (0.076042ms)\n\u2714 free shipping still validates later lines and aggregate overflow (0.221541ms)\n\u2714 typed immutable lines (0.492208ms)\n\u2714 negative price rejected (0.211917ms)\n\u2714 fractional price rejected (0.11175ms)\n\u2139 tests 15\n\u2139 suites 0\n\u2139 pass 15\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 181.314833\n",
+    "stderr": ""
+  },
+  {
+    "name": "go",
+    "command": [
+      "/opt/homebrew/opt/go/libexec/bin/go",
+      "test",
+      "-count=1",
+      "-v",
+      "./..."
+    ],
+    "cwd": "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo/services/order-go",
+    "returncode": 0,
+    "seconds": 4.847,
+    "stdout": "?   \texample.test/order/internal/money\t[no test files]\n=== RUN   TestEmpty\n--- PASS: TestEmpty (0.00s)\n=== RUN   TestOrdinary\n--- PASS: TestOrdinary (0.00s)\n=== RUN   TestZeroPrice\n--- PASS: TestZeroPrice (0.00s)\n=== RUN   TestInvalidQuantity\n--- PASS: TestInvalidQuantity (0.00s)\n=== RUN   TestOverflow\n--- PASS: TestOverflow (0.00s)\n=== RUN   TestShippingThreshold\n--- PASS: TestShippingThreshold (0.00s)\n=== RUN   TestCheckedAggregateThreshold\n--- PASS: TestCheckedAggregateThreshold (0.00s)\n=== RUN   TestFreeShippingStillValidates\n--- PASS: TestFreeShippingStillValidates (0.00s)\nPASS\nok  \texample.test/order/quote\t0.392s\n",
+    "stderr": ""
+  },
+  {
+    "name": "c_compile",
+    "command": [
+      "/usr/bin/clang",
+      "-std=c17",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "native/order-c/src/money.c",
+      "native/order-c/src/quote.c",
+      "native/order-c/tests/test_quote.c",
+      "-o",
+      "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/forward-evidence/build/test_quote"
+    ],
+    "cwd": "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo",
+    "returncode": 0,
+    "seconds": 0.126,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "name": "c_execute",
+    "command": [
+      "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/forward-evidence/build/test_quote"
+    ],
+    "cwd": "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo",
+    "returncode": 0,
+    "seconds": 0.229,
+    "stdout": "C_BASELINE_OK groups=5\n",
+    "stderr": ""
+  },
+  {
+    "name": "c_threshold_compile",
+    "command": [
+      "/usr/bin/clang",
+      "-std=c17",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "native/order-c/src/money.c",
+      "native/order-c/src/quote.c",
+      "native/order-c/tests/test_shipping_threshold.c",
+      "-o",
+      "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/forward-evidence/build/test_shipping_threshold"
+    ],
+    "cwd": "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo",
+    "returncode": 0,
+    "seconds": 0.102,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "name": "c_threshold_execute",
+    "command": [
+      "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/forward-evidence/build/test_shipping_threshold"
+    ],
+    "cwd": "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo",
+    "returncode": 0,
+    "seconds": 0.228,
+    "stdout": "C_THRESHOLD_OK groups=4 boundary_cases=5\n",
+    "stderr": ""
+  },
+  {
+    "name": "java_compile",
+    "command": [
+      "/opt/homebrew/opt/openjdk@21/bin/javac",
+      "-d",
+      "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/forward-evidence/build/java",
+      "services/order-java/src/example/order/Line.java",
+      "services/order-java/src/example/order/Money.java",
+      "services/order-java/src/example/order/QuoteService.java",
+      "services/order-java/tests/example/order/QuoteTests.java",
+      "services/order-java/tests/example/order/ShippingThresholdTests.java"
+    ],
+    "cwd": "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo",
+    "returncode": 0,
+    "seconds": 0.861,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "name": "java_execute",
+    "command": [
+      "/opt/homebrew/opt/openjdk@21/bin/java",
+      "-ea",
+      "-cp",
+      "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/forward-evidence/build/java",
+      "example.order.QuoteTests"
+    ],
+    "cwd": "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo",
+    "returncode": 0,
+    "seconds": 0.077,
+    "stdout": "JAVA_BASELINE_OK groups=5\n",
+    "stderr": ""
+  },
+  {
+    "name": "java_threshold_execute",
+    "command": [
+      "/opt/homebrew/opt/openjdk@21/bin/java",
+      "-ea",
+      "-cp",
+      "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/forward-evidence/build/java",
+      "example.order.ShippingThresholdTests"
+    ],
+    "cwd": "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo",
+    "returncode": 0,
+    "seconds": 0.073,
+    "stdout": "JAVA_THRESHOLD_OK groups=4 boundary_cases=5\n",
+    "stderr": ""
+  },
+  {
+    "name": "diff_check",
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "cwd": "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo",
+    "returncode": 0,
+    "seconds": 0.013,
+    "stdout": "",
+    "stderr": ""
+  }
+]

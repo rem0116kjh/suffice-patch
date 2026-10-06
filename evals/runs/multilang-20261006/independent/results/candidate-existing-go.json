@@ -1,0 +1,14 @@
+{
+  "name": "candidate-existing-go",
+  "command": [
+    "/opt/homebrew/opt/go/libexec/bin/go",
+    "test",
+    "-v",
+    "./..."
+  ],
+  "cwd": "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo/services/order-go",
+  "returncode": 0,
+  "seconds": 1.827,
+  "stdout": "?   \texample.test/order/internal/money\t[no test files]\n=== RUN   TestEmpty\n--- PASS: TestEmpty (0.00s)\n=== RUN   TestOrdinary\n--- PASS: TestOrdinary (0.00s)\n=== RUN   TestZeroPrice\n--- PASS: TestZeroPrice (0.00s)\n=== RUN   TestInvalidQuantity\n--- PASS: TestInvalidQuantity (0.00s)\n=== RUN   TestOverflow\n--- PASS: TestOverflow (0.00s)\n=== RUN   TestShippingThreshold\n--- PASS: TestShippingThreshold (0.00s)\n=== RUN   TestCheckedAggregateThreshold\n--- PASS: TestCheckedAggregateThreshold (0.00s)\n=== RUN   TestFreeShippingStillValidates\n--- PASS: TestFreeShippingStillValidates (0.00s)\nPASS\nok  \texample.test/order/quote\t0.264s\n",
+  "stderr": ""
+}

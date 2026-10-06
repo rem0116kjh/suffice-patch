@@ -35,7 +35,8 @@ def parsed(*events):
 class PreservationTests(unittest.TestCase):
     def test_protected_files_reject_edit_delete_and_mode_change(self):
         names = ("tests/test_existing.py", ".agents/skills/suffice-patch/SKILL.md",
-                 ".agents/skills/suffice-patch/scripts/collect_context.py", "LOCAL_NOTES.md")
+                 ".agents/skills/suffice-patch/scripts/collect_context.py",
+                 ".agents/skills/suffice-patch/scripts/context_languages.py", "LOCAL_NOTES.md")
         for name in names:
             before = {name: file_row()}
             variants = ({name: file_row(b"changed\n")}, {}, {name: file_row(mode=0o755)})

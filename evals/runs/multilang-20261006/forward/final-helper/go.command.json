@@ -1,0 +1,13 @@
+{
+  "command": [
+    "python3",
+    "-B",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/bundle-final/scripts/collect_context.py",
+    "services/order-go/quote/quote.go",
+    "--scope",
+    "services/order-go"
+  ],
+  "cwd": "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo",
+  "returncode": 0,
+  "seconds": 0.153
+}

@@ -1,0 +1,19 @@
+?   	example.test/order/internal/money	[no test files]
+=== RUN   TestEmpty
+--- PASS: TestEmpty (0.00s)
+=== RUN   TestOrdinary
+--- PASS: TestOrdinary (0.00s)
+=== RUN   TestZeroPrice
+--- PASS: TestZeroPrice (0.00s)
+=== RUN   TestInvalidQuantity
+--- PASS: TestInvalidQuantity (0.00s)
+=== RUN   TestOverflow
+--- PASS: TestOverflow (0.00s)
+=== RUN   TestShippingThreshold
+--- PASS: TestShippingThreshold (0.00s)
+=== RUN   TestCheckedAggregateThreshold
+--- PASS: TestCheckedAggregateThreshold (0.00s)
+=== RUN   TestFreeShippingStillValidates
+--- PASS: TestFreeShippingStillValidates (0.00s)
+PASS
+ok  	example.test/order/quote	0.392s

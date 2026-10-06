@@ -1,0 +1,158 @@
+{
+  "date": "2026-10-06",
+  "timezone": "Asia/Seoul",
+  "python": "3.12.14 (main, Aug 12 2026, 13:57:54) [Clang 21.0.0 (clang-2100.3.34.2)]",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "process_timeout_seconds": 5,
+  "measurement": "Fresh process; analysis-only monotonic duration excludes interpreter startup; one measurement per size.",
+  "production_sha256": "4c1cd7939b38a71848db77926cd7a766788d9de54b3506c236b438e75702b407",
+  "frozen_initial_sha256": "fa2fcbdd98f1b563d1bee9a53bb1d6d5f1f7163d129178b5ad5a50e9fa8f5a86",
+  "before_blank_docs": [
+    {
+      "blank_lines": 1000,
+      "source_bytes": 1001,
+      "seconds": 0.0186,
+      "note": "Previously observed before fix; rounded to four decimals."
+    },
+    {
+      "blank_lines": 4000,
+      "source_bytes": 4001,
+      "seconds": 0.2885,
+      "note": "Previously observed before fix; rounded to four decimals."
+    },
+    {
+      "blank_lines": 8000,
+      "source_bytes": 8001,
+      "seconds": 1.1576,
+      "note": "Previously observed before fix; rounded to four decimals."
+    }
+  ],
+  "after_blank_docs": [
+    {
+      "blank_lines": 1000,
+      "timed_out": false,
+      "source_bytes": 1001,
+      "seconds": 0.0006851249927422032,
+      "symbols": 0,
+      "imports": 0,
+      "notes": [
+        "docs uses textual symbol/reference hints only; imports and call graphs are not resolved."
+      ]
+    },
+    {
+      "blank_lines": 4000,
+      "timed_out": false,
+      "source_bytes": 4001,
+      "seconds": 0.0008532500069122761,
+      "symbols": 0,
+      "imports": 0,
+      "notes": [
+        "docs uses textual symbol/reference hints only; imports and call graphs are not resolved."
+      ]
+    },
+    {
+      "blank_lines": 8000,
+      "timed_out": false,
+      "source_bytes": 8001,
+      "seconds": 0.0010990419978043064,
+      "symbols": 0,
+      "imports": 0,
+      "notes": [
+        "docs uses textual symbol/reference hints only; imports and call graphs are not resolved."
+      ]
+    },
+    {
+      "blank_lines": 40000,
+      "timed_out": false,
+      "source_bytes": 40001,
+      "seconds": 0.003375667001819238,
+      "symbols": 0,
+      "imports": 0,
+      "notes": [
+        "docs uses textual symbol/reference hints only; imports and call graphs are not resolved."
+      ]
+    }
+  ],
+  "additional_before": [
+    {
+      "kind": "go_unclosed",
+      "source_bytes": 39996,
+      "seconds": 0.5024672920117155
+    },
+    {
+      "kind": "c_unclosed",
+      "source_bytes": 39998,
+      "seconds": 0.6072123339981772
+    }
+  ],
+  "additional_after": [
+    {
+      "kind": "go_unclosed",
+      "timed_out": false,
+      "source_bytes": 39996,
+      "seconds": 0.010038666994660161,
+      "symbols": 0,
+      "imports": 0,
+      "notes": [
+        "Unclosed Go import block; only partial textual references are available.",
+        "Go package hints exclude tests; build tags, replace directives and workspace dependencies are not evaluated."
+      ]
+    },
+    {
+      "kind": "c_unclosed",
+      "timed_out": false,
+      "source_bytes": 39998,
+      "seconds": 0.0720478750008624,
+      "symbols": 0,
+      "imports": 0,
+      "notes": [
+        "C/C++ quoted includes and function parameter spans up to 2048 characters only; compiler paths, conditionals and macros are not evaluated."
+      ]
+    },
+    {
+      "kind": "js_unclosed_comment",
+      "timed_out": false,
+      "source_bytes": 39999,
+      "seconds": 0.0007532090094173327,
+      "symbols": 0,
+      "imports": 0,
+      "notes": [
+        "JS/TS imports are textual hints; package exports, aliases, templates and runtime loading may need inspection."
+      ]
+    },
+    {
+      "kind": "js_unclosed_string",
+      "timed_out": false,
+      "source_bytes": 40000,
+      "seconds": 0.00381166698934976,
+      "symbols": 0,
+      "imports": 0,
+      "notes": [
+        "JS/TS imports are textual hints; package exports, aliases, templates and runtime loading may need inspection."
+      ]
+    },
+    {
+      "kind": "go_empty_import",
+      "timed_out": false,
+      "source_bytes": 20,
+      "seconds": 0.0009226250112988055,
+      "symbols": 0,
+      "imports": 0,
+      "notes": [
+        "Go package hints exclude tests; build tags, replace directives and workspace dependencies are not evaluated."
+      ]
+    },
+    {
+      "kind": "go_incomplete_empty_import",
+      "timed_out": false,
+      "source_bytes": 18,
+      "seconds": 0.0010169579909415916,
+      "symbols": 0,
+      "imports": 0,
+      "notes": [
+        "Unclosed Go import block; only partial textual references are available.",
+        "Go package hints exclude tests; build tags, replace directives and workspace dependencies are not evaluated."
+      ]
+    }
+  ]
+}

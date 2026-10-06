@@ -1,0 +1,153 @@
+Caller/test search: 7 matching files (textual, not a complete call graph).
+ROOT: /private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo
+Sources returned: 10; source bytes: 4309
+Languages: go, java
+
+FILE: services/order-java/src/example/order/QuoteService.java | requested target | SHA256: 76b24bba7a6ef3cd63a851fd0e4fb7773795d0409922ca5d8815a5b0b8bab4ac
+package example.order;
+import java.util.List;
+public final class QuoteService {
+    public record Quote(long subtotalCents, long shippingCents, long totalCents) {}
+    public static Quote quote(List<Line> lines) {
+        long subtotal = Money.subtotal(lines);
+        long shipping = subtotal == 0 ? 0 : 500;
+        return new Quote(subtotal, shipping, Math.addExact(subtotal, shipping));
+    }
+}
+
+
+FILE: services/order-java/src/example/order/Money.java | requested target | SHA256: b47ca2fcbb42223c393a4935c2246e6b0abdbac7111a07a99a02501723baf64c
+package example.order;
+import java.util.List;
+final class Money {
+    static long subtotal(List<Line> lines) {
+        long subtotal = 0;
+        for (Line line : lines) {
+            if (line.priceCents() < 0 || line.quantity() <= 0) throw new IllegalArgumentException("invalid line");
+            subtotal = Math.addExact(subtotal, Math.multiplyExact(line.priceCents(), line.quantity()));
+        }
+        return subtotal;
+    }
+}
+
+
+FILE: services/order-java/tests/example/order/QuoteTests.java | requested target | SHA256: cacc53ff11c1d68b78aed106c2cda4edcd261755adf8b5bff815c2a1c428bd4f
+package example.order;
+import java.util.List;
+public final class QuoteTests {
+    public static void main(String[] args) {
+        assert QuoteService.quote(List.of()).equals(new QuoteService.Quote(0, 0, 0));
+        var lines = List.of(new Line(1200, 2), new Line(300, 1));
+        assert QuoteService.quote(lines).equals(new QuoteService.Quote(2700, 500, 3200));
+        assert lines.get(0).equals(new Line(1200, 2));
+        assert QuoteService.quote(List.of(new Line(0, 1))).totalCents() == 0;
+        boolean invalid = false;
+        try { QuoteService.quote(List.of(new Line(100, 0))); } catch (IllegalArgumentException expected) { invalid = true; }
+        assert invalid;
+        boolean overflow = false;
+        try { QuoteService.quote(List.of(new Line(Long.MAX_VALUE, 2))); } catch (ArithmeticException expected) { overflow = true; }
+        assert overflow;
+        System.out.println("JAVA_BASELINE_OK groups=5");
+    }
+}
+
+
+FILE: services/order-go/quote/quote_test.go | requested target | SHA256: 8f6c58b2c89963e970bc3aea40a0cbf51b13ee274a45378762011277a71700b7
+package quote
+
+import "testing"
+
+func TestEmpty(t *testing.T) { got, err := Calculate(nil); if err != nil || got != (Quote{}) { t.Fatalf("%+v %v", got, err) } }
+func TestOrdinary(t *testing.T) {
+    lines := []Line{{1200, 2}, {300, 1}}
+    got, err := Calculate(lines)
+    if err != nil || got != (Quote{2700, 500, 3200}) { t.Fatalf("%+v %v", got, err) }
+    if lines[0] != (Line{1200, 2}) || lines[1] != (Line{300, 1}) { t.Fatal("input changed") }
+}
+func TestZeroPrice(t *testing.T) { got, err := Calculate([]Line{{0, 1}}); if err != nil || got != (Quote{}) { t.Fatalf("%+v %v", got, err) } }
+func TestInvalidQuantity(t *testing.T) { if _, err := Calculate([]Line{{100, 0}}); err == nil { t.Fatal("accepted zero quantity") } }
+func TestOverflow(t *testing.T) { if _, err := Calculate([]Line{{^uint64(0), 2}}); err == nil { t.Fatal("accepted overflow") } }
+
+
+FILE: AGENTS.md | project instructions | SHA256: b0e91b337c5b5c95b55c28a2e8e93c314942fef72f889c920576c98b1cd7e417
+Keep unrelated user files and changes intact. Do not edit existing tests to satisfy new behavior.
+This is a dependency-free synthetic multi-language fixture, not an external project benchmark.
+JS/TS: node --test apps/storefront/test/quote.test.js packages/money/test/amount.test.ts
+Go: cd services/order-go && GOPROXY=off GOSUMDB=off GOTOOLCHAIN=local go test ./...
+Native C and Java compile commands are recorded outside this checkout in evidence.
+
+
+FILE: services/order-go/go.mod | project manifest; inspect declared checks without executing it | SHA256: e5cb41423749876d62cd6507cb541313b445c05119b6b1d5835a17196d0fcd6b
+module example.test/order
+
+go 1.22
+
+
+FILE: go.work | project manifest; inspect declared checks without executing it | SHA256: c1f12068070634b0fe54a3d8614ee0925a1e9f86b46d512885fc825ef7f71b88
+go 1.22
+
+use ./services/order-go
+
+
+FILE: services/order-go/quote/quote.go | local import | SHA256: 9cff7163322b06d01bb888efd0f71b2284f2cb211de892c4e062757ee3b76f87
+package quote
+
+import (
+    "errors"
+    "example.test/order/internal/money"
+)
+
+type Line = money.Line
+type Quote struct { SubtotalCents uint64; ShippingCents uint64; TotalCents uint64 }
+
+func Calculate(lines []Line) (Quote, error) {
+    subtotal, err := money.Subtotal(lines)
+    if err != nil { return Quote{}, err }
+    var shipping uint64
+    if subtotal != 0 { shipping = 500 }
+    if subtotal > ^uint64(0) - shipping { return Quote{}, errors.New("amount overflow") }
+    return Quote{subtotal, shipping, subtotal + shipping}, nil
+}
+
+
+FILE: services/order-go/internal/money/sum.go | local import | SHA256: efec56360840de5d13f79c132c41fea5000b3d0bd8065c6cd69c322102cf3482
+package money
+
+import "errors"
+
+type Line struct { PriceCents uint64; Quantity uint64 }
+
+func Subtotal(lines []Line) (uint64, error) {
+    var total uint64
+    for _, line := range lines {
+        if line.Quantity == 0 { return 0, errors.New("invalid quantity") }
+        if line.PriceCents > ^uint64(0) / line.Quantity { return 0, errors.New("amount overflow") }
+        amount := line.PriceCents * line.Quantity
+        if total > ^uint64(0) - amount { return 0, errors.New("amount overflow") }
+        total += amount
+    }
+    return total, nil
+}
+
+
+FILE: services/order-java/src/example/order/Line.java | matching caller or test; textual match | SHA256: 78a8a9c586350fa729a0cc19e6e25b22327d0ddae93cb4f82a486c32585f9240
+package example.order;
+public record Line(long priceCents, long quantity) {}
+
+
+GIT STATUS:
+
+
+GIT DIFF:
+
+
+GIT STAGED DIFF:
+
+
+LIMITS / FOLLOW-UP:
+java uses textual symbol/reference hints only; imports and call graphs are not resolved.
+Go package hints exclude tests; build tags, replace directives and workspace dependencies are not evaluated.
+1 import reference(s) external or unresolved; aliases and compiler paths are not inferred.
+docs uses textual symbol/reference hints only; imports and call graphs are not resolved.
+text uses textual symbol/reference hints only; imports and call graphs are not resolved.
+References are textual candidates, not a complete call graph. Dynamic imports, aliases, generated code, and external packages may need targeted follow-up.

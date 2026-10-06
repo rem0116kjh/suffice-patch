@@ -1,0 +1,24 @@
+{
+  "goal": "Across the independently executable quote services, introduce free shipping for orders whose checked subtotal is at least 10000 cents. Empty and zero-valued orders remain free; positive orders below the threshold retain the existing 500-cent fee. Preserve public APIs, exact checked arithmetic, invalid-input behavior, local money helpers, all existing tests, and unrelated user changes. Do not claim Rust runtime validation without a compiler.",
+  "targets": {
+    "javascript_typescript": "apps/storefront/src/quote.js :: quote(lines), local TS dependency packages/money/src/amount.ts :: checkedSubtotal(lines)",
+    "go": "services/order-go/quote/quote.go :: Calculate([]Line) (Quote,error)",
+    "c": "native/order-c/src/quote.c :: make_quote(const order_line*,size_t,order_quote*)",
+    "java": "services/order-java/src/example/order/QuoteService.java :: quote(List<Line>)",
+    "rust_unavailable": "crates/order-rs/src/lib.rs :: quote(&[Line]) -> Result<Quote,...>"
+  },
+  "baseline_evidence": "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/evidence/baseline.json",
+  "repo": "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo",
+  "allowed_existing_source_paths": [
+    "apps/storefront/src/quote.js",
+    "services/order-go/quote/quote.go",
+    "native/order-c/src/quote.c",
+    "services/order-java/src/example/order/QuoteService.java",
+    "crates/order-rs/src/lib.rs"
+  ],
+  "preserve": [
+    "existing tests",
+    "LOCAL_NOTES.md",
+    "DRAFT.txt"
+  ]
+}

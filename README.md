@@ -1,12 +1,47 @@
-# SufficePatch v3
+# SufficePatch v4
 
-작은 Python 코드 수정에 필요한 소스·로컬 import·호출부·테스트·Git 변경을
-한 번에 수집하는 Codex/Claude 스킬이다. Codex에서 자동 선택하거나 명시적으로 호출할 수 있다.
+여러 언어로 된 코드·테스트·설정·문서를 수정할 때 필요한 파일과 참조를 제한된 범위로
+모아 주는 Codex/Claude 스킬이다. 모노레포는 패키지별로 탐색하고, 큰 변경은 관련 부분을
+차례로 처리한 뒤 통합 검증한다. 도우미는 Python으로 작성했지만 대상 프로젝트 언어는
+Python으로 제한하지 않는다. 자동 선택을 유지한다.
 
-문장을 짧게 만드는 것만으로는 효율이 좋아지지 않았다. v3는 읽기 전용 도우미를
-추가하고 탐색·수정·검증을 묶어 실행하도록 바꿨다. 필수 검사와 무관한 변경 보존은 유지한다.
+## 다언어와 모노레포 지원
 
-## 외부 저장소 검증 (2026-10-06)
+| 대상 | 수집 방식 |
+|---|---|
+| Python | AST 기반 로컬 import, src 레이아웃, 상대 import, 정의 심볼 |
+| JS/TS·JSX/TSX·Vue/Svelte | 상대 import·export·require·문자열 dynamic import, TS 확장자와 index 후보 |
+| Go | go.mod 안의 로컬 패키지와 같은 패키지의 소스 후보 |
+| Rust | mod 및 crate/self/super 경로의 로컬 모듈 후보 |
+| C/C++ | 따옴표 include와 가까운 include 디렉터리 후보 |
+| Java/Kotlin/C#/Swift/Ruby/PHP·Shell·HTML/CSS·SQL·설정·문서 | 텍스트와 심볼 참조 검색, 가까운 프로젝트 manifest |
+
+언어별 탐색은 완전한 컴파일러 분석이 아니다. alias, workspace 간 package 이름,
+동적 참조, 조건부 빌드와 생성 코드는 누락 안내를 보고 추가 확인해야 한다.
+Vue/Svelte의 의존성 탐색은 inline script 범위다. 다른 언어의 테스트도 검색하지만
+실행 명령은 프로젝트 manifest와 지침에서 확인한다.
+
+```sh
+# 모노레포의 한 패키지 안에서 후보 경로만 확인
+python3 -B scripts/collect_context.py . --scope packages/web
+# 실제 파일·의존성·참조·테스트 수집
+python3 -B scripts/collect_context.py packages/web/src/cart.ts --scope packages/web
+# 연결된 두 패키지를 함께 검색하고 특정 심볼로 좁히기
+python3 -B scripts/collect_context.py services/api/main.go --scope services/api --scope packages/shared --symbol Calculate
+```
+
+기본 한도는 소스 16개/40,000바이트, 검색 후보 200개, 검색당 5초다. `--scope`는
+경로 목록과 참조 검색의 범위이며, 실제 연결된 로컬 import는 저장소 안의 다른 패키지도
+읽을 수 있다. 폴더를 지정하면 내용을 자동으로 덤프하지 않고 파일 지도만 반환한다.
+의존성·빌드 산출물은 검색에서 제외하고 검색/Git 출력도 크기와 시간을 제한한다.
+
+v4는 회귀 검사 54/54와 JS/TS·Go·C·Java의 독립 API 검사 57/57을 통과했다.
+2,000개 무관 파일 fixture의 수집 한도도 확인했다. Rust 실행·TS 정적 타입 검사는 미검증이다.
+[v4 검증 기록](evals/MULTILANG_20261006.md)에 지원 깊이와 실행하지 못한 검사를 구분한다.
+**아래 시간·토큰 수치는 이전 Python 전용 v3의 결과이며 v4의 성능 근거가 아니다.**
+v4의 토큰 절감이나 시간 개선은 아직 비교 측정하지 않았다.
+
+## 이전 Python 전용 v3 외부 저장소 검증 (2026-10-06)
 
 `python-dotenv`, `packaging`, `itsdangerous`의 실제 과거 버그 3개와 변경 불필요
 과제 1개를 각 조건에서 3번씩 비교했다. 사전 계획을 고정한 **24회 실행**에서
@@ -34,7 +69,7 @@
 [원자료 감사](evals/runs/generalization-20261006/audit.json)에 성공·사용량·한계와 재현 절차를 공개했다.
 아래의 이전 합성 과제 결과와 합산하지 않는다.
 
-## 2026-10-06 코드 최적화와 재실행
+## 이전 v3 코드 최적화와 재실행 (2026-10-06)
 
 도우미의 중복 경로 탐색·AST 분석·대기 목록 처리를 줄이고, 한도 소진 후 검색을
 생략했다. Git 필터와 ripgrep 전처리기 실행도 차단했다. 회귀 검사 12/12를 통과했고
@@ -72,11 +107,11 @@ Codex CLI 0.160.0 / `gpt-6-astra` / `low`의 작은 합성 과제 결과이며,
 
 ## 사용
 
-Python 모듈과 수정할 동작을 설명하면 Codex가 관련 요청에서 자동 선택할 수 있다.
+수정할 파일·기능·대상 패키지를 설명하면 Codex가 관련 요청에서 자동 선택할 수 있다.
 항상 선택된다는 보장은 없다. 명시적으로 사용할 수도 있다.
 
 ```text
-$suffice-patch api.customer_label을 web 표시와 같게 수정해줘. 응답 형식은 유지해줘.
+$suffice-patch packages/web의 장바구니 계산과 services/api의 검증을 함께 수정해줘. 기존 응답 형식은 유지해줘.
 ```
 
 Claude Code에서는 `/suffice-patch`로 명시 호출한다. Claude의 기능 검증과
@@ -88,14 +123,14 @@ Codex의 비교 측정은 서로 다른 증거이며 Claude의 토큰 절감은 
 - Claude: `~/.claude/skills/suffice-patch/`
 
 새 설치에는 **SKILL.md와 scripts/를 함께** 복사한다. [설치용 ZIP](dist/suffice-patch.zip)은
-이번 평가와 동일한 두 파일을 담는다. 별도 임시 설치에서 Python 3.12.14와 3.14.7 각각
-도우미 검사 12/12를 통과했다. Linux·Windows 및 다른 사용자의 설치는 아직 시험하지 않았다.
+현재 v4의 SKILL.md와 두 Python 도우미 파일을 담는다. 프로젝트에 Python 코드를
+추가할 필요는 없다. Linux·Windows 및 다른 사용자의 설치는 아직 시험하지 않았다.
 자동 선택을 끄는 설정은 추가하지 않는다.
 
 ```sh
 mkdir -p "$HOME/.agents/skills/suffice-patch/scripts"
 cp SKILL.md "$HOME/.agents/skills/suffice-patch/SKILL.md"
-cp scripts/collect_context.py "$HOME/.agents/skills/suffice-patch/scripts/collect_context.py"
+cp scripts/collect_context.py scripts/context_languages.py "$HOME/.agents/skills/suffice-patch/scripts/"
 ```
 
 ## 도우미와 한계
@@ -103,14 +138,15 @@ cp scripts/collect_context.py "$HOME/.agents/skills/suffice-patch/scripts/collec
 Python 3.9 이상, `rg`, `git`을 사용한다. 프로젝트 root에서 직접 확인할 수도 있다.
 
 ```sh
-python3 -B scripts/collect_context.py api.py web
-python3 -B -m unittest evals/test_inspect.py -v
+python3 -B scripts/collect_context.py src/lib.rs --scope src
+python3 -B -m unittest evals.test_inspect evals.test_multilang -v
 ```
 
 도우미는 프로젝트 코드를 실행하지 않으며 저장소 밖 경로를 읽지 않는다.
 기본 소스 한도는 16개 파일/40,000바이트다. 누락·한도·검색 실패를 표시한다.
-동적 호출이나 다른 언어의 테스트까지 완전하게 찾는 도구는 아니므로, 보고된 빈틈은
-추가 확인해야 한다. 파이썬 이외의 작업에는 이 스킬의 효율 결과를 적용하지 않는다.
+검색 결과는 참조 후보이며 완전한 호출 그래프가 아니다. 보고된 빈틈을 추가 확인하고
+필수 언어별 검사·통합 검사를 수행해야 한다. 수집 한도 준수는 대형 저장소에서의
+성능 우위나 모든 변경 영향의 발견을 보장하지 않는다.
 
 ## 보존한 기록
 

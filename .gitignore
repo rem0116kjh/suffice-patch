@@ -23,6 +23,7 @@ __pycache__/
 !/evals/runs/optimization-native-20261006/
 !/evals/runs/generalization-20261006/
 !/evals/runs/generalization-install-20261006/
+!/evals/runs/multilang-20261006/
 
 # Generated agent checkouts contain nested Git repositories and are reproducible.
 /evals/runs/**/workspace/
@@ -31,3 +32,7 @@ __pycache__/
 # Temporary local validation runtime; not required to install or use the skill.
 /evals/v3-validation-python.txt
 .DS_Store
+
+# Native outputs from reproducible multilingual checks.
+/evals/runs/multilang-20261006/independent/results/*-build/
+/evals/runs/multilang-20261006/independent/results/go-cache/

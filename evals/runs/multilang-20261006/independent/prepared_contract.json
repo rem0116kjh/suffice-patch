@@ -1,0 +1,36 @@
+{
+  "prepared_before_execution": true,
+  "candidate_source_read_for_preparation": false,
+  "behavior_scope": [
+    "subtotal 9999/10000/10001",
+    "threshold reached by multiple lines or quantity",
+    "empty and zero price",
+    "invalid quantity after eligible subtotal",
+    "checked product and sum overflow",
+    "maximum representable valid subtotal",
+    "input and output preservation on errors"
+  ],
+  "stacks": [
+    "JS/TS via Node native type stripping",
+    "Go",
+    "native C",
+    "Java"
+  ],
+  "typescript_static_typecheck": false,
+  "rust_runtime": false,
+  "source_sha256": {
+    "check_go.go": "0170e58dc7dd02edeed4494e0e8e9fef1eb7118ae13686f4a06981cc03d944cf",
+    "check_js.mjs": "c9ff0502bf8b23f59ac645bc8ba6e9d84dcb116973dd56ad8c3118aba4cc65b9",
+    "run.py": "3b235dddeb32983b7b42907e775add763f367e39ba3dccc4eb4e4f45f4e60695",
+    "IndependentQuoteCheck.java": "ea8218aa2237a14d1bf0c00ada0b54e108014068ffa30aa237f09c3e02bddd79",
+    "check_c.c": "a760f5bcfce67951e1f7b59fd58c5fe6e4bcaf6811221b95936192ab0874dacc"
+  },
+  "run_command": [
+    "python3",
+    "-B",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/run.py",
+    "--out",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/results"
+  ],
+  "preservation_policy": "Existing 30 frozen files preserved except four authorized quote implementations; new test files in the four related test locations are permitted per root completion notice."
+}

@@ -1,0 +1,22 @@
+{
+  "name": "negative-control-compile-c",
+  "command": [
+    "/usr/bin/clang",
+    "-std=c17",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-I",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/results/unchanged-baseline/native/order-c/include",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/results/unchanged-baseline/native/order-c/src/money.c",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/results/unchanged-baseline/native/order-c/src/quote.c",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/check_c.c",
+    "-o",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/results/negative-control-build/check_c"
+  ],
+  "cwd": "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/results/unchanged-baseline",
+  "returncode": 0,
+  "seconds": 0.12,
+  "stdout": "",
+  "stderr": ""
+}

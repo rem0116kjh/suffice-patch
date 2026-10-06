@@ -1,0 +1,708 @@
+{
+  "scope": "Synthetic functional forward test; no efficiency or public-project benchmark claim",
+  "fixture": "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo",
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "started_at_utc": "2026-10-06T07:05:35Z",
+  "additional_model_calls": 0,
+  "network_installations": 0,
+  "verification_sha256": "7112a4682f5294a1be48fe67116680cfaddaa0286237d5ec507d852cd210efbe",
+  "archive_sha256": "e6364212663140b57faaa5def6db107ba191415359b9e9e702d039842ee69c1d",
+  "grader_source_sha256": {
+    "IndependentQuoteCheck.java": "ea8218aa2237a14d1bf0c00ada0b54e108014068ffa30aa237f09c3e02bddd79",
+    "check_c.c": "a760f5bcfce67951e1f7b59fd58c5fe6e4bcaf6811221b95936192ab0874dacc",
+    "check_go.go": "0170e58dc7dd02edeed4494e0e8e9fef1eb7118ae13686f4a06981cc03d944cf",
+    "check_js.mjs": "c9ff0502bf8b23f59ac645bc8ba6e9d84dcb116973dd56ad8c3118aba4cc65b9",
+    "run.py": "3b235dddeb32983b7b42907e775add763f367e39ba3dccc4eb4e4f45f4e60695"
+  },
+  "archive_matches_frozen_hashes": true,
+  "allowed_existing_source_paths": [
+    "apps/storefront/src/quote.js",
+    "native/order-c/src/quote.c",
+    "services/order-go/quote/quote.go",
+    "services/order-java/src/example/order/QuoteService.java"
+  ],
+  "modified_paths": [
+    "apps/storefront/src/quote.js",
+    "apps/storefront/test/shipping-threshold.test.js",
+    "native/order-c/src/quote.c",
+    "native/order-c/tests/test_shipping_threshold.c",
+    "services/order-go/quote/quote.go",
+    "services/order-go/quote/shipping_threshold_test.go",
+    "services/order-java/src/example/order/QuoteService.java",
+    "services/order-java/tests/example/order/ShippingThresholdTests.java"
+  ],
+  "forbidden_changes": [],
+  "added_tests": [
+    "apps/storefront/test/shipping-threshold.test.js",
+    "native/order-c/tests/test_shipping_threshold.c",
+    "services/order-go/quote/shipping_threshold_test.go",
+    "services/order-java/tests/example/order/ShippingThresholdTests.java"
+  ],
+  "protected_files_unchanged": true,
+  "rust_unchanged": true,
+  "typescript_static_typecheck": "not run: tsc unavailable; Node native type-stripping runtime checks only",
+  "rust_runtime": "not run: rustc/cargo unavailable",
+  "tools": {
+    "node": "/opt/homebrew/bin/node",
+    "go": "/opt/homebrew/opt/go/libexec/bin/go",
+    "clang": "/usr/bin/clang",
+    "java": "/opt/homebrew/opt/openjdk@21/bin/java",
+    "javac": "/opt/homebrew/opt/openjdk@21/bin/javac"
+  },
+  "commands": [
+    {
+      "name": "negative-control-hidden-js-ts",
+      "returncode": 1,
+      "seconds": 0.167,
+      "log_path": "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/results/negative-control-hidden-js-ts.json",
+      "log_sha256": "cef9dd8bbe6d682f76ddba549b783961c2551ee2fb8b0cf1b07501a3930de74a"
+    },
+    {
+      "name": "negative-control-hidden-go",
+      "returncode": 1,
+      "seconds": 3.531,
+      "log_path": "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/results/negative-control-hidden-go.json",
+      "log_sha256": "b771d6e64cddf5c71eac75621723f8e864f86343b3bffbb5862ed8f671577f4f"
+    },
+    {
+      "name": "negative-control-compile-c",
+      "returncode": 0,
+      "seconds": 0.12,
+      "log_path": "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/results/negative-control-compile-c.json",
+      "log_sha256": "1051916ada21759ec2b0f9c1f263b89725d90f6c37994fe523cbe0024039eeb7"
+    },
+    {
+      "name": "negative-control-hidden-c",
+      "returncode": 1,
+      "seconds": 0.234,
+      "log_path": "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/results/negative-control-hidden-c.json",
+      "log_sha256": "a1cf0bcc551a64fb970852d85ad1148e3c8dbbfab6b22dacbb3f8681be9ed8a9"
+    },
+    {
+      "name": "negative-control-compile-java",
+      "returncode": 0,
+      "seconds": 0.488,
+      "log_path": "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/results/negative-control-compile-java.json",
+      "log_sha256": "e46fe473030bfff68b333d0d3017e0b46648a7c7bda50fdadf0aac0e27467937"
+    },
+    {
+      "name": "negative-control-hidden-java",
+      "returncode": 1,
+      "seconds": 0.067,
+      "log_path": "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/results/negative-control-hidden-java.json",
+      "log_sha256": "0893cdd67be08555cc850fb9800f793733eacad39132e9143daaa1fe17d2ee5c"
+    },
+    {
+      "name": "candidate-existing-js-ts",
+      "returncode": 0,
+      "seconds": 0.271,
+      "log_path": "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/results/candidate-existing-js-ts.json",
+      "log_sha256": "96b28cee1c3d20382da07196687b41dd236d78fddcf2f1a498b05d3770190c3b"
+    },
+    {
+      "name": "candidate-existing-go",
+      "returncode": 0,
+      "seconds": 1.827,
+      "log_path": "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/results/candidate-existing-go.json",
+      "log_sha256": "b7d7dfece7075dce816d8fd53e0930d796ab972443139c9da6b244600b393512"
+    },
+    {
+      "name": "candidate-hidden-js-ts",
+      "returncode": 0,
+      "seconds": 0.147,
+      "log_path": "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/results/candidate-hidden-js-ts.json",
+      "log_sha256": "8fa9a440df12498c806ba6d94c765ee7a89b19196b2c2d5e4283e7172ea14499"
+    },
+    {
+      "name": "candidate-hidden-go",
+      "returncode": 0,
+      "seconds": 0.391,
+      "log_path": "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/results/candidate-hidden-go.json",
+      "log_sha256": "4130196dd581cb96ce4de4290fd7ce6364603e9e828cfe41835c057d5e0c5e8d"
+    },
+    {
+      "name": "candidate-compile-c",
+      "returncode": 0,
+      "seconds": 0.083,
+      "log_path": "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/results/candidate-compile-c.json",
+      "log_sha256": "e16a9fdf230597aa85c35fcdcf104cb06ea4fefca3acbd358381d9ac245c1a40"
+    },
+    {
+      "name": "candidate-hidden-c",
+      "returncode": 0,
+      "seconds": 0.235,
+      "log_path": "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/results/candidate-hidden-c.json",
+      "log_sha256": "55e552950c85e605a44b3a597dec03aba7fe020934f61cf89e693a518a04dc63"
+    },
+    {
+      "name": "candidate-compile-existing-c",
+      "returncode": 0,
+      "seconds": 0.092,
+      "log_path": "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/results/candidate-compile-existing-c.json",
+      "log_sha256": "2901a092ca81ba23a981b9aa69aa7d206d4203aa0ee95af5d3d398a65b3a2b32"
+    },
+    {
+      "name": "candidate-existing-c",
+      "returncode": 0,
+      "seconds": 0.225,
+      "log_path": "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/results/candidate-existing-c.json",
+      "log_sha256": "4f1c17007d2c08f0e9fcfe3471bd9f89a8d0c6631cfb80617e4e60f1c22241ec"
+    },
+    {
+      "name": "candidate-compile-java",
+      "returncode": 0,
+      "seconds": 0.396,
+      "log_path": "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/results/candidate-compile-java.json",
+      "log_sha256": "955c61b8bac9f1ffbebe98a4b56dacc622ed1965db4916606b5b1bff249521db"
+    },
+    {
+      "name": "candidate-hidden-java",
+      "returncode": 0,
+      "seconds": 0.058,
+      "log_path": "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/results/candidate-hidden-java.json",
+      "log_sha256": "d2affb102462ec8ee3ee9ca259eb6f3cf38f6ddab275a53012f1ccce33f7fae2"
+    },
+    {
+      "name": "candidate-existing-java",
+      "returncode": 0,
+      "seconds": 0.064,
+      "log_path": "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/results/candidate-existing-java.json",
+      "log_sha256": "b800087923878f8f5d120fb80e985b986875b7ad332b95b62c87a0b1b6e7a1e4"
+    }
+  ],
+  "success": true,
+  "candidate_hidden": {
+    "candidate-hidden-js-ts": {
+      "passed": 15,
+      "total": 15,
+      "failed": 0,
+      "checks": [
+        {
+          "name": "below_threshold",
+          "passed": true
+        },
+        {
+          "name": "at_threshold",
+          "passed": true
+        },
+        {
+          "name": "above_threshold",
+          "passed": true
+        },
+        {
+          "name": "threshold_from_multiple_lines",
+          "passed": true
+        },
+        {
+          "name": "threshold_from_quantity",
+          "passed": true
+        },
+        {
+          "name": "below_from_quantity",
+          "passed": true
+        },
+        {
+          "name": "empty",
+          "passed": true
+        },
+        {
+          "name": "zero_price",
+          "passed": true
+        },
+        {
+          "name": "maximum_representable_subtotal",
+          "passed": true
+        },
+        {
+          "name": "invalid_quantity",
+          "passed": true
+        },
+        {
+          "name": "invalid_after_free_shipping_line",
+          "passed": true
+        },
+        {
+          "name": "negative_price",
+          "passed": true
+        },
+        {
+          "name": "fractional_price",
+          "passed": true
+        },
+        {
+          "name": "multiplication_overflow",
+          "passed": true
+        },
+        {
+          "name": "summation_overflow",
+          "passed": true
+        }
+      ]
+    },
+    "candidate-hidden-go": {
+      "checks": [
+        {
+          "name": "below_threshold",
+          "passed": true
+        },
+        {
+          "name": "at_threshold",
+          "passed": true
+        },
+        {
+          "name": "above_threshold",
+          "passed": true
+        },
+        {
+          "name": "threshold_from_multiple_lines",
+          "passed": true
+        },
+        {
+          "name": "threshold_from_quantity",
+          "passed": true
+        },
+        {
+          "name": "below_from_quantity",
+          "passed": true
+        },
+        {
+          "name": "empty",
+          "passed": true
+        },
+        {
+          "name": "zero_price",
+          "passed": true
+        },
+        {
+          "name": "maximum_representable_subtotal",
+          "passed": true
+        },
+        {
+          "name": "invalid_quantity",
+          "passed": true
+        },
+        {
+          "name": "invalid_after_free_shipping_line",
+          "passed": true
+        },
+        {
+          "name": "multiplication_overflow",
+          "passed": true
+        },
+        {
+          "name": "summation_overflow",
+          "passed": true
+        }
+      ],
+      "failed": 0,
+      "passed": 13,
+      "total": 13
+    },
+    "candidate-hidden-c": {
+      "checks": [
+        {
+          "name": "below_threshold",
+          "passed": true
+        },
+        {
+          "name": "at_threshold",
+          "passed": true
+        },
+        {
+          "name": "above_threshold",
+          "passed": true
+        },
+        {
+          "name": "threshold_from_multiple_lines",
+          "passed": true
+        },
+        {
+          "name": "threshold_from_quantity",
+          "passed": true
+        },
+        {
+          "name": "below_from_quantity",
+          "passed": true
+        },
+        {
+          "name": "empty",
+          "passed": true
+        },
+        {
+          "name": "zero_price",
+          "passed": true
+        },
+        {
+          "name": "maximum_representable_subtotal",
+          "passed": true
+        },
+        {
+          "name": "invalid_quantity",
+          "passed": true
+        },
+        {
+          "name": "invalid_after_free_shipping_line",
+          "passed": true
+        },
+        {
+          "name": "multiplication_overflow",
+          "passed": true
+        },
+        {
+          "name": "summation_overflow",
+          "passed": true
+        },
+        {
+          "name": "null_output",
+          "passed": true
+        },
+        {
+          "name": "null_nonempty_input",
+          "passed": true
+        }
+      ],
+      "passed": 15,
+      "total": 15,
+      "failed": 0
+    },
+    "candidate-hidden-java": {
+      "passed": 14,
+      "total": 14,
+      "failed": 0,
+      "checks": [
+        {
+          "name": "below_threshold",
+          "passed": true
+        },
+        {
+          "name": "at_threshold",
+          "passed": true
+        },
+        {
+          "name": "above_threshold",
+          "passed": true
+        },
+        {
+          "name": "threshold_from_multiple_lines",
+          "passed": true
+        },
+        {
+          "name": "threshold_from_quantity",
+          "passed": true
+        },
+        {
+          "name": "below_from_quantity",
+          "passed": true
+        },
+        {
+          "name": "empty",
+          "passed": true
+        },
+        {
+          "name": "zero_price",
+          "passed": true
+        },
+        {
+          "name": "maximum_representable_subtotal",
+          "passed": true
+        },
+        {
+          "name": "invalid_quantity",
+          "passed": true
+        },
+        {
+          "name": "invalid_after_free_shipping_line",
+          "passed": true
+        },
+        {
+          "name": "negative_price",
+          "passed": true
+        },
+        {
+          "name": "multiplication_overflow",
+          "passed": true
+        },
+        {
+          "name": "summation_overflow",
+          "passed": true
+        }
+      ]
+    }
+  },
+  "negative_control_hidden": {
+    "negative-control-hidden-js-ts": {
+      "passed": 10,
+      "total": 15,
+      "failed": 5,
+      "checks": [
+        {
+          "name": "below_threshold",
+          "passed": true
+        },
+        {
+          "name": "at_threshold",
+          "passed": false,
+          "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   shippingCents: 500,\n-   shippingCents: 0,\n    subtotalCents: 10000,\n+   totalCents: 10500\n-   totalCents: 10000\n  }\n"
+        },
+        {
+          "name": "above_threshold",
+          "passed": false,
+          "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   shippingCents: 500,\n-   shippingCents: 0,\n    subtotalCents: 10001,\n+   totalCents: 10501\n-   totalCents: 10001\n  }\n"
+        },
+        {
+          "name": "threshold_from_multiple_lines",
+          "passed": false,
+          "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   shippingCents: 500,\n-   shippingCents: 0,\n    subtotalCents: 10000,\n+   totalCents: 10500\n-   totalCents: 10000\n  }\n"
+        },
+        {
+          "name": "threshold_from_quantity",
+          "passed": false,
+          "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   shippingCents: 500,\n-   shippingCents: 0,\n    subtotalCents: 10000,\n+   totalCents: 10500\n-   totalCents: 10000\n  }\n"
+        },
+        {
+          "name": "below_from_quantity",
+          "passed": true
+        },
+        {
+          "name": "empty",
+          "passed": true
+        },
+        {
+          "name": "zero_price",
+          "passed": true
+        },
+        {
+          "name": "maximum_representable_subtotal",
+          "passed": false,
+          "error": "RangeError: amount overflow"
+        },
+        {
+          "name": "invalid_quantity",
+          "passed": true
+        },
+        {
+          "name": "invalid_after_free_shipping_line",
+          "passed": true
+        },
+        {
+          "name": "negative_price",
+          "passed": true
+        },
+        {
+          "name": "fractional_price",
+          "passed": true
+        },
+        {
+          "name": "multiplication_overflow",
+          "passed": true
+        },
+        {
+          "name": "summation_overflow",
+          "passed": true
+        }
+      ]
+    },
+    "negative-control-hidden-go": {
+      "checks": [
+        {
+          "name": "below_threshold",
+          "passed": true
+        },
+        {
+          "name": "at_threshold",
+          "passed": false,
+          "error": "got={SubtotalCents:10000 ShippingCents:500 TotalCents:10500} err=<nil> expected={SubtotalCents:10000 ShippingCents:0 TotalCents:10000} wantError=false"
+        },
+        {
+          "name": "above_threshold",
+          "passed": false,
+          "error": "got={SubtotalCents:10001 ShippingCents:500 TotalCents:10501} err=<nil> expected={SubtotalCents:10001 ShippingCents:0 TotalCents:10001} wantError=false"
+        },
+        {
+          "name": "threshold_from_multiple_lines",
+          "passed": false,
+          "error": "got={SubtotalCents:10000 ShippingCents:500 TotalCents:10500} err=<nil> expected={SubtotalCents:10000 ShippingCents:0 TotalCents:10000} wantError=false"
+        },
+        {
+          "name": "threshold_from_quantity",
+          "passed": false,
+          "error": "got={SubtotalCents:10000 ShippingCents:500 TotalCents:10500} err=<nil> expected={SubtotalCents:10000 ShippingCents:0 TotalCents:10000} wantError=false"
+        },
+        {
+          "name": "below_from_quantity",
+          "passed": true
+        },
+        {
+          "name": "empty",
+          "passed": true
+        },
+        {
+          "name": "zero_price",
+          "passed": true
+        },
+        {
+          "name": "maximum_representable_subtotal",
+          "passed": false,
+          "error": "got={SubtotalCents:0 ShippingCents:0 TotalCents:0} err=amount overflow expected={SubtotalCents:18446744073709551615 ShippingCents:0 TotalCents:18446744073709551615} wantError=false"
+        },
+        {
+          "name": "invalid_quantity",
+          "passed": true
+        },
+        {
+          "name": "invalid_after_free_shipping_line",
+          "passed": true
+        },
+        {
+          "name": "multiplication_overflow",
+          "passed": true
+        },
+        {
+          "name": "summation_overflow",
+          "passed": true
+        }
+      ],
+      "failed": 5,
+      "passed": 8,
+      "total": 13
+    },
+    "negative-control-hidden-c": {
+      "checks": [
+        {
+          "name": "below_threshold",
+          "passed": true
+        },
+        {
+          "name": "at_threshold",
+          "passed": false
+        },
+        {
+          "name": "above_threshold",
+          "passed": false
+        },
+        {
+          "name": "threshold_from_multiple_lines",
+          "passed": false
+        },
+        {
+          "name": "threshold_from_quantity",
+          "passed": false
+        },
+        {
+          "name": "below_from_quantity",
+          "passed": true
+        },
+        {
+          "name": "empty",
+          "passed": true
+        },
+        {
+          "name": "zero_price",
+          "passed": true
+        },
+        {
+          "name": "maximum_representable_subtotal",
+          "passed": false
+        },
+        {
+          "name": "invalid_quantity",
+          "passed": true
+        },
+        {
+          "name": "invalid_after_free_shipping_line",
+          "passed": true
+        },
+        {
+          "name": "multiplication_overflow",
+          "passed": true
+        },
+        {
+          "name": "summation_overflow",
+          "passed": true
+        },
+        {
+          "name": "null_output",
+          "passed": true
+        },
+        {
+          "name": "null_nonempty_input",
+          "passed": true
+        }
+      ],
+      "passed": 10,
+      "total": 15,
+      "failed": 5
+    },
+    "negative-control-hidden-java": {
+      "passed": 9,
+      "total": 14,
+      "failed": 5,
+      "checks": [
+        {
+          "name": "below_threshold",
+          "passed": true
+        },
+        {
+          "name": "at_threshold",
+          "passed": false
+        },
+        {
+          "name": "above_threshold",
+          "passed": false
+        },
+        {
+          "name": "threshold_from_multiple_lines",
+          "passed": false
+        },
+        {
+          "name": "threshold_from_quantity",
+          "passed": false
+        },
+        {
+          "name": "below_from_quantity",
+          "passed": true
+        },
+        {
+          "name": "empty",
+          "passed": true
+        },
+        {
+          "name": "zero_price",
+          "passed": true
+        },
+        {
+          "name": "maximum_representable_subtotal",
+          "passed": false
+        },
+        {
+          "name": "invalid_quantity",
+          "passed": true
+        },
+        {
+          "name": "invalid_after_free_shipping_line",
+          "passed": true
+        },
+        {
+          "name": "negative_price",
+          "passed": true
+        },
+        {
+          "name": "multiplication_overflow",
+          "passed": true
+        },
+        {
+          "name": "summation_overflow",
+          "passed": true
+        }
+      ]
+    }
+  },
+  "negative_control_detected_missing_feature": true,
+  "candidate_runtime_passed": true,
+  "fixture_unchanged_by_grader": true,
+  "finished_at_utc": "2026-10-06T07:05:43Z",
+  "discarded_generated_cache": {
+    "path": "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/results/go-cache",
+    "reason": "Generated Go compilation cache removed after validation; command logs, grader sources, API results and small native build artifacts retained."
+  }
+}

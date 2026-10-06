@@ -1,0 +1,20 @@
+{
+  "name": "candidate-compile-existing-c",
+  "command": [
+    "/usr/bin/clang",
+    "-std=c17",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo/native/order-c/src/money.c",
+    "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo/native/order-c/src/quote.c",
+    "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo/native/order-c/tests/test_quote.c",
+    "-o",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/results/candidate-build/existing_c"
+  ],
+  "cwd": "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo",
+  "returncode": 0,
+  "seconds": 0.092,
+  "stdout": "",
+  "stderr": ""
+}

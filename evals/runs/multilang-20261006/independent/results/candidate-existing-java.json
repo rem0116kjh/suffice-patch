@@ -1,0 +1,15 @@
+{
+  "name": "candidate-existing-java",
+  "command": [
+    "/opt/homebrew/opt/openjdk@21/bin/java",
+    "-ea",
+    "-cp",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/results/candidate-build/java",
+    "example.order.QuoteTests"
+  ],
+  "cwd": "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo",
+  "returncode": 0,
+  "seconds": 0.064,
+  "stdout": "JAVA_BASELINE_OK groups=5\n",
+  "stderr": ""
+}

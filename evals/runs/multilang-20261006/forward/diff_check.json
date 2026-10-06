@@ -1,0 +1,13 @@
+{
+  "name": "diff_check",
+  "command": [
+    "git",
+    "diff",
+    "--check"
+  ],
+  "cwd": "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo",
+  "returncode": 0,
+  "seconds": 0.013,
+  "stdout": "",
+  "stderr": ""
+}

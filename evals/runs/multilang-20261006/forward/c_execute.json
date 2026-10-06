@@ -1,0 +1,11 @@
+{
+  "name": "c_execute",
+  "command": [
+    "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/forward-evidence/build/test_quote"
+  ],
+  "cwd": "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo",
+  "returncode": 0,
+  "seconds": 0.229,
+  "stdout": "C_BASELINE_OK groups=5\n",
+  "stderr": ""
+}

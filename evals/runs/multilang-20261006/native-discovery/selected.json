@@ -1,0 +1,8 @@
+[
+  {
+    "name": "suffice-patch",
+    "path": "/Users/luka/.agents/skills/suffice-patch/SKILL.md",
+    "enabled": true,
+    "description": "For code, test, configuration, and documentation changes across languages and monorepos, collect bounded source, local dependencies, textual references, project instructions, and Git changes before editing. Use for focused fixes or successive parts of larger repository work."
+  }
+]

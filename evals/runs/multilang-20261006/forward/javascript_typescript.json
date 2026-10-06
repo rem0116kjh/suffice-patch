@@ -1,0 +1,15 @@
+{
+  "name": "javascript_typescript",
+  "command": [
+    "/opt/homebrew/bin/node",
+    "--test",
+    "apps/storefront/test/quote.test.js",
+    "packages/money/test/amount.test.ts",
+    "apps/storefront/test/shipping-threshold.test.js"
+  ],
+  "cwd": "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo",
+  "returncode": 0,
+  "seconds": 0.312,
+  "stdout": "\u2714 empty order (1.098917ms)\n\u2714 ordinary order and unchanged input (0.591708ms)\n\u2714 zero price (0.09125ms)\n\u2714 invalid quantity (0.264791ms)\n\u2714 multiplication overflow (0.083583ms)\n\u2714 shipping for 1 cents (0.862916ms)\n\u2714 shipping for 9999 cents (0.077208ms)\n\u2714 shipping for 10000 cents (0.053125ms)\n\u2714 shipping for 10001 cents (0.052833ms)\n\u2714 shipping for 9007199254740991 cents (0.059333ms)\n\u2714 threshold uses the checked aggregate without changing input (0.076042ms)\n\u2714 free shipping still validates later lines and aggregate overflow (0.221541ms)\n\u2714 typed immutable lines (0.492208ms)\n\u2714 negative price rejected (0.211917ms)\n\u2714 fractional price rejected (0.11175ms)\n\u2139 tests 15\n\u2139 suites 0\n\u2139 pass 15\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 181.314833\n",
+  "stderr": ""
+}

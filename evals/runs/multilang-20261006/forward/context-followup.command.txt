@@ -1,0 +1,1 @@
+python3 -B /Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/bundle/scripts/collect_context.py services/order-java/src/example/order/QuoteService.java services/order-java/src/example/order/Money.java services/order-java/tests/example/order/QuoteTests.java services/order-go/quote/quote_test.go --scope services/order-java --scope services/order-go

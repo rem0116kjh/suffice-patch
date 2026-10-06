@@ -1,0 +1,113 @@
+Caller/test search: 3 matching files (textual, not a complete call graph).
+ROOT: /private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo
+Sources returned: 4; source bytes: 3023
+Languages: java
+
+FILE: services/order-java/src/example/order/QuoteService.java | requested target | SHA256: 26283a74f05136a6e7f4928d6aa83a43f74cf1475b02006645dc661b89bdcf58
+package example.order;
+import java.util.List;
+public final class QuoteService {
+    public record Quote(long subtotalCents, long shippingCents, long totalCents) {}
+    public static Quote quote(List<Line> lines) {
+        long subtotal = Money.subtotal(lines);
+        long shipping = subtotal > 0 && subtotal < 10000 ? 500 : 0;
+        return new Quote(subtotal, shipping, Math.addExact(subtotal, shipping));
+    }
+}
+
+
+FILE: AGENTS.md | project instructions | SHA256: b0e91b337c5b5c95b55c28a2e8e93c314942fef72f889c920576c98b1cd7e417
+Keep unrelated user files and changes intact. Do not edit existing tests to satisfy new behavior.
+This is a dependency-free synthetic multi-language fixture, not an external project benchmark.
+JS/TS: node --test apps/storefront/test/quote.test.js packages/money/test/amount.test.ts
+Go: cd services/order-go && GOPROXY=off GOSUMDB=off GOTOOLCHAIN=local go test ./...
+Native C and Java compile commands are recorded outside this checkout in evidence.
+
+
+FILE: services/order-java/tests/example/order/QuoteTests.java | matching caller or test; textual match | SHA256: cacc53ff11c1d68b78aed106c2cda4edcd261755adf8b5bff815c2a1c428bd4f
+package example.order;
+import java.util.List;
+public final class QuoteTests {
+    public static void main(String[] args) {
+        assert QuoteService.quote(List.of()).equals(new QuoteService.Quote(0, 0, 0));
+        var lines = List.of(new Line(1200, 2), new Line(300, 1));
+        assert QuoteService.quote(lines).equals(new QuoteService.Quote(2700, 500, 3200));
+        assert lines.get(0).equals(new Line(1200, 2));
+        assert QuoteService.quote(List.of(new Line(0, 1))).totalCents() == 0;
+        boolean invalid = false;
+        try { QuoteService.quote(List.of(new Line(100, 0))); } catch (IllegalArgumentException expected) { invalid = true; }
+        assert invalid;
+        boolean overflow = false;
+        try { QuoteService.quote(List.of(new Line(Long.MAX_VALUE, 2))); } catch (ArithmeticException expected) { overflow = true; }
+        assert overflow;
+        System.out.println("JAVA_BASELINE_OK groups=5");
+    }
+}
+
+
+FILE: services/order-java/tests/example/order/ShippingThresholdTests.java | matching caller or test; textual match | SHA256: 3166a3eb06aadecf2fe637e5fd3194be25cbabebf1a50e3e3e5936726b65bab9
+package example.order;
+import java.util.List;
+
+public final class ShippingThresholdTests {
+    public static void main(String[] args) {
+        long[][] cases = {{1, 500}, {9999, 500}, {10000, 0}, {10001, 0}, {Long.MAX_VALUE, 0}};
+        for (long[] boundary : cases) {
+            assert QuoteService.quote(List.of(new Line(boundary[0], 1))).equals(
+                new QuoteService.Quote(boundary[0], boundary[1], boundary[0] + boundary[1]));
+        }
+        var lines = List.of(new Line(3000, 3), new Line(1000, 1));
+        assert QuoteService.quote(lines).equals(new QuoteService.Quote(10000, 0, 10000));
+        assert lines.equals(List.of(new Line(3000, 3), new Line(1000, 1)));
+
+        boolean invalid = false;
+        try {
+            QuoteService.quote(List.of(new Line(10000, 1), new Line(1, 0)));
+        } catch (IllegalArgumentException expected) { invalid = true; }
+        assert invalid;
+        boolean overflow = false;
+        try {
+            QuoteService.quote(List.of(new Line(Long.MAX_VALUE, 1), new Line(1, 1)));
+        } catch (ArithmeticException expected) { overflow = true; }
+        assert overflow;
+        System.out.println("JAVA_THRESHOLD_OK groups=4 boundary_cases=5");
+    }
+}
+
+
+GIT STATUS:
+ M LOCAL_NOTES.md
+ M apps/storefront/src/quote.js
+ M native/order-c/src/quote.c
+ M services/order-go/quote/quote.go
+ M services/order-java/src/example/order/QuoteService.java
+?? DRAFT.txt
+?? apps/storefront/test/shipping-threshold.test.js
+?? native/order-c/tests/test_shipping_threshold.c
+?? services/order-go/quote/shipping_threshold_test.go
+?? services/order-java/tests/example/order/ShippingThresholdTests.java
+
+
+GIT DIFF:
+diff --git a/services/order-java/src/example/order/QuoteService.java b/services/order-java/src/example/order/QuoteService.java
+index 91f48a0..4c47dfe 100644
+--- a/services/order-java/src/example/order/QuoteService.java
++++ b/services/order-java/src/example/order/QuoteService.java
+@@ -4,7 +4,7 @@ public final class QuoteService {
+     public record Quote(long subtotalCents, long shippingCents, long totalCents) {}
+     public static Quote quote(List<Line> lines) {
+         long subtotal = Money.subtotal(lines);
+-        long shipping = subtotal == 0 ? 0 : 500;
++        long shipping = subtotal > 0 && subtotal < 10000 ? 500 : 0;
+         return new Quote(subtotal, shipping, Math.addExact(subtotal, shipping));
+     }
+ }
+
+
+GIT STAGED DIFF:
+
+
+LIMITS / FOLLOW-UP:
+java uses textual symbol/reference hints only; imports and call graphs are not resolved.
+docs uses textual symbol/reference hints only; imports and call graphs are not resolved.
+References are textual candidates, not a complete call graph. Dynamic imports, aliases, generated code, and external packages may need targeted follow-up.

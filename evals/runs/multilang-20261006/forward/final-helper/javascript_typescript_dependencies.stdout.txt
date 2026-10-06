@@ -1,0 +1,154 @@
+Caller/test search: 6 matching files (textual, not a complete call graph).
+ROOT: /private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo
+Sources returned: 8; source bytes: 4279
+Languages: typescript
+
+FILE: packages/money/src/amount.ts | requested target | SHA256: 72975f03baac577e36411c34e0d2601c0d945dfad332a4aa080c10a8f532b22f
+export type Line = Readonly<{ priceCents: number; quantity: number }>;
+
+export function checkedSubtotal(lines: readonly Line[]): number {
+  let subtotal = 0;
+  for (const line of lines) {
+    if (!Number.isSafeInteger(line.priceCents) || line.priceCents < 0 ||
+        !Number.isSafeInteger(line.quantity) || line.quantity <= 0) {
+      throw new RangeError("invalid line");
+    }
+    const amount = line.priceCents * line.quantity;
+    if (!Number.isSafeInteger(amount) || !Number.isSafeInteger(subtotal + amount)) {
+      throw new RangeError("amount overflow");
+    }
+    subtotal += amount;
+  }
+  return subtotal;
+}
+
+
+FILE: packages/money/test/amount.test.ts | requested target | SHA256: 971c4de5b30fc7ea670d64457269300f711063ecee0af91a7b039c20f8501378
+import test from "node:test";
+import assert from "node:assert/strict";
+import { checkedSubtotal, type Line } from "../src/amount.ts";
+
+test("typed immutable lines", () => {
+  const lines: readonly Line[] = Object.freeze([Object.freeze({priceCents: 250, quantity: 3})]);
+  assert.equal(checkedSubtotal(lines), 750);
+});
+test("negative price rejected", () => assert.throws(() => checkedSubtotal([{priceCents: -1, quantity: 1}]), RangeError));
+test("fractional price rejected", () => assert.throws(() => checkedSubtotal([{priceCents: 1.5, quantity: 1}]), RangeError));
+
+
+FILE: AGENTS.md | project instructions | SHA256: b0e91b337c5b5c95b55c28a2e8e93c314942fef72f889c920576c98b1cd7e417
+Keep unrelated user files and changes intact. Do not edit existing tests to satisfy new behavior.
+This is a dependency-free synthetic multi-language fixture, not an external project benchmark.
+JS/TS: node --test apps/storefront/test/quote.test.js packages/money/test/amount.test.ts
+Go: cd services/order-go && GOPROXY=off GOSUMDB=off GOTOOLCHAIN=local go test ./...
+Native C and Java compile commands are recorded outside this checkout in evidence.
+
+
+FILE: packages/money/package.json | project manifest; inspect declared checks without executing it | SHA256: bd9a064c97066793038f34903eaeb1d245d5fb2ffeecabfb6f8592dcabf5ff8b
+{"name":"@fixture/money","private":true,"type":"module","exports":"./src/amount.ts"}
+
+
+FILE: package.json | project manifest; inspect declared checks without executing it | SHA256: 14b87a234edd4b6092b28bd65ffead71e16a7a818197f9223c68146349929f8c
+{"name":"suffice-native-monorepo-fixture","private":true,"type":"module","workspaces":["apps/storefront","packages/money"]}
+
+
+FILE: apps/storefront/src/quote.js | matching caller or test; textual match | SHA256: 8660c1d46b35c838ae6fa2df6fd65c19e17caae56a5beea3aa0a0e77d8fcb690
+import { checkedSubtotal } from "../../../packages/money/src/amount.ts";
+
+export function quote(lines) {
+  const subtotalCents = checkedSubtotal(lines);
+  const shippingCents = subtotalCents > 0 && subtotalCents < 10000 ? 500 : 0;
+  const totalCents = subtotalCents + shippingCents;
+  if (!Number.isSafeInteger(totalCents)) throw new RangeError("amount overflow");
+  return { subtotalCents, shippingCents, totalCents };
+}
+
+
+FILE: apps/storefront/test/quote.test.js | matching caller or test; textual match | SHA256: 2a816be987f23c198a298e4ef644485c2bc3d4081c06cf167efdb878b60d480d
+import test from "node:test";
+import assert from "node:assert/strict";
+import { quote } from "../src/quote.js";
+
+test("empty order", () => assert.deepEqual(quote([]), {subtotalCents: 0, shippingCents: 0, totalCents: 0}));
+test("ordinary order and unchanged input", () => {
+  const lines = [{priceCents: 1200, quantity: 2}, {priceCents: 300, quantity: 1}];
+  const before = JSON.stringify(lines);
+  assert.deepEqual(quote(lines), {subtotalCents: 2700, shippingCents: 500, totalCents: 3200});
+  assert.equal(JSON.stringify(lines), before);
+});
+test("zero price", () => assert.equal(quote([{priceCents: 0, quantity: 1}]).totalCents, 0));
+test("invalid quantity", () => assert.throws(() => quote([{priceCents: 100, quantity: 0}]), RangeError));
+test("multiplication overflow", () => assert.throws(() => quote([{priceCents: Number.MAX_SAFE_INTEGER, quantity: 2}]), RangeError));
+
+
+FILE: apps/storefront/test/shipping-threshold.test.js | matching caller or test; textual match | SHA256: 8f47f3e5aab4f8951d87de857913cc0ee751c48970dbea2385d9739aa39b3411
+import test from "node:test";
+import assert from "node:assert/strict";
+import { quote } from "../src/quote.js";
+
+for (const [subtotalCents, shippingCents] of [
+  [1, 500], [9999, 500], [10000, 0], [10001, 0], [Number.MAX_SAFE_INTEGER, 0],
+]) {
+  test(`shipping for ${subtotalCents} cents`, () => {
+    assert.deepEqual(quote([{ priceCents: subtotalCents, quantity: 1 }]), {
+      subtotalCents, shippingCents, totalCents: subtotalCents + shippingCents,
+    });
+  });
+}
+
+test("threshold uses the checked aggregate without changing input", () => {
+  const lines = Object.freeze([
+    Object.freeze({ priceCents: 3000, quantity: 3 }),
+    Object.freeze({ priceCents: 1000, quantity: 1 }),
+  ]);
+  assert.deepEqual(quote(lines), { subtotalCents: 10000, shippingCents: 0, totalCents: 10000 });
+});
+
+test("free shipping still validates later lines and aggregate overflow", () => {
+  assert.throws(() => quote([
+    { priceCents: 10000, quantity: 1 }, { priceCents: 1, quantity: 0 },
+  ]), RangeError);
+  assert.throws(() => quote([
+    { priceCents: Number.MAX_SAFE_INTEGER, quantity: 1 }, { priceCents: 1, quantity: 1 },
+  ]), RangeError);
+});
+
+
+GIT STATUS:
+ M LOCAL_NOTES.md
+ M apps/storefront/src/quote.js
+ M native/order-c/src/quote.c
+ M services/order-go/quote/quote.go
+ M services/order-java/src/example/order/QuoteService.java
+?? DRAFT.txt
+?? apps/storefront/test/shipping-threshold.test.js
+?? native/order-c/tests/test_shipping_threshold.c
+?? services/order-go/quote/shipping_threshold_test.go
+?? services/order-java/tests/example/order/ShippingThresholdTests.java
+
+
+GIT DIFF:
+diff --git a/apps/storefront/src/quote.js b/apps/storefront/src/quote.js
+index 5927a69..86e8938 100644
+--- a/apps/storefront/src/quote.js
++++ b/apps/storefront/src/quote.js
+@@ -2,7 +2,7 @@ import { checkedSubtotal } from "../../../packages/money/src/amount.ts";
+ 
+ export function quote(lines) {
+   const subtotalCents = checkedSubtotal(lines);
+-  const shippingCents = subtotalCents === 0 ? 0 : 500;
++  const shippingCents = subtotalCents > 0 && subtotalCents < 10000 ? 500 : 0;
+   const totalCents = subtotalCents + shippingCents;
+   if (!Number.isSafeInteger(totalCents)) throw new RangeError("amount overflow");
+   return { subtotalCents, shippingCents, totalCents };
+
+
+GIT STAGED DIFF:
+
+
+LIMITS / FOLLOW-UP:
+JS/TS imports are textual hints; package exports, aliases, templates and runtime loading may need inspection.
+2 import reference(s) external or unresolved; aliases and compiler paths are not inferred.
+docs uses textual symbol/reference hints only; imports and call graphs are not resolved.
+config uses textual symbol/reference hints only; imports and call graphs are not resolved.
+References are textual candidates, not a complete call graph. Dynamic imports, aliases, generated code, and external packages may need targeted follow-up.

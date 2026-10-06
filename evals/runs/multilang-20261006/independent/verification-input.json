@@ -1,0 +1,52 @@
+{
+  "bundle": {
+    "SKILL.md": "78493fc745a271e0c1fe480db39f8fa6a55a42492600dd471233712638419e86",
+    "scripts/collect_context.py": "f20fbe6d6567057a434b940ad57ef77b541c58bb36c8f64def288335d2a16f94",
+    "scripts/context_languages.py": "fa2fcbdd98f1b563d1bee9a53bb1d6d5f1f7163d129178b5ad5a50e9fa8f5a86"
+  },
+  "fixture_before": {
+    "AGENTS.md": "b0e91b337c5b5c95b55c28a2e8e93c314942fef72f889c920576c98b1cd7e417",
+    "DRAFT.txt": "51a472165c44db1c31682711ec813da847cfbb76d312279d6829278b9c300827",
+    "LOCAL_NOTES.md": "09e7f98301669a5177db224165bd719ead06ada8a0cc0c74792fc2b9e9851b8b",
+    "apps/storefront/package.json": "5e2a3babe743cdc632b45cea710ac2dad74a0ba108e2f45c4b97c7b267fd3746",
+    "apps/storefront/src/quote.js": "7852e2d68c933a35de742c91cdc8423c83296d3e79fe7bb46480cf7577ca4675",
+    "apps/storefront/test/quote.test.js": "2a816be987f23c198a298e4ef644485c2bc3d4081c06cf167efdb878b60d480d",
+    "crates/order-rs/Cargo.toml": "62bde1930dd6234513c8013c4d5fc22468fc45addadcbaf3bc309994fc212bbf",
+    "crates/order-rs/src/lib.rs": "e837fa84afd86dd0b78fa58110d7186fa021d6f42c25d12f88bfe0baa0bbd24a",
+    "crates/order-rs/src/money.rs": "99ca591cc73dfff0075e6256e50ef2c78cd7be137d444f2d3265f8cd926d13aa",
+    "crates/order-rs/tests/quote_test.rs": "dbbabd76b46475c15a939ddc114ea94f8a9ce0c197aeb30bd90c27b87ff0b2ca",
+    "docs/architecture.md": "2067f166bc2bcacb44f4f34b0c2b2cd5a911ac1f662aa10546f03d875f33d700",
+    "go.work": "c1f12068070634b0fe54a3d8614ee0925a1e9f86b46d512885fc825ef7f71b88",
+    "native/order-c/CMakeLists.txt": "63ec089d383feb6388d96d57877a051ab0468322c4fb7cf03c7773b4526a7a8f",
+    "native/order-c/include/money.h": "fe8f641a5ef6b4c99c1c52178b4162aabae435ddc95bede153aa2570a300d958",
+    "native/order-c/include/quote.h": "420865800e4e585c9dce18e76beba688c9ca75cc0b261182bbef05461ffd36d1",
+    "native/order-c/src/money.c": "22757d20e53d3f4411877c0ce816c189dfe74288c449cb47ec79d1bbabe3d7ff",
+    "native/order-c/src/quote.c": "e5227e5b3517323f9ae8d98746b772d14126462ff815540168568c034ae315f3",
+    "native/order-c/tests/test_quote.c": "d60d4cd570a4bdc1050976bd190024f3d1b42ac9f43aff132fc14f2b072eae17",
+    "package.json": "14b87a234edd4b6092b28bd65ffead71e16a7a818197f9223c68146349929f8c",
+    "packages/money/package.json": "bd9a064c97066793038f34903eaeb1d245d5fb2ffeecabfb6f8592dcabf5ff8b",
+    "packages/money/src/amount.ts": "72975f03baac577e36411c34e0d2601c0d945dfad332a4aa080c10a8f532b22f",
+    "packages/money/test/amount.test.ts": "971c4de5b30fc7ea670d64457269300f711063ecee0af91a7b039c20f8501378",
+    "services/order-go/go.mod": "e5cb41423749876d62cd6507cb541313b445c05119b6b1d5835a17196d0fcd6b",
+    "services/order-go/internal/money/sum.go": "efec56360840de5d13f79c132c41fea5000b3d0bd8065c6cd69c322102cf3482",
+    "services/order-go/quote/quote.go": "9cff7163322b06d01bb888efd0f71b2284f2cb211de892c4e062757ee3b76f87",
+    "services/order-go/quote/quote_test.go": "8f6c58b2c89963e970bc3aea40a0cbf51b13ee274a45378762011277a71700b7",
+    "services/order-java/src/example/order/Line.java": "78a8a9c586350fa729a0cc19e6e25b22327d0ddae93cb4f82a486c32585f9240",
+    "services/order-java/src/example/order/Money.java": "b47ca2fcbb42223c393a4935c2246e6b0abdbac7111a07a99a02501723baf64c",
+    "services/order-java/src/example/order/QuoteService.java": "76b24bba7a6ef3cd63a851fd0e4fb7773795d0409922ca5d8815a5b0b8bab4ac",
+    "services/order-java/tests/example/order/QuoteTests.java": "cacc53ff11c1d68b78aed106c2cda4edcd261755adf8b5bff815c2a1c428bd4f"
+  },
+  "fixture": "/private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo",
+  "unit_tests": {
+    "count": 52,
+    "passed": 52,
+    "command": "python3 -B -m unittest evals.test_inspect evals.test_multilang evals.test_external_run evals.test_external_summary -q"
+  },
+  "scope": "Functional synthetic checks, not an efficiency comparison or external repository benchmark",
+  "skill_validator": {
+    "command": "/tmp/suffice-skill-validation-20261006/bin/python -B /Users/luka/.codex/skills/.system/skill-creator/scripts/quick_validate.py /Users/luka/Desktop/ctf/suffice-patch",
+    "passed": true,
+    "validation_only_dependency": "PyYAML==6.0.2",
+    "global_python_modified": false
+  }
+}

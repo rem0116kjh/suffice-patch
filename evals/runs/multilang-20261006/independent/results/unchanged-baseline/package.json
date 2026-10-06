@@ -1,0 +1,1 @@
+{"name":"suffice-native-monorepo-fixture","private":true,"type":"module","workspaces":["apps/storefront","packages/money"]}

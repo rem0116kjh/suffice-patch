@@ -1,0 +1,225 @@
+Caller/test search: 13 matching files (textual, not a complete call graph).
+ROOT: /private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo
+Sources returned: 16; source bytes: 6207
+Languages: c, go, java, javascript
+
+FILE: apps/storefront/src/quote.js | requested target | SHA256: 7852e2d68c933a35de742c91cdc8423c83296d3e79fe7bb46480cf7577ca4675
+import { checkedSubtotal } from "../../../packages/money/src/amount.ts";
+
+export function quote(lines) {
+  const subtotalCents = checkedSubtotal(lines);
+  const shippingCents = subtotalCents === 0 ? 0 : 500;
+  const totalCents = subtotalCents + shippingCents;
+  if (!Number.isSafeInteger(totalCents)) throw new RangeError("amount overflow");
+  return { subtotalCents, shippingCents, totalCents };
+}
+
+
+FILE: services/order-go/quote/quote.go | requested target | SHA256: 9cff7163322b06d01bb888efd0f71b2284f2cb211de892c4e062757ee3b76f87
+package quote
+
+import (
+    "errors"
+    "example.test/order/internal/money"
+)
+
+type Line = money.Line
+type Quote struct { SubtotalCents uint64; ShippingCents uint64; TotalCents uint64 }
+
+func Calculate(lines []Line) (Quote, error) {
+    subtotal, err := money.Subtotal(lines)
+    if err != nil { return Quote{}, err }
+    var shipping uint64
+    if subtotal != 0 { shipping = 500 }
+    if subtotal > ^uint64(0) - shipping { return Quote{}, errors.New("amount overflow") }
+    return Quote{subtotal, shipping, subtotal + shipping}, nil
+}
+
+
+FILE: native/order-c/src/quote.c | requested target | SHA256: e5227e5b3517323f9ae8d98746b772d14126462ff815540168568c034ae315f3
+#include "../include/quote.h"
+
+int make_quote(const order_line *lines, size_t count, order_quote *result) {
+    if (!result) return -1;
+    uint64_t subtotal;
+    int status = money_subtotal(lines, count, &subtotal);
+    if (status) return status;
+    uint64_t shipping = subtotal == 0 ? 0 : 500;
+    if (subtotal > UINT64_MAX - shipping) return -2;
+    *result = (order_quote){subtotal, shipping, subtotal + shipping};
+    return 0;
+}
+
+
+FILE: services/order-java/src/example/order/QuoteService.java | requested target | SHA256: 76b24bba7a6ef3cd63a851fd0e4fb7773795d0409922ca5d8815a5b0b8bab4ac
+package example.order;
+import java.util.List;
+public final class QuoteService {
+    public record Quote(long subtotalCents, long shippingCents, long totalCents) {}
+    public static Quote quote(List<Line> lines) {
+        long subtotal = Money.subtotal(lines);
+        long shipping = subtotal == 0 ? 0 : 500;
+        return new Quote(subtotal, shipping, Math.addExact(subtotal, shipping));
+    }
+}
+
+
+FILE: AGENTS.md | project instructions | SHA256: b0e91b337c5b5c95b55c28a2e8e93c314942fef72f889c920576c98b1cd7e417
+Keep unrelated user files and changes intact. Do not edit existing tests to satisfy new behavior.
+This is a dependency-free synthetic multi-language fixture, not an external project benchmark.
+JS/TS: node --test apps/storefront/test/quote.test.js packages/money/test/amount.test.ts
+Go: cd services/order-go && GOPROXY=off GOSUMDB=off GOTOOLCHAIN=local go test ./...
+Native C and Java compile commands are recorded outside this checkout in evidence.
+
+
+FILE: apps/storefront/package.json | project manifest; inspect declared checks without executing it | SHA256: 5e2a3babe743cdc632b45cea710ac2dad74a0ba108e2f45c4b97c7b267fd3746
+{"name":"@fixture/storefront","private":true,"type":"module"}
+
+
+FILE: package.json | project manifest; inspect declared checks without executing it | SHA256: 14b87a234edd4b6092b28bd65ffead71e16a7a818197f9223c68146349929f8c
+{"name":"suffice-native-monorepo-fixture","private":true,"type":"module","workspaces":["apps/storefront","packages/money"]}
+
+
+FILE: services/order-go/go.mod | project manifest; inspect declared checks without executing it | SHA256: e5cb41423749876d62cd6507cb541313b445c05119b6b1d5835a17196d0fcd6b
+module example.test/order
+
+go 1.22
+
+
+FILE: go.work | project manifest; inspect declared checks without executing it | SHA256: c1f12068070634b0fe54a3d8614ee0925a1e9f86b46d512885fc825ef7f71b88
+go 1.22
+
+use ./services/order-go
+
+
+FILE: native/order-c/CMakeLists.txt | project manifest; inspect declared checks without executing it | SHA256: 63ec089d383feb6388d96d57877a051ab0468322c4fb7cf03c7773b4526a7a8f
+cmake_minimum_required(VERSION 3.16)
+project(order_quote C)
+add_library(order_quote src/money.c src/quote.c)
+target_include_directories(order_quote PUBLIC include)
+add_executable(test_quote tests/test_quote.c)
+target_link_libraries(test_quote PRIVATE order_quote)
+enable_testing()
+add_test(NAME quote COMMAND test_quote)
+
+
+FILE: packages/money/src/amount.ts | local import | SHA256: 72975f03baac577e36411c34e0d2601c0d945dfad332a4aa080c10a8f532b22f
+export type Line = Readonly<{ priceCents: number; quantity: number }>;
+
+export function checkedSubtotal(lines: readonly Line[]): number {
+  let subtotal = 0;
+  for (const line of lines) {
+    if (!Number.isSafeInteger(line.priceCents) || line.priceCents < 0 ||
+        !Number.isSafeInteger(line.quantity) || line.quantity <= 0) {
+      throw new RangeError("invalid line");
+    }
+    const amount = line.priceCents * line.quantity;
+    if (!Number.isSafeInteger(amount) || !Number.isSafeInteger(subtotal + amount)) {
+      throw new RangeError("amount overflow");
+    }
+    subtotal += amount;
+  }
+  return subtotal;
+}
+
+
+FILE: services/order-go/internal/money/sum.go | local import | SHA256: efec56360840de5d13f79c132c41fea5000b3d0bd8065c6cd69c322102cf3482
+package money
+
+import "errors"
+
+type Line struct { PriceCents uint64; Quantity uint64 }
+
+func Subtotal(lines []Line) (uint64, error) {
+    var total uint64
+    for _, line := range lines {
+        if line.Quantity == 0 { return 0, errors.New("invalid quantity") }
+        if line.PriceCents > ^uint64(0) / line.Quantity { return 0, errors.New("amount overflow") }
+        amount := line.PriceCents * line.Quantity
+        if total > ^uint64(0) - amount { return 0, errors.New("amount overflow") }
+        total += amount
+    }
+    return total, nil
+}
+
+
+FILE: native/order-c/include/quote.h | local import | SHA256: 420865800e4e585c9dce18e76beba688c9ca75cc0b261182bbef05461ffd36d1
+#ifndef ORDER_QUOTE_H
+#define ORDER_QUOTE_H
+#include "money.h"
+typedef struct { uint64_t subtotal_cents; uint64_t shipping_cents; uint64_t total_cents; } order_quote;
+int make_quote(const order_line *lines, size_t count, order_quote *result);
+#endif
+
+
+FILE: native/order-c/include/money.h | local import | SHA256: fe8f641a5ef6b4c99c1c52178b4162aabae435ddc95bede153aa2570a300d958
+#ifndef ORDER_MONEY_H
+#define ORDER_MONEY_H
+#include <stddef.h>
+#include <stdint.h>
+typedef struct { uint64_t price_cents; uint64_t quantity; } order_line;
+int money_subtotal(const order_line *lines, size_t count, uint64_t *result);
+#endif
+
+
+FILE: apps/storefront/test/quote.test.js | matching caller or test; textual match | SHA256: 2a816be987f23c198a298e4ef644485c2bc3d4081c06cf167efdb878b60d480d
+import test from "node:test";
+import assert from "node:assert/strict";
+import { quote } from "../src/quote.js";
+
+test("empty order", () => assert.deepEqual(quote([]), {subtotalCents: 0, shippingCents: 0, totalCents: 0}));
+test("ordinary order and unchanged input", () => {
+  const lines = [{priceCents: 1200, quantity: 2}, {priceCents: 300, quantity: 1}];
+  const before = JSON.stringify(lines);
+  assert.deepEqual(quote(lines), {subtotalCents: 2700, shippingCents: 500, totalCents: 3200});
+  assert.equal(JSON.stringify(lines), before);
+});
+test("zero price", () => assert.equal(quote([{priceCents: 0, quantity: 1}]).totalCents, 0));
+test("invalid quantity", () => assert.throws(() => quote([{priceCents: 100, quantity: 0}]), RangeError));
+test("multiplication overflow", () => assert.throws(() => quote([{priceCents: Number.MAX_SAFE_INTEGER, quantity: 2}]), RangeError));
+
+
+FILE: native/order-c/tests/test_quote.c | matching caller or test; textual match | SHA256: d60d4cd570a4bdc1050976bd190024f3d1b42ac9f43aff132fc14f2b072eae17
+#include "../include/quote.h"
+#include <assert.h>
+#include <stdio.h>
+
+int main(void) {
+    order_quote result = {99, 99, 99};
+    assert(make_quote(NULL, 0, &result) == 0 && result.total_cents == 0);
+    const order_line ordinary[] = {{1200, 2}, {300, 1}};
+    assert(make_quote(ordinary, 2, &result) == 0);
+    assert(result.subtotal_cents == 2700 && result.shipping_cents == 500 && result.total_cents == 3200);
+    const order_line zero[] = {{0, 1}};
+    assert(make_quote(zero, 1, &result) == 0 && result.total_cents == 0);
+    result = (order_quote){99, 99, 99};
+    const order_line invalid[] = {{100, 0}};
+    assert(make_quote(invalid, 1, &result) == -1 && result.total_cents == 99);
+    const order_line overflow[] = {{UINT64_MAX, 2}};
+    assert(make_quote(overflow, 1, &result) == -2 && result.total_cents == 99);
+    puts("C_BASELINE_OK groups=5");
+    return 0;
+}
+
+
+GIT STATUS:
+
+
+GIT DIFF:
+
+
+GIT STAGED DIFF:
+
+
+LIMITS / FOLLOW-UP:
+JS/TS imports are textual hints; package exports, aliases, templates and runtime loading may need inspection.
+Go package hints exclude tests; build tags, replace directives and workspace dependencies are not evaluated.
+1 import reference(s) external or unresolved; aliases and compiler paths are not inferred.
+C/C++ quoted includes only; compiler include paths, conditional compilation and macros are not evaluated.
+java uses textual symbol/reference hints only; imports and call graphs are not resolved.
+docs uses textual symbol/reference hints only; imports and call graphs are not resolved.
+config uses textual symbol/reference hints only; imports and call graphs are not resolved.
+text uses textual symbol/reference hints only; imports and call graphs are not resolved.
+2 import reference(s) external or unresolved; aliases and compiler paths are not inferred.
+File limit reached; additional context may exist.
+References are textual candidates, not a complete call graph. Dynamic imports, aliases, generated code, and external packages may need targeted follow-up.

@@ -1,0 +1,17 @@
+{
+  "name": "negative-control-compile-java",
+  "command": [
+    "/opt/homebrew/opt/openjdk@21/bin/javac",
+    "-d",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/results/negative-control-build/java",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/results/unchanged-baseline/services/order-java/src/example/order/Line.java",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/results/unchanged-baseline/services/order-java/src/example/order/Money.java",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/results/unchanged-baseline/services/order-java/src/example/order/QuoteService.java",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/IndependentQuoteCheck.java"
+  ],
+  "cwd": "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/results/unchanged-baseline",
+  "returncode": 0,
+  "seconds": 0.488,
+  "stdout": "",
+  "stderr": ""
+}

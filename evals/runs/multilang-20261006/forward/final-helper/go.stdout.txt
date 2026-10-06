@@ -1,0 +1,162 @@
+Caller/test search: 4 matching files (textual, not a complete call graph).
+ROOT: /private/tmp/suffice-multilang-fixture-20261006-dua88vzs/monorepo
+Sources returned: 7; source bytes: 3510
+Languages: go
+
+FILE: services/order-go/quote/quote.go | requested target | SHA256: d037ed2c151240eb5b6707d0d870b5d87afa57b238a1bbbf9f74b68eda5b171b
+package quote
+
+import (
+    "errors"
+    "example.test/order/internal/money"
+)
+
+type Line = money.Line
+type Quote struct { SubtotalCents uint64; ShippingCents uint64; TotalCents uint64 }
+
+func Calculate(lines []Line) (Quote, error) {
+    subtotal, err := money.Subtotal(lines)
+    if err != nil { return Quote{}, err }
+    var shipping uint64
+    if subtotal > 0 && subtotal < 10000 { shipping = 500 }
+    if subtotal > ^uint64(0) - shipping { return Quote{}, errors.New("amount overflow") }
+    return Quote{subtotal, shipping, subtotal + shipping}, nil
+}
+
+
+FILE: AGENTS.md | project instructions | SHA256: b0e91b337c5b5c95b55c28a2e8e93c314942fef72f889c920576c98b1cd7e417
+Keep unrelated user files and changes intact. Do not edit existing tests to satisfy new behavior.
+This is a dependency-free synthetic multi-language fixture, not an external project benchmark.
+JS/TS: node --test apps/storefront/test/quote.test.js packages/money/test/amount.test.ts
+Go: cd services/order-go && GOPROXY=off GOSUMDB=off GOTOOLCHAIN=local go test ./...
+Native C and Java compile commands are recorded outside this checkout in evidence.
+
+
+FILE: services/order-go/go.mod | project manifest; inspect declared checks without executing it | SHA256: e5cb41423749876d62cd6507cb541313b445c05119b6b1d5835a17196d0fcd6b
+module example.test/order
+
+go 1.22
+
+
+FILE: go.work | project manifest; inspect declared checks without executing it | SHA256: c1f12068070634b0fe54a3d8614ee0925a1e9f86b46d512885fc825ef7f71b88
+go 1.22
+
+use ./services/order-go
+
+
+FILE: services/order-go/internal/money/sum.go | local import | SHA256: efec56360840de5d13f79c132c41fea5000b3d0bd8065c6cd69c322102cf3482
+package money
+
+import "errors"
+
+type Line struct { PriceCents uint64; Quantity uint64 }
+
+func Subtotal(lines []Line) (uint64, error) {
+    var total uint64
+    for _, line := range lines {
+        if line.Quantity == 0 { return 0, errors.New("invalid quantity") }
+        if line.PriceCents > ^uint64(0) / line.Quantity { return 0, errors.New("amount overflow") }
+        amount := line.PriceCents * line.Quantity
+        if total > ^uint64(0) - amount { return 0, errors.New("amount overflow") }
+        total += amount
+    }
+    return total, nil
+}
+
+
+FILE: services/order-go/quote/quote_test.go | matching caller or test; textual match | SHA256: 8f6c58b2c89963e970bc3aea40a0cbf51b13ee274a45378762011277a71700b7
+package quote
+
+import "testing"
+
+func TestEmpty(t *testing.T) { got, err := Calculate(nil); if err != nil || got != (Quote{}) { t.Fatalf("%+v %v", got, err) } }
+func TestOrdinary(t *testing.T) {
+    lines := []Line{{1200, 2}, {300, 1}}
+    got, err := Calculate(lines)
+    if err != nil || got != (Quote{2700, 500, 3200}) { t.Fatalf("%+v %v", got, err) }
+    if lines[0] != (Line{1200, 2}) || lines[1] != (Line{300, 1}) { t.Fatal("input changed") }
+}
+func TestZeroPrice(t *testing.T) { got, err := Calculate([]Line{{0, 1}}); if err != nil || got != (Quote{}) { t.Fatalf("%+v %v", got, err) } }
+func TestInvalidQuantity(t *testing.T) { if _, err := Calculate([]Line{{100, 0}}); err == nil { t.Fatal("accepted zero quantity") } }
+func TestOverflow(t *testing.T) { if _, err := Calculate([]Line{{^uint64(0), 2}}); err == nil { t.Fatal("accepted overflow") } }
+
+
+FILE: services/order-go/quote/shipping_threshold_test.go | matching caller or test; textual match | SHA256: b8ad06b025c8227bb13d80f3ba8da820eedc39b2e0aa3d6a00cfdc68671ea268
+package quote
+
+import "testing"
+
+func TestShippingThreshold(t *testing.T) {
+	for _, tc := range []struct{ subtotal, shipping uint64 }{
+		{1, 500}, {9999, 500}, {10000, 0}, {10001, 0}, {^uint64(0), 0},
+	} {
+		got, err := Calculate([]Line{{tc.subtotal, 1}})
+		want := Quote{tc.subtotal, tc.shipping, tc.subtotal + tc.shipping}
+		if err != nil || got != want {
+			t.Fatalf("subtotal %d: got %+v, %v; want %+v", tc.subtotal, got, err, want)
+		}
+	}
+}
+
+func TestCheckedAggregateThreshold(t *testing.T) {
+	lines := []Line{{3000, 3}, {1000, 1}}
+	got, err := Calculate(lines)
+	if err != nil || got != (Quote{10000, 0, 10000}) {
+		t.Fatalf("%+v %v", got, err)
+	}
+	if lines[0] != (Line{3000, 3}) || lines[1] != (Line{1000, 1}) {
+		t.Fatal("input changed")
+	}
+}
+
+func TestFreeShippingStillValidates(t *testing.T) {
+	for _, lines := range [][]Line{
+		{{10000, 1}, {1, 0}},
+		{{^uint64(0), 1}, {1, 1}},
+	} {
+		got, err := Calculate(lines)
+		if err == nil || got != (Quote{}) {
+			t.Fatalf("invalid order returned %+v, %v", got, err)
+		}
+	}
+}
+
+
+GIT STATUS:
+ M LOCAL_NOTES.md
+ M apps/storefront/src/quote.js
+ M native/order-c/src/quote.c
+ M services/order-go/quote/quote.go
+ M services/order-java/src/example/order/QuoteService.java
+?? DRAFT.txt
+?? apps/storefront/test/shipping-threshold.test.js
+?? native/order-c/tests/test_shipping_threshold.c
+?? services/order-go/quote/shipping_threshold_test.go
+?? services/order-java/tests/example/order/ShippingThresholdTests.java
+
+
+GIT DIFF:
+diff --git a/services/order-go/quote/quote.go b/services/order-go/quote/quote.go
+index 5b9a5c4..5194057 100644
+--- a/services/order-go/quote/quote.go
++++ b/services/order-go/quote/quote.go
+@@ -12,7 +12,7 @@ func Calculate(lines []Line) (Quote, error) {
+     subtotal, err := money.Subtotal(lines)
+     if err != nil { return Quote{}, err }
+     var shipping uint64
+-    if subtotal != 0 { shipping = 500 }
++    if subtotal > 0 && subtotal < 10000 { shipping = 500 }
+     if subtotal > ^uint64(0) - shipping { return Quote{}, errors.New("amount overflow") }
+     return Quote{subtotal, shipping, subtotal + shipping}, nil
+ }
+
+
+GIT STAGED DIFF:
+
+
+LIMITS / FOLLOW-UP:
+Go package hints exclude tests; build tags, replace directives and workspace dependencies are not evaluated.
+1 import reference(s) external or unresolved; aliases and compiler paths are not inferred.
+docs uses textual symbol/reference hints only; imports and call graphs are not resolved.
+text uses textual symbol/reference hints only; imports and call graphs are not resolved.
+References are textual candidates, not a complete call graph. Dynamic imports, aliases, generated code, and external packages may need targeted follow-up.

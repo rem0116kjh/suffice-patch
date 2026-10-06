@@ -37,7 +37,7 @@ def snapshot(root):
     return result, bodies
 
 
-def prepared(run, task, platform):
+def prepared(run, task, platform, bundle=BUNDLE):
     result, bodies = {}, {}
     with tarfile.open(run / 'assets' / task['id'] / 'base.tar') as archive:
         for member in archive:
@@ -48,7 +48,7 @@ def prepared(run, task, platform):
             mode = (0o755 if platform.startswith('macOS') else 0o777) if member.issym() else member.mode & 0o755
             result[member.name] = entry(body, mode, 'link' if member.issym() else 'file')
             bodies[member.name] = body
-    for name in BUNDLE:
+    for name in bundle:
         path = '.agents/skills/suffice-patch/' + name
         bodies[path] = (run / 'assets/skill' / name).read_bytes()
         result[path] = entry(bodies[path])
@@ -93,6 +93,7 @@ def main():
             issue(relative, 'frozen source missing')
         else:
             equal(relative, sha(read(path)), expected)
+    bundle = manifest.get('bundle_files', BUNDLE)
     schedule = manifest['schedule']
     tasks = {task['id']: task for task in manifest['tasks']}
     cases = {case['run']: case for case in schedule}
@@ -124,7 +125,7 @@ def main():
             active = [s for s in record['skills'] if s.get('enabled')]
             wanted = [(str(Path(record['cwd']) / '.agents/skills/suffice-patch/SKILL.md'), 'suffice-patch')] if arm == 'implicit' else []
             equal('discovery-' + arm + '.' + record['cwd'], sorted((s['path'], s['name']) for s in active), wanted)
-    bases = {ident: prepared(run, task, manifest['platform']) for ident, task in tasks.items()}
+    bases = {ident: prepared(run, task, manifest['platform'], bundle) for ident, task in tasks.items()}
     prompts = {}
     for case in schedule:
         name, task = case['run'], tasks[case['task']]
@@ -182,7 +183,7 @@ def main():
         maps(name + '.current_vs_after', current, after)
         changed = sorted(p for p in before.keys() | after.keys() if before.get(p) != after.get(p))
         forbidden = [p for p in changed if task.get('expected_noop') or not (p in task['allowed_source_paths'] or (p not in before and p.startswith('tests/') and p.endswith('.py') and after[p]['kind'] == 'file' and task.get('allow_new_tests', True)))]
-        bundle_ok = all(before.get('.agents/skills/suffice-patch/' + p) == after.get('.agents/skills/suffice-patch/' + p) for p in BUNDLE)
+        bundle_ok = all(before.get('.agents/skills/suffice-patch/' + p) == after.get('.agents/skills/suffice-patch/' + p) for p in bundle)
         patch = []
         for path in changed:
             left, right = bases[task['id']][1].get(path, b''), bodies.get(path, b'')

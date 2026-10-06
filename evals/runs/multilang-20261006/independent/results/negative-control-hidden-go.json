@@ -1,0 +1,77 @@
+{
+  "name": "negative-control-hidden-go",
+  "command": [
+    "/opt/homebrew/opt/go/libexec/bin/go",
+    "run",
+    "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/check_go.go"
+  ],
+  "cwd": "/Users/luka/Desktop/ctf/suffice-patch/evals/runs/multilang-20261006/independent/results/unchanged-baseline/services/order-go",
+  "returncode": 1,
+  "seconds": 3.531,
+  "stdout": "{\"checks\":[{\"name\":\"below_threshold\",\"passed\":true},{\"name\":\"at_threshold\",\"passed\":false,\"error\":\"got={SubtotalCents:10000 ShippingCents:500 TotalCents:10500} err=\\u003cnil\\u003e expected={SubtotalCents:10000 ShippingCents:0 TotalCents:10000} wantError=false\"},{\"name\":\"above_threshold\",\"passed\":false,\"error\":\"got={SubtotalCents:10001 ShippingCents:500 TotalCents:10501} err=\\u003cnil\\u003e expected={SubtotalCents:10001 ShippingCents:0 TotalCents:10001} wantError=false\"},{\"name\":\"threshold_from_multiple_lines\",\"passed\":false,\"error\":\"got={SubtotalCents:10000 ShippingCents:500 TotalCents:10500} err=\\u003cnil\\u003e expected={SubtotalCents:10000 ShippingCents:0 TotalCents:10000} wantError=false\"},{\"name\":\"threshold_from_quantity\",\"passed\":false,\"error\":\"got={SubtotalCents:10000 ShippingCents:500 TotalCents:10500} err=\\u003cnil\\u003e expected={SubtotalCents:10000 ShippingCents:0 TotalCents:10000} wantError=false\"},{\"name\":\"below_from_quantity\",\"passed\":true},{\"name\":\"empty\",\"passed\":true},{\"name\":\"zero_price\",\"passed\":true},{\"name\":\"maximum_representable_subtotal\",\"passed\":false,\"error\":\"got={SubtotalCents:0 ShippingCents:0 TotalCents:0} err=amount overflow expected={SubtotalCents:18446744073709551615 ShippingCents:0 TotalCents:18446744073709551615} wantError=false\"},{\"name\":\"invalid_quantity\",\"passed\":true},{\"name\":\"invalid_after_free_shipping_line\",\"passed\":true},{\"name\":\"multiplication_overflow\",\"passed\":true},{\"name\":\"summation_overflow\",\"passed\":true}],\"failed\":5,\"passed\":8,\"total\":13}\n",
+  "stderr": "exit status 1\n",
+  "checks": {
+    "checks": [
+      {
+        "name": "below_threshold",
+        "passed": true
+      },
+      {
+        "name": "at_threshold",
+        "passed": false,
+        "error": "got={SubtotalCents:10000 ShippingCents:500 TotalCents:10500} err=<nil> expected={SubtotalCents:10000 ShippingCents:0 TotalCents:10000} wantError=false"
+      },
+      {
+        "name": "above_threshold",
+        "passed": false,
+        "error": "got={SubtotalCents:10001 ShippingCents:500 TotalCents:10501} err=<nil> expected={SubtotalCents:10001 ShippingCents:0 TotalCents:10001} wantError=false"
+      },
+      {
+        "name": "threshold_from_multiple_lines",
+        "passed": false,
+        "error": "got={SubtotalCents:10000 ShippingCents:500 TotalCents:10500} err=<nil> expected={SubtotalCents:10000 ShippingCents:0 TotalCents:10000} wantError=false"
+      },
+      {
+        "name": "threshold_from_quantity",
+        "passed": false,
+        "error": "got={SubtotalCents:10000 ShippingCents:500 TotalCents:10500} err=<nil> expected={SubtotalCents:10000 ShippingCents:0 TotalCents:10000} wantError=false"
+      },
+      {
+        "name": "below_from_quantity",
+        "passed": true
+      },
+      {
+        "name": "empty",
+        "passed": true
+      },
+      {
+        "name": "zero_price",
+        "passed": true
+      },
+      {
+        "name": "maximum_representable_subtotal",
+        "passed": false,
+        "error": "got={SubtotalCents:0 ShippingCents:0 TotalCents:0} err=amount overflow expected={SubtotalCents:18446744073709551615 ShippingCents:0 TotalCents:18446744073709551615} wantError=false"
+      },
+      {
+        "name": "invalid_quantity",
+        "passed": true
+      },
+      {
+        "name": "invalid_after_free_shipping_line",
+        "passed": true
+      },
+      {
+        "name": "multiplication_overflow",
+        "passed": true
+      },
+      {
+        "name": "summation_overflow",
+        "passed": true
+      }
+    ],
+    "failed": 5,
+    "passed": 8,
+    "total": 13
+  }
+}

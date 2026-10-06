@@ -1,0 +1,15 @@
+{
+  "command": [
+    "python3",
+    "-B",
+    "-m",
+    "unittest",
+    "evals.test_inspect",
+    "evals.test_multilang",
+    "evals.test_external_run",
+    "evals.test_external_summary",
+    "-v"
+  ],
+  "returncode": 0,
+  "duration_seconds": 13.740368458005833
+}

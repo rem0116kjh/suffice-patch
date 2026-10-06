@@ -110,7 +110,7 @@ python-dotenv의 `tests/test_cli.py::test_run_with_command_flags`는 GNU `printe
 
 이는 동일 macOS 호스트에서 복사 설치한 **도우미의 실행 및 보존 동작** 검증이다. 여러 사람의 사용 후기, Python 3.14를 이용한 이번 모델 비교, Linux/Windows 실행, 다른 모델의 효과를 검증한 것은 아니다. Linux는 Docker daemon이 준비되지 않아 실행하지 않았다. 이번 대상은 순수 Python 코드이며 Linux 바이너리를 macOS에서 실행한 것도 아니다.
 
-[설치 검증 원자료](runs/generalization-install-20261006/verification.json), [재현 스크립트](runs/generalization-install-20261006/verify_install.py), [배포용 ZIP](../dist/suffice-patch.zip)에 증거와 번들을 보존했다. ZIP은 검증한 두 파일을 담고 있으며 SHA256은 `07cf0c8fdbe55742f305edaeb075149020aefe62b33a620ca2aebf70ea0de9c1`이다. 이 아카이브 준비는 외부 서비스 공개·배포를 뜻하지 않는다.
+[설치 검증 원자료](runs/generalization-install-20261006/verification.json), [재현 스크립트](runs/generalization-install-20261006/verify_install.py), [배포용 ZIP](../dist/suffice-patch-v3-python.zip)에 증거와 번들을 보존했다. ZIP은 검증한 두 파일을 담고 있으며 SHA256은 `07cf0c8fdbe55742f305edaeb075149020aefe62b33a620ca2aebf70ea0de9c1`이다. 이 아카이브 준비는 외부 서비스 공개·배포를 뜻하지 않는다.
 
 ## 재현
 
@@ -130,6 +130,14 @@ python3 -B evals/runs/generalization-20261006/assets/external_summarize.py \
 ```sh
 python3 -B evals/audit_external.py \
   --run evals/runs/generalization-20261006 --require-complete
+```
+
+동일한 Python 전용 v3 번들로 재현하려면 당시 커밋에서 작업한다. 현재 main의 v4는
+다언어 확장 버전이므로 같은 성능 결과를 기대하는 동일 후보가 아니다.
+
+```sh
+git worktree add --detach /tmp/sufficepatch-v3 2aacc65a953d1b250bb12c28a9d9f1e0b899fd62
+cd /tmp/sufficepatch-v3
 ```
 
 다른 로컬 환경에서 새 평가를 준비하려면 Python 3.12, `git`, `rg`, 해당 Codex CLI와 로그인 상태가 필요하다. 아래 준비 단계는 공개 저장소를 clone하고 저장소별 venv에 고정 의존성을 설치하지만 모델은 호출하지 않는다. 출력 폴더는 새 경로여야 한다.

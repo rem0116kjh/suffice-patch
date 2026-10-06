@@ -4,33 +4,33 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="SufficePatch는 여러 언어와 모노레포에서 코드 변경에 필요한 파일과 참조를 제한된 범위로 모으는 Codex·Claude 스킬입니다. 사용법, 업데이트, 검증 기록을 확인하세요.">
-  <meta name="theme-color" content="#f8f8f2">
+  <meta name="theme-color" content="#080b12">
   <title>SufficePatch — 필요한 맥락을 모아, 코드 변경에 집중</title>
   <link rel="canonical" href="https://rem0116kjh.github.io/suffice-patch/">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%3E%3Crect%20width%3D%2248%22%20height%3D%2248%22%20rx%3D%2212%22%20fill%3D%22%23235c46%22%2F%3E%3Cpath%20d%3D%22M21%2013H13V35H21M27%2013H35V35H27%22%20fill%3D%22none%22%20stroke%3D%22%23faf9f3%22%20stroke-width%3D%223%22%2F%3E%3C%2Fsvg%3E">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%3E%3Crect%20width%3D%2248%22%20height%3D%2248%22%20rx%3D%2212%22%20fill%3D%22%232563eb%22%2F%3E%3Cpath%20d%3D%22M21%2013H13V35H21M27%2013H35V35H27%22%20fill%3D%22none%22%20stroke%3D%22%23ffffff%22%20stroke-width%3D%223%22%2F%3E%3C%2Fsvg%3E">
   <style>
 /* Self-contained project page: no build step or external assets. */
 :root {
-  color-scheme: light;
-  --paper: #f8f8f2;
-  --ink: #24342d;
-  --muted: #5f6b63;
-  --line: #d7ddd3;
-  --green: #235c46;
-  --green-wash: #e9eee4;
-  --orange: #a14625;
+  color-scheme: dark;
+  --background: #080b12;
+  --text: #edf3ff;
+  --muted: #a3b1c8;
+  --line: #29364b;
+  --accent: #70a7ff;
+  --accent-wash: #142947;
+  --highlight: #b9d4ff;
   --mono: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 28px; }
-body { margin: 0; background: var(--paper); color: var(--ink); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; line-height: 1.7; word-break: keep-all; }
+body { margin: 0; background: var(--background); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; line-height: 1.7; word-break: keep-all; }
 a { color: inherit; text-underline-offset: 4px; }
-a:hover { color: var(--green); }
+a:hover { color: var(--accent); }
 a, summary { -webkit-tap-highlight-color: transparent; }
-:focus-visible { outline: 3px solid var(--orange); outline-offset: 5px; }
-::selection { background: #d8e7cd; }
+:focus-visible { outline: 3px solid var(--highlight); outline-offset: 5px; }
+::selection { background: #2554a3; color: #ffffff; }
 .wrap { width: min(1120px, calc(100% - 64px)); margin-inline: auto; }
-.skip { position: absolute; top: -80px; left: 16px; z-index: 10; padding: 10px 20px; background: var(--ink); color: white; }
+.skip { position: absolute; top: -80px; left: 16px; z-index: 10; padding: 10px 20px; background: #2563eb; color: white; }
 .skip:focus { top: 12px; }
 .header { display: flex; align-items: center; justify-content: space-between; gap: 28px; min-height: 96px; border-bottom: 1px solid var(--line); }
 .brand { display: inline-flex; align-items: center; gap: 11px; text-decoration: none; font-size: 19px; font-weight: 750; letter-spacing: -.6px; white-space: nowrap; }
@@ -39,37 +39,38 @@ a, summary { -webkit-tap-highlight-color: transparent; }
 .nav a { text-decoration: none; }
 .locale { display: flex; gap: 8px; align-items: center; font-family: var(--mono); font-size: 12px; }
 .locale a { padding: 5px 7px; }
-.eyebrow { margin: 0 0 25px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font: 11px/1.5 var(--mono); letter-spacing: 1.1px; text-transform: uppercase; color: var(--green); }
-.pill { background: var(--green); color: white; padding: 4px 8px; border-radius: 3px; letter-spacing: .4px; }
+.eyebrow { margin: 0 0 25px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font: 11px/1.5 var(--mono); letter-spacing: 1.1px; text-transform: uppercase; color: var(--accent); }
+.pill { background: #2563eb; color: white; padding: 4px 8px; border-radius: 3px; letter-spacing: .4px; }
 .hero { display: grid; grid-template-columns: 1.1fr 1fr; align-items: center; gap: 60px; padding: 82px 0 66px; }
 h1 { margin: 0; font-size: clamp(35px, 3.7vw, 51px); line-height: 1.26; font-weight: 650; letter-spacing: -2.2px; text-wrap: balance; }
+.hero-accent { color: var(--accent); }
 .hero-copy > p:not(.eyebrow) { max-width: 470px; margin: 24px 0; color: var(--muted); font-size: 16px; }
 .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: 30px; }
-.button { display: inline-flex; justify-content: center; align-items: center; gap: 22px; min-height: 46px; padding: 10px 19px; border-radius: 4px; background: var(--green); color: white; text-decoration: none; font-size: 14px; font-weight: 600; }
-.button:hover { background: #174733; color: white; }
-.button.secondary { background: transparent; color: var(--ink); border: 1px solid var(--line); }
-.button.secondary:hover { border-color: var(--green); }
-.context { border: 1px solid #bfcbbc; border-radius: 7px; box-shadow: 9px 9px 0 var(--green-wash); overflow: hidden; font-family: var(--mono); font-size: 12px; }
-.context-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; background: var(--green-wash); padding: 13px 17px; border-bottom: 1px solid #bfcbbc; }
+.button { display: inline-flex; justify-content: center; align-items: center; gap: 22px; min-height: 46px; padding: 10px 19px; border-radius: 4px; background: #2563eb; color: white; text-decoration: none; font-size: 14px; font-weight: 600; }
+.button:hover { background: #1d4ed8; color: white; }
+.button.secondary { background: transparent; color: var(--text); border: 1px solid var(--line); }
+.button.secondary:hover { border-color: var(--accent); }
+.context { border: 1px solid #35578b; border-radius: 7px; box-shadow: 9px 9px 0 #101e36; overflow: hidden; font-family: var(--mono); font-size: 12px; }
+.context-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; background: #101c31; padding: 13px 17px; border-bottom: 1px solid #35578b; }
 .dots { display: flex; gap: 5px; }
-.dots i { display: block; width: 6px; height: 6px; border: 1px solid #849581; border-radius: 50%; }
-.context-body { padding: 22px 22px 18px; background: #fffef8; }
+.dots i { display: block; width: 6px; height: 6px; border: 1px solid #6981a8; border-radius: 50%; }
+.context-body { padding: 22px 22px 18px; background: #0e1420; }
 .terminal-label { color: var(--muted); font-size: 11px; margin: 0 0 11px; }
-.command { margin: 0 0 23px; overflow-wrap: anywhere; color: var(--green); line-height: 1.9; }
+.command { margin: 0 0 23px; overflow-wrap: anywhere; color: var(--accent); line-height: 1.9; }
 .tree { display: grid; gap: 5px; }
 .tree-row { display: flex; gap: 10px; align-items: baseline; justify-content: space-between; padding: 5px 9px; border-radius: 3px; }
-.tree-row.selected { background: var(--green-wash); }
+.tree-row.selected { background: var(--accent-wash); }
 .tree-row span:first-child { overflow-wrap: anywhere; }
-.tree-row small { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 10px; flex-shrink: 0; color: var(--green); }
-.tree-row.muted { color: #70776e; }
-.context-bottom { display: flex; flex-wrap: wrap; gap: 6px 16px; padding: 12px 22px; border-top: 1px dashed #c9d0c5; background: #fffef8; color: var(--muted); font-size: 10px; }
+.tree-row small { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 10px; flex-shrink: 0; color: var(--accent); }
+.tree-row.muted { color: #94a4bf; }
+.context-bottom { display: flex; flex-wrap: wrap; gap: 6px 16px; padding: 12px 22px; border-top: 1px dashed #29364b; background: #0e1420; color: var(--muted); font-size: 10px; }
 .caption { margin: 15px 0 0; color: var(--muted); font-size: 11px; text-align: right; }
 .limits { display: grid; grid-template-columns: 1.3fr repeat(3, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 25px 0; }
 .limits > div { padding-left: 34px; border-left: 1px solid var(--line); }
 .limits > div:first-child { padding-left: 0; border-left: none; display: flex; align-items: center; }
 .limits strong { display: block; font: 27px/1.3 var(--mono); letter-spacing: -1px; }
 .limits span { color: var(--muted); font-size: 12px; }
-.limits .limits-title { color: var(--ink); font-size: 14px; font-weight: 600; }
+.limits .limits-title { color: var(--text); font-size: 14px; font-weight: 600; }
 .section { padding: 76px 0; border-bottom: 1px solid var(--line); }
 .section-heading { display: grid; grid-template-columns: 1fr 1fr; align-items: end; gap: 45px; margin-bottom: 38px; }
 .section-heading .eyebrow { margin-bottom: 10px; }
@@ -77,51 +78,51 @@ h2 { font-size: 29px; line-height: 1.35; letter-spacing: -1px; margin: 0; font-w
 .section-heading > p { color: var(--muted); font-size: 14px; margin: 0; }
 .workflow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin: 0 0 38px; padding: 0; list-style: none; counter-reset: steps; }
 .workflow li { counter-increment: steps; }
-.workflow li::before { content: "0" counter(steps); font: 13px var(--mono); color: var(--green); display: block; padding-bottom: 14px; }
+.workflow li::before { content: "0" counter(steps); font: 13px var(--mono); color: var(--accent); display: block; padding-bottom: 14px; }
 h3 { font-size: 17px; line-height: 1.45; letter-spacing: -.3px; margin: 0 0 9px; font-weight: 650; }
 .workflow p, .timeline p { font-size: 14px; color: var(--muted); margin: 0; }
 code { font-family: var(--mono); font-size: .9em; overflow-wrap: anywhere; }
 details { border: 1px solid var(--line); border-radius: 4px; }
 summary { padding: 17px 22px; cursor: pointer; font-size: 14px; font-weight: 600; }
-summary:hover { background: var(--green-wash); }
+summary:hover { background: var(--accent-wash); }
 .details-body { padding: 0 22px 22px; }
 .languages { display: grid; grid-template-columns: 1fr 1fr; gap: 22px 36px; }
 .languages dt { font-family: var(--mono); font-size: 12px; font-weight: 700; margin-bottom: 5px; }
 .languages dd { margin: 0; color: var(--muted); font-size: 13px; }
 .note { margin: 22px 0 0; color: var(--muted); font-size: 12px; }
 .evidence-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
-.evidence-block { border-top: 2px solid var(--green); padding-top: 20px; }
-.tag { display: inline-block; font: 11px/1.5 var(--mono); color: var(--green); text-transform: uppercase; margin-bottom: 18px; }
+.evidence-block { border-top: 2px solid var(--accent); padding-top: 20px; }
+.tag { display: inline-block; font: 11px/1.5 var(--mono); color: var(--accent); text-transform: uppercase; margin-bottom: 18px; }
 .checks { display: flex; gap: 42px; margin: 6px 0 20px; }
 .checks strong { display: block; font: 34px/1.3 var(--mono); letter-spacing: -1.6px; }
 .checks span { color: var(--muted); font-size: 12px; }
 .evidence-block p { font-size: 13px; color: var(--muted); margin: 16px 0; }
-.evidence-block .unmeasured { color: var(--ink); border-left: 2px solid var(--orange); padding-left: 12px; }
+.evidence-block .unmeasured { color: var(--text); border-left: 2px solid var(--highlight); padding-left: 12px; }
 .text-link { font-size: 13px; font-weight: 600; }
 .metrics { width: 100%; border-collapse: collapse; font-size: 13px; }
 .metrics th, .metrics td { padding: 9px 0; text-align: left; border-bottom: 1px solid var(--line); }
 .metrics th { font-weight: 500; }
 .metrics td { text-align: right; font-family: var(--mono); }
-.metrics .increase { color: var(--orange); }
-.evidence-note { padding: 15px 18px; border-radius: 4px; background: var(--green-wash); margin: 30px 0 0; font-size: 12px; color: var(--muted); }
+.metrics .increase { color: var(--highlight); }
+.evidence-note { padding: 15px 18px; border-radius: 4px; background: var(--accent-wash); margin: 30px 0 0; font-size: 12px; color: var(--muted); }
 .timeline { list-style: none; padding: 0; margin: 0; }
 .timeline > li { display: grid; grid-template-columns: 165px 1fr; gap: 32px; padding: 26px 0; border-top: 1px solid var(--line); }
 .timeline time { display: block; font: 12px/1.7 var(--mono); color: var(--muted); }
-.timeline .version { font: 11px/1.7 var(--mono); color: var(--green); display: block; margin-top: 7px; }
+.timeline .version { font: 11px/1.7 var(--mono); color: var(--accent); display: block; margin-top: 7px; }
 .timeline p { max-width: 780px; margin-bottom: 9px; }
-.timeline .latest { display: inline-block; padding: 2px 7px; color: white; background: var(--green); border-radius: 3px; }
+.timeline .latest { display: inline-block; padding: 2px 7px; color: white; background: #2563eb; border-radius: 3px; }
 .timeline-links { display: flex; flex-wrap: wrap; gap: 5px 18px; }
 .install { display: grid; grid-template-columns: .85fr 1.2fr; gap: 60px; }
 .install .eyebrow { margin-bottom: 12px; }
 .install p { font-size: 14px; color: var(--muted); }
 .install .actions { gap: 12px; }
-.code-block { background: #24342d; color: #f1f4e9; padding: 23px 26px; border-radius: 5px; }
-.code-block .terminal-label { color: #c1cbbc; }
+.code-block { background: #0e1420; color: #edf3ff; border: 1px solid var(--line); padding: 23px 26px; border-radius: 5px; }
+.code-block .terminal-label { color: #a3b1c8; }
 pre { margin: 10px 0 0; white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word; font: 12px/1.85 var(--mono); }
 pre code { font: inherit; }
 .install-aside .note { font-size: 12px; }
 .footer { display: flex; justify-content: space-between; gap: 28px; padding: 32px 0 42px; color: var(--muted); font-size: 12px; }
-.footer strong { font-weight: 600; color: var(--ink); }
+.footer strong { font-weight: 600; color: var(--text); }
 .footer-links { display: flex; flex-wrap: wrap; gap: 12px 22px; }
 @media (max-width: 920px) {
   .hero { gap: 34px; }
@@ -166,7 +167,7 @@ pre code { font: inherit; }
   <a class="skip" href="#main">본문으로 건너뛰기</a>
   <div class="wrap">
     <header class="header">
-      <a class="brand" href="./" aria-label="SufficePatch 홈"><svg aria-hidden="true" width="30" height="30" viewBox="0 0 48 48"><rect width="48" height="48" rx="12" fill="#235c46"/><path d="M21 13H13V35H21M27 13H35V35H27" fill="none" stroke="#faf9f3" stroke-width="3"/></svg>SufficePatch</a>
+      <a class="brand" href="./" aria-label="SufficePatch 홈"><svg aria-hidden="true" width="30" height="30" viewBox="0 0 48 48"><rect width="48" height="48" rx="12" fill="#2563eb"/><path d="M21 13H13V35H21M27 13H35V35H27" fill="none" stroke="#ffffff" stroke-width="3"/></svg>SufficePatch</a>
       <nav class="nav" aria-label="주 메뉴">
         <a href="#how">사용 방식</a><a href="#evidence">검증</a><a href="#updates">업데이트</a><a href="https://github.com/rem0116kjh/suffice-patch">GitHub ↗</a>
         <div class="locale"><a href="https://github.com/rem0116kjh/suffice-patch/blob/main/README.en.md" lang="en" hreflang="en">English README ↗</a></div>
@@ -176,7 +177,7 @@ pre code { font: inherit; }
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero-copy">
           <p class="eyebrow"><span class="pill">v4</span> A context skill for coding agents</p>
-          <h1 id="hero-title">필요한 맥락을 모아,<br>코드 변경에 집중.</h1>
+          <h1 id="hero-title">필요한 맥락을 모아,<br><span class="hero-accent">코드 변경에 집중.</span></h1>
           <p>여러 언어가 섞인 저장소에서도 관련 소스, 참조, 테스트를 범위 안에서 모읍니다. Codex와 Claude가 수정할 부분을 파악하고 검증하도록 돕는 스킬입니다.</p>
           <div class="actions"><a class="button" href="#install">설치하고 시작하기 <span aria-hidden="true">↗</span></a><a class="button secondary" href="https://github.com/rem0116kjh/suffice-patch/blob/main/README.md">한국어 README</a><a class="text-link" href="https://github.com/rem0116kjh/suffice-patch/blob/main/README.en.md" lang="en" hreflang="en">English README ↗</a></div>
         </div>

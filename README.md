@@ -1,4 +1,8 @@
+한국어 | [English](README.en.md)
+
 # SufficePatch v4
+
+[프로젝트 웹페이지](https://rem0116kjh.github.io/suffice-patch/) · [웹페이지 소스](index.html) · [업데이트 모아 보기](https://rem0116kjh.github.io/suffice-patch/#updates)
 
 여러 언어로 된 코드·테스트·설정·문서를 수정할 때 필요한 파일과 참조를 제한된 범위로
 모아 주는 Codex/Claude 스킬이다. 모노레포는 패키지별로 탐색하고, 큰 변경은 관련 부분을

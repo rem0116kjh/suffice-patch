@@ -1,4 +1,4 @@
-[한국어](README.md) | English
+[한국어](README.md) · English
 
 # SufficePatch v4
 
@@ -176,6 +176,18 @@ Investigate reported gaps and run the required language-specific and integration
 Staying within collection limits does not establish better performance on large repositories
 or guarantee discovery of every affected dependency.
 
+## Update history
+
+- **2026-10-06 · Automatic documentation sync** — Generate the website content from the Korean and English READMEs, with language selection and a table of contents. The blue-and-black design is preserved.
+- **2026-10-06 · v4** — Added language and monorepo exploration, repeatable `--scope`, `--symbol`, file maps, and output limits. [Functional validation and limitations](evals/MULTILANG_20261006.md)
+- **2026-10-06 · Documentation website** — Connected the Korean and English READMEs, installation instructions, cumulative updates, and validation reports through one project page. [Website source](index.html) · [한국어 README](README.md)
+- **2026-10-06 · Website design** — Applied a blue-and-black palette and a documentation-focused layout to the project page. [Project website](https://rem0116kjh.github.io/suffice-patch/)
+- **2026-10-06 · v3 external repository evaluation** — Completed 24 comparisons on historical problems and a raw-evidence audit, and verified evaluation setup at a new path without additional model calls. [Report](evals/GENERALIZATION_20261006.md) · [Prespecified plan](evals/GENERALIZATION_PLAN_20261006.md) · [All results](evals/runs/generalization-20261006/RESULTS.md)
+- **2026-10-06 · v3 optimization** — Reduced duplicate collection work and searches after budget exhaustion, recording helper-only measurements separately from the agent rerun. [Optimization record](evals/OPTIMIZATION_20261006.md)
+- **2026-10-03 · v3 automatic selection** — Preserved the Python task comparison with automatic selection, the separate workflow comparison, and failed candidates. [v3 measurements](evals/V3_RESULTS.md)
+- **2026-10-03 · v2** — Preserved the decision to stop the research after tokens increased by 5.36%, despite both conditions succeeding in 16/16 attempts. [Detailed results](evals/EVAL_RESULTS.md) · [README at the time](evals/README_V2.md)
+- **Initial design · v1 (date not recorded)** — Defined the workflow: intent → context → minimal solution → implementation → verification → stop. [Initial draft](evals/prototype-v1.md) · [v1 record](evals/v1.md)
+
 ## Preserved history
 
 v2 maintained the success rate but used 5.36% more tokens. Its stop decision is preserved in
@@ -183,3 +195,15 @@ the [v2 README](evals/README_V2.md) and [detailed v2 results](evals/EVAL_RESULTS
 The later results belong to a separate v3 experiment resumed at the user's request.
 Previous installations are preserved in the
 [backup and installation record](evals/installation-v3.json).
+
+## Updating the documentation and website
+
+The Korean website content comes from `README.md`; the English content comes from
+`README.en.md`. Edit the relevant file, then commit and push to `main`. GitHub Pages
+converts both documents to static HTML and publishes them once the build and deployment
+finish.
+
+`index.html` is the template for the blue-and-black design and document navigation.
+Edit the introduction, support details, measurements, and updates in the README for the
+relevant language. The website table of contents is also generated from README headings.
+Edit the template only when changing the design.

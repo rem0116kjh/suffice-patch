@@ -32,6 +32,9 @@ __pycache__/
 # Temporary local validation runtime; not required to install or use the skill.
 /evals/v3-validation-python.txt
 .DS_Store
+/_site/
+/.jekyll-cache/
+/.jekyll-metadata
 
 # Native outputs from reproducible multilingual checks.
 /evals/runs/multilang-20261006/independent/results/*-build/

@@ -1,0 +1,18 @@
+title: SufficePatch
+url: https://rem0116kjh.github.io
+baseurl: /suffice-patch
+timezone: Asia/Seoul
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: null
+# Only the website is published. README files are included directly by index.html;
+# repository reports and downloads link to GitHub rather than being built as pages.
+exclude:
+  - README.md
+  - README.en.md
+  - SKILL.md
+  - candidates
+  - dist
+  - evals
+  - scripts

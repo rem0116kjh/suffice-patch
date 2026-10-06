@@ -1,4 +1,4 @@
-한국어 | [English](README.en.md)
+한국어 · [English](README.en.md)
 
 # SufficePatch v4
 
@@ -152,9 +152,31 @@ python3 -B -m unittest evals.test_inspect evals.test_multilang -v
 필수 언어별 검사·통합 검사를 수행해야 한다. 수집 한도 준수는 대형 저장소에서의
 성능 우위나 모든 변경 영향의 발견을 보장하지 않는다.
 
+## 업데이트 기록
+
+- **2026-10-06 · 문서 자동 동기화** — 한국어·영어 README에서 웹 본문을 생성하고, 언어 전환과 목차를 연결했다. 블루·블랙 디자인은 유지한다.
+- **2026-10-06 · v4** — 여러 언어와 모노레포 탐색, 반복 `--scope`, `--symbol`, 파일 지도와 출력 한도를 추가했다. [기능 검증과 한계](evals/MULTILANG_20261006.md)
+- **2026-10-06 · 문서 웹사이트** — 하나의 프로젝트 페이지에서 한국어·영어 README, 설치 방법, 누적 업데이트와 검증 보고서를 연결했다. [웹사이트 소스](index.html) · [English README](README.en.md)
+- **2026-10-06 · 웹 디자인** — 프로젝트 페이지에 블루·블랙 색상과 문서 중심 레이아웃을 적용했다. [프로젝트 페이지](https://rem0116kjh.github.io/suffice-patch/)
+- **2026-10-06 · v3 외부 저장소 평가** — 실제 과거 문제의 24회 비교와 원자료 감사를 완료하고, 새 경로의 평가 준비를 모델 재호출 없이 확인했다. [보고서](evals/GENERALIZATION_20261006.md) · [사전 계획](evals/GENERALIZATION_PLAN_20261006.md) · [전체 결과](evals/runs/generalization-20261006/RESULTS.md)
+- **2026-10-06 · v3 최적화** — 수집기의 중복 작업과 한도 소진 후 검색을 줄이고, 도우미 단독 측정과 에이전트 재실행을 구분해 기록했다. [최적화 기록](evals/OPTIMIZATION_20261006.md)
+- **2026-10-03 · v3 자동 선택** — 자동 선택 조건의 Python 과제 비교, 별도 workflow 비교와 실패한 후보를 함께 보존했다. [v3 측정 기록](evals/V3_RESULTS.md)
+- **2026-10-03 · v2** — 양쪽 16/16 성공에도 토큰이 5.36% 늘어 연구를 중단한 결론을 보존했다. [상세 결과](evals/EVAL_RESULTS.md) · [당시 README](evals/README_V2.md)
+- **초기 설계 · v1 (날짜 미기록)** — 의도 → 맥락 → 최소한의 해결 → 구현 → 검증 → 중단의 작업 흐름을 설계했다. [초기 초안](evals/prototype-v1.md) · [v1 기록](evals/v1.md)
+
 ## 보존한 기록
 
 v2는 성공률을 유지했지만 토큰이 5.36% 늘었다. 당시의 중단 결론을 덮어쓰지 않고
 [v2 README](evals/README_V2.md)와 [v2 상세 결과](evals/EVAL_RESULTS.md)로 보존했다.
 새 결과는 사용자 요청으로 재개한 별도 v3 실험이다. 이전 설치본도
 [백업과 설치 기록](evals/installation-v3.json)에 남겼다.
+
+## 문서와 웹페이지 업데이트
+
+한국어 웹 본문은 `README.md`, 영어 웹 본문은 `README.en.md`에서 가져온다.
+내용을 수정하고 `main`에 커밋·푸시하면 GitHub Pages가 두 문서를 정적 HTML로
+변환해 배포한다. 반영 시점은 Pages 빌드와 배포가 끝난 뒤다.
+
+`index.html`은 블루·블랙 디자인과 문서 연결을 담당하는 템플릿이다.
+소개·지원 범위·수치·업데이트는 해당 언어의 README에서 수정하면 되고,
+웹페이지 목차도 README 제목에서 만들어진다. 디자인을 바꿀 때만 템플릿을 수정한다.

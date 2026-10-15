@@ -11,7 +11,7 @@ and reference/test candidates to help the agent decide what to read and check ne
 Use it for focused bug fixes or package-level work in a monorepo. The inspector is read-only;
 the AI agent performs edits and runs checks using the project's own tools.
 
-[Download v5.0.0](dist/suffice-patch-v5.0.0.zip) · [Validation report](evals/V5_20261015.md) · [CLI and JSON guide](references/cli.md) · [Project website](https://rem0116kjh.github.io/suffice-patch/?lang=en)
+[Download v5.0.0](dist/suffice-patch-v5.0.0.zip) · [Real-project comparison](evals/V5_EXTERNAL_20261015.en.md) · [Functional validation](evals/V5_20261015.md) · [CLI and JSON guide](references/cli.md) · [Project website](https://rem0116kjh.github.io/suffice-patch/?lang=en)
 
 ## When to use it
 
@@ -115,11 +115,72 @@ and Java. Collection limits were also checked with a fixture containing 2,000 un
 Rust execution and TypeScript static type checking remain unverified.
 The [v4 validation report](evals/MULTILANG_20261006.md) distinguishes supported behavior from
 checks that were not run.
-**The time and token measurements below belong to the earlier Python-only v3; they are not
-performance evidence for v4.** Token savings and execution-time improvements for v4 have not
-yet been measured in a controlled comparison.
+The next section compares v4 and v5 on actual editing tasks. The v3 records near the end of
+this page describe separate experiments and are not pooled with this v4/v5 comparison.
 
-## v5 validation and performance
+## v5 real-project comparison (2026-10-15)
+
+**v5 succeeded in 9/9 real bug-fix attempts on public projects. v4 also succeeded in 9/9.**
+We used pinned historical bugs in `python-dotenv`, `packaging`, and `itsdangerous`, with
+three repetitions per version and project: **18 runs** in total. Both versions received the
+same model, prompts and initial project files. Automatic skill execution and protected-file
+preservation were verified in all nine attempts per version.
+
+### Overall usage: nine-run totals per version
+
+| Metric | v4 | v5 | v5 change |
+|---|---:|---:|---:|
+| Successful fixes | 9/9 | 9/9 | Unchanged |
+| Total tokens: input + output | 1,467,232 | 1,360,626 | 7.27% lower |
+| Uncached input tokens | 267,365 | 231,154 | 13.54% lower |
+| Agent task time | 667.35s | 608.37s | 8.84% lower |
+
+Total tokens include cached input. Time includes the agent's exploration, edits and own
+tests, excluding environment preparation and independent post-run grading. Actual billing
+cost was not measured.
+
+### Per-project results: medians of three runs
+
+| Project | v4 total tokens | v5 total tokens | v4 time | v5 time |
+|---|---:|---:|---:|---:|
+| python-dotenv | 151,161 | 145,102 | 63.9s | 73.4s |
+| packaging | 226,724 | 193,253 | 93.6s | 80.5s |
+| itsdangerous | 124,943 | 125,527 | 45.0s | 48.1s |
+
+Both versions passed 3/3 attempts on every project. `packaging` used fewer tokens and less
+time with v5; the other two projects had higher median task times with v5.
+
+### How to interpret the results
+
+The prespecified comparison takes the v5/v4 ratio for each paired repetition, its median
+within each project, then the geometric mean with equal weight for all three projects.
+This differs from raw totals or directly dividing the per-version medians above.
+
+| Prespecified metric | Equal-project comparison | Descriptive bootstrap 95% interval | Improvement criterion |
+|---|---:|---:|---|
+| Total tokens | 5.68% lower | −14.76% to +0.02% | Not met |
+| Task time | 1.36% lower | −13.98% to +6.97% | Not met |
+
+An improvement required preserved success, at least 10% fewer tokens or 5% less time,
+and an interval upper bound below 0% for the respective metric. Neither metric met these
+conditions. With only three projects, the intervals are descriptive measures of variation.
+
+**The workflow worked on these tasks. Consistent token or time improvements were not established.**
+One `itsdangerous` v4 run took 99.02s and affected the raw time total. These results cover
+three historical public Python bugs on one macOS environment, not other languages, large
+repositories or production environments. There was no skill-disabled control.
+
+Settings were `gpt-6-astra / low`, Codex CLI `0.162.1`, Python 3.12 and locked dependencies.
+Success required hidden behavioral checks, existing tests, correct import origins and
+protected-file preservation. One dotenv test incompatible with macOS was excluded equally
+in both versions. There were no failed attempts, timeouts or replacement retries.
+
+[Detailed report and all 18 runs](evals/V5_EXTERNAL_20261015.en.md) ·
+[Measurements, environment and audit](evals/v5-external-results.json) ·
+[Prespecified evaluation plan](evals/V5_EXTERNAL_PLAN_20261015.md) ·
+[Reproducible runner](evals/version_compare.py)
+
+## v5 inspector and installation validation
 
 **Functional checks passed. Speed and output claims are limited to the measured cases.**
 
@@ -146,8 +207,9 @@ These are medians, not measurements of an AI agent completing an editing task.
 | One-file limit | 88.7ms | 90.5ms | 2.1% slower |
 | 12 files in one Go package | 107.3ms | 101.3ms | 5.6% faster |
 
-Both improvements and regressions were observed. **Overall speed or token savings have not
-been established.** The initial candidate-selection mismatch and invalid pilot are preserved.
+The helper-only measurements showed both improvements and regressions. **These figures alone
+do not establish overall agent speed or token savings.** The initial candidate-selection mismatch
+and invalid pilot are preserved.
 [Method and limitations](evals/V5_20261015.md) · [Raw measurements](evals/v5-benchmark.json) ·
 [Summary comparison](evals/v5-summary-output.json) · [Installation verification](evals/v5-installation.json)
 
@@ -169,6 +231,8 @@ Staying within collection limits does not establish better performance on large 
 or guarantee discovery of every affected dependency.
 
 ## Update history
+
+- **2026-10-15 · v5 real-project comparison** — Compared v4/v5 across three public projects in 18 runs. Published 9/9 successes for both versions, 7.27% lower total tokens and 8.84% lower total time, alongside the unmet prespecified improvement criteria. [Detailed results and reproduction](evals/V5_EXTERNAL_20261015.en.md)
 
 - **2026-10-15 · v5 website documentation** — Reorganized use cases, installation, quick start and validation in Korean and English, distinguishing output reduction from timing results.
 

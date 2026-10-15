@@ -1,0 +1,53 @@
+{
+  "version": "5.0.0",
+  "date": "2026-10-15",
+  "package_tests": {
+    "run": 44,
+    "passed": true
+  },
+  "zip_sha256": "576accefd47677269d074b5de14ff2ee7fa5e39aa6cb3b7f85945ba1af7f7438",
+  "installations": [
+    {
+      "name": "codex",
+      "path": "/Users/luka/.agents/skills/suffice-patch",
+      "backup": "/Users/luka/.codex/suffice-v5-backup-ide1wyxv/codex",
+      "files_match_release": {
+        "SKILL.md": true,
+        "scripts/collect_context.py": true,
+        "scripts/context_git.py": true,
+        "scripts/context_languages.py": true,
+        "references/cli.md": true
+      },
+      "reported_version": "SufficePatch 5.0.0",
+      "changed_summary_smoke": {
+        "success": true,
+        "sources": 10
+      }
+    },
+    {
+      "name": "claude",
+      "path": "/Users/luka/.claude/skills/suffice-patch",
+      "backup": "/Users/luka/.codex/suffice-v5-backup-ide1wyxv/claude",
+      "files_match_release": {
+        "SKILL.md": true,
+        "scripts/collect_context.py": true,
+        "scripts/context_git.py": true,
+        "scripts/context_languages.py": true,
+        "references/cli.md": true
+      },
+      "reported_version": "SufficePatch 5.0.0",
+      "changed_summary_smoke": {
+        "success": true,
+        "sources": 10
+      }
+    }
+  ],
+  "native_discovery": {
+    "codex_version": "codex-cli 0.162.1",
+    "method": "app-server skills/list with forceReload; no model turn",
+    "enabled": true,
+    "path": "/Users/luka/.agents/skills/suffice-patch/SKILL.md",
+    "description": "Collect bounded source, local dependencies, reference candidates, project instructions, and Git changes for focused repository edits across languages and monorepos.",
+    "skill_sha256": "8a30b8ca06055f688ad03cf6b68e9e8ccdd39eb470522d5e6db9985157a6c4c0"
+  }
+}

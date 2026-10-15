@@ -1,14 +1,82 @@
 [한국어](README.md) · English
 
-# SufficePatch v4
+# SufficePatch v5.0.0
 
-[Project website](https://rem0116kjh.github.io/suffice-patch/?lang=en) · [Website source](index.html) · [Updates](https://rem0116kjh.github.io/suffice-patch/?lang=en#updates)
+**Collect the files you need before changing the code.**
 
-A Codex/Claude skill that collects a bounded set of files and references for changes to code,
-tests, configuration, and documentation across multiple languages. It guides package-level
-exploration in monorepos, divides larger changes into manageable parts, and finishes with
-integration checks. The helper is written in Python, but target projects do not have to use
-Python. Automatic skill selection remains enabled.
+SufficePatch helps Codex and Claude Code collect a bounded set of source files, project
+instructions and Git changes. Starting from requested files, it finds local dependencies
+and reference/test candidates to help the agent decide what to read and check next.
+
+Use it for focused bug fixes or package-level work in a monorepo. The inspector is read-only;
+the AI agent performs edits and runs checks using the project's own tools.
+
+[Download v5.0.0](dist/suffice-patch-v5.0.0.zip) · [Validation report](evals/V5_20261015.md) · [CLI and JSON guide](references/cli.md) · [Project website](https://rem0116kjh.github.io/suffice-patch/?lang=en)
+
+## When to use it
+
+| Task | Start with | What you get |
+|---|---|---|
+| Fix a specific function or file | A file path | Source, local dependencies, reference/test candidates |
+| Inspect existing edits | `--changed all` or `--changed staged` | Changed paths, current source, staged and unstaged diffs |
+| Explore a large monorepo | `--scope packages/web` | File maps and reference candidates for the selected package |
+| Triage the scope first | `--summary` | Paths, hashes, limits and omissions without source bodies |
+| Connect another tool | `--format json` | A structured result with a schema version |
+
+One collection does not establish every effect of a change. Inspect relevant files in bounded
+parts, then run integration checks when a change affects multiple packages.
+
+## Installation and quick start
+
+The inspector needs **Python 3.9+, Git and ripgrep (`rg`)**. Your project does not need to use
+Python. No additional Python packages or project dependencies are required.
+
+Extract the [installation ZIP](dist/suffice-patch-v5.0.0.zip), enter its `suffice-patch` folder,
+and run these commands to install for Codex. Copy all five files: the skill instructions,
+three Python helpers and CLI reference.
+
+```sh
+mkdir -p "$HOME/.agents/skills/suffice-patch/scripts" "$HOME/.agents/skills/suffice-patch/references"
+cp SKILL.md "$HOME/.agents/skills/suffice-patch/SKILL.md"
+cp scripts/*.py "$HOME/.agents/skills/suffice-patch/scripts/"
+cp references/cli.md "$HOME/.agents/skills/suffice-patch/references/"
+python3 -B "$HOME/.agents/skills/suffice-patch/scripts/collect_context.py" --version
+# SufficePatch 5.0.0
+```
+
+For Claude Code, replace `.agents/skills` with `.claude/skills` in the paths above.
+Use the [SHA256 manifest](dist/release.json) to verify archives and files.
+The [previous v4 archive](dist/suffice-patch-v4.zip) remains available.
+
+After installation, start a new conversation and describe the files, behavior and packages
+you want to change. Codex may select the skill for a relevant request; you can also name it:
+
+```text
+$suffice-patch Fix the cart calculation bug in packages/web.
+Preserve the existing response format and check the relevant tests.
+```
+
+In Claude Code, invoke `/suffice-patch`. Automatic selection is not guaranteed. Current checks
+ran on macOS Apple Silicon; other operating systems and users' environments need validation.
+
+## v5 change selection and output controls
+
+- **Changed-file selection**: start from Git status with `--changed all|staged|worktree`. Handle deletions, renames and nested roots; restrict automatic selection with `--scope`.
+- **Summary and JSON**: `--summary` returns paths and hashes without source bodies or diffs. `--format json` emits a versioned structured result.
+- **Less repeated analysis**: share path checks, manifest reads and package listings within one invocation. Discard caches on exit.
+- **Repeatable searches**: sort paths before applying candidate limits. Check the installed release with `--version`.
+
+```sh
+python3 -B scripts/collect_context.py --changed all --scope packages/web
+python3 -B scripts/collect_context.py --changed staged --summary
+python3 -B scripts/collect_context.py --changed worktree --include-untracked --format json
+python3 -B scripts/collect_context.py --version
+```
+
+Untracked files require `--include-untracked`, valid with all/worktree. Even staged mode
+returns current working-tree source; staged changes have their own diff. Summary still reads
+files to compute hashes and dependencies: it reduces **emitted content**. Read full bodies
+and diffs before editing.
 
 ## Language and monorepo support
 
@@ -51,7 +119,76 @@ checks that were not run.
 performance evidence for v4.** Token savings and execution-time improvements for v4 have not
 yet been measured in a controlled comparison.
 
-## Earlier Python-only v3: external repository evaluation (2026-10-06)
+## v5 validation and performance
+
+**Functional checks passed. Speed and output claims are limited to the measured cases.**
+
+| Check | Result | What it establishes |
+|---|---:|---|
+| Full functional/regression suite | 69/69 passed | 29 existing inspector tests + 15 new tests + 25 evaluation-tool tests |
+| Python 3.12 compatibility | 44/44 passed | Inspector and v5 behavior checks |
+| Extracted ZIP execution | 44/44 passed | Packaged behavior and skill-format validation |
+| Codex and Claude installations | Matching hashes and successful execution | Codex also discovered the new description with the skill enabled |
+| Summary output | 61,706 → 7,833 bytes | 87.3% less emitted content in one self-inspection case |
+
+Summary retains the same source paths and hashes while omitting bodies and diffs. The
+**87.3% figure measures output bytes**, not model tokens, cost or task accuracy. Read relevant
+source and diffs after triage; a summary alone is insufficient for editing.
+
+The helper-only v4/v5 comparison used one warm-up and seven measured runs per condition.
+These are medians, not measurements of an AI agent completing an editing task.
+
+| Case | v4 | v5 | Observation |
+|---|---:|---:|---|
+| Small Python repository | 99.3ms | 99.0ms | 0.3% faster |
+| Repeated imports | 101.8ms | 103.4ms | 1.6% slower |
+| 2,000 reference files | 271.4ms | 293.9ms | 8.3% slower |
+| One-file limit | 88.7ms | 90.5ms | 2.1% slower |
+| 12 files in one Go package | 107.3ms | 101.3ms | 5.6% faster |
+
+Both improvements and regressions were observed. **Overall speed or token savings have not
+been established.** The initial candidate-selection mismatch and invalid pilot are preserved.
+[Method and limitations](evals/V5_20261015.md) · [Raw measurements](evals/v5-benchmark.json) ·
+[Summary comparison](evals/v5-summary-output.json) · [Installation verification](evals/v5-installation.json)
+
+## Helper requirements and limitations
+
+The helper uses Python 3.9 or later, `rg`, and `git`. You can also run it directly from the
+project root:
+
+```sh
+python3 -B scripts/collect_context.py src/lib.rs --scope src
+python3 -B -m unittest evals.test_inspect evals.test_multilang evals.test_v5 -v
+```
+
+The helper does not execute project code or read project source outside the repository.
+The default source budget is 16 files and 40,000 bytes. It reports omissions, limits, and
+search failures. Search results are reference candidates, not a complete call graph.
+Investigate reported gaps and run the required language-specific and integration checks.
+Staying within collection limits does not establish better performance on large repositories
+or guarantee discovery of every affected dependency.
+
+## Update history
+
+- **2026-10-15 · v5 website documentation** — Reorganized use cases, installation, quick start and validation in Korean and English, distinguishing output reduction from timing results.
+
+- **2026-10-15 · v5.0.0** — Added Git change selection, summary/JSON output, per-invocation analysis caches and sorted searches. Updated installations and versioned archives; documented both improvements and regressions. [Validation](evals/V5_20261015.md)
+
+- **2026-10-06 · Automatic documentation sync** — Generate the website content from the Korean and English READMEs, with language selection and a table of contents. The blue-and-black design is preserved.
+- **2026-10-06 · v4** — Added language and monorepo exploration, repeatable `--scope`, `--symbol`, file maps, and output limits. [Functional validation and limitations](evals/MULTILANG_20261006.md)
+- **2026-10-06 · Documentation website** — Connected the Korean and English READMEs, installation instructions, cumulative updates, and validation reports through one project page. [Website source](index.html) · [한국어 README](README.md)
+- **2026-10-06 · Website design** — Applied a blue-and-black palette and a documentation-focused layout to the project page. [Project website](https://rem0116kjh.github.io/suffice-patch/?lang=en)
+- **2026-10-06 · v3 external repository evaluation** — Completed 24 comparisons on historical problems and a raw-evidence audit, and verified evaluation setup at a new path without additional model calls. [Report](evals/GENERALIZATION_20261006.md) · [Prespecified plan](evals/GENERALIZATION_PLAN_20261006.md) · [All results](evals/runs/generalization-20261006/RESULTS.md)
+- **2026-10-06 · v3 optimization** — Reduced duplicate collection work and searches after budget exhaustion, recording helper-only measurements separately from the agent rerun. [Optimization record](evals/OPTIMIZATION_20261006.md)
+- **2026-10-03 · v3 automatic selection** — Preserved the Python task comparison with automatic selection, the separate workflow comparison, and failed candidates. [v3 measurements](evals/V3_RESULTS.md)
+- **2026-10-03 · v2** — Preserved the decision to stop the research after tokens increased by 5.36%, despite both conditions succeeding in 16/16 attempts. [Detailed results](evals/EVAL_RESULTS.md) · [README at the time](evals/README_V2.md)
+- **Initial design · v1 (date not recorded)** — Defined the workflow: intent → context → minimal solution → implementation → verification → stop. [Initial draft](evals/prototype-v1.md) · [v1 record](evals/v1.md)
+
+## Earlier validation records
+
+These results belong to their respective versions and are not combined as evidence for v5.
+
+### Earlier Python-only v3: external repository evaluation (2026-10-06)
 
 Three real historical bugs in `python-dotenv`, `packaging`, and `itsdangerous`, plus one task
 requiring no changes, were compared with three repetitions per condition. Across **24 runs
@@ -86,7 +223,7 @@ The [evaluation report](evals/GENERALIZATION_20261006.md),
 limitations, and reproduction steps. These results are not pooled with the earlier synthetic
 task results below.
 
-## Earlier v3: code optimization and rerun (2026-10-06)
+### Earlier v3: code optimization and rerun (2026-10-06)
 
 The helper was optimized to avoid repeated path discovery, AST analysis, and queue processing,
 and to skip searches once the budget was exhausted. Git filters and ripgrep preprocessors
@@ -105,7 +242,7 @@ These are synthetic observations, not evidence of faster end-to-end agent execut
 [optimization report](evals/OPTIMIZATION_20261006.md) records the tested version, the later
 `.pyi` compatibility change, raw measurements, and reproduction commands.
 
-## Earlier v3 measurements (2026-10-03)
+### Earlier v3 measurements (2026-10-03)
 
 Two Python tasks were each compared twice with Codex automatically selecting the final v3
 version.
@@ -128,67 +265,7 @@ of native automatic skill selection. Failed candidates, a pilot excluded because
 measurement error, detailed figures, and raw evidence are preserved in the
 [v3 evaluation report](evals/V3_RESULTS.md).
 
-## Usage
-
-Describe the files, behavior, and target packages you want to change. Codex may automatically
-select the skill for a relevant request; selection is not guaranteed. You can also invoke it
-explicitly:
-
-```text
-$suffice-patch Update cart calculations in packages/web and validation in services/api together. Preserve the existing response format.
-```
-
-In Claude Code, invoke `/suffice-patch` explicitly. Claude's functional checks and Codex's
-comparative measurements are separate evidence; token savings in Claude have not been
-measured.
-
-Current installation locations:
-
-- Codex: `~/.agents/skills/suffice-patch/`
-- Claude: `~/.claude/skills/suffice-patch/`
-
-For a new installation, **copy both `SKILL.md` and `scripts/`**. The
-[installation ZIP](dist/suffice-patch.zip) contains the current v4 `SKILL.md` and its two Python
-helper files. You do not need to add Python code to your project. Linux, Windows, and
-installations by other users have not been tested. Do not add configuration that disables
-automatic selection.
-
-```sh
-mkdir -p "$HOME/.agents/skills/suffice-patch/scripts"
-cp SKILL.md "$HOME/.agents/skills/suffice-patch/SKILL.md"
-cp scripts/collect_context.py scripts/context_languages.py "$HOME/.agents/skills/suffice-patch/scripts/"
-```
-
-## Helper requirements and limitations
-
-The helper uses Python 3.9 or later, `rg`, and `git`. You can also run it directly from the
-project root:
-
-```sh
-python3 -B scripts/collect_context.py src/lib.rs --scope src
-python3 -B -m unittest evals.test_inspect evals.test_multilang -v
-```
-
-The helper does not execute project code or read project source outside the repository.
-The default source budget is 16 files and 40,000 bytes. It reports omissions, limits, and
-search failures. Search results are reference candidates, not a complete call graph.
-Investigate reported gaps and run the required language-specific and integration checks.
-Staying within collection limits does not establish better performance on large repositories
-or guarantee discovery of every affected dependency.
-
-## Update history
-
-- **2026-10-06 · Automatic documentation sync** — Generate the website content from the Korean and English READMEs, with language selection and a table of contents. The blue-and-black design is preserved.
-- **2026-10-06 · v4** — Added language and monorepo exploration, repeatable `--scope`, `--symbol`, file maps, and output limits. [Functional validation and limitations](evals/MULTILANG_20261006.md)
-- **2026-10-06 · Documentation website** — Connected the Korean and English READMEs, installation instructions, cumulative updates, and validation reports through one project page. [Website source](index.html) · [한국어 README](README.md)
-- **2026-10-06 · Website design** — Applied a blue-and-black palette and a documentation-focused layout to the project page. [Project website](https://rem0116kjh.github.io/suffice-patch/?lang=en)
-- **2026-10-06 · v3 external repository evaluation** — Completed 24 comparisons on historical problems and a raw-evidence audit, and verified evaluation setup at a new path without additional model calls. [Report](evals/GENERALIZATION_20261006.md) · [Prespecified plan](evals/GENERALIZATION_PLAN_20261006.md) · [All results](evals/runs/generalization-20261006/RESULTS.md)
-- **2026-10-06 · v3 optimization** — Reduced duplicate collection work and searches after budget exhaustion, recording helper-only measurements separately from the agent rerun. [Optimization record](evals/OPTIMIZATION_20261006.md)
-- **2026-10-03 · v3 automatic selection** — Preserved the Python task comparison with automatic selection, the separate workflow comparison, and failed candidates. [v3 measurements](evals/V3_RESULTS.md)
-- **2026-10-03 · v2** — Preserved the decision to stop the research after tokens increased by 5.36%, despite both conditions succeeding in 16/16 attempts. [Detailed results](evals/EVAL_RESULTS.md) · [README at the time](evals/README_V2.md)
-- **Initial design · v1 (date not recorded)** — Defined the workflow: intent → context → minimal solution → implementation → verification → stop. [Initial draft](evals/prototype-v1.md) · [v1 record](evals/v1.md)
-
-## Preserved history
+### Preserved history
 
 v2 maintained the success rate but used 5.36% more tokens. Its stop decision is preserved in
 the [v2 README](evals/README_V2.md) and [detailed v2 results](evals/EVAL_RESULTS.md).

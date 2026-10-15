@@ -1,0 +1,17 @@
+{
+  "version": "5.0.0",
+  "schema_version": 1,
+  "date": "2026-10-15",
+  "files": {
+    "SKILL.md": "8a30b8ca06055f688ad03cf6b68e9e8ccdd39eb470522d5e6db9985157a6c4c0",
+    "scripts/collect_context.py": "51409b2a858117569589a384b3145c1d71dd9226c1f7ea6dd7ede3781f947d74",
+    "scripts/context_git.py": "96ab689b7805b22f7d4bb941b6382c84d0e389e223433f7b08f94e41b4d74105",
+    "scripts/context_languages.py": "45fd7ff67b94177e75df4a5cb684f4f6c04591b5babc934aa21be1aed5fc3276",
+    "references/cli.md": "b04d4057acd17b7a9c04f30db52ed12ef397424220e71ac062f39225d3e94d7d"
+  },
+  "archives": {
+    "suffice-patch-v5.0.0.zip": "576accefd47677269d074b5de14ff2ee7fa5e39aa6cb3b7f85945ba1af7f7438",
+    "suffice-patch.zip": "576accefd47677269d074b5de14ff2ee7fa5e39aa6cb3b7f85945ba1af7f7438",
+    "suffice-patch-v4.zip": "c7f11aa2797684514c4396e22eb0b77e2eeb9f61b0d1d7ee0d616bee24e599ff"
+  }
+}

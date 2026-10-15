@@ -1,0 +1,34 @@
+{
+  "case": "collect the v5 collector from this working tree; full vs summary JSON",
+  "results": [
+    {
+      "summary": false,
+      "output_bytes": 61706,
+      "source_count": 5,
+      "source_bytes": 39865,
+      "source_hashes": {
+        "scripts/collect_context.py": "51409b2a858117569589a384b3145c1d71dd9226c1f7ea6dd7ede3781f947d74",
+        "scripts/context_languages.py": "45fd7ff67b94177e75df4a5cb684f4f6c04591b5babc934aa21be1aed5fc3276",
+        "evals/runs/multilang-20261006/forward/context-followup.command.txt": "460f5eca2631d81fc4a50fd94e53a26d6bcc3f46480045d797d8c4146907b827",
+        "evals/runs/multilang-20261006/forward/context.command.txt": "b4dadaac70ac4a1e18d90ffce23f19eeb5d1b1b20b382dfb67cb19936f82b085",
+        "evals/runs/multilang-20261006/forward/final-helper/c.command.txt": "5291d2e83726165293590e6ad2f4e4f5d3d8ff868b9177510b860c33f7810ae0"
+      }
+    },
+    {
+      "summary": true,
+      "output_bytes": 7833,
+      "source_count": 5,
+      "source_bytes": 39865,
+      "source_hashes": {
+        "scripts/collect_context.py": "51409b2a858117569589a384b3145c1d71dd9226c1f7ea6dd7ede3781f947d74",
+        "scripts/context_languages.py": "45fd7ff67b94177e75df4a5cb684f4f6c04591b5babc934aa21be1aed5fc3276",
+        "evals/runs/multilang-20261006/forward/context-followup.command.txt": "460f5eca2631d81fc4a50fd94e53a26d6bcc3f46480045d797d8c4146907b827",
+        "evals/runs/multilang-20261006/forward/context.command.txt": "b4dadaac70ac4a1e18d90ffce23f19eeb5d1b1b20b382dfb67cb19936f82b085",
+        "evals/runs/multilang-20261006/forward/final-helper/c.command.txt": "5291d2e83726165293590e6ad2f4e4f5d3d8ff868b9177510b860c33f7810ae0"
+      }
+    }
+  ],
+  "same_sources": true,
+  "output_reduction_percent": 87.30593459307036,
+  "scope": "Output bytes only; no model tokens, cost or end-to-end agent comparison."
+}

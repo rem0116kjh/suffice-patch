@@ -1,0 +1,1982 @@
+{
+  "benchmark": "isolated inspector subprocess microbenchmark; not an agent or skill quality evaluation",
+  "created_utc": "2026-10-15T05:34:16.728272+00:00",
+  "environment": {
+    "python": "3.15.0 (main, Oct  9 2026, 11:16:41) [Clang 21.0.0 (clang-2100.3.34.2)]",
+    "executable": "/opt/homebrew/opt/python@3.15/bin/python3.15",
+    "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+    "machine": "arm64",
+    "git": "git version 2.55.0",
+    "rg": "ripgrep 15.2.0 (rev e89fff89ac)"
+  },
+  "parameters": {
+    "repetitions": 7,
+    "warmup": 1,
+    "callers": 2000,
+    "seed": 20261006,
+    "timeout_seconds": 30
+  },
+  "method": "Freeze script bytes, warm each variant, then alternate paired execution order; include interpreter startup, search, and Git subprocesses. Fixtures share one root per case. Use medians; preserve every sample. Filesystem cache is warm and not reset.",
+  "scripts": {
+    "before": {
+      "path": "/private/var/folders/73/krw9m9bx40b6xkxngwlzh1lc0000gn/T/suffice-v4-baseline-6tv0jpcy/scripts/collect_context.py",
+      "sha256": "49e65eb99c99b6bcf17b280313ce76b44c6af12e8eda31cf7f2c8fadf119b10a",
+      "bundle_sha256": {
+        "collect_context.py": "49e65eb99c99b6bcf17b280313ce76b44c6af12e8eda31cf7f2c8fadf119b10a",
+        "context_languages.py": "4c1cd7939b38a71848db77926cd7a766788d9de54b3506c236b438e75702b407"
+      }
+    },
+    "after": {
+      "path": "/Users/luka/Desktop/ctf/suffice-patch/scripts/collect_context.py",
+      "sha256": "51409b2a858117569589a384b3145c1d71dd9226c1f7ea6dd7ede3781f947d74",
+      "bundle_sha256": {
+        "collect_context.py": "51409b2a858117569589a384b3145c1d71dd9226c1f7ea6dd7ede3781f947d74",
+        "context_git.py": "96ab689b7805b22f7d4bb941b6382c84d0e389e223433f7b08f94e41b4d74105",
+        "context_languages.py": "45fd7ff67b94177e75df4a5cb684f4f6c04591b5babc934aa21be1aed5fc3276"
+      }
+    }
+  },
+  "cases": [
+    {
+      "name": "small",
+      "fixture": {
+        "python_files": 5,
+        "tracked_fixture": true,
+        "target": "api.customer_label",
+        "repeated_import_statements": 0,
+        "textual_callers_created": 2
+      },
+      "arguments": [
+        "api.customer_label"
+      ],
+      "before": {
+        "median_seconds": 0.099304208,
+        "min_seconds": 0.097276917,
+        "max_seconds": 0.116086125,
+        "stdout_bytes": [
+          1809
+        ],
+        "stdout_stable": true,
+        "source_context_stable": true
+      },
+      "after": {
+        "median_seconds": 0.099042166,
+        "min_seconds": 0.098075208,
+        "max_seconds": 0.1044885,
+        "stdout_bytes": [
+          1809
+        ],
+        "stdout_stable": true,
+        "source_context_stable": true
+      },
+      "median_time_reduction_percent": 0.26387804230814105,
+      "comparison": {
+        "stdout_equivalent": true,
+        "source_context_equivalent": true,
+        "difference": "identical stdout",
+        "before_search_reporting": [
+          "Caller/test search: 3 matching files (textual, not a complete call graph)."
+        ],
+        "after_search_reporting": [
+          "Caller/test search: 3 matching files (textual, not a complete call graph)."
+        ]
+      },
+      "all_runs_succeeded": true,
+      "raw_runs": [
+        {
+          "elapsed_ns": 106889792,
+          "returncode": 0,
+          "stdout_bytes": 1809,
+          "stdout_sha256": "fec98124207f3f76a69ecfa4fdc3e8da700936b871978271771393f7d6854933",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "warmup",
+          "pair": 0,
+          "position": 0,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 102482125,
+          "returncode": 0,
+          "stdout_bytes": 1809,
+          "stdout_sha256": "fec98124207f3f76a69ecfa4fdc3e8da700936b871978271771393f7d6854933",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "warmup",
+          "pair": 0,
+          "position": 1,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 116086125,
+          "returncode": 0,
+          "stdout_bytes": 1809,
+          "stdout_sha256": "fec98124207f3f76a69ecfa4fdc3e8da700936b871978271771393f7d6854933",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 0,
+          "position": 0,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 104488500,
+          "returncode": 0,
+          "stdout_bytes": 1809,
+          "stdout_sha256": "fec98124207f3f76a69ecfa4fdc3e8da700936b871978271771393f7d6854933",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 0,
+          "position": 1,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 100037916,
+          "returncode": 0,
+          "stdout_bytes": 1809,
+          "stdout_sha256": "fec98124207f3f76a69ecfa4fdc3e8da700936b871978271771393f7d6854933",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 1,
+          "position": 0,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 99354500,
+          "returncode": 0,
+          "stdout_bytes": 1809,
+          "stdout_sha256": "fec98124207f3f76a69ecfa4fdc3e8da700936b871978271771393f7d6854933",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 1,
+          "position": 1,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 99863333,
+          "returncode": 0,
+          "stdout_bytes": 1809,
+          "stdout_sha256": "fec98124207f3f76a69ecfa4fdc3e8da700936b871978271771393f7d6854933",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 2,
+          "position": 0,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 98508208,
+          "returncode": 0,
+          "stdout_bytes": 1809,
+          "stdout_sha256": "fec98124207f3f76a69ecfa4fdc3e8da700936b871978271771393f7d6854933",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 2,
+          "position": 1,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 99042166,
+          "returncode": 0,
+          "stdout_bytes": 1809,
+          "stdout_sha256": "fec98124207f3f76a69ecfa4fdc3e8da700936b871978271771393f7d6854933",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 3,
+          "position": 0,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 98191833,
+          "returncode": 0,
+          "stdout_bytes": 1809,
+          "stdout_sha256": "fec98124207f3f76a69ecfa4fdc3e8da700936b871978271771393f7d6854933",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 3,
+          "position": 1,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 99304208,
+          "returncode": 0,
+          "stdout_bytes": 1809,
+          "stdout_sha256": "fec98124207f3f76a69ecfa4fdc3e8da700936b871978271771393f7d6854933",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 4,
+          "position": 0,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 98895166,
+          "returncode": 0,
+          "stdout_bytes": 1809,
+          "stdout_sha256": "fec98124207f3f76a69ecfa4fdc3e8da700936b871978271771393f7d6854933",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 4,
+          "position": 1,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 98075208,
+          "returncode": 0,
+          "stdout_bytes": 1809,
+          "stdout_sha256": "fec98124207f3f76a69ecfa4fdc3e8da700936b871978271771393f7d6854933",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 5,
+          "position": 0,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 97776500,
+          "returncode": 0,
+          "stdout_bytes": 1809,
+          "stdout_sha256": "fec98124207f3f76a69ecfa4fdc3e8da700936b871978271771393f7d6854933",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 5,
+          "position": 1,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 97276917,
+          "returncode": 0,
+          "stdout_bytes": 1809,
+          "stdout_sha256": "fec98124207f3f76a69ecfa4fdc3e8da700936b871978271771393f7d6854933",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 6,
+          "position": 0,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 99337458,
+          "returncode": 0,
+          "stdout_bytes": 1809,
+          "stdout_sha256": "fec98124207f3f76a69ecfa4fdc3e8da700936b871978271771393f7d6854933",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 6,
+          "position": 1,
+          "variant": "after"
+        }
+      ]
+    },
+    {
+      "name": "repeated_imports",
+      "fixture": {
+        "python_files": 5,
+        "tracked_fixture": true,
+        "target": "api.customer_label",
+        "repeated_import_statements": 2000,
+        "textual_callers_created": 2
+      },
+      "arguments": [
+        "api.customer_label"
+      ],
+      "before": {
+        "median_seconds": 0.101820625,
+        "min_seconds": 0.100786709,
+        "max_seconds": 0.1026045,
+        "stdout_bytes": [
+          29867
+        ],
+        "stdout_stable": true,
+        "source_context_stable": true
+      },
+      "after": {
+        "median_seconds": 0.103401125,
+        "min_seconds": 0.101142958,
+        "max_seconds": 0.104465,
+        "stdout_bytes": [
+          29867
+        ],
+        "stdout_stable": true,
+        "source_context_stable": true
+      },
+      "median_time_reduction_percent": -1.552239538894984,
+      "comparison": {
+        "stdout_equivalent": true,
+        "source_context_equivalent": true,
+        "difference": "identical stdout",
+        "before_search_reporting": [
+          "Caller/test search: 3 matching files (textual, not a complete call graph)."
+        ],
+        "after_search_reporting": [
+          "Caller/test search: 3 matching files (textual, not a complete call graph)."
+        ]
+      },
+      "all_runs_succeeded": true,
+      "raw_runs": [
+        {
+          "elapsed_ns": 106472000,
+          "returncode": 0,
+          "stdout_bytes": 29867,
+          "stdout_sha256": "adf4ca9d18cee01b016833a67dc3bb035e5fcd684757b810e953cafce4b19725",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "99aa8316297293ef1018b97fc1ba23fea30714d989d4dce2ca1871e6ace037eb",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "warmup",
+          "pair": 0,
+          "position": 0,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 101243541,
+          "returncode": 0,
+          "stdout_bytes": 29867,
+          "stdout_sha256": "adf4ca9d18cee01b016833a67dc3bb035e5fcd684757b810e953cafce4b19725",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "99aa8316297293ef1018b97fc1ba23fea30714d989d4dce2ca1871e6ace037eb",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "warmup",
+          "pair": 0,
+          "position": 1,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 103587125,
+          "returncode": 0,
+          "stdout_bytes": 29867,
+          "stdout_sha256": "adf4ca9d18cee01b016833a67dc3bb035e5fcd684757b810e953cafce4b19725",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "99aa8316297293ef1018b97fc1ba23fea30714d989d4dce2ca1871e6ace037eb",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 0,
+          "position": 0,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 101062542,
+          "returncode": 0,
+          "stdout_bytes": 29867,
+          "stdout_sha256": "adf4ca9d18cee01b016833a67dc3bb035e5fcd684757b810e953cafce4b19725",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "99aa8316297293ef1018b97fc1ba23fea30714d989d4dce2ca1871e6ace037eb",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 0,
+          "position": 1,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 102009959,
+          "returncode": 0,
+          "stdout_bytes": 29867,
+          "stdout_sha256": "adf4ca9d18cee01b016833a67dc3bb035e5fcd684757b810e953cafce4b19725",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "99aa8316297293ef1018b97fc1ba23fea30714d989d4dce2ca1871e6ace037eb",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 1,
+          "position": 0,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 101520334,
+          "returncode": 0,
+          "stdout_bytes": 29867,
+          "stdout_sha256": "adf4ca9d18cee01b016833a67dc3bb035e5fcd684757b810e953cafce4b19725",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "99aa8316297293ef1018b97fc1ba23fea30714d989d4dce2ca1871e6ace037eb",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 1,
+          "position": 1,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 101142958,
+          "returncode": 0,
+          "stdout_bytes": 29867,
+          "stdout_sha256": "adf4ca9d18cee01b016833a67dc3bb035e5fcd684757b810e953cafce4b19725",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "99aa8316297293ef1018b97fc1ba23fea30714d989d4dce2ca1871e6ace037eb",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 2,
+          "position": 0,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 101820625,
+          "returncode": 0,
+          "stdout_bytes": 29867,
+          "stdout_sha256": "adf4ca9d18cee01b016833a67dc3bb035e5fcd684757b810e953cafce4b19725",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "99aa8316297293ef1018b97fc1ba23fea30714d989d4dce2ca1871e6ace037eb",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 2,
+          "position": 1,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 102521709,
+          "returncode": 0,
+          "stdout_bytes": 29867,
+          "stdout_sha256": "adf4ca9d18cee01b016833a67dc3bb035e5fcd684757b810e953cafce4b19725",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "99aa8316297293ef1018b97fc1ba23fea30714d989d4dce2ca1871e6ace037eb",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 3,
+          "position": 0,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 104333000,
+          "returncode": 0,
+          "stdout_bytes": 29867,
+          "stdout_sha256": "adf4ca9d18cee01b016833a67dc3bb035e5fcd684757b810e953cafce4b19725",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "99aa8316297293ef1018b97fc1ba23fea30714d989d4dce2ca1871e6ace037eb",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 3,
+          "position": 1,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 104465000,
+          "returncode": 0,
+          "stdout_bytes": 29867,
+          "stdout_sha256": "adf4ca9d18cee01b016833a67dc3bb035e5fcd684757b810e953cafce4b19725",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "99aa8316297293ef1018b97fc1ba23fea30714d989d4dce2ca1871e6ace037eb",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 4,
+          "position": 0,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 100786709,
+          "returncode": 0,
+          "stdout_bytes": 29867,
+          "stdout_sha256": "adf4ca9d18cee01b016833a67dc3bb035e5fcd684757b810e953cafce4b19725",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "99aa8316297293ef1018b97fc1ba23fea30714d989d4dce2ca1871e6ace037eb",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 4,
+          "position": 1,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 102604500,
+          "returncode": 0,
+          "stdout_bytes": 29867,
+          "stdout_sha256": "adf4ca9d18cee01b016833a67dc3bb035e5fcd684757b810e953cafce4b19725",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "99aa8316297293ef1018b97fc1ba23fea30714d989d4dce2ca1871e6ace037eb",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 5,
+          "position": 0,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 103174750,
+          "returncode": 0,
+          "stdout_bytes": 29867,
+          "stdout_sha256": "adf4ca9d18cee01b016833a67dc3bb035e5fcd684757b810e953cafce4b19725",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "99aa8316297293ef1018b97fc1ba23fea30714d989d4dce2ca1871e6ace037eb",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 5,
+          "position": 1,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 103401125,
+          "returncode": 0,
+          "stdout_bytes": 29867,
+          "stdout_sha256": "adf4ca9d18cee01b016833a67dc3bb035e5fcd684757b810e953cafce4b19725",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "99aa8316297293ef1018b97fc1ba23fea30714d989d4dce2ca1871e6ace037eb",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 6,
+          "position": 0,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 101364916,
+          "returncode": 0,
+          "stdout_bytes": 29867,
+          "stdout_sha256": "adf4ca9d18cee01b016833a67dc3bb035e5fcd684757b810e953cafce4b19725",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "99aa8316297293ef1018b97fc1ba23fea30714d989d4dce2ca1871e6ace037eb",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "test_api.py": "a8ebf4316041ebec851a50db501ba9c209efdbf95ec5f17b3e2f616381b65a84",
+            "web.py": "36fd7a801d1e300598c17c4a48e3f36ee64d9d9a154cbcb131c972f38a204c5f"
+          },
+          "phase": "measured",
+          "pair": 6,
+          "position": 1,
+          "variant": "before"
+        }
+      ]
+    },
+    {
+      "name": "many_callers",
+      "fixture": {
+        "python_files": 2005,
+        "tracked_fixture": true,
+        "target": "api.customer_label",
+        "repeated_import_statements": 0,
+        "textual_callers_created": 2000
+      },
+      "arguments": [
+        "--max-search-matches",
+        "2016",
+        "api.customer_label"
+      ],
+      "before": {
+        "median_seconds": 0.271425625,
+        "min_seconds": 0.265784208,
+        "max_seconds": 0.274847375,
+        "stdout_bytes": [
+          4747
+        ],
+        "stdout_stable": true,
+        "source_context_stable": true
+      },
+      "after": {
+        "median_seconds": 0.293938708,
+        "min_seconds": 0.291563166,
+        "max_seconds": 0.2995925,
+        "stdout_bytes": [
+          4747
+        ],
+        "stdout_stable": true,
+        "source_context_stable": true
+      },
+      "median_time_reduction_percent": -8.29438377456071,
+      "comparison": {
+        "stdout_equivalent": true,
+        "source_context_equivalent": true,
+        "difference": "identical stdout",
+        "before_search_reporting": [
+          "Caller/test search: 2003 matching files (textual, not a complete call graph)."
+        ],
+        "after_search_reporting": [
+          "Caller/test search: 2003 matching files (textual, not a complete call graph)."
+        ]
+      },
+      "all_runs_succeeded": true,
+      "raw_runs": [
+        {
+          "elapsed_ns": 301677708,
+          "returncode": 0,
+          "stdout_bytes": 4747,
+          "stdout_sha256": "6a6005220efea0546ab84fdfabf12997c75abdc32a65d55c73716eb15b3418f1",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "callers/caller_00000.py": "1b026c4ffa4c5089a19f6bde019327100ad1528de6de1c6ee16ae85a9478b78c",
+            "callers/caller_00001.py": "1c279c0298c53344c2756ed276b863bb056ee07fd27e42faf429d4962509871f",
+            "callers/caller_00002.py": "abd6b8e2af4e13814fe5d825c7fbeb574b444b1adef8b14a3c2adb943bef9f65",
+            "callers/caller_00003.py": "c834fc80028da91cfc89c212291eb01dd6a0ad079fd0a9e47d44705504114a44",
+            "callers/caller_00004.py": "d907042fdcdd7a2a5f79548bb1370c55e6b0fb4f6573b707a4b7fdd9e46d8392",
+            "callers/caller_00005.py": "22192d39178e025bbd971680ca42fa8095d458114183dc1fcf23cafaba0e0355",
+            "callers/caller_00006.py": "f7858354ffa4f468c92b1d2b9a6610165408caf8e1481d0ca3fca5cb20186472",
+            "callers/caller_00007.py": "48a37b70e2b65d5f75a2d1656accc134c269b08258693c6fab3a99cfcb0854d8",
+            "callers/caller_00008.py": "3adbc1ec73f682b5377ea3ac6e59dbe76f37ae77c3f21e5aae5ad2e56c51efcc",
+            "callers/caller_00009.py": "ec30e6e8f64568dadeb672c09b5b5bb557e8605d70462dc940e221c1d4386ffd",
+            "callers/caller_00010.py": "011044868652d85735056faf84cba6367884905e2a7bad7b2dc85dad6aa49419",
+            "callers/caller_00011.py": "70d91fb8a805788929c4756bb58a1cc2070159359841a4b693b76e2029f62b29",
+            "callers/caller_00012.py": "0124a38311f2149098694301aa39a9a559de18be7b3767d8e2ddd267189daefb"
+          },
+          "phase": "warmup",
+          "pair": 0,
+          "position": 0,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 298460792,
+          "returncode": 0,
+          "stdout_bytes": 4747,
+          "stdout_sha256": "6a6005220efea0546ab84fdfabf12997c75abdc32a65d55c73716eb15b3418f1",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "callers/caller_00000.py": "1b026c4ffa4c5089a19f6bde019327100ad1528de6de1c6ee16ae85a9478b78c",
+            "callers/caller_00001.py": "1c279c0298c53344c2756ed276b863bb056ee07fd27e42faf429d4962509871f",
+            "callers/caller_00002.py": "abd6b8e2af4e13814fe5d825c7fbeb574b444b1adef8b14a3c2adb943bef9f65",
+            "callers/caller_00003.py": "c834fc80028da91cfc89c212291eb01dd6a0ad079fd0a9e47d44705504114a44",
+            "callers/caller_00004.py": "d907042fdcdd7a2a5f79548bb1370c55e6b0fb4f6573b707a4b7fdd9e46d8392",
+            "callers/caller_00005.py": "22192d39178e025bbd971680ca42fa8095d458114183dc1fcf23cafaba0e0355",
+            "callers/caller_00006.py": "f7858354ffa4f468c92b1d2b9a6610165408caf8e1481d0ca3fca5cb20186472",
+            "callers/caller_00007.py": "48a37b70e2b65d5f75a2d1656accc134c269b08258693c6fab3a99cfcb0854d8",
+            "callers/caller_00008.py": "3adbc1ec73f682b5377ea3ac6e59dbe76f37ae77c3f21e5aae5ad2e56c51efcc",
+            "callers/caller_00009.py": "ec30e6e8f64568dadeb672c09b5b5bb557e8605d70462dc940e221c1d4386ffd",
+            "callers/caller_00010.py": "011044868652d85735056faf84cba6367884905e2a7bad7b2dc85dad6aa49419",
+            "callers/caller_00011.py": "70d91fb8a805788929c4756bb58a1cc2070159359841a4b693b76e2029f62b29",
+            "callers/caller_00012.py": "0124a38311f2149098694301aa39a9a559de18be7b3767d8e2ddd267189daefb"
+          },
+          "phase": "warmup",
+          "pair": 0,
+          "position": 1,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 274847375,
+          "returncode": 0,
+          "stdout_bytes": 4747,
+          "stdout_sha256": "6a6005220efea0546ab84fdfabf12997c75abdc32a65d55c73716eb15b3418f1",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "callers/caller_00000.py": "1b026c4ffa4c5089a19f6bde019327100ad1528de6de1c6ee16ae85a9478b78c",
+            "callers/caller_00001.py": "1c279c0298c53344c2756ed276b863bb056ee07fd27e42faf429d4962509871f",
+            "callers/caller_00002.py": "abd6b8e2af4e13814fe5d825c7fbeb574b444b1adef8b14a3c2adb943bef9f65",
+            "callers/caller_00003.py": "c834fc80028da91cfc89c212291eb01dd6a0ad079fd0a9e47d44705504114a44",
+            "callers/caller_00004.py": "d907042fdcdd7a2a5f79548bb1370c55e6b0fb4f6573b707a4b7fdd9e46d8392",
+            "callers/caller_00005.py": "22192d39178e025bbd971680ca42fa8095d458114183dc1fcf23cafaba0e0355",
+            "callers/caller_00006.py": "f7858354ffa4f468c92b1d2b9a6610165408caf8e1481d0ca3fca5cb20186472",
+            "callers/caller_00007.py": "48a37b70e2b65d5f75a2d1656accc134c269b08258693c6fab3a99cfcb0854d8",
+            "callers/caller_00008.py": "3adbc1ec73f682b5377ea3ac6e59dbe76f37ae77c3f21e5aae5ad2e56c51efcc",
+            "callers/caller_00009.py": "ec30e6e8f64568dadeb672c09b5b5bb557e8605d70462dc940e221c1d4386ffd",
+            "callers/caller_00010.py": "011044868652d85735056faf84cba6367884905e2a7bad7b2dc85dad6aa49419",
+            "callers/caller_00011.py": "70d91fb8a805788929c4756bb58a1cc2070159359841a4b693b76e2029f62b29",
+            "callers/caller_00012.py": "0124a38311f2149098694301aa39a9a559de18be7b3767d8e2ddd267189daefb"
+          },
+          "phase": "measured",
+          "pair": 0,
+          "position": 0,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 299592500,
+          "returncode": 0,
+          "stdout_bytes": 4747,
+          "stdout_sha256": "6a6005220efea0546ab84fdfabf12997c75abdc32a65d55c73716eb15b3418f1",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "callers/caller_00000.py": "1b026c4ffa4c5089a19f6bde019327100ad1528de6de1c6ee16ae85a9478b78c",
+            "callers/caller_00001.py": "1c279c0298c53344c2756ed276b863bb056ee07fd27e42faf429d4962509871f",
+            "callers/caller_00002.py": "abd6b8e2af4e13814fe5d825c7fbeb574b444b1adef8b14a3c2adb943bef9f65",
+            "callers/caller_00003.py": "c834fc80028da91cfc89c212291eb01dd6a0ad079fd0a9e47d44705504114a44",
+            "callers/caller_00004.py": "d907042fdcdd7a2a5f79548bb1370c55e6b0fb4f6573b707a4b7fdd9e46d8392",
+            "callers/caller_00005.py": "22192d39178e025bbd971680ca42fa8095d458114183dc1fcf23cafaba0e0355",
+            "callers/caller_00006.py": "f7858354ffa4f468c92b1d2b9a6610165408caf8e1481d0ca3fca5cb20186472",
+            "callers/caller_00007.py": "48a37b70e2b65d5f75a2d1656accc134c269b08258693c6fab3a99cfcb0854d8",
+            "callers/caller_00008.py": "3adbc1ec73f682b5377ea3ac6e59dbe76f37ae77c3f21e5aae5ad2e56c51efcc",
+            "callers/caller_00009.py": "ec30e6e8f64568dadeb672c09b5b5bb557e8605d70462dc940e221c1d4386ffd",
+            "callers/caller_00010.py": "011044868652d85735056faf84cba6367884905e2a7bad7b2dc85dad6aa49419",
+            "callers/caller_00011.py": "70d91fb8a805788929c4756bb58a1cc2070159359841a4b693b76e2029f62b29",
+            "callers/caller_00012.py": "0124a38311f2149098694301aa39a9a559de18be7b3767d8e2ddd267189daefb"
+          },
+          "phase": "measured",
+          "pair": 0,
+          "position": 1,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 297141000,
+          "returncode": 0,
+          "stdout_bytes": 4747,
+          "stdout_sha256": "6a6005220efea0546ab84fdfabf12997c75abdc32a65d55c73716eb15b3418f1",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "callers/caller_00000.py": "1b026c4ffa4c5089a19f6bde019327100ad1528de6de1c6ee16ae85a9478b78c",
+            "callers/caller_00001.py": "1c279c0298c53344c2756ed276b863bb056ee07fd27e42faf429d4962509871f",
+            "callers/caller_00002.py": "abd6b8e2af4e13814fe5d825c7fbeb574b444b1adef8b14a3c2adb943bef9f65",
+            "callers/caller_00003.py": "c834fc80028da91cfc89c212291eb01dd6a0ad079fd0a9e47d44705504114a44",
+            "callers/caller_00004.py": "d907042fdcdd7a2a5f79548bb1370c55e6b0fb4f6573b707a4b7fdd9e46d8392",
+            "callers/caller_00005.py": "22192d39178e025bbd971680ca42fa8095d458114183dc1fcf23cafaba0e0355",
+            "callers/caller_00006.py": "f7858354ffa4f468c92b1d2b9a6610165408caf8e1481d0ca3fca5cb20186472",
+            "callers/caller_00007.py": "48a37b70e2b65d5f75a2d1656accc134c269b08258693c6fab3a99cfcb0854d8",
+            "callers/caller_00008.py": "3adbc1ec73f682b5377ea3ac6e59dbe76f37ae77c3f21e5aae5ad2e56c51efcc",
+            "callers/caller_00009.py": "ec30e6e8f64568dadeb672c09b5b5bb557e8605d70462dc940e221c1d4386ffd",
+            "callers/caller_00010.py": "011044868652d85735056faf84cba6367884905e2a7bad7b2dc85dad6aa49419",
+            "callers/caller_00011.py": "70d91fb8a805788929c4756bb58a1cc2070159359841a4b693b76e2029f62b29",
+            "callers/caller_00012.py": "0124a38311f2149098694301aa39a9a559de18be7b3767d8e2ddd267189daefb"
+          },
+          "phase": "measured",
+          "pair": 1,
+          "position": 0,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 274326541,
+          "returncode": 0,
+          "stdout_bytes": 4747,
+          "stdout_sha256": "6a6005220efea0546ab84fdfabf12997c75abdc32a65d55c73716eb15b3418f1",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "callers/caller_00000.py": "1b026c4ffa4c5089a19f6bde019327100ad1528de6de1c6ee16ae85a9478b78c",
+            "callers/caller_00001.py": "1c279c0298c53344c2756ed276b863bb056ee07fd27e42faf429d4962509871f",
+            "callers/caller_00002.py": "abd6b8e2af4e13814fe5d825c7fbeb574b444b1adef8b14a3c2adb943bef9f65",
+            "callers/caller_00003.py": "c834fc80028da91cfc89c212291eb01dd6a0ad079fd0a9e47d44705504114a44",
+            "callers/caller_00004.py": "d907042fdcdd7a2a5f79548bb1370c55e6b0fb4f6573b707a4b7fdd9e46d8392",
+            "callers/caller_00005.py": "22192d39178e025bbd971680ca42fa8095d458114183dc1fcf23cafaba0e0355",
+            "callers/caller_00006.py": "f7858354ffa4f468c92b1d2b9a6610165408caf8e1481d0ca3fca5cb20186472",
+            "callers/caller_00007.py": "48a37b70e2b65d5f75a2d1656accc134c269b08258693c6fab3a99cfcb0854d8",
+            "callers/caller_00008.py": "3adbc1ec73f682b5377ea3ac6e59dbe76f37ae77c3f21e5aae5ad2e56c51efcc",
+            "callers/caller_00009.py": "ec30e6e8f64568dadeb672c09b5b5bb557e8605d70462dc940e221c1d4386ffd",
+            "callers/caller_00010.py": "011044868652d85735056faf84cba6367884905e2a7bad7b2dc85dad6aa49419",
+            "callers/caller_00011.py": "70d91fb8a805788929c4756bb58a1cc2070159359841a4b693b76e2029f62b29",
+            "callers/caller_00012.py": "0124a38311f2149098694301aa39a9a559de18be7b3767d8e2ddd267189daefb"
+          },
+          "phase": "measured",
+          "pair": 1,
+          "position": 1,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 271425625,
+          "returncode": 0,
+          "stdout_bytes": 4747,
+          "stdout_sha256": "6a6005220efea0546ab84fdfabf12997c75abdc32a65d55c73716eb15b3418f1",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "callers/caller_00000.py": "1b026c4ffa4c5089a19f6bde019327100ad1528de6de1c6ee16ae85a9478b78c",
+            "callers/caller_00001.py": "1c279c0298c53344c2756ed276b863bb056ee07fd27e42faf429d4962509871f",
+            "callers/caller_00002.py": "abd6b8e2af4e13814fe5d825c7fbeb574b444b1adef8b14a3c2adb943bef9f65",
+            "callers/caller_00003.py": "c834fc80028da91cfc89c212291eb01dd6a0ad079fd0a9e47d44705504114a44",
+            "callers/caller_00004.py": "d907042fdcdd7a2a5f79548bb1370c55e6b0fb4f6573b707a4b7fdd9e46d8392",
+            "callers/caller_00005.py": "22192d39178e025bbd971680ca42fa8095d458114183dc1fcf23cafaba0e0355",
+            "callers/caller_00006.py": "f7858354ffa4f468c92b1d2b9a6610165408caf8e1481d0ca3fca5cb20186472",
+            "callers/caller_00007.py": "48a37b70e2b65d5f75a2d1656accc134c269b08258693c6fab3a99cfcb0854d8",
+            "callers/caller_00008.py": "3adbc1ec73f682b5377ea3ac6e59dbe76f37ae77c3f21e5aae5ad2e56c51efcc",
+            "callers/caller_00009.py": "ec30e6e8f64568dadeb672c09b5b5bb557e8605d70462dc940e221c1d4386ffd",
+            "callers/caller_00010.py": "011044868652d85735056faf84cba6367884905e2a7bad7b2dc85dad6aa49419",
+            "callers/caller_00011.py": "70d91fb8a805788929c4756bb58a1cc2070159359841a4b693b76e2029f62b29",
+            "callers/caller_00012.py": "0124a38311f2149098694301aa39a9a559de18be7b3767d8e2ddd267189daefb"
+          },
+          "phase": "measured",
+          "pair": 2,
+          "position": 0,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 291563166,
+          "returncode": 0,
+          "stdout_bytes": 4747,
+          "stdout_sha256": "6a6005220efea0546ab84fdfabf12997c75abdc32a65d55c73716eb15b3418f1",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "callers/caller_00000.py": "1b026c4ffa4c5089a19f6bde019327100ad1528de6de1c6ee16ae85a9478b78c",
+            "callers/caller_00001.py": "1c279c0298c53344c2756ed276b863bb056ee07fd27e42faf429d4962509871f",
+            "callers/caller_00002.py": "abd6b8e2af4e13814fe5d825c7fbeb574b444b1adef8b14a3c2adb943bef9f65",
+            "callers/caller_00003.py": "c834fc80028da91cfc89c212291eb01dd6a0ad079fd0a9e47d44705504114a44",
+            "callers/caller_00004.py": "d907042fdcdd7a2a5f79548bb1370c55e6b0fb4f6573b707a4b7fdd9e46d8392",
+            "callers/caller_00005.py": "22192d39178e025bbd971680ca42fa8095d458114183dc1fcf23cafaba0e0355",
+            "callers/caller_00006.py": "f7858354ffa4f468c92b1d2b9a6610165408caf8e1481d0ca3fca5cb20186472",
+            "callers/caller_00007.py": "48a37b70e2b65d5f75a2d1656accc134c269b08258693c6fab3a99cfcb0854d8",
+            "callers/caller_00008.py": "3adbc1ec73f682b5377ea3ac6e59dbe76f37ae77c3f21e5aae5ad2e56c51efcc",
+            "callers/caller_00009.py": "ec30e6e8f64568dadeb672c09b5b5bb557e8605d70462dc940e221c1d4386ffd",
+            "callers/caller_00010.py": "011044868652d85735056faf84cba6367884905e2a7bad7b2dc85dad6aa49419",
+            "callers/caller_00011.py": "70d91fb8a805788929c4756bb58a1cc2070159359841a4b693b76e2029f62b29",
+            "callers/caller_00012.py": "0124a38311f2149098694301aa39a9a559de18be7b3767d8e2ddd267189daefb"
+          },
+          "phase": "measured",
+          "pair": 2,
+          "position": 1,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 297679583,
+          "returncode": 0,
+          "stdout_bytes": 4747,
+          "stdout_sha256": "6a6005220efea0546ab84fdfabf12997c75abdc32a65d55c73716eb15b3418f1",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "callers/caller_00000.py": "1b026c4ffa4c5089a19f6bde019327100ad1528de6de1c6ee16ae85a9478b78c",
+            "callers/caller_00001.py": "1c279c0298c53344c2756ed276b863bb056ee07fd27e42faf429d4962509871f",
+            "callers/caller_00002.py": "abd6b8e2af4e13814fe5d825c7fbeb574b444b1adef8b14a3c2adb943bef9f65",
+            "callers/caller_00003.py": "c834fc80028da91cfc89c212291eb01dd6a0ad079fd0a9e47d44705504114a44",
+            "callers/caller_00004.py": "d907042fdcdd7a2a5f79548bb1370c55e6b0fb4f6573b707a4b7fdd9e46d8392",
+            "callers/caller_00005.py": "22192d39178e025bbd971680ca42fa8095d458114183dc1fcf23cafaba0e0355",
+            "callers/caller_00006.py": "f7858354ffa4f468c92b1d2b9a6610165408caf8e1481d0ca3fca5cb20186472",
+            "callers/caller_00007.py": "48a37b70e2b65d5f75a2d1656accc134c269b08258693c6fab3a99cfcb0854d8",
+            "callers/caller_00008.py": "3adbc1ec73f682b5377ea3ac6e59dbe76f37ae77c3f21e5aae5ad2e56c51efcc",
+            "callers/caller_00009.py": "ec30e6e8f64568dadeb672c09b5b5bb557e8605d70462dc940e221c1d4386ffd",
+            "callers/caller_00010.py": "011044868652d85735056faf84cba6367884905e2a7bad7b2dc85dad6aa49419",
+            "callers/caller_00011.py": "70d91fb8a805788929c4756bb58a1cc2070159359841a4b693b76e2029f62b29",
+            "callers/caller_00012.py": "0124a38311f2149098694301aa39a9a559de18be7b3767d8e2ddd267189daefb"
+          },
+          "phase": "measured",
+          "pair": 3,
+          "position": 0,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 272386209,
+          "returncode": 0,
+          "stdout_bytes": 4747,
+          "stdout_sha256": "6a6005220efea0546ab84fdfabf12997c75abdc32a65d55c73716eb15b3418f1",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "callers/caller_00000.py": "1b026c4ffa4c5089a19f6bde019327100ad1528de6de1c6ee16ae85a9478b78c",
+            "callers/caller_00001.py": "1c279c0298c53344c2756ed276b863bb056ee07fd27e42faf429d4962509871f",
+            "callers/caller_00002.py": "abd6b8e2af4e13814fe5d825c7fbeb574b444b1adef8b14a3c2adb943bef9f65",
+            "callers/caller_00003.py": "c834fc80028da91cfc89c212291eb01dd6a0ad079fd0a9e47d44705504114a44",
+            "callers/caller_00004.py": "d907042fdcdd7a2a5f79548bb1370c55e6b0fb4f6573b707a4b7fdd9e46d8392",
+            "callers/caller_00005.py": "22192d39178e025bbd971680ca42fa8095d458114183dc1fcf23cafaba0e0355",
+            "callers/caller_00006.py": "f7858354ffa4f468c92b1d2b9a6610165408caf8e1481d0ca3fca5cb20186472",
+            "callers/caller_00007.py": "48a37b70e2b65d5f75a2d1656accc134c269b08258693c6fab3a99cfcb0854d8",
+            "callers/caller_00008.py": "3adbc1ec73f682b5377ea3ac6e59dbe76f37ae77c3f21e5aae5ad2e56c51efcc",
+            "callers/caller_00009.py": "ec30e6e8f64568dadeb672c09b5b5bb557e8605d70462dc940e221c1d4386ffd",
+            "callers/caller_00010.py": "011044868652d85735056faf84cba6367884905e2a7bad7b2dc85dad6aa49419",
+            "callers/caller_00011.py": "70d91fb8a805788929c4756bb58a1cc2070159359841a4b693b76e2029f62b29",
+            "callers/caller_00012.py": "0124a38311f2149098694301aa39a9a559de18be7b3767d8e2ddd267189daefb"
+          },
+          "phase": "measured",
+          "pair": 3,
+          "position": 1,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 265784208,
+          "returncode": 0,
+          "stdout_bytes": 4747,
+          "stdout_sha256": "6a6005220efea0546ab84fdfabf12997c75abdc32a65d55c73716eb15b3418f1",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "callers/caller_00000.py": "1b026c4ffa4c5089a19f6bde019327100ad1528de6de1c6ee16ae85a9478b78c",
+            "callers/caller_00001.py": "1c279c0298c53344c2756ed276b863bb056ee07fd27e42faf429d4962509871f",
+            "callers/caller_00002.py": "abd6b8e2af4e13814fe5d825c7fbeb574b444b1adef8b14a3c2adb943bef9f65",
+            "callers/caller_00003.py": "c834fc80028da91cfc89c212291eb01dd6a0ad079fd0a9e47d44705504114a44",
+            "callers/caller_00004.py": "d907042fdcdd7a2a5f79548bb1370c55e6b0fb4f6573b707a4b7fdd9e46d8392",
+            "callers/caller_00005.py": "22192d39178e025bbd971680ca42fa8095d458114183dc1fcf23cafaba0e0355",
+            "callers/caller_00006.py": "f7858354ffa4f468c92b1d2b9a6610165408caf8e1481d0ca3fca5cb20186472",
+            "callers/caller_00007.py": "48a37b70e2b65d5f75a2d1656accc134c269b08258693c6fab3a99cfcb0854d8",
+            "callers/caller_00008.py": "3adbc1ec73f682b5377ea3ac6e59dbe76f37ae77c3f21e5aae5ad2e56c51efcc",
+            "callers/caller_00009.py": "ec30e6e8f64568dadeb672c09b5b5bb557e8605d70462dc940e221c1d4386ffd",
+            "callers/caller_00010.py": "011044868652d85735056faf84cba6367884905e2a7bad7b2dc85dad6aa49419",
+            "callers/caller_00011.py": "70d91fb8a805788929c4756bb58a1cc2070159359841a4b693b76e2029f62b29",
+            "callers/caller_00012.py": "0124a38311f2149098694301aa39a9a559de18be7b3767d8e2ddd267189daefb"
+          },
+          "phase": "measured",
+          "pair": 4,
+          "position": 0,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 293342584,
+          "returncode": 0,
+          "stdout_bytes": 4747,
+          "stdout_sha256": "6a6005220efea0546ab84fdfabf12997c75abdc32a65d55c73716eb15b3418f1",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "callers/caller_00000.py": "1b026c4ffa4c5089a19f6bde019327100ad1528de6de1c6ee16ae85a9478b78c",
+            "callers/caller_00001.py": "1c279c0298c53344c2756ed276b863bb056ee07fd27e42faf429d4962509871f",
+            "callers/caller_00002.py": "abd6b8e2af4e13814fe5d825c7fbeb574b444b1adef8b14a3c2adb943bef9f65",
+            "callers/caller_00003.py": "c834fc80028da91cfc89c212291eb01dd6a0ad079fd0a9e47d44705504114a44",
+            "callers/caller_00004.py": "d907042fdcdd7a2a5f79548bb1370c55e6b0fb4f6573b707a4b7fdd9e46d8392",
+            "callers/caller_00005.py": "22192d39178e025bbd971680ca42fa8095d458114183dc1fcf23cafaba0e0355",
+            "callers/caller_00006.py": "f7858354ffa4f468c92b1d2b9a6610165408caf8e1481d0ca3fca5cb20186472",
+            "callers/caller_00007.py": "48a37b70e2b65d5f75a2d1656accc134c269b08258693c6fab3a99cfcb0854d8",
+            "callers/caller_00008.py": "3adbc1ec73f682b5377ea3ac6e59dbe76f37ae77c3f21e5aae5ad2e56c51efcc",
+            "callers/caller_00009.py": "ec30e6e8f64568dadeb672c09b5b5bb557e8605d70462dc940e221c1d4386ffd",
+            "callers/caller_00010.py": "011044868652d85735056faf84cba6367884905e2a7bad7b2dc85dad6aa49419",
+            "callers/caller_00011.py": "70d91fb8a805788929c4756bb58a1cc2070159359841a4b693b76e2029f62b29",
+            "callers/caller_00012.py": "0124a38311f2149098694301aa39a9a559de18be7b3767d8e2ddd267189daefb"
+          },
+          "phase": "measured",
+          "pair": 4,
+          "position": 1,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 293655417,
+          "returncode": 0,
+          "stdout_bytes": 4747,
+          "stdout_sha256": "6a6005220efea0546ab84fdfabf12997c75abdc32a65d55c73716eb15b3418f1",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "callers/caller_00000.py": "1b026c4ffa4c5089a19f6bde019327100ad1528de6de1c6ee16ae85a9478b78c",
+            "callers/caller_00001.py": "1c279c0298c53344c2756ed276b863bb056ee07fd27e42faf429d4962509871f",
+            "callers/caller_00002.py": "abd6b8e2af4e13814fe5d825c7fbeb574b444b1adef8b14a3c2adb943bef9f65",
+            "callers/caller_00003.py": "c834fc80028da91cfc89c212291eb01dd6a0ad079fd0a9e47d44705504114a44",
+            "callers/caller_00004.py": "d907042fdcdd7a2a5f79548bb1370c55e6b0fb4f6573b707a4b7fdd9e46d8392",
+            "callers/caller_00005.py": "22192d39178e025bbd971680ca42fa8095d458114183dc1fcf23cafaba0e0355",
+            "callers/caller_00006.py": "f7858354ffa4f468c92b1d2b9a6610165408caf8e1481d0ca3fca5cb20186472",
+            "callers/caller_00007.py": "48a37b70e2b65d5f75a2d1656accc134c269b08258693c6fab3a99cfcb0854d8",
+            "callers/caller_00008.py": "3adbc1ec73f682b5377ea3ac6e59dbe76f37ae77c3f21e5aae5ad2e56c51efcc",
+            "callers/caller_00009.py": "ec30e6e8f64568dadeb672c09b5b5bb557e8605d70462dc940e221c1d4386ffd",
+            "callers/caller_00010.py": "011044868652d85735056faf84cba6367884905e2a7bad7b2dc85dad6aa49419",
+            "callers/caller_00011.py": "70d91fb8a805788929c4756bb58a1cc2070159359841a4b693b76e2029f62b29",
+            "callers/caller_00012.py": "0124a38311f2149098694301aa39a9a559de18be7b3767d8e2ddd267189daefb"
+          },
+          "phase": "measured",
+          "pair": 5,
+          "position": 0,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 267097542,
+          "returncode": 0,
+          "stdout_bytes": 4747,
+          "stdout_sha256": "6a6005220efea0546ab84fdfabf12997c75abdc32a65d55c73716eb15b3418f1",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "callers/caller_00000.py": "1b026c4ffa4c5089a19f6bde019327100ad1528de6de1c6ee16ae85a9478b78c",
+            "callers/caller_00001.py": "1c279c0298c53344c2756ed276b863bb056ee07fd27e42faf429d4962509871f",
+            "callers/caller_00002.py": "abd6b8e2af4e13814fe5d825c7fbeb574b444b1adef8b14a3c2adb943bef9f65",
+            "callers/caller_00003.py": "c834fc80028da91cfc89c212291eb01dd6a0ad079fd0a9e47d44705504114a44",
+            "callers/caller_00004.py": "d907042fdcdd7a2a5f79548bb1370c55e6b0fb4f6573b707a4b7fdd9e46d8392",
+            "callers/caller_00005.py": "22192d39178e025bbd971680ca42fa8095d458114183dc1fcf23cafaba0e0355",
+            "callers/caller_00006.py": "f7858354ffa4f468c92b1d2b9a6610165408caf8e1481d0ca3fca5cb20186472",
+            "callers/caller_00007.py": "48a37b70e2b65d5f75a2d1656accc134c269b08258693c6fab3a99cfcb0854d8",
+            "callers/caller_00008.py": "3adbc1ec73f682b5377ea3ac6e59dbe76f37ae77c3f21e5aae5ad2e56c51efcc",
+            "callers/caller_00009.py": "ec30e6e8f64568dadeb672c09b5b5bb557e8605d70462dc940e221c1d4386ffd",
+            "callers/caller_00010.py": "011044868652d85735056faf84cba6367884905e2a7bad7b2dc85dad6aa49419",
+            "callers/caller_00011.py": "70d91fb8a805788929c4756bb58a1cc2070159359841a4b693b76e2029f62b29",
+            "callers/caller_00012.py": "0124a38311f2149098694301aa39a9a559de18be7b3767d8e2ddd267189daefb"
+          },
+          "phase": "measured",
+          "pair": 5,
+          "position": 1,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 268333500,
+          "returncode": 0,
+          "stdout_bytes": 4747,
+          "stdout_sha256": "6a6005220efea0546ab84fdfabf12997c75abdc32a65d55c73716eb15b3418f1",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "callers/caller_00000.py": "1b026c4ffa4c5089a19f6bde019327100ad1528de6de1c6ee16ae85a9478b78c",
+            "callers/caller_00001.py": "1c279c0298c53344c2756ed276b863bb056ee07fd27e42faf429d4962509871f",
+            "callers/caller_00002.py": "abd6b8e2af4e13814fe5d825c7fbeb574b444b1adef8b14a3c2adb943bef9f65",
+            "callers/caller_00003.py": "c834fc80028da91cfc89c212291eb01dd6a0ad079fd0a9e47d44705504114a44",
+            "callers/caller_00004.py": "d907042fdcdd7a2a5f79548bb1370c55e6b0fb4f6573b707a4b7fdd9e46d8392",
+            "callers/caller_00005.py": "22192d39178e025bbd971680ca42fa8095d458114183dc1fcf23cafaba0e0355",
+            "callers/caller_00006.py": "f7858354ffa4f468c92b1d2b9a6610165408caf8e1481d0ca3fca5cb20186472",
+            "callers/caller_00007.py": "48a37b70e2b65d5f75a2d1656accc134c269b08258693c6fab3a99cfcb0854d8",
+            "callers/caller_00008.py": "3adbc1ec73f682b5377ea3ac6e59dbe76f37ae77c3f21e5aae5ad2e56c51efcc",
+            "callers/caller_00009.py": "ec30e6e8f64568dadeb672c09b5b5bb557e8605d70462dc940e221c1d4386ffd",
+            "callers/caller_00010.py": "011044868652d85735056faf84cba6367884905e2a7bad7b2dc85dad6aa49419",
+            "callers/caller_00011.py": "70d91fb8a805788929c4756bb58a1cc2070159359841a4b693b76e2029f62b29",
+            "callers/caller_00012.py": "0124a38311f2149098694301aa39a9a559de18be7b3767d8e2ddd267189daefb"
+          },
+          "phase": "measured",
+          "pair": 6,
+          "position": 0,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 293938708,
+          "returncode": 0,
+          "stdout_bytes": 4747,
+          "stdout_sha256": "6a6005220efea0546ab84fdfabf12997c75abdc32a65d55c73716eb15b3418f1",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "labels.py": "74a27d61baeb17f6f5162209b711cd691c17709480922edc7961abd10facb4f5",
+            "callers/caller_00000.py": "1b026c4ffa4c5089a19f6bde019327100ad1528de6de1c6ee16ae85a9478b78c",
+            "callers/caller_00001.py": "1c279c0298c53344c2756ed276b863bb056ee07fd27e42faf429d4962509871f",
+            "callers/caller_00002.py": "abd6b8e2af4e13814fe5d825c7fbeb574b444b1adef8b14a3c2adb943bef9f65",
+            "callers/caller_00003.py": "c834fc80028da91cfc89c212291eb01dd6a0ad079fd0a9e47d44705504114a44",
+            "callers/caller_00004.py": "d907042fdcdd7a2a5f79548bb1370c55e6b0fb4f6573b707a4b7fdd9e46d8392",
+            "callers/caller_00005.py": "22192d39178e025bbd971680ca42fa8095d458114183dc1fcf23cafaba0e0355",
+            "callers/caller_00006.py": "f7858354ffa4f468c92b1d2b9a6610165408caf8e1481d0ca3fca5cb20186472",
+            "callers/caller_00007.py": "48a37b70e2b65d5f75a2d1656accc134c269b08258693c6fab3a99cfcb0854d8",
+            "callers/caller_00008.py": "3adbc1ec73f682b5377ea3ac6e59dbe76f37ae77c3f21e5aae5ad2e56c51efcc",
+            "callers/caller_00009.py": "ec30e6e8f64568dadeb672c09b5b5bb557e8605d70462dc940e221c1d4386ffd",
+            "callers/caller_00010.py": "011044868652d85735056faf84cba6367884905e2a7bad7b2dc85dad6aa49419",
+            "callers/caller_00011.py": "70d91fb8a805788929c4756bb58a1cc2070159359841a4b693b76e2029f62b29",
+            "callers/caller_00012.py": "0124a38311f2149098694301aa39a9a559de18be7b3767d8e2ddd267189daefb"
+          },
+          "phase": "measured",
+          "pair": 6,
+          "position": 1,
+          "variant": "after"
+        }
+      ]
+    },
+    {
+      "name": "file_limit",
+      "fixture": {
+        "python_files": 2005,
+        "tracked_fixture": true,
+        "target": "api.customer_label",
+        "repeated_import_statements": 0,
+        "textual_callers_created": 2000
+      },
+      "arguments": [
+        "--max-files",
+        "1",
+        "api.customer_label"
+      ],
+      "before": {
+        "median_seconds": 0.088678333,
+        "min_seconds": 0.087665208,
+        "max_seconds": 0.090621791,
+        "stdout_bytes": [
+          743
+        ],
+        "stdout_stable": true,
+        "source_context_stable": true
+      },
+      "after": {
+        "median_seconds": 0.090530917,
+        "min_seconds": 0.088338708,
+        "max_seconds": 0.091438083,
+        "stdout_bytes": [
+          743
+        ],
+        "stdout_stable": true,
+        "source_context_stable": true
+      },
+      "median_time_reduction_percent": -2.0891055766688815,
+      "comparison": {
+        "stdout_equivalent": true,
+        "source_context_equivalent": true,
+        "difference": "identical stdout",
+        "before_search_reporting": [
+          "File limit reached; caller/test search skipped. Additional context may exist."
+        ],
+        "after_search_reporting": [
+          "File limit reached; caller/test search skipped. Additional context may exist."
+        ]
+      },
+      "all_runs_succeeded": true,
+      "raw_runs": [
+        {
+          "elapsed_ns": 91910458,
+          "returncode": 0,
+          "stdout_bytes": 743,
+          "stdout_sha256": "33ccce72b009b52dc8e3230fc4023de51ca337e5f788b71ede5e32678f2ee88e",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d"
+          },
+          "phase": "warmup",
+          "pair": 0,
+          "position": 0,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 88535833,
+          "returncode": 0,
+          "stdout_bytes": 743,
+          "stdout_sha256": "33ccce72b009b52dc8e3230fc4023de51ca337e5f788b71ede5e32678f2ee88e",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d"
+          },
+          "phase": "warmup",
+          "pair": 0,
+          "position": 1,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 91438083,
+          "returncode": 0,
+          "stdout_bytes": 743,
+          "stdout_sha256": "33ccce72b009b52dc8e3230fc4023de51ca337e5f788b71ede5e32678f2ee88e",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d"
+          },
+          "phase": "measured",
+          "pair": 0,
+          "position": 0,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 87665208,
+          "returncode": 0,
+          "stdout_bytes": 743,
+          "stdout_sha256": "33ccce72b009b52dc8e3230fc4023de51ca337e5f788b71ede5e32678f2ee88e",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d"
+          },
+          "phase": "measured",
+          "pair": 0,
+          "position": 1,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 90621791,
+          "returncode": 0,
+          "stdout_bytes": 743,
+          "stdout_sha256": "33ccce72b009b52dc8e3230fc4023de51ca337e5f788b71ede5e32678f2ee88e",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d"
+          },
+          "phase": "measured",
+          "pair": 1,
+          "position": 0,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 90714750,
+          "returncode": 0,
+          "stdout_bytes": 743,
+          "stdout_sha256": "33ccce72b009b52dc8e3230fc4023de51ca337e5f788b71ede5e32678f2ee88e",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d"
+          },
+          "phase": "measured",
+          "pair": 1,
+          "position": 1,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 88338708,
+          "returncode": 0,
+          "stdout_bytes": 743,
+          "stdout_sha256": "33ccce72b009b52dc8e3230fc4023de51ca337e5f788b71ede5e32678f2ee88e",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d"
+          },
+          "phase": "measured",
+          "pair": 2,
+          "position": 0,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 88678333,
+          "returncode": 0,
+          "stdout_bytes": 743,
+          "stdout_sha256": "33ccce72b009b52dc8e3230fc4023de51ca337e5f788b71ede5e32678f2ee88e",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d"
+          },
+          "phase": "measured",
+          "pair": 2,
+          "position": 1,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 89721292,
+          "returncode": 0,
+          "stdout_bytes": 743,
+          "stdout_sha256": "33ccce72b009b52dc8e3230fc4023de51ca337e5f788b71ede5e32678f2ee88e",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d"
+          },
+          "phase": "measured",
+          "pair": 3,
+          "position": 0,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 91138000,
+          "returncode": 0,
+          "stdout_bytes": 743,
+          "stdout_sha256": "33ccce72b009b52dc8e3230fc4023de51ca337e5f788b71ede5e32678f2ee88e",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d"
+          },
+          "phase": "measured",
+          "pair": 3,
+          "position": 1,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 90530917,
+          "returncode": 0,
+          "stdout_bytes": 743,
+          "stdout_sha256": "33ccce72b009b52dc8e3230fc4023de51ca337e5f788b71ede5e32678f2ee88e",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d"
+          },
+          "phase": "measured",
+          "pair": 4,
+          "position": 0,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 88067500,
+          "returncode": 0,
+          "stdout_bytes": 743,
+          "stdout_sha256": "33ccce72b009b52dc8e3230fc4023de51ca337e5f788b71ede5e32678f2ee88e",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d"
+          },
+          "phase": "measured",
+          "pair": 4,
+          "position": 1,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 88562333,
+          "returncode": 0,
+          "stdout_bytes": 743,
+          "stdout_sha256": "33ccce72b009b52dc8e3230fc4023de51ca337e5f788b71ede5e32678f2ee88e",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d"
+          },
+          "phase": "measured",
+          "pair": 5,
+          "position": 0,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 89220209,
+          "returncode": 0,
+          "stdout_bytes": 743,
+          "stdout_sha256": "33ccce72b009b52dc8e3230fc4023de51ca337e5f788b71ede5e32678f2ee88e",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d"
+          },
+          "phase": "measured",
+          "pair": 5,
+          "position": 1,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 89565125,
+          "returncode": 0,
+          "stdout_bytes": 743,
+          "stdout_sha256": "33ccce72b009b52dc8e3230fc4023de51ca337e5f788b71ede5e32678f2ee88e",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d"
+          },
+          "phase": "measured",
+          "pair": 6,
+          "position": 0,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 89213833,
+          "returncode": 0,
+          "stdout_bytes": 743,
+          "stdout_sha256": "33ccce72b009b52dc8e3230fc4023de51ca337e5f788b71ede5e32678f2ee88e",
+          "stderr": "",
+          "source_fingerprints": {
+            "api.py": "936b9d5502f3f7c6af56b7678e402b5279c42696d342ba7d34eba03df8bb0a9d"
+          },
+          "phase": "measured",
+          "pair": 6,
+          "position": 1,
+          "variant": "before"
+        }
+      ]
+    },
+    {
+      "name": "go_package",
+      "fixture": {
+        "python_files": 5,
+        "tracked_fixture": true,
+        "target": "api.customer_label",
+        "repeated_import_statements": 0,
+        "textual_callers_created": 2
+      },
+      "arguments": [
+        "pkg/file_00.go"
+      ],
+      "before": {
+        "median_seconds": 0.107285625,
+        "min_seconds": 0.105164458,
+        "max_seconds": 0.116008709,
+        "stdout_bytes": [
+          3068
+        ],
+        "stdout_stable": true,
+        "source_context_stable": true
+      },
+      "after": {
+        "median_seconds": 0.101253667,
+        "min_seconds": 0.099533875,
+        "max_seconds": 0.104112125,
+        "stdout_bytes": [
+          3068
+        ],
+        "stdout_stable": true,
+        "source_context_stable": true
+      },
+      "median_time_reduction_percent": 5.622335704340619,
+      "comparison": {
+        "stdout_equivalent": true,
+        "source_context_equivalent": true,
+        "difference": "identical stdout",
+        "before_search_reporting": [
+          "Caller/test search: 1 matching files (textual, not a complete call graph)."
+        ],
+        "after_search_reporting": [
+          "Caller/test search: 1 matching files (textual, not a complete call graph)."
+        ]
+      },
+      "all_runs_succeeded": true,
+      "raw_runs": [
+        {
+          "elapsed_ns": 106620708,
+          "returncode": 0,
+          "stdout_bytes": 3068,
+          "stdout_sha256": "da223bf80831c8e2f71e2a4e66edca64f5e780c294a29a5c1762f4a43e2996ee",
+          "stderr": "",
+          "source_fingerprints": {
+            "pkg/file_00.go": "40f9ad22491dd92fd6f8737923f0f3f6e465d3c32d79e99fc2833f9bdbd1e16e",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "go.mod": "6649027ecc2dc0e9d34d06a6ce9e8a85925997efd4239f7a50f206a76764b02f",
+            "pkg/file_01.go": "2d3b5fe1ea8c31c60d3e1914e6ede72f4cbb0afd43e0870d2f52226cfb69cba4",
+            "pkg/file_02.go": "ebfe0618b1bd517c3517c1c6449542bb6c7fcc4409a4f64bca67805272a49637",
+            "pkg/file_03.go": "d7e08c75cf37df0b4e86ed3438b7068faa71220cea2fa5985ee10f40a66f959e",
+            "pkg/file_04.go": "fbb195bbad0945b6c0890ed445864954d144a3758c920eb0ea5ada63e4bc7063",
+            "pkg/file_05.go": "b85b7f18f1524cc0a2ecfb6f81c1e482dd5667161fba3279a65c76883e6b5779",
+            "pkg/file_06.go": "5731e22c1a06f11b534b771679167c23de0df890ac4f198ec67ae0b21593500b",
+            "pkg/file_07.go": "736333198f47c008ffa34193367c518bbfa8bf2cf9a3a4be372fbb617c6edfcc",
+            "pkg/file_08.go": "3bb5608d07669f47111b208ff8acbdb01cc23fd1886a46a13a64ae674744d98f",
+            "pkg/file_09.go": "fb1d7d4b6c1872f0a1ae12a81316b6407c96a4a9f9af489647593d38fe4b3c30",
+            "pkg/file_10.go": "d4625453c632729710233331ab9676b2776889e6d5432e28d87a41d5e6a7cc70",
+            "pkg/file_11.go": "0196a5b3e5621905f382b1f77ed54d9e1607ad36402fe2fa125d2fddedab2900"
+          },
+          "phase": "warmup",
+          "pair": 0,
+          "position": 0,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 100788959,
+          "returncode": 0,
+          "stdout_bytes": 3068,
+          "stdout_sha256": "da223bf80831c8e2f71e2a4e66edca64f5e780c294a29a5c1762f4a43e2996ee",
+          "stderr": "",
+          "source_fingerprints": {
+            "pkg/file_00.go": "40f9ad22491dd92fd6f8737923f0f3f6e465d3c32d79e99fc2833f9bdbd1e16e",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "go.mod": "6649027ecc2dc0e9d34d06a6ce9e8a85925997efd4239f7a50f206a76764b02f",
+            "pkg/file_01.go": "2d3b5fe1ea8c31c60d3e1914e6ede72f4cbb0afd43e0870d2f52226cfb69cba4",
+            "pkg/file_02.go": "ebfe0618b1bd517c3517c1c6449542bb6c7fcc4409a4f64bca67805272a49637",
+            "pkg/file_03.go": "d7e08c75cf37df0b4e86ed3438b7068faa71220cea2fa5985ee10f40a66f959e",
+            "pkg/file_04.go": "fbb195bbad0945b6c0890ed445864954d144a3758c920eb0ea5ada63e4bc7063",
+            "pkg/file_05.go": "b85b7f18f1524cc0a2ecfb6f81c1e482dd5667161fba3279a65c76883e6b5779",
+            "pkg/file_06.go": "5731e22c1a06f11b534b771679167c23de0df890ac4f198ec67ae0b21593500b",
+            "pkg/file_07.go": "736333198f47c008ffa34193367c518bbfa8bf2cf9a3a4be372fbb617c6edfcc",
+            "pkg/file_08.go": "3bb5608d07669f47111b208ff8acbdb01cc23fd1886a46a13a64ae674744d98f",
+            "pkg/file_09.go": "fb1d7d4b6c1872f0a1ae12a81316b6407c96a4a9f9af489647593d38fe4b3c30",
+            "pkg/file_10.go": "d4625453c632729710233331ab9676b2776889e6d5432e28d87a41d5e6a7cc70",
+            "pkg/file_11.go": "0196a5b3e5621905f382b1f77ed54d9e1607ad36402fe2fa125d2fddedab2900"
+          },
+          "phase": "warmup",
+          "pair": 0,
+          "position": 1,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 105499250,
+          "returncode": 0,
+          "stdout_bytes": 3068,
+          "stdout_sha256": "da223bf80831c8e2f71e2a4e66edca64f5e780c294a29a5c1762f4a43e2996ee",
+          "stderr": "",
+          "source_fingerprints": {
+            "pkg/file_00.go": "40f9ad22491dd92fd6f8737923f0f3f6e465d3c32d79e99fc2833f9bdbd1e16e",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "go.mod": "6649027ecc2dc0e9d34d06a6ce9e8a85925997efd4239f7a50f206a76764b02f",
+            "pkg/file_01.go": "2d3b5fe1ea8c31c60d3e1914e6ede72f4cbb0afd43e0870d2f52226cfb69cba4",
+            "pkg/file_02.go": "ebfe0618b1bd517c3517c1c6449542bb6c7fcc4409a4f64bca67805272a49637",
+            "pkg/file_03.go": "d7e08c75cf37df0b4e86ed3438b7068faa71220cea2fa5985ee10f40a66f959e",
+            "pkg/file_04.go": "fbb195bbad0945b6c0890ed445864954d144a3758c920eb0ea5ada63e4bc7063",
+            "pkg/file_05.go": "b85b7f18f1524cc0a2ecfb6f81c1e482dd5667161fba3279a65c76883e6b5779",
+            "pkg/file_06.go": "5731e22c1a06f11b534b771679167c23de0df890ac4f198ec67ae0b21593500b",
+            "pkg/file_07.go": "736333198f47c008ffa34193367c518bbfa8bf2cf9a3a4be372fbb617c6edfcc",
+            "pkg/file_08.go": "3bb5608d07669f47111b208ff8acbdb01cc23fd1886a46a13a64ae674744d98f",
+            "pkg/file_09.go": "fb1d7d4b6c1872f0a1ae12a81316b6407c96a4a9f9af489647593d38fe4b3c30",
+            "pkg/file_10.go": "d4625453c632729710233331ab9676b2776889e6d5432e28d87a41d5e6a7cc70",
+            "pkg/file_11.go": "0196a5b3e5621905f382b1f77ed54d9e1607ad36402fe2fa125d2fddedab2900"
+          },
+          "phase": "measured",
+          "pair": 0,
+          "position": 0,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 101253667,
+          "returncode": 0,
+          "stdout_bytes": 3068,
+          "stdout_sha256": "da223bf80831c8e2f71e2a4e66edca64f5e780c294a29a5c1762f4a43e2996ee",
+          "stderr": "",
+          "source_fingerprints": {
+            "pkg/file_00.go": "40f9ad22491dd92fd6f8737923f0f3f6e465d3c32d79e99fc2833f9bdbd1e16e",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "go.mod": "6649027ecc2dc0e9d34d06a6ce9e8a85925997efd4239f7a50f206a76764b02f",
+            "pkg/file_01.go": "2d3b5fe1ea8c31c60d3e1914e6ede72f4cbb0afd43e0870d2f52226cfb69cba4",
+            "pkg/file_02.go": "ebfe0618b1bd517c3517c1c6449542bb6c7fcc4409a4f64bca67805272a49637",
+            "pkg/file_03.go": "d7e08c75cf37df0b4e86ed3438b7068faa71220cea2fa5985ee10f40a66f959e",
+            "pkg/file_04.go": "fbb195bbad0945b6c0890ed445864954d144a3758c920eb0ea5ada63e4bc7063",
+            "pkg/file_05.go": "b85b7f18f1524cc0a2ecfb6f81c1e482dd5667161fba3279a65c76883e6b5779",
+            "pkg/file_06.go": "5731e22c1a06f11b534b771679167c23de0df890ac4f198ec67ae0b21593500b",
+            "pkg/file_07.go": "736333198f47c008ffa34193367c518bbfa8bf2cf9a3a4be372fbb617c6edfcc",
+            "pkg/file_08.go": "3bb5608d07669f47111b208ff8acbdb01cc23fd1886a46a13a64ae674744d98f",
+            "pkg/file_09.go": "fb1d7d4b6c1872f0a1ae12a81316b6407c96a4a9f9af489647593d38fe4b3c30",
+            "pkg/file_10.go": "d4625453c632729710233331ab9676b2776889e6d5432e28d87a41d5e6a7cc70",
+            "pkg/file_11.go": "0196a5b3e5621905f382b1f77ed54d9e1607ad36402fe2fa125d2fddedab2900"
+          },
+          "phase": "measured",
+          "pair": 0,
+          "position": 1,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 104112125,
+          "returncode": 0,
+          "stdout_bytes": 3068,
+          "stdout_sha256": "da223bf80831c8e2f71e2a4e66edca64f5e780c294a29a5c1762f4a43e2996ee",
+          "stderr": "",
+          "source_fingerprints": {
+            "pkg/file_00.go": "40f9ad22491dd92fd6f8737923f0f3f6e465d3c32d79e99fc2833f9bdbd1e16e",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "go.mod": "6649027ecc2dc0e9d34d06a6ce9e8a85925997efd4239f7a50f206a76764b02f",
+            "pkg/file_01.go": "2d3b5fe1ea8c31c60d3e1914e6ede72f4cbb0afd43e0870d2f52226cfb69cba4",
+            "pkg/file_02.go": "ebfe0618b1bd517c3517c1c6449542bb6c7fcc4409a4f64bca67805272a49637",
+            "pkg/file_03.go": "d7e08c75cf37df0b4e86ed3438b7068faa71220cea2fa5985ee10f40a66f959e",
+            "pkg/file_04.go": "fbb195bbad0945b6c0890ed445864954d144a3758c920eb0ea5ada63e4bc7063",
+            "pkg/file_05.go": "b85b7f18f1524cc0a2ecfb6f81c1e482dd5667161fba3279a65c76883e6b5779",
+            "pkg/file_06.go": "5731e22c1a06f11b534b771679167c23de0df890ac4f198ec67ae0b21593500b",
+            "pkg/file_07.go": "736333198f47c008ffa34193367c518bbfa8bf2cf9a3a4be372fbb617c6edfcc",
+            "pkg/file_08.go": "3bb5608d07669f47111b208ff8acbdb01cc23fd1886a46a13a64ae674744d98f",
+            "pkg/file_09.go": "fb1d7d4b6c1872f0a1ae12a81316b6407c96a4a9f9af489647593d38fe4b3c30",
+            "pkg/file_10.go": "d4625453c632729710233331ab9676b2776889e6d5432e28d87a41d5e6a7cc70",
+            "pkg/file_11.go": "0196a5b3e5621905f382b1f77ed54d9e1607ad36402fe2fa125d2fddedab2900"
+          },
+          "phase": "measured",
+          "pair": 1,
+          "position": 0,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 116008709,
+          "returncode": 0,
+          "stdout_bytes": 3068,
+          "stdout_sha256": "da223bf80831c8e2f71e2a4e66edca64f5e780c294a29a5c1762f4a43e2996ee",
+          "stderr": "",
+          "source_fingerprints": {
+            "pkg/file_00.go": "40f9ad22491dd92fd6f8737923f0f3f6e465d3c32d79e99fc2833f9bdbd1e16e",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "go.mod": "6649027ecc2dc0e9d34d06a6ce9e8a85925997efd4239f7a50f206a76764b02f",
+            "pkg/file_01.go": "2d3b5fe1ea8c31c60d3e1914e6ede72f4cbb0afd43e0870d2f52226cfb69cba4",
+            "pkg/file_02.go": "ebfe0618b1bd517c3517c1c6449542bb6c7fcc4409a4f64bca67805272a49637",
+            "pkg/file_03.go": "d7e08c75cf37df0b4e86ed3438b7068faa71220cea2fa5985ee10f40a66f959e",
+            "pkg/file_04.go": "fbb195bbad0945b6c0890ed445864954d144a3758c920eb0ea5ada63e4bc7063",
+            "pkg/file_05.go": "b85b7f18f1524cc0a2ecfb6f81c1e482dd5667161fba3279a65c76883e6b5779",
+            "pkg/file_06.go": "5731e22c1a06f11b534b771679167c23de0df890ac4f198ec67ae0b21593500b",
+            "pkg/file_07.go": "736333198f47c008ffa34193367c518bbfa8bf2cf9a3a4be372fbb617c6edfcc",
+            "pkg/file_08.go": "3bb5608d07669f47111b208ff8acbdb01cc23fd1886a46a13a64ae674744d98f",
+            "pkg/file_09.go": "fb1d7d4b6c1872f0a1ae12a81316b6407c96a4a9f9af489647593d38fe4b3c30",
+            "pkg/file_10.go": "d4625453c632729710233331ab9676b2776889e6d5432e28d87a41d5e6a7cc70",
+            "pkg/file_11.go": "0196a5b3e5621905f382b1f77ed54d9e1607ad36402fe2fa125d2fddedab2900"
+          },
+          "phase": "measured",
+          "pair": 1,
+          "position": 1,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 109817500,
+          "returncode": 0,
+          "stdout_bytes": 3068,
+          "stdout_sha256": "da223bf80831c8e2f71e2a4e66edca64f5e780c294a29a5c1762f4a43e2996ee",
+          "stderr": "",
+          "source_fingerprints": {
+            "pkg/file_00.go": "40f9ad22491dd92fd6f8737923f0f3f6e465d3c32d79e99fc2833f9bdbd1e16e",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "go.mod": "6649027ecc2dc0e9d34d06a6ce9e8a85925997efd4239f7a50f206a76764b02f",
+            "pkg/file_01.go": "2d3b5fe1ea8c31c60d3e1914e6ede72f4cbb0afd43e0870d2f52226cfb69cba4",
+            "pkg/file_02.go": "ebfe0618b1bd517c3517c1c6449542bb6c7fcc4409a4f64bca67805272a49637",
+            "pkg/file_03.go": "d7e08c75cf37df0b4e86ed3438b7068faa71220cea2fa5985ee10f40a66f959e",
+            "pkg/file_04.go": "fbb195bbad0945b6c0890ed445864954d144a3758c920eb0ea5ada63e4bc7063",
+            "pkg/file_05.go": "b85b7f18f1524cc0a2ecfb6f81c1e482dd5667161fba3279a65c76883e6b5779",
+            "pkg/file_06.go": "5731e22c1a06f11b534b771679167c23de0df890ac4f198ec67ae0b21593500b",
+            "pkg/file_07.go": "736333198f47c008ffa34193367c518bbfa8bf2cf9a3a4be372fbb617c6edfcc",
+            "pkg/file_08.go": "3bb5608d07669f47111b208ff8acbdb01cc23fd1886a46a13a64ae674744d98f",
+            "pkg/file_09.go": "fb1d7d4b6c1872f0a1ae12a81316b6407c96a4a9f9af489647593d38fe4b3c30",
+            "pkg/file_10.go": "d4625453c632729710233331ab9676b2776889e6d5432e28d87a41d5e6a7cc70",
+            "pkg/file_11.go": "0196a5b3e5621905f382b1f77ed54d9e1607ad36402fe2fa125d2fddedab2900"
+          },
+          "phase": "measured",
+          "pair": 2,
+          "position": 0,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 100037125,
+          "returncode": 0,
+          "stdout_bytes": 3068,
+          "stdout_sha256": "da223bf80831c8e2f71e2a4e66edca64f5e780c294a29a5c1762f4a43e2996ee",
+          "stderr": "",
+          "source_fingerprints": {
+            "pkg/file_00.go": "40f9ad22491dd92fd6f8737923f0f3f6e465d3c32d79e99fc2833f9bdbd1e16e",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "go.mod": "6649027ecc2dc0e9d34d06a6ce9e8a85925997efd4239f7a50f206a76764b02f",
+            "pkg/file_01.go": "2d3b5fe1ea8c31c60d3e1914e6ede72f4cbb0afd43e0870d2f52226cfb69cba4",
+            "pkg/file_02.go": "ebfe0618b1bd517c3517c1c6449542bb6c7fcc4409a4f64bca67805272a49637",
+            "pkg/file_03.go": "d7e08c75cf37df0b4e86ed3438b7068faa71220cea2fa5985ee10f40a66f959e",
+            "pkg/file_04.go": "fbb195bbad0945b6c0890ed445864954d144a3758c920eb0ea5ada63e4bc7063",
+            "pkg/file_05.go": "b85b7f18f1524cc0a2ecfb6f81c1e482dd5667161fba3279a65c76883e6b5779",
+            "pkg/file_06.go": "5731e22c1a06f11b534b771679167c23de0df890ac4f198ec67ae0b21593500b",
+            "pkg/file_07.go": "736333198f47c008ffa34193367c518bbfa8bf2cf9a3a4be372fbb617c6edfcc",
+            "pkg/file_08.go": "3bb5608d07669f47111b208ff8acbdb01cc23fd1886a46a13a64ae674744d98f",
+            "pkg/file_09.go": "fb1d7d4b6c1872f0a1ae12a81316b6407c96a4a9f9af489647593d38fe4b3c30",
+            "pkg/file_10.go": "d4625453c632729710233331ab9676b2776889e6d5432e28d87a41d5e6a7cc70",
+            "pkg/file_11.go": "0196a5b3e5621905f382b1f77ed54d9e1607ad36402fe2fa125d2fddedab2900"
+          },
+          "phase": "measured",
+          "pair": 2,
+          "position": 1,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 100166875,
+          "returncode": 0,
+          "stdout_bytes": 3068,
+          "stdout_sha256": "da223bf80831c8e2f71e2a4e66edca64f5e780c294a29a5c1762f4a43e2996ee",
+          "stderr": "",
+          "source_fingerprints": {
+            "pkg/file_00.go": "40f9ad22491dd92fd6f8737923f0f3f6e465d3c32d79e99fc2833f9bdbd1e16e",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "go.mod": "6649027ecc2dc0e9d34d06a6ce9e8a85925997efd4239f7a50f206a76764b02f",
+            "pkg/file_01.go": "2d3b5fe1ea8c31c60d3e1914e6ede72f4cbb0afd43e0870d2f52226cfb69cba4",
+            "pkg/file_02.go": "ebfe0618b1bd517c3517c1c6449542bb6c7fcc4409a4f64bca67805272a49637",
+            "pkg/file_03.go": "d7e08c75cf37df0b4e86ed3438b7068faa71220cea2fa5985ee10f40a66f959e",
+            "pkg/file_04.go": "fbb195bbad0945b6c0890ed445864954d144a3758c920eb0ea5ada63e4bc7063",
+            "pkg/file_05.go": "b85b7f18f1524cc0a2ecfb6f81c1e482dd5667161fba3279a65c76883e6b5779",
+            "pkg/file_06.go": "5731e22c1a06f11b534b771679167c23de0df890ac4f198ec67ae0b21593500b",
+            "pkg/file_07.go": "736333198f47c008ffa34193367c518bbfa8bf2cf9a3a4be372fbb617c6edfcc",
+            "pkg/file_08.go": "3bb5608d07669f47111b208ff8acbdb01cc23fd1886a46a13a64ae674744d98f",
+            "pkg/file_09.go": "fb1d7d4b6c1872f0a1ae12a81316b6407c96a4a9f9af489647593d38fe4b3c30",
+            "pkg/file_10.go": "d4625453c632729710233331ab9676b2776889e6d5432e28d87a41d5e6a7cc70",
+            "pkg/file_11.go": "0196a5b3e5621905f382b1f77ed54d9e1607ad36402fe2fa125d2fddedab2900"
+          },
+          "phase": "measured",
+          "pair": 3,
+          "position": 0,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 107285625,
+          "returncode": 0,
+          "stdout_bytes": 3068,
+          "stdout_sha256": "da223bf80831c8e2f71e2a4e66edca64f5e780c294a29a5c1762f4a43e2996ee",
+          "stderr": "",
+          "source_fingerprints": {
+            "pkg/file_00.go": "40f9ad22491dd92fd6f8737923f0f3f6e465d3c32d79e99fc2833f9bdbd1e16e",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "go.mod": "6649027ecc2dc0e9d34d06a6ce9e8a85925997efd4239f7a50f206a76764b02f",
+            "pkg/file_01.go": "2d3b5fe1ea8c31c60d3e1914e6ede72f4cbb0afd43e0870d2f52226cfb69cba4",
+            "pkg/file_02.go": "ebfe0618b1bd517c3517c1c6449542bb6c7fcc4409a4f64bca67805272a49637",
+            "pkg/file_03.go": "d7e08c75cf37df0b4e86ed3438b7068faa71220cea2fa5985ee10f40a66f959e",
+            "pkg/file_04.go": "fbb195bbad0945b6c0890ed445864954d144a3758c920eb0ea5ada63e4bc7063",
+            "pkg/file_05.go": "b85b7f18f1524cc0a2ecfb6f81c1e482dd5667161fba3279a65c76883e6b5779",
+            "pkg/file_06.go": "5731e22c1a06f11b534b771679167c23de0df890ac4f198ec67ae0b21593500b",
+            "pkg/file_07.go": "736333198f47c008ffa34193367c518bbfa8bf2cf9a3a4be372fbb617c6edfcc",
+            "pkg/file_08.go": "3bb5608d07669f47111b208ff8acbdb01cc23fd1886a46a13a64ae674744d98f",
+            "pkg/file_09.go": "fb1d7d4b6c1872f0a1ae12a81316b6407c96a4a9f9af489647593d38fe4b3c30",
+            "pkg/file_10.go": "d4625453c632729710233331ab9676b2776889e6d5432e28d87a41d5e6a7cc70",
+            "pkg/file_11.go": "0196a5b3e5621905f382b1f77ed54d9e1607ad36402fe2fa125d2fddedab2900"
+          },
+          "phase": "measured",
+          "pair": 3,
+          "position": 1,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 105164458,
+          "returncode": 0,
+          "stdout_bytes": 3068,
+          "stdout_sha256": "da223bf80831c8e2f71e2a4e66edca64f5e780c294a29a5c1762f4a43e2996ee",
+          "stderr": "",
+          "source_fingerprints": {
+            "pkg/file_00.go": "40f9ad22491dd92fd6f8737923f0f3f6e465d3c32d79e99fc2833f9bdbd1e16e",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "go.mod": "6649027ecc2dc0e9d34d06a6ce9e8a85925997efd4239f7a50f206a76764b02f",
+            "pkg/file_01.go": "2d3b5fe1ea8c31c60d3e1914e6ede72f4cbb0afd43e0870d2f52226cfb69cba4",
+            "pkg/file_02.go": "ebfe0618b1bd517c3517c1c6449542bb6c7fcc4409a4f64bca67805272a49637",
+            "pkg/file_03.go": "d7e08c75cf37df0b4e86ed3438b7068faa71220cea2fa5985ee10f40a66f959e",
+            "pkg/file_04.go": "fbb195bbad0945b6c0890ed445864954d144a3758c920eb0ea5ada63e4bc7063",
+            "pkg/file_05.go": "b85b7f18f1524cc0a2ecfb6f81c1e482dd5667161fba3279a65c76883e6b5779",
+            "pkg/file_06.go": "5731e22c1a06f11b534b771679167c23de0df890ac4f198ec67ae0b21593500b",
+            "pkg/file_07.go": "736333198f47c008ffa34193367c518bbfa8bf2cf9a3a4be372fbb617c6edfcc",
+            "pkg/file_08.go": "3bb5608d07669f47111b208ff8acbdb01cc23fd1886a46a13a64ae674744d98f",
+            "pkg/file_09.go": "fb1d7d4b6c1872f0a1ae12a81316b6407c96a4a9f9af489647593d38fe4b3c30",
+            "pkg/file_10.go": "d4625453c632729710233331ab9676b2776889e6d5432e28d87a41d5e6a7cc70",
+            "pkg/file_11.go": "0196a5b3e5621905f382b1f77ed54d9e1607ad36402fe2fa125d2fddedab2900"
+          },
+          "phase": "measured",
+          "pair": 4,
+          "position": 0,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 99533875,
+          "returncode": 0,
+          "stdout_bytes": 3068,
+          "stdout_sha256": "da223bf80831c8e2f71e2a4e66edca64f5e780c294a29a5c1762f4a43e2996ee",
+          "stderr": "",
+          "source_fingerprints": {
+            "pkg/file_00.go": "40f9ad22491dd92fd6f8737923f0f3f6e465d3c32d79e99fc2833f9bdbd1e16e",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "go.mod": "6649027ecc2dc0e9d34d06a6ce9e8a85925997efd4239f7a50f206a76764b02f",
+            "pkg/file_01.go": "2d3b5fe1ea8c31c60d3e1914e6ede72f4cbb0afd43e0870d2f52226cfb69cba4",
+            "pkg/file_02.go": "ebfe0618b1bd517c3517c1c6449542bb6c7fcc4409a4f64bca67805272a49637",
+            "pkg/file_03.go": "d7e08c75cf37df0b4e86ed3438b7068faa71220cea2fa5985ee10f40a66f959e",
+            "pkg/file_04.go": "fbb195bbad0945b6c0890ed445864954d144a3758c920eb0ea5ada63e4bc7063",
+            "pkg/file_05.go": "b85b7f18f1524cc0a2ecfb6f81c1e482dd5667161fba3279a65c76883e6b5779",
+            "pkg/file_06.go": "5731e22c1a06f11b534b771679167c23de0df890ac4f198ec67ae0b21593500b",
+            "pkg/file_07.go": "736333198f47c008ffa34193367c518bbfa8bf2cf9a3a4be372fbb617c6edfcc",
+            "pkg/file_08.go": "3bb5608d07669f47111b208ff8acbdb01cc23fd1886a46a13a64ae674744d98f",
+            "pkg/file_09.go": "fb1d7d4b6c1872f0a1ae12a81316b6407c96a4a9f9af489647593d38fe4b3c30",
+            "pkg/file_10.go": "d4625453c632729710233331ab9676b2776889e6d5432e28d87a41d5e6a7cc70",
+            "pkg/file_11.go": "0196a5b3e5621905f382b1f77ed54d9e1607ad36402fe2fa125d2fddedab2900"
+          },
+          "phase": "measured",
+          "pair": 4,
+          "position": 1,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 101486667,
+          "returncode": 0,
+          "stdout_bytes": 3068,
+          "stdout_sha256": "da223bf80831c8e2f71e2a4e66edca64f5e780c294a29a5c1762f4a43e2996ee",
+          "stderr": "",
+          "source_fingerprints": {
+            "pkg/file_00.go": "40f9ad22491dd92fd6f8737923f0f3f6e465d3c32d79e99fc2833f9bdbd1e16e",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "go.mod": "6649027ecc2dc0e9d34d06a6ce9e8a85925997efd4239f7a50f206a76764b02f",
+            "pkg/file_01.go": "2d3b5fe1ea8c31c60d3e1914e6ede72f4cbb0afd43e0870d2f52226cfb69cba4",
+            "pkg/file_02.go": "ebfe0618b1bd517c3517c1c6449542bb6c7fcc4409a4f64bca67805272a49637",
+            "pkg/file_03.go": "d7e08c75cf37df0b4e86ed3438b7068faa71220cea2fa5985ee10f40a66f959e",
+            "pkg/file_04.go": "fbb195bbad0945b6c0890ed445864954d144a3758c920eb0ea5ada63e4bc7063",
+            "pkg/file_05.go": "b85b7f18f1524cc0a2ecfb6f81c1e482dd5667161fba3279a65c76883e6b5779",
+            "pkg/file_06.go": "5731e22c1a06f11b534b771679167c23de0df890ac4f198ec67ae0b21593500b",
+            "pkg/file_07.go": "736333198f47c008ffa34193367c518bbfa8bf2cf9a3a4be372fbb617c6edfcc",
+            "pkg/file_08.go": "3bb5608d07669f47111b208ff8acbdb01cc23fd1886a46a13a64ae674744d98f",
+            "pkg/file_09.go": "fb1d7d4b6c1872f0a1ae12a81316b6407c96a4a9f9af489647593d38fe4b3c30",
+            "pkg/file_10.go": "d4625453c632729710233331ab9676b2776889e6d5432e28d87a41d5e6a7cc70",
+            "pkg/file_11.go": "0196a5b3e5621905f382b1f77ed54d9e1607ad36402fe2fa125d2fddedab2900"
+          },
+          "phase": "measured",
+          "pair": 5,
+          "position": 0,
+          "variant": "after"
+        },
+        {
+          "elapsed_ns": 114151250,
+          "returncode": 0,
+          "stdout_bytes": 3068,
+          "stdout_sha256": "da223bf80831c8e2f71e2a4e66edca64f5e780c294a29a5c1762f4a43e2996ee",
+          "stderr": "",
+          "source_fingerprints": {
+            "pkg/file_00.go": "40f9ad22491dd92fd6f8737923f0f3f6e465d3c32d79e99fc2833f9bdbd1e16e",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "go.mod": "6649027ecc2dc0e9d34d06a6ce9e8a85925997efd4239f7a50f206a76764b02f",
+            "pkg/file_01.go": "2d3b5fe1ea8c31c60d3e1914e6ede72f4cbb0afd43e0870d2f52226cfb69cba4",
+            "pkg/file_02.go": "ebfe0618b1bd517c3517c1c6449542bb6c7fcc4409a4f64bca67805272a49637",
+            "pkg/file_03.go": "d7e08c75cf37df0b4e86ed3438b7068faa71220cea2fa5985ee10f40a66f959e",
+            "pkg/file_04.go": "fbb195bbad0945b6c0890ed445864954d144a3758c920eb0ea5ada63e4bc7063",
+            "pkg/file_05.go": "b85b7f18f1524cc0a2ecfb6f81c1e482dd5667161fba3279a65c76883e6b5779",
+            "pkg/file_06.go": "5731e22c1a06f11b534b771679167c23de0df890ac4f198ec67ae0b21593500b",
+            "pkg/file_07.go": "736333198f47c008ffa34193367c518bbfa8bf2cf9a3a4be372fbb617c6edfcc",
+            "pkg/file_08.go": "3bb5608d07669f47111b208ff8acbdb01cc23fd1886a46a13a64ae674744d98f",
+            "pkg/file_09.go": "fb1d7d4b6c1872f0a1ae12a81316b6407c96a4a9f9af489647593d38fe4b3c30",
+            "pkg/file_10.go": "d4625453c632729710233331ab9676b2776889e6d5432e28d87a41d5e6a7cc70",
+            "pkg/file_11.go": "0196a5b3e5621905f382b1f77ed54d9e1607ad36402fe2fa125d2fddedab2900"
+          },
+          "phase": "measured",
+          "pair": 5,
+          "position": 1,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 105401792,
+          "returncode": 0,
+          "stdout_bytes": 3068,
+          "stdout_sha256": "da223bf80831c8e2f71e2a4e66edca64f5e780c294a29a5c1762f4a43e2996ee",
+          "stderr": "",
+          "source_fingerprints": {
+            "pkg/file_00.go": "40f9ad22491dd92fd6f8737923f0f3f6e465d3c32d79e99fc2833f9bdbd1e16e",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "go.mod": "6649027ecc2dc0e9d34d06a6ce9e8a85925997efd4239f7a50f206a76764b02f",
+            "pkg/file_01.go": "2d3b5fe1ea8c31c60d3e1914e6ede72f4cbb0afd43e0870d2f52226cfb69cba4",
+            "pkg/file_02.go": "ebfe0618b1bd517c3517c1c6449542bb6c7fcc4409a4f64bca67805272a49637",
+            "pkg/file_03.go": "d7e08c75cf37df0b4e86ed3438b7068faa71220cea2fa5985ee10f40a66f959e",
+            "pkg/file_04.go": "fbb195bbad0945b6c0890ed445864954d144a3758c920eb0ea5ada63e4bc7063",
+            "pkg/file_05.go": "b85b7f18f1524cc0a2ecfb6f81c1e482dd5667161fba3279a65c76883e6b5779",
+            "pkg/file_06.go": "5731e22c1a06f11b534b771679167c23de0df890ac4f198ec67ae0b21593500b",
+            "pkg/file_07.go": "736333198f47c008ffa34193367c518bbfa8bf2cf9a3a4be372fbb617c6edfcc",
+            "pkg/file_08.go": "3bb5608d07669f47111b208ff8acbdb01cc23fd1886a46a13a64ae674744d98f",
+            "pkg/file_09.go": "fb1d7d4b6c1872f0a1ae12a81316b6407c96a4a9f9af489647593d38fe4b3c30",
+            "pkg/file_10.go": "d4625453c632729710233331ab9676b2776889e6d5432e28d87a41d5e6a7cc70",
+            "pkg/file_11.go": "0196a5b3e5621905f382b1f77ed54d9e1607ad36402fe2fa125d2fddedab2900"
+          },
+          "phase": "measured",
+          "pair": 6,
+          "position": 0,
+          "variant": "before"
+        },
+        {
+          "elapsed_ns": 103405500,
+          "returncode": 0,
+          "stdout_bytes": 3068,
+          "stdout_sha256": "da223bf80831c8e2f71e2a4e66edca64f5e780c294a29a5c1762f4a43e2996ee",
+          "stderr": "",
+          "source_fingerprints": {
+            "pkg/file_00.go": "40f9ad22491dd92fd6f8737923f0f3f6e465d3c32d79e99fc2833f9bdbd1e16e",
+            "AGENTS.md": "6c90aba0d345e63031209602b98e29800b7aae01de0edf4e1cbe61c6b0e4c1ad",
+            "go.mod": "6649027ecc2dc0e9d34d06a6ce9e8a85925997efd4239f7a50f206a76764b02f",
+            "pkg/file_01.go": "2d3b5fe1ea8c31c60d3e1914e6ede72f4cbb0afd43e0870d2f52226cfb69cba4",
+            "pkg/file_02.go": "ebfe0618b1bd517c3517c1c6449542bb6c7fcc4409a4f64bca67805272a49637",
+            "pkg/file_03.go": "d7e08c75cf37df0b4e86ed3438b7068faa71220cea2fa5985ee10f40a66f959e",
+            "pkg/file_04.go": "fbb195bbad0945b6c0890ed445864954d144a3758c920eb0ea5ada63e4bc7063",
+            "pkg/file_05.go": "b85b7f18f1524cc0a2ecfb6f81c1e482dd5667161fba3279a65c76883e6b5779",
+            "pkg/file_06.go": "5731e22c1a06f11b534b771679167c23de0df890ac4f198ec67ae0b21593500b",
+            "pkg/file_07.go": "736333198f47c008ffa34193367c518bbfa8bf2cf9a3a4be372fbb617c6edfcc",
+            "pkg/file_08.go": "3bb5608d07669f47111b208ff8acbdb01cc23fd1886a46a13a64ae674744d98f",
+            "pkg/file_09.go": "fb1d7d4b6c1872f0a1ae12a81316b6407c96a4a9f9af489647593d38fe4b3c30",
+            "pkg/file_10.go": "d4625453c632729710233331ab9676b2776889e6d5432e28d87a41d5e6a7cc70",
+            "pkg/file_11.go": "0196a5b3e5621905f382b1f77ed54d9e1607ad36402fe2fa125d2fddedab2900"
+          },
+          "phase": "measured",
+          "pair": 6,
+          "position": 1,
+          "variant": "after"
+        }
+      ]
+    }
+  ],
+  "valid": true
+}

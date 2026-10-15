@@ -107,13 +107,23 @@ def discover_manifests(path: Path, root: Path) -> list[Path]:
     return found
 
 
+class AnalysisCache:
+    """Reuse filesystem facts within one collection only; never persist across runs."""
+    def __init__(self, root):
+        self.root = root.resolve()
+        self.paths, self.reads, self.directories = {}, {}, {}
+
+
 class _Scan:
-    def __init__(self, path, root):
+    def __init__(self, path, root, cache=None):
         self.path, self.root = path, root
+        self.cache = cache if cache is not None else AnalysisCache(root)
+        if self.cache.root != root:
+            raise ValueError('Analysis cache belongs to a different repository root')
         self.imports, self.notes = [], []
         self.remaining = MAX_AUX_BYTES
         self.read_cache = {}
-        self.path_cache = {}
+        self.path_cache = self.cache.paths
         self.unresolved = 0
 
     def note(self, text):
@@ -143,6 +153,11 @@ class _Scan:
             return ""
         if path in self.read_cache:
             return self.read_cache[path]
+        cached = self.cache.reads.get(path)
+        if cached is not None and cached[1] <= self.remaining:
+            self.remaining -= cached[1]
+            self.read_cache[path] = cached[0]
+            return cached[0]
         if self.remaining <= 0:
             self.note("Auxiliary manifest byte limit reached; resolution is incomplete.")
             return ""
@@ -157,6 +172,7 @@ class _Scan:
             else:
                 self.remaining -= len(data)
                 text = data.decode("utf-8")
+                self.cache.reads[path] = (text, len(data))
         except (OSError, UnicodeError):
             self.note("Auxiliary manifest could not be read as UTF-8.")
             text = ""
@@ -168,11 +184,16 @@ class _Scan:
         if directory is None:
             return []
         try:
-            with os.scandir(directory) as entries:
-                names = list(itertools.islice(entries, MAX_DIRECTORY_ENTRIES + 1))
-            if len(names) > MAX_DIRECTORY_ENTRIES:
+            if directory not in self.cache.directories:
+                with os.scandir(directory) as entries:
+                    names = list(itertools.islice(entries, MAX_DIRECTORY_ENTRIES + 1))
+                self.cache.directories[directory] = (
+                    [Path(item.path) for item in sorted(names[:MAX_DIRECTORY_ENTRIES], key=lambda e: e.name)],
+                    len(names) > MAX_DIRECTORY_ENTRIES)
+            paths, truncated = self.cache.directories[directory]
+            if truncated:
                 self.note("Package directory entry limit reached; file selection is incomplete.")
-            return [Path(item.path) for item in sorted(names[:MAX_DIRECTORY_ENTRIES], key=lambda e: e.name)]
+            return paths
         except OSError:
             return []
 
@@ -423,13 +444,13 @@ def _c(scan, source):
     return symbols
 
 
-def analyze(path: Path, source: str, root: Path) -> tuple[set[str], list[Path], list[str]]:
+def analyze(path: Path, source: str, root: Path, cache=None) -> tuple[set[str], list[Path], list[str]]:
     """Return definition hints, existing local dependencies, and honest limits."""
     root = root.resolve()
     path = _inside(path if path.is_absolute() else root / path, root)
     if path is None:
         return set(), [], ["Analysis path is outside the repository or in an excluded dependency directory."]
-    scan = _Scan(path, root)
+    scan = _Scan(path, root, cache)
     language = language_for(path)
     if language == "python":
         symbols = _python(scan, source)

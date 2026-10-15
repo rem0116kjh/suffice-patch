@@ -7,6 +7,7 @@ import platform
 import random
 import re
 import statistics
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -52,6 +53,11 @@ def fixture(root, kind, callers, seed):
     write(root, 'web.py', 'from api import customer_label\n\n'
           'def render(value):\n    return "Hello, " + customer_label(value)\n')
     write(root, 'unrelated.py', 'UNRELATED_USER_VALUE = 10\n')
+    if kind == 'go_package':
+        write(root, 'go.mod', 'module example.test/fixture\n')
+        for index in range(12):
+            write(root, f'pkg/file_{index:02d}.go',
+                  f'package fixture\nfunc Value{index}() int {{ return {index} }}\n')
     if kind == 'many_callers':
         for index in range(callers):
             write(root, f'callers/caller_{index:05d}.py',
@@ -155,18 +161,26 @@ def main():
         scripts = {}
         for label, original in [('before', args.before), ('after', args.after)]:
             raw = original.read_bytes()
-            scripts[label] = base / f'{label}.py'
+            bundle = base / label
+            bundle.mkdir()
+            for sibling in original.parent.glob('*.py'):
+                shutil.copy2(sibling, bundle / sibling.name)
+            scripts[label] = bundle / original.name
             scripts[label].write_bytes(raw)
-            report['scripts'][label] = {'path': str(original.resolve()), 'sha256': digest(raw)}
+            report['scripts'][label] = {'path': str(original.resolve()), 'sha256': digest(raw),
+                                       'bundle_sha256': {p.name: digest(p.read_bytes()) for p in sorted(bundle.glob('*.py'))}}
         fixtures = {}
-        for index, kind in enumerate(('small', 'repeated_imports', 'many_callers')):
+        for index, kind in enumerate(('small', 'repeated_imports', 'many_callers', 'go_package')):
             root = base / kind
             fixtures[kind] = (root, fixture(root, kind, args.callers, args.seed + index))
         for case_index, (name, kind, arguments) in enumerate([
             ('small', 'small', ['api.customer_label']),
             ('repeated_imports', 'repeated_imports', ['api.customer_label']),
-            ('many_callers', 'many_callers', ['api.customer_label']),
+            # Keep all candidates so historical unordered rg truncation cannot
+            # confound a timing comparison by selecting different source files.
+            ('many_callers', 'many_callers', ['--max-search-matches', str(args.callers + 16), 'api.customer_label']),
             ('file_limit', 'many_callers', ['--max-files', '1', 'api.customer_label']),
+            ('go_package', 'go_package', ['pkg/file_00.go']),
         ]):
             root, description = fixtures[kind]
             records, samples = [], {}

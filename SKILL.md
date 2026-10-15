@@ -1,16 +1,18 @@
 ---
 name: suffice-patch
-description: For code, test, configuration, and documentation changes across languages and monorepos, collect bounded source, local dependencies, textual references, project instructions, and Git changes before editing. Use for focused fixes or successive parts of larger repository work.
+description: Collect bounded source, local dependencies, reference candidates, project instructions, and Git changes for focused repository edits across languages and monorepos.
+metadata:
+  version: "5.0.0"
 ---
 
 # SufficePatch
 
-Use the bundled read-only inspector from the project root. Its Python runtime
-is an implementation detail; the inspected project can use other languages.
+Use the bundled read-only inspector from the project root. Python runs the
+inspector; the project can use any supported language.
 
 ```sh
 python3 -B <skill-dir>/scripts/collect_context.py packages/web/src/cart.ts --scope packages/web
-python3 -B <skill-dir>/scripts/collect_context.py src/lib.rs include/parser.h
+python3 -B <skill-dir>/scripts/collect_context.py --changed all --scope packages/web
 ```
 
 `<skill-dir>` is this skill's directory. Pass named files and explicitly requested
@@ -21,16 +23,22 @@ directory for a bounded file map, then choose files based on the task:
 python3 -B <skill-dir>/scripts/collect_context.py . --scope packages/api
 ```
 
-The inspector reads source, local dependencies where resolvable, matching
-references/tests, ancestor `AGENTS.md`, nearby manifests, bounded Git status, and file-scoped diffs.
-Use the output directly; read its implementation only to debug the inspector.
-Python imports use AST; JS/TS, Go, Rust, and C/C++ use limited static heuristics.
-Other text formats use textual symbols/references. Treat candidates as evidence
-to inspect, not a complete dependency graph. Resolve reported aliases, generated
-code, build tags, dynamic references, or omitted files with targeted reads.
+For existing changes, use `--changed all`, `staged`, or `worktree`. Untracked
+files require `--include-untracked`; source bodies always reflect the working
+tree, even with `staged`. Deleted files retain diff and filename-reference hints.
+`--summary` returns paths/hashes without bodies or diffs; use it for triage, then
+read full context before editing. `--format json` enables structured consumers.
+Read [CLI details](references/cli.md) for these modes and the JSON contract.
 
-For a large repository, repeat `--scope` for relevant packages; connected local
-imports may cross these search scopes but remain inside the repository root.
+The inspector reads source, resolvable local imports, matching references/tests,
+ancestor `AGENTS.md`, nearby manifests, bounded Git status and file-scoped diffs.
+Use its output directly. Python imports use AST; other imports are limited
+static hints. Candidates are not a complete dependency graph. Follow reported
+alias, generated-code, build-tag and dynamic-reference gaps with targeted reads.
+
+Repeat `--scope` for relevant packages. It bounds discovery, references and
+automatic changed-file selection; connected local imports can cross scopes
+inside the repository. Explicit targets are retained regardless of scope.
 Use `--symbol` to narrow ambiguous references. Default limits are 16 source files,
 40,000 source bytes, 200 search candidates, and 5 seconds per search. Directory
 maps do not load file contents. Increase limits only when the missing evidence
@@ -38,12 +46,9 @@ justifies it. Divide larger work by dependency or behavior, then run the require
 integration checks across affected packages; do not treat one bounded read as a
 whole-repository review.
 
-Edit and verify using the project's actual language and declared tooling. Read
-relevant manifest scripts before running them; the inspector never runs project
-code, installs dependencies, or chooses a test command for you. Keep required
-project checks and data-integrity tests. Preserve unrelated work and leave
-already-correct code unchanged. When grouping edit/check/diff steps, keep them
-sequential and stop on failure. Assert a unique old-text match for replacements,
-or use the normal patch tool. Report changed behavior, actual checks, and any
-remaining coverage or environment limits. Do not infer token or time savings
-from using the helper; performance evidence is specific to its tested version.
+Read declared project commands before executing them. The inspector never runs
+project code or installs dependencies. Use the project's actual tooling and
+required integration/data-integrity checks. Preserve unrelated work and already
+correct code. Keep dependent edits and checks sequential; stop on failure.
+Report changed behavior, actual checks and coverage limits. Performance evidence
+is version-specific; using this helper alone does not prove token or time savings.

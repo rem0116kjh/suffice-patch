@@ -1,13 +1,82 @@
 한국어 · [English](README.en.md)
 
-# SufficePatch v4
+# SufficePatch v5.0.0
 
-[프로젝트 웹페이지](https://rem0116kjh.github.io/suffice-patch/) · [웹페이지 소스](index.html) · [업데이트 모아 보기](https://rem0116kjh.github.io/suffice-patch/#updates)
+**코드를 고치기 전에, 필요한 파일부터 모으세요.**
 
-여러 언어로 된 코드·테스트·설정·문서를 수정할 때 필요한 파일과 참조를 제한된 범위로
-모아 주는 Codex/Claude 스킬이다. 모노레포는 패키지별로 탐색하고, 큰 변경은 관련 부분을
-차례로 처리한 뒤 통합 검증한다. 도우미는 Python으로 작성했지만 대상 프로젝트 언어는
-Python으로 제한하지 않는다. 자동 선택을 유지한다.
+SufficePatch는 Codex와 Claude Code가 저장소를 수정할 때 필요한 코드·프로젝트 지침·
+Git 변경 내역을 제한된 범위로 모아 주는 스킬입니다. 요청한 파일에서 로컬 의존성과
+참조·테스트 후보를 찾아, 다음에 어떤 파일을 읽고 확인할지 판단하도록 돕습니다.
+
+작은 버그 수정부터 모노레포의 패키지별 작업까지 사용할 수 있습니다. 수집기는 읽기
+전용으로 동작하며, 코드 수정과 테스트 실행은 AI 에이전트가 프로젝트의 도구로 수행합니다.
+
+[v5.0.0 설치 ZIP](dist/suffice-patch-v5.0.0.zip) · [검증 보고서](evals/V5_20261015.md) · [CLI·JSON 안내](references/cli.md) · [프로젝트 웹페이지](https://rem0116kjh.github.io/suffice-patch/)
+
+## 어떤 작업에 유용한가요?
+
+| 작업 | 시작 방법 | 얻는 정보 |
+|---|---|---|
+| 특정 함수나 파일의 버그 수정 | 파일 경로를 지정 | 소스, 로컬 의존성, 참조·테스트 후보 |
+| 이미 수정한 코드 확인 | `--changed all` 또는 `--changed staged` | 변경 경로와 현재 소스, 스테이징 전후 diff |
+| 큰 모노레포 탐색 | `--scope packages/web` | 선택한 패키지의 파일 지도와 참조 후보 |
+| 먼저 범위만 파악 | `--summary` | 본문 없이 경로·해시·수집 한도와 누락 안내 |
+| 다른 도구와 연결 | `--format json` | 스키마 버전이 있는 구조화된 결과 |
+
+한 번의 수집으로 저장소 전체의 영향을 알아내지는 않습니다. 범위를 나누어 필요한
+파일을 확인하고, 변경이 여러 패키지에 걸치면 마지막에 통합 검증을 수행합니다.
+
+## 설치와 빠른 시작
+
+실행에는 **Python 3.9 이상, Git, ripgrep(`rg`)**이 필요합니다. 대상 프로젝트가 Python일
+필요는 없으며, 별도 Python 패키지나 프로젝트 의존성을 설치하지 않습니다.
+
+[설치 ZIP](dist/suffice-patch-v5.0.0.zip)을 풀고 `suffice-patch` 폴더 안에서 아래 명령을
+실행하면 Codex에 설치됩니다. 지침·도우미 3개·CLI 참조 문서, 총 5파일을 함께 복사합니다.
+
+```sh
+mkdir -p "$HOME/.agents/skills/suffice-patch/scripts" "$HOME/.agents/skills/suffice-patch/references"
+cp SKILL.md "$HOME/.agents/skills/suffice-patch/SKILL.md"
+cp scripts/*.py "$HOME/.agents/skills/suffice-patch/scripts/"
+cp references/cli.md "$HOME/.agents/skills/suffice-patch/references/"
+python3 -B "$HOME/.agents/skills/suffice-patch/scripts/collect_context.py" --version
+# SufficePatch 5.0.0
+```
+
+Claude Code에 설치할 때는 위 경로의 `.agents/skills`를 `.claude/skills`로 바꿉니다.
+[SHA256 목록](dist/release.json)으로 ZIP과 파일을 확인할 수 있고,
+[이전 v4 ZIP](dist/suffice-patch-v4.zip)도 보존합니다.
+
+설치 후 새 대화에서 수정할 파일·동작·대상 패키지를 설명하세요. Codex는 관련 요청에서
+스킬을 자동 선택할 수 있으며, 명시적으로 지정할 수도 있습니다.
+
+```text
+$suffice-patch packages/web의 장바구니 계산 오류를 수정해줘.
+기존 응답 형식은 유지하고, 관련 테스트도 확인해줘.
+```
+
+Claude Code의 명시 호출은 `/suffice-patch`입니다. 자동 선택이 항상 일어난다는 보장은
+없습니다. 현재 검증은 macOS Apple Silicon 환경이며, 다른 운영체제와 사용자 환경은
+추가 검증이 필요합니다.
+
+## v5 변경 파일 수집과 출력 최적화
+
+- **변경 파일 자동 선택**: `--changed all|staged|worktree`로 Git 상태에서 시작한다. 삭제·이름 변경과 중첩 root를 처리하고, `--scope`로 대상 패키지를 제한한다.
+- **요약·JSON 출력**: `--summary`는 본문과 diff를 생략하고 경로·해시를 제공한다. `--format json`은 스키마 버전이 있는 구조화된 결과를 반환한다.
+- **반복 분석 감소**: 한 번의 실행 안에서 경로 확인·manifest 읽기·패키지 목록을 공유한다. 캐시는 실행 종료 시 폐기한다.
+- **재현 가능한 검색**: 경로를 정렬한 뒤 검색 후보 한도를 적용한다. `--version`으로 실제 설치 버전을 확인한다.
+
+```sh
+python3 -B scripts/collect_context.py --changed all --scope packages/web
+python3 -B scripts/collect_context.py --changed staged --summary
+python3 -B scripts/collect_context.py --changed worktree --include-untracked --format json
+python3 -B scripts/collect_context.py --version
+```
+
+미추적 파일은 `--include-untracked`를 지정해야 선택하며, 이 옵션은 all/worktree에서만
+사용한다. staged 모드에서도 소스 본문은 현재 작업 폴더 내용이다. 스테이징된 차이는
+별도 diff로 구분한다. 요약 모드도 파일을 읽어 해시와 의존성을 구하므로 **출력량을 줄이는
+기능**이다. 실제 수정 전에는 본문과 전체 diff를 확인한다.
 
 ## 다언어와 모노레포 지원
 
@@ -45,7 +114,74 @@ v4는 회귀 검사 54/54와 JS/TS·Go·C·Java의 독립 API 검사 57/57을 �
 **아래 시간·토큰 수치는 이전 Python 전용 v3의 결과이며 v4의 성능 근거가 아니다.**
 v4의 토큰 절감이나 시간 개선은 아직 비교 측정하지 않았다.
 
-## 이전 Python 전용 v3 외부 저장소 검증 (2026-10-06)
+## v5 검증 결과와 성능
+
+**기능 검증은 통과했습니다. 속도와 출력량은 측정한 범위 안에서만 설명합니다.**
+
+| 검증 | 결과 | 의미 |
+|---|---:|---|
+| 전체 기능·회귀 검사 | 69/69 통과 | 기존 수집기 29개 + 새 기능 15개 + 평가 도구 25개 |
+| Python 3.12 호환성 | 44/44 통과 | 수집기와 v5 기능 검사 |
+| ZIP 압축 해제 후 실행 | 44/44 통과 | 배포 파일의 실행과 스킬 형식 확인 |
+| Codex·Claude 설치 | 파일 해시 일치·실행 성공 | Codex 스킬 검색에서 새 설명과 활성 상태도 확인 |
+| 요약 출력 | 61,706 → 7,833바이트 | 자체 소스 수집 1사례에서 출력량 87.3% 감소 |
+
+요약 출력은 같은 파일과 해시를 유지하면서 본문과 diff를 생략합니다. 위 **87.3%는
+출력 바이트 감소율**이며, 모델 토큰·비용 절감이나 작업 정확성 향상을 뜻하지 않습니다.
+요약만으로 수정하지 말고 필요한 파일의 본문과 diff를 이어서 확인해야 합니다.
+
+도우미만 실행한 v4/v5 비교는 각 조건을 1회 준비 실행 후 7회씩 측정했습니다.
+아래는 중앙값이며, AI 모델이 실제 수정 작업을 마치는 시간을 측정한 결과는 아닙니다.
+
+| 사례 | v4 | v5 | 관측 |
+|---|---:|---:|---|
+| 작은 Python 저장소 | 99.3ms | 99.0ms | 0.3% 빠름 |
+| 반복 import | 101.8ms | 103.4ms | 1.6% 느림 |
+| 참조 파일 2,000개 | 271.4ms | 293.9ms | 8.3% 느림 |
+| 파일 한도 1개 | 88.7ms | 90.5ms | 2.1% 느림 |
+| 같은 Go 패키지 12파일 | 107.3ms | 101.3ms | 5.6% 빠름 |
+
+개선과 회귀가 모두 관측되어 **전체 속도 향상이나 토큰 절감을 입증하지 않았습니다.**
+첫 비교에서 발견한 후보 선택 불일치와 무효 pilot도 기록에 남겼습니다.
+[검증 방법과 한계](evals/V5_20261015.md) · [원시 측정값](evals/v5-benchmark.json) ·
+[요약 출력 비교](evals/v5-summary-output.json) · [설치 검증](evals/v5-installation.json)
+
+## 도우미와 한계
+
+Python 3.9 이상, `rg`, `git`을 사용한다. 프로젝트 root에서 직접 확인할 수도 있다.
+
+```sh
+python3 -B scripts/collect_context.py src/lib.rs --scope src
+python3 -B -m unittest evals.test_inspect evals.test_multilang evals.test_v5 -v
+```
+
+도우미는 프로젝트 코드를 실행하지 않으며 저장소 밖 경로를 읽지 않는다.
+기본 소스 한도는 16개 파일/40,000바이트다. 누락·한도·검색 실패를 표시한다.
+검색 결과는 참조 후보이며 완전한 호출 그래프가 아니다. 보고된 빈틈을 추가 확인하고
+필수 언어별 검사·통합 검사를 수행해야 한다. 수집 한도 준수는 대형 저장소에서의
+성능 우위나 모든 변경 영향의 발견을 보장하지 않는다.
+
+## 업데이트 기록
+
+- **2026-10-15 · v5 웹 문서** — 용도·설치·빠른 시작·검증 결과를 한국어와 영어로 정리하고, 출력량 감소와 속도 변화의 의미를 구분했습니다.
+
+- **2026-10-15 · v5.0.0** — Git 변경 파일 자동 선택, 요약·JSON 출력, 실행 내 분석 캐시와 정렬 검색을 추가했다. 설치본·버전 ZIP을 갱신하고 개선·회귀 측정을 함께 기록했다. [검증 기록](evals/V5_20261015.md)
+
+- **2026-10-06 · 문서 자동 동기화** — 한국어·영어 README에서 웹 본문을 생성하고, 언어 전환과 목차를 연결했다. 블루·블랙 디자인은 유지한다.
+- **2026-10-06 · v4** — 여러 언어와 모노레포 탐색, 반복 `--scope`, `--symbol`, 파일 지도와 출력 한도를 추가했다. [기능 검증과 한계](evals/MULTILANG_20261006.md)
+- **2026-10-06 · 문서 웹사이트** — 하나의 프로젝트 페이지에서 한국어·영어 README, 설치 방법, 누적 업데이트와 검증 보고서를 연결했다. [웹사이트 소스](index.html) · [English README](README.en.md)
+- **2026-10-06 · 웹 디자인** — 프로젝트 페이지에 블루·블랙 색상과 문서 중심 레이아웃을 적용했다. [프로젝트 페이지](https://rem0116kjh.github.io/suffice-patch/)
+- **2026-10-06 · v3 외부 저장소 평가** — 실제 과거 문제의 24회 비교와 원자료 감사를 완료하고, 새 경로의 평가 준비를 모델 재호출 없이 확인했다. [보고서](evals/GENERALIZATION_20261006.md) · [사전 계획](evals/GENERALIZATION_PLAN_20261006.md) · [전체 결과](evals/runs/generalization-20261006/RESULTS.md)
+- **2026-10-06 · v3 최적화** — 수집기의 중복 작업과 한도 소진 후 검색을 줄이고, 도우미 단독 측정과 에이전트 재실행을 구분해 기록했다. [최적화 기록](evals/OPTIMIZATION_20261006.md)
+- **2026-10-03 · v3 자동 선택** — 자동 선택 조건의 Python 과제 비교, 별도 workflow 비교와 실패한 후보를 함께 보존했다. [v3 측정 기록](evals/V3_RESULTS.md)
+- **2026-10-03 · v2** — 양쪽 16/16 성공에도 토큰이 5.36% 늘어 연구를 중단한 결론을 보존했다. [상세 결과](evals/EVAL_RESULTS.md) · [당시 README](evals/README_V2.md)
+- **초기 설계 · v1 (날짜 미기록)** — 의도 → 맥락 → 최소한의 해결 → 구현 → 검증 → 중단의 작업 흐름을 설계했다. [초기 초안](evals/prototype-v1.md) · [v1 기록](evals/v1.md)
+
+## 이전 버전의 검증 기록
+
+아래는 해당 버전에서 얻은 결과이며, 현재 v5의 성능 근거로 합산하지 않습니다.
+
+### 이전 Python 전용 v3 외부 저장소 검증 (2026-10-06)
 
 `python-dotenv`, `packaging`, `itsdangerous`의 실제 과거 버그 3개와 변경 불필요
 과제 1개를 각 조건에서 3번씩 비교했다. 사전 계획을 고정한 **24회 실행**에서
@@ -73,7 +209,7 @@ v4의 토큰 절감이나 시간 개선은 아직 비교 측정하지 않았다.
 [원자료 감사](evals/runs/generalization-20261006/audit.json)에 성공·사용량·한계와 재현 절차를 공개했다.
 아래의 이전 합성 과제 결과와 합산하지 않는다.
 
-## 이전 v3 코드 최적화와 재실행 (2026-10-06)
+### 이전 v3 코드 최적화와 재실행 (2026-10-06)
 
 도우미의 중복 경로 탐색·AST 분석·대기 목록 처리를 줄이고, 한도 소진 후 검색을
 생략했다. Git 필터와 ripgrep 전처리기 실행도 차단했다. 회귀 검사 12/12를 통과했고
@@ -89,7 +225,7 @@ Codex·Claude 설치본의 도우미에도 반영했다.
 관측이며 전체 에이전트 속도 향상을 뜻하지 않는다. 실행 버전과 후속 `.pyi` 수정의
 구분, 원자료, 재현 명령은 [최적화 보고서](evals/OPTIMIZATION_20261006.md)에 있다.
 
-## 기존 v3 측정 결과 (2026-10-03)
+### 기존 v3 측정 결과 (2026-10-03)
 
 최종 버전을 Codex가 자동 선택하는 조건으로 두 Python 과제를 두 번씩 비교했다.
 
@@ -109,62 +245,7 @@ Codex CLI 0.160.0 / `gpt-6-astra` / `low`의 작은 합성 과제 결과이며,
 실패한 후보, 측정 오류로 제외한 pilot, 상세 수치와 원자료는
 [검증 보고서](evals/V3_RESULTS.md)에 보존했다.
 
-## 사용
-
-수정할 파일·기능·대상 패키지를 설명하면 Codex가 관련 요청에서 자동 선택할 수 있다.
-항상 선택된다는 보장은 없다. 명시적으로 사용할 수도 있다.
-
-```text
-$suffice-patch packages/web의 장바구니 계산과 services/api의 검증을 함께 수정해줘. 기존 응답 형식은 유지해줘.
-```
-
-Claude Code에서는 `/suffice-patch`로 명시 호출한다. Claude의 기능 검증과
-Codex의 비교 측정은 서로 다른 증거이며 Claude의 토큰 절감은 아직 측정하지 않았다.
-
-현재 설치 위치:
-
-- Codex: `~/.agents/skills/suffice-patch/`
-- Claude: `~/.claude/skills/suffice-patch/`
-
-새 설치에는 **SKILL.md와 scripts/를 함께** 복사한다. [설치용 ZIP](dist/suffice-patch.zip)은
-현재 v4의 SKILL.md와 두 Python 도우미 파일을 담는다. 프로젝트에 Python 코드를
-추가할 필요는 없다. Linux·Windows 및 다른 사용자의 설치는 아직 시험하지 않았다.
-자동 선택을 끄는 설정은 추가하지 않는다.
-
-```sh
-mkdir -p "$HOME/.agents/skills/suffice-patch/scripts"
-cp SKILL.md "$HOME/.agents/skills/suffice-patch/SKILL.md"
-cp scripts/collect_context.py scripts/context_languages.py "$HOME/.agents/skills/suffice-patch/scripts/"
-```
-
-## 도우미와 한계
-
-Python 3.9 이상, `rg`, `git`을 사용한다. 프로젝트 root에서 직접 확인할 수도 있다.
-
-```sh
-python3 -B scripts/collect_context.py src/lib.rs --scope src
-python3 -B -m unittest evals.test_inspect evals.test_multilang -v
-```
-
-도우미는 프로젝트 코드를 실행하지 않으며 저장소 밖 경로를 읽지 않는다.
-기본 소스 한도는 16개 파일/40,000바이트다. 누락·한도·검색 실패를 표시한다.
-검색 결과는 참조 후보이며 완전한 호출 그래프가 아니다. 보고된 빈틈을 추가 확인하고
-필수 언어별 검사·통합 검사를 수행해야 한다. 수집 한도 준수는 대형 저장소에서의
-성능 우위나 모든 변경 영향의 발견을 보장하지 않는다.
-
-## 업데이트 기록
-
-- **2026-10-06 · 문서 자동 동기화** — 한국어·영어 README에서 웹 본문을 생성하고, 언어 전환과 목차를 연결했다. 블루·블랙 디자인은 유지한다.
-- **2026-10-06 · v4** — 여러 언어와 모노레포 탐색, 반복 `--scope`, `--symbol`, 파일 지도와 출력 한도를 추가했다. [기능 검증과 한계](evals/MULTILANG_20261006.md)
-- **2026-10-06 · 문서 웹사이트** — 하나의 프로젝트 페이지에서 한국어·영어 README, 설치 방법, 누적 업데이트와 검증 보고서를 연결했다. [웹사이트 소스](index.html) · [English README](README.en.md)
-- **2026-10-06 · 웹 디자인** — 프로젝트 페이지에 블루·블랙 색상과 문서 중심 레이아웃을 적용했다. [프로젝트 페이지](https://rem0116kjh.github.io/suffice-patch/)
-- **2026-10-06 · v3 외부 저장소 평가** — 실제 과거 문제의 24회 비교와 원자료 감사를 완료하고, 새 경로의 평가 준비를 모델 재호출 없이 확인했다. [보고서](evals/GENERALIZATION_20261006.md) · [사전 계획](evals/GENERALIZATION_PLAN_20261006.md) · [전체 결과](evals/runs/generalization-20261006/RESULTS.md)
-- **2026-10-06 · v3 최적화** — 수집기의 중복 작업과 한도 소진 후 검색을 줄이고, 도우미 단독 측정과 에이전트 재실행을 구분해 기록했다. [최적화 기록](evals/OPTIMIZATION_20261006.md)
-- **2026-10-03 · v3 자동 선택** — 자동 선택 조건의 Python 과제 비교, 별도 workflow 비교와 실패한 후보를 함께 보존했다. [v3 측정 기록](evals/V3_RESULTS.md)
-- **2026-10-03 · v2** — 양쪽 16/16 성공에도 토큰이 5.36% 늘어 연구를 중단한 결론을 보존했다. [상세 결과](evals/EVAL_RESULTS.md) · [당시 README](evals/README_V2.md)
-- **초기 설계 · v1 (날짜 미기록)** — 의도 → 맥락 → 최소한의 해결 → 구현 → 검증 → 중단의 작업 흐름을 설계했다. [초기 초안](evals/prototype-v1.md) · [v1 기록](evals/v1.md)
-
-## 보존한 기록
+### 보존한 기록
 
 v2는 성공률을 유지했지만 토큰이 5.36% 늘었다. 당시의 중단 결론을 덮어쓰지 않고
 [v2 README](evals/README_V2.md)와 [v2 상세 결과](evals/EVAL_RESULTS.md)로 보존했다.

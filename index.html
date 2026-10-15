@@ -6,7 +6,7 @@ layout: null
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="SufficePatch는 여러 언어와 모노레포에서 코드 변경에 필요한 파일과 참조를 제한된 범위로 모으는 Codex·Claude 스킬입니다. 사용법, 업데이트, 검증 기록을 확인하세요.">
+  <meta name="description" content="SufficePatch v5.0.0: Codex·Claude Code를 위한 읽기 전용 코드 맥락 수집 스킬. Git 변경 파일 선택, 요약·JSON 출력, 설치 방법과 실제 검증 결과를 확인하세요.">
   <meta name="theme-color" content="#080b12">
   <title>SufficePatch — 프로젝트 문서</title>
   <link rel="canonical" href="https://rem0116kjh.github.io/suffice-patch/">
@@ -121,10 +121,11 @@ a { -webkit-tap-highlight-color: transparent; }
         {% capture korean %}{% include_relative README.md %}{% endcapture %}
         {% capture english %}{% include_relative README.en.md %}{% endcapture %}
         {% assign reports = 'href="https://github.com/rem0116kjh/suffice-patch/blob/main/evals/' %}
+        {% assign references = 'href="https://github.com/rem0116kjh/suffice-patch/blob/main/references/' %}
         {% assign downloads = 'href="https://github.com/rem0116kjh/suffice-patch/raw/refs/heads/main/dist/' %}
         {% assign page_source = 'href="https://github.com/rem0116kjh/suffice-patch/blob/main/index.html"' %}
-        <article class="readme" id="ko" lang="ko" aria-label="한국어 README">{{ korean | markdownify | replace: 'id="', 'id="ko-' | replace: 'href="#', 'href="#ko-' | replace: 'href="README.md"', 'href="#ko"' | replace: 'href="README.en.md"', 'href="#en"' | replace: 'href="evals/', reports | replace: 'href="dist/', downloads | replace: 'href="index.html"', page_source }}</article>
-        <article class="readme" id="en" lang="en" aria-label="English README">{{ english | markdownify | replace: 'id="', 'id="en-' | replace: 'href="#', 'href="#en-' | replace: 'href="README.md"', 'href="#ko"' | replace: 'href="README.en.md"', 'href="#en"' | replace: 'href="evals/', reports | replace: 'href="dist/', downloads | replace: 'href="index.html"', page_source }}</article>
+        <article class="readme" id="ko" lang="ko" aria-label="한국어 README">{{ korean | markdownify | replace: 'id="', 'id="ko-' | replace: 'href="#', 'href="#ko-' | replace: 'href="README.md"', 'href="#ko"' | replace: 'href="README.en.md"', 'href="#en"' | replace: 'href="evals/', reports | replace: 'href="references/', references | replace: 'href="dist/', downloads | replace: 'href="index.html"', page_source }}</article>
+        <article class="readme" id="en" lang="en" aria-label="English README">{{ english | markdownify | replace: 'id="', 'id="en-' | replace: 'href="#', 'href="#en-' | replace: 'href="README.md"', 'href="#ko"' | replace: 'href="README.en.md"', 'href="#en"' | replace: 'href="evals/', reports | replace: 'href="references/', references | replace: 'href="dist/', downloads | replace: 'href="index.html"', page_source }}</article>
         <span id="updates"></span>
       </div>
     </main>

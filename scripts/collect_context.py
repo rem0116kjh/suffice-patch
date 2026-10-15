@@ -6,6 +6,7 @@ Read-only: project code, dependency managers, builds, and tests are never execut
 import argparse
 from collections import deque
 import hashlib
+import json
 import math
 import os
 from pathlib import Path
@@ -16,7 +17,10 @@ import threading
 
 # A sibling module keeps language heuristics separate from traversal and budgets.
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from context_languages import analyze, discover_manifests, language_for, SUPPORTED_SUFFIXES
+from context_languages import AnalysisCache, analyze, discover_manifests, language_for, SUPPORTED_SUFFIXES
+from context_git import changed_files, prepare_git
+
+VERSION = '5.0.0'
 
 EXCLUDED_DIRS = ('.git', '.agents', '.claude', 'node_modules', 'vendor', '.venv', 'venv',
                  '__pycache__', '.next', '.nuxt', '.cache', 'dist', 'build', 'target',
@@ -66,7 +70,12 @@ def bounded_command(command, cwd, timeout=5, cap=16000):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('targets', nargs='+', help='Repository-relative files, directories, or Python modules/functions')
+    parser.add_argument('targets', nargs='*', help='Repository-relative files, directories, or Python modules/functions')
+    parser.add_argument('--version', action='version', version='SufficePatch ' + VERSION)
+    parser.add_argument('--changed', choices=('all', 'staged', 'worktree'), help='Select changed tracked files; sources always reflect the working tree')
+    parser.add_argument('--include-untracked', action='store_true', help='Also select untracked files with --changed all/worktree')
+    parser.add_argument('--format', choices=('text', 'json'), default='text')
+    parser.add_argument('--summary', action='store_true', help='Return paths, hashes and notices without source bodies or diffs')
     parser.add_argument('--root', type=Path, default=Path.cwd())
     parser.add_argument('--max-files', type=int, default=16)
     parser.add_argument('--max-bytes', type=int, default=40000)
@@ -75,6 +84,10 @@ def main():
     parser.add_argument('--max-search-matches', type=int, default=200)
     parser.add_argument('--search-timeout', type=float, default=5)
     args = parser.parse_args()
+    if not args.targets and not args.changed:
+        parser.error('provide targets or --changed all/staged/worktree')
+    if args.include_untracked and args.changed not in ('all', 'worktree'):
+        parser.error('--include-untracked requires --changed all or worktree')
     root = args.root.resolve()
     if not root.is_dir():
         parser.error('root must be an existing directory')
@@ -85,6 +98,10 @@ def main():
     loaded, pending, notices = {}, deque(), []
     seen_paths, seen_files, target_symbols = set(), set(), {}
     remaining = args.max_bytes
+    analysis_cache = AnalysisCache(root)
+    report = {'schema_version': 1, 'version': VERSION, 'root': str(root),
+              'summary': args.summary, 'file_map': [], 'changes': [], 'sources': [],
+              'git': {}, 'search': {}, 'notices': []}
 
     def inside(path):
         try:
@@ -103,6 +120,18 @@ def main():
             parser.error('scope must be an existing directory inside root: ' + name)
         if path not in scopes:
             scopes.append(path)
+
+    git = prepare_git(root, bounded_command, notices)
+    if args.changed:
+        try:
+            report['changes'] = changed_files(git, root, scopes, args.changed, args.include_untracked,
+                                               args.max_search_matches, args.search_timeout,
+                                               bounded_command, notices)
+        except ValueError as error:
+            parser.error(str(error))
+        notices.append('Changed-file selection uses Git status; source bodies are current working-tree files, including unstaged edits.')
+        if not report['changes']:
+            notices.append('No matching Git changes selected; no repository-wide source fallback.')
 
     def add(path, reason):
         if path in seen_paths:
@@ -139,14 +168,28 @@ def main():
                 directories.append(target)
         elif target not in targets:
             targets.append(target)
-    if not targets and not directories:
+    explicit_targets = set(targets)
+    changed_paths = []
+    for change in report['changes']:
+        for name in (change['path'], change['original_path']):
+            if name is None:
+                continue
+            path = root / name
+            changed_paths.append(name)
+            if path.is_dir():
+                notices.append('Changed directory/submodule not loaded: ' + name)
+            elif path not in targets:
+                targets.append(path)
+                if not path.is_file():
+                    notices.append('Deleted or missing changed source; inspect its diff and references: ' + name)
+    if not targets and not directories and not args.changed:
         parser.error('; '.join(notices))
 
     def rg_base():
         command = ['rg', '--no-config', '--hidden']
         for directory in EXCLUDED_DIRS:
             command.extend(['--glob', '!' + directory + '/**', '--glob', '!**/' + directory + '/**'])
-        command.extend(['--glob', '!*.min.*', '--glob', '!*.map', '--glob', '!*.lock', '--glob', '!package-lock.json'])
+        command.extend(['--sort', 'path', '--glob', '!*.min.*', '--glob', '!*.map', '--glob', '!*.lock', '--glob', '!package-lock.json'])
         return command
 
     def search_paths(command, label):
@@ -177,17 +220,16 @@ def main():
         return sorted(paths[:args.max_search_matches])
 
     if directories:
-        print('FILE MAP (bounded paths; contents are not loaded):')
         map_roots = scopes or directories
         paths = search_paths([*rg_base(), '--files', '--null', '--', *[relative(p) for p in map_roots]], 'File discovery')
         # Keep directory maps useful without dumping generated or binary assets.
         for path in paths:
-            print('PATH: ' + relative(path)[:400])
+            report['file_map'].append(relative(path))
         notices.append('Directory target: choose specific files from the map and run again; no directory contents were loaded automatically.')
 
     # Explicit targets get priority; scoped discovery never silently expands them.
     for target in targets:
-        add(target, 'requested target')
+        add(target, 'requested target' if target in explicit_targets else 'Git changed target')
     for target in targets:
         for directory in [target.parent, *target.parent.parents]:
             if not directory.is_relative_to(root):
@@ -222,7 +264,7 @@ def main():
                 continue
             remaining -= len(raw)
             loaded[path] = (source, reason, hashlib.sha256(raw).hexdigest())
-            symbols, imports, warnings = analyze(path, source, root)
+            symbols, imports, warnings = analyze(path, source, root, cache=analysis_cache)
             if path in targets:
                 target_symbols[path] = symbols
             notices.extend(warnings)
@@ -253,41 +295,35 @@ def main():
             matches = search_paths(command, 'Caller/test search')
             for path in matches:
                 add(path, 'matching caller or test; textual match')
-            print(f'Caller/test search: {len(matches)} matching files (textual, not a complete call graph).')
+            report['search']['matching_files'] = len(matches)
         else:
             notices.append('No specific target symbols found; use --symbol or inspect references directly.')
         drain()
-    print(f'ROOT: {root}\nSources returned: {len(loaded)}; source bytes: {args.max_bytes - remaining}')
-    if targets:
-        print('Languages: ' + ', '.join(sorted({language_for(p) for p in targets})))
+    report['source_count'] = len(loaded)
+    report['source_bytes'] = args.max_bytes - remaining
+    report['languages'] = sorted({language_for(p) for p in targets})
+    report['limits'] = {'max_files': args.max_files, 'max_bytes': args.max_bytes,
+                        'max_search_matches': args.max_search_matches, 'search_timeout': args.search_timeout}
     for path, (source, reason, digest) in loaded.items():
-        print(f'\nFILE: {relative(path)} | {reason} | SHA256: {digest}\n{source}', end='\n')
+        item = {'path': relative(path), 'reason': reason, 'sha256': digest,
+                'language': language_for(path), 'bytes': len(source.encode('utf-8'))}
+        if not args.summary:
+            item['content'] = source
+        report['sources'].append(item)
 
-    git = ['git', '--no-optional-locks', '--no-pager', '--literal-pathspecs', '-c', 'core.fsmonitor=false']
-    try:
-        code, output, error, overflow, timed_out = bounded_command(
-            [*git, 'config', '--null', '--name-only', '--get-regexp', r'^filter\..*\.(clean|process|required)$'], root)
-        git_safe = code in (0, 1) and not overflow and not timed_out
-        if git_safe:
-            drivers = {key.rsplit('.', 1)[0] for key in output.decode(errors='replace').split('\0') if key}
-            for driver in sorted(drivers):
-                git += ['-c', driver + '.clean=', '-c', driver + '.process=', '-c', driver + '.required=false']
-            if drivers:
-                notices.append('Git clean/process filters disabled; diffs use raw working-tree content.')
+    git_paths = list(dict.fromkeys([*[relative(p) for p in loaded], *changed_paths]))
+    if git is not None and git_paths:
+        commands = [('GIT STATUS', [*git, 'status', '--short', '--ignore-submodules=all', '--', '.'])]
+        if args.summary:
+            notices.append('Summary mode: source bodies and Git diffs omitted; request full context before editing.')
         else:
-            notices.append('Git inspection skipped: filter configuration unavailable.')
-    except OSError as error:
-        git_safe = False
-        notices.append('Git inspection skipped: ' + type(error).__name__)
-    git_paths = [relative(p) for p in loaded]
-    if git_safe and git_paths:
-        commands = [('GIT STATUS', [*git, 'status', '--short', '--', '.']),
-                    ('GIT DIFF', [*git, 'diff', '--no-ext-diff', '--no-textconv', '--', *git_paths]),
-                    ('GIT STAGED DIFF', [*git, 'diff', '--no-ext-diff', '--no-textconv', '--cached', '--', *git_paths])]
+            commands += [('GIT DIFF', [*git, 'diff', '--no-ext-diff', '--no-textconv', '--ignore-submodules=all', '--', *git_paths]),
+                         ('GIT STAGED DIFF', [*git, 'diff', '--no-ext-diff', '--no-textconv', '--ignore-submodules=all', '--cached', '--', *git_paths])]
         for title, command in commands:
             try:
                 code, output, error, overflow, timed_out = bounded_command(command, root, cap=12000)
-                print(f'\n{title}:\n{output.decode(errors="replace")}')
+                report['git'][title] = {'output': output.decode(errors='replace'), 'returncode': code,
+                                         'truncated': overflow, 'timed_out': timed_out}
                 if code and not (overflow or timed_out):
                     notices.append(title + ' unavailable: ' + error.decode(errors='replace')[:300])
                 if overflow or timed_out:
@@ -297,15 +333,38 @@ def main():
     elif not git_paths:
         notices.append('Git inspection skipped: no source loaded; no repository-wide fallback.')
     notices.append('References are textual candidates, not a complete call graph. Dynamic imports, aliases, generated code, and external packages may need targeted follow-up.')
-    print('\nLIMITS / FOLLOW-UP:')
     notice_budget = 6000
     for notice in dict.fromkeys(notices):
         text = notice[:500]
         if len(text) + 1 > notice_budget:
-            print('Further notices omitted; narrow the targets or scope.')
+            report['notices'].append('Further notices omitted; narrow the targets or scope.')
             break
-        print(text)
+        report['notices'].append(text)
         notice_budget -= len(text) + 1
+    if args.format == 'json':
+        # ASCII escaping also round-trips filesystem names containing surrogate bytes.
+        print(json.dumps(report, ensure_ascii=True, separators=(',', ':')))
+        return
+    if directories:
+        print('FILE MAP (bounded paths; contents are not loaded):')
+        for path in report['file_map']:
+            print('PATH: ' + path[:400])
+    for change in report['changes']:
+        print('CHANGE: ' + change['status'] + ' ' + json.dumps(change['path'], ensure_ascii=True))
+    if 'matching_files' in report['search']:
+        print(f"Caller/test search: {report['search']['matching_files']} matching files (textual, not a complete call graph).")
+    print(f"ROOT: {root}\nSources returned: {len(loaded)}; source bytes: {report['source_bytes']}")
+    if targets:
+        print('Languages: ' + ', '.join(report['languages']))
+    for item in report['sources']:
+        print(f"\nFILE: {item['path']} | {item['reason']} | SHA256: {item['sha256']}")
+        if 'content' in item:
+            print(item['content'])
+    for title, item in report['git'].items():
+        print(f"\n{title}:\n{item['output']}")
+    print('\nLIMITS / FOLLOW-UP:')
+    for notice in report['notices']:
+        print(notice)
 
 
 if __name__ == '__main__':

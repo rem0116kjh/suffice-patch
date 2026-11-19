@@ -13,6 +13,22 @@ the AI agent performs edits and runs checks using the project's own tools.
 
 [Download v5.5.0](dist/suffice-patch-v5.5.0.zip) · [Real-project comparison](evals/V5_EXTERNAL_20261015.en.md) · [Functional validation](evals/V5_20261015.md) · [CLI and JSON guide](references/cli.md) · [Project website](https://rem0116kjh.github.io/suffice-patch/?lang=en)
 
+## Finding related files for a Flutter widget in v5.5.0
+
+Start with one Dart file to follow local `import`, `export` and `part` directives that use relative or `package:` paths. The inspector also finds related tests under `test/` and `integration_test/` by filename and by references in the code.
+
+In the example we tested, the Flutter app in `shop/` depends on a `shared/` package in the same repository. Open the repository root in Codex to search across both packages.
+
+```text
+$suffice-patch Find the code that builds the badge label for shop/lib/src/cart_badge.dart and the related tests in the shop package.
+```
+
+- `shared/lib/labels.dart` defines `itemLabel()`, which turns the item count into the badge label.
+- `shop/test/cart_badge_test.dart` checks the displayed text when the cart contains three items.
+- `shop/test/rendering_test.dart` checks that exactly one `CartBadge` widget appears.
+
+Both widget tests found by the inspector passed when run with `flutter test`. [v5.5.0 release](https://github.com/rem0116kjh/suffice-patch/releases/tag/v5.5.0)
+
 ## When to use it
 
 | Task | Start with | What you get |

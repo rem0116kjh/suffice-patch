@@ -13,6 +13,22 @@ Git 변경 내역을 제한된 범위로 모아 주는 스킬입니다. 요청�
 
 [v5.5.0 설치 ZIP](dist/suffice-patch-v5.5.0.zip) · [실제 프로젝트 비교](evals/V5_EXTERNAL_20261015.md) · [기능 검증](evals/V5_20261015.md) · [CLI·JSON 안내](references/cli.md) · [프로젝트 웹페이지](https://rem0116kjh.github.io/suffice-patch/)
 
+## v5.5.0에서 Flutter 위젯의 관련 파일 찾기
+
+Dart 파일 하나를 지정하면 상대 경로와 `package:` 경로를 통해 `import`, `export`, `part`로 연결된 로컬 파일을 찾습니다. `test/`와 `integration_test/`에서는 파일 이름과 코드 참조를 바탕으로 관련 테스트를 찾습니다.
+
+검증에 사용한 예제에서 Flutter 앱 `shop/`은 같은 저장소의 `shared/` 패키지를 사용합니다. 저장소 루트에서 Codex에 이렇게 요청할 수 있습니다.
+
+```text
+$suffice-patch shop/lib/src/cart_badge.dart의 배지 문구를 만드는 코드와 shop/ 안의 관련 테스트를 찾아줘.
+```
+
+- `shared/lib/labels.dart`의 `itemLabel()`이 상품 수를 배지에 표시할 문구로 바꿉니다.
+- `shop/test/cart_badge_test.dart`는 상품이 3개일 때 배지에 예상한 문구가 표시되는지 확인합니다.
+- `shop/test/rendering_test.dart`는 `CartBadge` 위젯이 하나만 표시되는지 확인합니다.
+
+수집기가 찾아낸 두 위젯 테스트는 `flutter test`로 실행해 모두 통과했습니다. [v5.5.0 릴리스](https://github.com/rem0116kjh/suffice-patch/releases/tag/v5.5.0)
+
 ## 어떤 작업에 유용한가요?
 
 | 작업 | 시작 방법 | 얻는 정보 |

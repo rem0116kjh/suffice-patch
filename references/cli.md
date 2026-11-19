@@ -1,4 +1,4 @@
-# CLI and structured output (v5.0.0)
+# CLI and structured output (v5.0.1)
 
 Run `python3 -B <skill-dir>/scripts/collect_context.py --help` for all flags,
 or `--version` to identify the installed helper. Python 3.9+, Git and ripgrep
@@ -28,8 +28,10 @@ a clean worktree. Submodules are not traversed by changed-file selection.
 
 `--root` defines the read boundary (default: current directory); nested Git
 directories are supported. Repeated `--scope` bounds automatic selection and
-search, while explicit targets and connected local imports may cross scopes
-inside root. Selection retains at most `--max-search-matches` complete records;
+search, while explicit file targets and connected local imports may cross scopes
+inside root. A directory map applies the candidate limit after intersecting the
+requested directories with the selected scopes. Disjoint paths yield an empty map.
+Selection retains at most `--max-search-matches` complete records;
 truncation/timeouts are reported. Source limits remain 16 files / 40,000 bytes by
 default. Path search is sorted before its candidate cap for repeatable selection.
 

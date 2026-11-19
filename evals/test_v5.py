@@ -51,7 +51,7 @@ class V5Tests(unittest.TestCase):
         return json.loads(result.stdout)
 
     def test_version_and_invalid_combinations(self):
-        self.assertEqual(self.run_cli('--version').stdout.strip(), 'SufficePatch 5.0.0')
+        self.assertEqual(self.run_cli('--version').stdout.strip(), 'SufficePatch 5.0.1')
         for args in [(), ('--include-untracked', 'AGENTS.md'),
                      ('--changed', 'staged', '--include-untracked')]:
             self.assertEqual(self.run_cli(*args).returncode, 2)
@@ -173,6 +173,30 @@ class V5Tests(unittest.TestCase):
             self.write(f'files/item_{index:02d}.txt', 'example\n')
         maps = [self.report('files', '--max-search-matches', '3')['file_map'] for _ in range(3)]
         self.assertEqual(maps, [['files/item_00.txt', 'files/item_01.txt', 'files/item_02.txt']] * 3)
+
+    def test_directory_map_intersects_target_and_scope_before_limiting(self):
+        price = 'cart/src/price.ts'
+        self.write(price, 'export const price = 3;\n')
+        self.write('cart/docs/setup.md', 'Setup\n')
+        self.write('search/query.ts', 'export const query = "";\n')
+        for target, scope, expected in [
+            ('cart/src', 'cart', [price]),
+            ('cart', 'cart/src', [price]),
+            ('cart/src', 'search', []),
+        ]:
+            with self.subTest(target=target, scope=scope):
+                result = self.report(target, '--scope', scope, '--max-search-matches', '1')
+                self.assertEqual(result['file_map'], expected)
+                self.assertEqual(result['sources'], [])
+
+    def test_directory_map_with_multiple_targets_and_scopes(self):
+        expected = ['apps/cart/docs/setup.md', 'apps/cart/src/main.py', 'tools/checks/lint.py']
+        for name in [*expected, 'apps/search/api.py', 'tools/notes.md']:
+            self.write(name, '# fixture\n')
+        result = self.report('tools', 'apps/cart/src', 'apps/cart', 'AGENTS.md',
+                             '--scope', 'tools/checks', '--scope', 'apps/cart/src', '--scope', 'apps')
+        self.assertEqual(result['file_map'], expected)
+        self.assertIn('AGENTS.md', [source['path'] for source in result['sources']])
 
     def test_no_git_is_an_error_for_change_selection_only(self):
         plain = self.base / 'plain'

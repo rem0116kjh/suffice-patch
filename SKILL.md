@@ -2,7 +2,7 @@
 name: suffice-patch
 description: Collect bounded source, local dependencies, reference candidates, project instructions, and Git changes for focused repository edits across languages and monorepos.
 metadata:
-  version: "5.0.0"
+  version: "5.0.1"
 ---
 
 # SufficePatch
@@ -38,7 +38,8 @@ alias, generated-code, build-tag and dynamic-reference gaps with targeted reads.
 
 Repeat `--scope` for relevant packages. It bounds discovery, references and
 automatic changed-file selection; connected local imports can cross scopes
-inside the repository. Explicit targets are retained regardless of scope.
+inside the repository. Explicit file targets are retained regardless of scope.
+With `--scope`, directory maps list only paths inside both a requested directory and a scope.
 Use `--symbol` to narrow ambiguous references. Default limits are 16 source files,
 40,000 source bytes, 200 search candidates, and 5 seconds per search. Directory
 maps do not load file contents. Increase limits only when the missing evidence

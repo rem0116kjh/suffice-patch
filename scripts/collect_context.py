@@ -20,12 +20,23 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from context_languages import AnalysisCache, analyze, discover_manifests, language_for, SUPPORTED_SUFFIXES
 from context_git import changed_files, prepare_git
 
-VERSION = '5.0.0'
+VERSION = '5.0.1'
 
 EXCLUDED_DIRS = ('.git', '.agents', '.claude', 'node_modules', 'vendor', '.venv', 'venv',
                  '__pycache__', '.next', '.nuxt', '.cache', 'dist', 'build', 'target',
                  'coverage', 'Pods', '.gradle', 'bin', 'obj')
 GENERIC_NAMES = {'index', 'main', 'lib', 'mod', '__init__', 'package', 'config', 'test', 'tests'}
+
+
+def directory_map_roots(directories, scopes):
+    """Intersect requested directory trees with scopes and search each subtree once."""
+    roots = set()
+    for directory in directories:
+        if not scopes or any(directory.is_relative_to(scope) for scope in scopes):
+            roots.add(directory)
+        else:
+            roots.update(scope for scope in scopes if scope.is_relative_to(directory))
+    return sorted(path for path in roots if roots.isdisjoint(path.parents))
 
 
 def bounded_command(command, cwd, timeout=5, cap=16000):
@@ -220,12 +231,13 @@ def main():
         return sorted(paths[:args.max_search_matches])
 
     if directories:
-        map_roots = scopes or directories
-        paths = search_paths([*rg_base(), '--files', '--null', '--', *[relative(p) for p in map_roots]], 'File discovery')
-        # Keep directory maps useful without dumping generated or binary assets.
-        for path in paths:
-            report['file_map'].append(relative(path))
-        notices.append('Directory target: choose specific files from the map and run again; no directory contents were loaded automatically.')
+        map_roots = directory_map_roots(directories, scopes)
+        if map_roots:
+            command = [*rg_base(), '--files', '--null', '--', *map(relative, map_roots)]
+            report['file_map'] = [relative(path) for path in search_paths(command, 'File discovery')]
+            notices.append('Directory target: choose specific files from the map and run again; no directory contents were loaded automatically.')
+        else:
+            notices.append('Directory targets and scopes do not overlap. The file map is empty.')
 
     # Explicit targets get priority; scoped discovery never silently expands them.
     for target in targets:

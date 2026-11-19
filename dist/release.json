@@ -1,17 +1,18 @@
 {
-  "version": "5.0.0",
+  "version": "5.0.1",
   "schema_version": 1,
-  "date": "2026-10-15",
+  "date": "2026-11-19",
   "files": {
-    "SKILL.md": "8a30b8ca06055f688ad03cf6b68e9e8ccdd39eb470522d5e6db9985157a6c4c0",
-    "scripts/collect_context.py": "51409b2a858117569589a384b3145c1d71dd9226c1f7ea6dd7ede3781f947d74",
+    "SKILL.md": "dbd1c5f23c58780e7b34956350812f6b70e2df5b054d971b8828027f384d5d7b",
+    "scripts/collect_context.py": "cc9963683352a15ae30141c781429a345f3cf3f80aba77df35286d854fe315f3",
     "scripts/context_git.py": "96ab689b7805b22f7d4bb941b6382c84d0e389e223433f7b08f94e41b4d74105",
     "scripts/context_languages.py": "45fd7ff67b94177e75df4a5cb684f4f6c04591b5babc934aa21be1aed5fc3276",
-    "references/cli.md": "b04d4057acd17b7a9c04f30db52ed12ef397424220e71ac062f39225d3e94d7d"
+    "references/cli.md": "eaf5edbf608c4e9e0be2d7bc68ebe97bd686e3b358e7970fbc885696ca212312"
   },
   "archives": {
+    "suffice-patch-v5.0.1.zip": "526589413ea0efe1063db9a359b7716065fbbe4c6348253d610140a87601acb3",
+    "suffice-patch.zip": "526589413ea0efe1063db9a359b7716065fbbe4c6348253d610140a87601acb3",
     "suffice-patch-v5.0.0.zip": "576accefd47677269d074b5de14ff2ee7fa5e39aa6cb3b7f85945ba1af7f7438",
-    "suffice-patch.zip": "576accefd47677269d074b5de14ff2ee7fa5e39aa6cb3b7f85945ba1af7f7438",
     "suffice-patch-v4.zip": "c7f11aa2797684514c4396e22eb0b77e2eeb9f61b0d1d7ee0d616bee24e599ff"
   }
 }

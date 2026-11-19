@@ -103,6 +103,96 @@ class MultilanguageContextTests(unittest.TestCase):
         self.assert_context(result, ["notes/probe.md"])
         self.assert_budget(result)
 
+    def test_dart_literal_directives_and_own_package_without_pub_get(self):
+        self.write("pubspec.yaml", '\ufeffname: "basket" # local package\r\n')
+        self.write("lib/model.dart", """import 'parts/relative.dart';
+export 'package:basket/feature.dart' show Feature;
+import 'fallback.dart'
+  if (dart.library.io == 'true') 'native.dart';
+part 'fields.dart';
+/* block /* nested */ import 'fake.dart'; */
+const documentation = '''
+import 'fake.dart';
+''';
+""")
+        for name in ("parts/relative", "feature", "fallback", "native", "fake"):
+            self.write(f"lib/{name}.dart", "// fixture\n")
+        self.write("lib/fields.dart", "part of 'model.dart';\n")
+        report = self.run_helper("lib/model.dart", "--symbol", "NoReferences", "--format", "json")
+        self.assertEqual(report.returncode, 0, report.stderr)
+        data = json.loads(report.stdout)
+        self.assertEqual(data["languages"], ["dart"])
+        sources = {s["path"]: s["reason"] for s in data["sources"]}
+        self.assertIn("pubspec.yaml", sources)
+        self.assertNotIn("lib/fake.dart", sources)
+        for name in ("parts/relative", "feature", "fallback", "native", "fields"):
+            self.assertEqual(sources[f"lib/{name}.dart"], "local import")
+        reverse = self.run_helper("lib/fields.dart", "--symbol", "NoReferences")
+        self.assert_context(reverse, ["lib/fields.dart", "lib/model.dart"])
+
+    def test_dart_package_config_resolves_local_peers_within_the_read_root(self):
+        self.write("app/pubspec.yaml", "name: example\n")
+        outside = self.base / "external"
+        outside.mkdir()
+        (outside / "secret.dart").write_text("EXTERNAL_SOURCE_SENTINEL\n")
+        self.write("app/.dart_tool/package_config.json", json.dumps({
+            "configVersion": 2, "packages": [
+                {"name": "peer", "rootUri": "../../shared%20pkg", "packageUri": "source/"},
+                {"name": "alias", "rootUri": (self.root / "metadata").as_uri()},
+                {"name": "external", "rootUri": outside.as_uri()},
+            ]}))
+        self.write("app/lib/entry.dart", """import 'package:peer/value.dart';
+import 'package:alias/helper.dart';
+import 'package:external/secret.dart';
+import 'package:peer/../private.dart';
+import 'link.dart';
+import 'dart:core';
+""")
+        self.write("shared pkg/source/value.dart", "const value = 1;\n")
+        self.write("metadata/helper.dart", "const helper = 2;\n")
+        self.write("shared pkg/private.dart", "// separate from the peer library\n")
+        (self.root / "app/lib/link.dart").symlink_to(outside / "secret.dart")
+        report = self.run_helper("app/lib/entry.dart", "--scope", "app", "--symbol", "NoReferences")
+        paths = self.assert_context(report, ["app/lib/entry.dart", "shared pkg/source/value.dart", "metadata/helper.dart"])
+        self.assertFalse({"shared pkg/private.dart", "app/lib/link.dart"} & paths)
+        self.assertNotIn("EXTERNAL_SOURCE_SENTINEL", report.stdout)
+        nested = self.run_helper("--root", str(self.root / "app"), "lib/entry.dart", "--symbol", "NoReferences")
+        self.assert_context(nested, ["lib/entry.dart", "pubspec.yaml"])
+        self.assertNotIn("const value = 1", nested.stdout)
+
+    def test_dart_scoped_unit_integration_and_referencing_tests(self):
+        self.write("shop/pubspec.yaml", "name: shop\n")
+        target = "shop/lib/src/item.dart"
+        self.write(target, "class InvoiceItem {}\n")
+        unit = "shop/test/item_test.dart"
+        integration = "shop/integration_test/src/item_test.dart"
+        caller = "shop/test/checkout_flow_test.dart"
+        for name in (unit, integration, "other/test/item_test.dart"):
+            self.write(name, "void main() {}\n")
+        self.write(caller, "void main() { InvoiceItem(); }\n")
+        self.write("shop/.dart_tool/ghost.dart", "// InvoiceItem\n")
+        self.write("shop/build/ghost.dart", "// InvoiceItem\n")
+        report = self.run_helper(target, "--scope", "shop", "--format", "json")
+        self.assertEqual(report.returncode, 0, report.stderr)
+        reasons = {s["path"]: s["reason"] for s in json.loads(report.stdout)["sources"]}
+        self.assertEqual(reasons.get(unit), "Dart test candidate")
+        self.assertEqual(reasons.get(integration), "Dart test candidate")
+        self.assertIn(caller, reasons)
+        self.assertFalse({"other/test/item_test.dart", "shop/.dart_tool/ghost.dart", "shop/build/ghost.dart"} & reasons.keys())
+        limited = self.run_helper(target, "--scope", "shop/lib")
+        self.assertFalse({unit, integration, caller} & self.assert_context(limited, [target]))
+        self.assert_budget(self.run_helper(target, "--max-files", "2"), max_files=2)
+
+    def test_dart_invalid_config_keeps_relative_and_own_imports(self):
+        self.write("pubspec.yaml", "name: local_app\n")
+        self.write(".dart_tool/package_config.json", "{truncated")
+        self.write("lib/main.dart", "import 'same.dart';\nimport 'package:local_app/util.dart';\n")
+        self.write("lib/same.dart", "const same = 1;\n")
+        self.write("lib/util.dart", "const util = 2;\n")
+        result = self.run_helper("lib/main.dart", "--symbol", "NoReferences")
+        self.assert_context(result, ["lib/same.dart", "lib/util.dart"])
+        self.assertIn("package configuration", result.stdout)
+
     def test_python_src_package_keeps_import_test_and_manifest(self):
         self.write("packages/python/pyproject.toml", '[project]\nname="fixture-python"\nversion="0.1.0"\n')
         self.write("packages/python/src/app/__init__.py", "")

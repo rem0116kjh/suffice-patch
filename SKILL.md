@@ -1,8 +1,8 @@
 ---
 name: suffice-patch
-description: Collect bounded source, local dependencies, reference candidates, project instructions, and Git changes for focused repository edits across languages and monorepos.
+description: Collect bounded source, local dependencies, reference and test candidates, project instructions, and Git changes for focused edits across languages and monorepos, including Flutter and Dart packages.
 metadata:
-  version: "5.0.1"
+  version: "5.5.0"
 ---
 
 # SufficePatch
@@ -29,6 +29,10 @@ tree, even with `staged`. Deleted files retain diff and filename-reference hints
 `--summary` returns paths/hashes without bodies or diffs; use it for triage, then
 read full context before editing. `--format json` enables structured consumers.
 Read [CLI details](references/cli.md) for these modes and the JSON contract.
+
+For Flutter or Dart, pass a `.dart` file and scope its package root to include
+`test/` and `integration_test/`. The inspector follows local library directives
+and looks for matching tests and references.
 
 The inspector reads source, resolvable local imports, matching references/tests,
 ancestor `AGENTS.md`, nearby manifests, bounded Git status and file-scoped diffs.

@@ -51,7 +51,7 @@ class V5Tests(unittest.TestCase):
         return json.loads(result.stdout)
 
     def test_version_and_invalid_combinations(self):
-        self.assertEqual(self.run_cli('--version').stdout.strip(), 'SufficePatch 5.0.1')
+        self.assertEqual(self.run_cli('--version').stdout.strip(), 'SufficePatch 5.5.0')
         for args in [(), ('--include-untracked', 'AGENTS.md'),
                      ('--changed', 'staged', '--include-untracked')]:
             self.assertEqual(self.run_cli(*args).returncode, 2)

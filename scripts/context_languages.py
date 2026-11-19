@@ -10,6 +10,7 @@ import json
 import os
 from pathlib import Path
 import re
+from urllib.parse import unquote, urlsplit
 
 MAX_IMPORT_CANDIDATES = 24
 MAX_AUX_BYTES = 65536
@@ -20,7 +21,7 @@ MAX_SYMBOLS = 32
 EXCLUDED_DIRS = frozenset({"node_modules", "vendor", ".git", ".venv", "venv", "__pycache__", "target"})
 
 _LANGUAGE_SUFFIXES = {
-    "python": {".py", ".pyi"},
+    "python": {".py", ".pyi"}, "dart": {".dart"},
     "javascript": {".js", ".jsx", ".mjs", ".cjs"},
     "typescript": {".ts", ".tsx", ".mts", ".cts"},
     "vue": {".vue"}, "svelte": {".svelte"}, "go": {".go"}, "rust": {".rs"},
@@ -42,6 +43,7 @@ _MANIFESTS = {
     "typescript": ("package.json", "tsconfig.json", "jsconfig.json"),
     "vue": ("package.json", "tsconfig.json"), "svelte": ("package.json", "tsconfig.json", "svelte.config.js"),
     "go": ("go.mod", "go.work"), "rust": ("Cargo.toml",),
+    "dart": ("pubspec.yaml",),
     "c": ("CMakeLists.txt", "Makefile", "meson.build"),
     "cpp": ("CMakeLists.txt", "Makefile", "meson.build"),
     "java": ("pom.xml", "build.gradle", "build.gradle.kts", "settings.gradle"),
@@ -112,6 +114,7 @@ class AnalysisCache:
     def __init__(self, root):
         self.root = root.resolve()
         self.paths, self.reads, self.directories = {}, {}, {}
+        self.dart_packages = {}
 
 
 class _Scan:
@@ -351,6 +354,139 @@ def _javascript(scan, source):
     return _text_symbols(source)
 
 
+_DART_TOKEN = re.compile(r"""//[^\n]*|/\*|r?(?:'{3}|"{3}|'|")|[A-Za-z_$][\w$]*|[^\s]""")
+_DART_COMMENT = re.compile(r"/\*|\*/")
+
+
+def _dart_directives(source):
+    """Yield URI literals in import, export and part directives, including conditional branches."""
+    pos = 0
+    directive = expect_uri = False
+    while match := _DART_TOKEN.search(source, pos):
+        token, pos = match[0], match.end()
+        if token.startswith("//"):
+            continue
+        if token == "/*":
+            depth = 1
+            for marker in _DART_COMMENT.finditer(source, pos):
+                depth += 1 if marker[0] == "/*" else -1
+                if depth == 0:
+                    pos = marker.end()
+                    break
+            else:
+                return
+            continue
+        if token.endswith(("'", '"')):
+            delimiter = token.removeprefix("r")
+            start = pos
+            while pos < len(source) and not source.startswith(delimiter, pos):
+                pos += 2 if source[pos] == "\\" and token == delimiter else 1
+            if pos >= len(source):
+                return
+            if expect_uri:
+                yield source[start:pos]
+            pos += len(delimiter)
+            expect_uri = False
+        elif token in {"import", "export", "part"}:
+            directive = expect_uri = True
+        elif token == ";":
+            directive = expect_uri = False
+        elif token != "of":
+            expect_uri = directive and token == ")"
+
+
+def _dart_uri_path(uri, allow_file=False):
+    if not isinstance(uri, str):
+        return None
+    try:
+        parsed = urlsplit(uri)
+    except ValueError:
+        return None
+    if parsed.netloc or parsed.query or parsed.fragment or (parsed.scheme and not (allow_file and parsed.scheme == "file")):
+        return None
+    path = unquote(parsed.path)
+    if "\x00" in path or "\\" in path or (not allow_file and Path(path).is_absolute()):
+        return None
+    return Path(path)
+
+
+def _dart_package_map(scan, config):
+    if config not in scan.cache.dart_packages:
+        entries = {}
+        try:
+            data = json.loads(scan.read(config))
+            if not isinstance(data, dict) or data.get("configVersion") != 2 or not isinstance(data.get("packages"), list):
+                raise ValueError
+            for entry in data["packages"]:
+                if isinstance(entry, dict) and isinstance(entry.get("name"), str):
+                    entries[entry["name"]] = entry
+        except (ValueError, RecursionError):
+            scan.note("Dart package configuration unavailable or unsupported. Cross-package imports may be missing.")
+            return {}
+        scan.cache.dart_packages[config] = entries
+    return scan.cache.dart_packages[config]
+
+
+def _dart(scan, source):
+    parents = list(_parents(scan.path, scan.root))
+    manifest = next((d / "pubspec.yaml" for d in parents if scan.existing(d / "pubspec.yaml")), None)
+    config = next((p for d in parents if scan.existing(p := d / ".dart_tool/package_config.json")), None)
+    own_name = re.search(r"""(?m)^name:[ \t]*['"]?([a-z_][a-z0-9_]*)['"]?[ \t]*(?:#[^\r\n]*)?\r?$""",
+                         scan.read(manifest).lstrip("\ufeff")) if manifest else None
+
+    def package_library(name):
+        entry = _dart_package_map(scan, config).get(name) if config else None
+        if entry is None:
+            return _inside(manifest.parent / "lib", scan.root) if own_name and own_name[1] == name else None
+        root_path = _dart_uri_path(entry.get("rootUri"), allow_file=True)
+        lib_path = _dart_uri_path(entry.get("packageUri", ""))
+        if root_path is None or lib_path is None:
+            return None
+        package = _inside(config.parent / root_path, scan.root)
+        return _inside(package / lib_path, package) if package else None
+
+    for index, uri in enumerate(_dart_directives(source)):
+        if index >= MAX_IMPORT_SPECIFIERS:
+            scan.note("Dart directive limit reached. Additional imports may be missing.")
+            break
+        if uri.startswith("dart:"):
+            continue
+        if uri.startswith("package:"):
+            name, sep, tail = uri[8:].partition("/")
+            base = package_library(name) if sep else None
+            path = _dart_uri_path(tail)
+            candidate = _inside(base / path, base) if base and path is not None else None
+        else:
+            path = _dart_uri_path(uri)
+            candidate = _inside(scan.path.parent / path, scan.root) if path is not None else None
+        if (candidate is None or candidate.suffix != ".dart"
+                or {".dart_tool", ".pub-cache", "build"}.intersection(candidate.relative_to(scan.root).parts)
+                or not scan.add(candidate)):
+            scan.missing()
+    code = _without_comments(source)
+    symbols = _text_symbols(code)
+    symbols.update(m[1] for m in itertools.islice(re.finditer(
+        r"(?m)^(?:external[ \t]+)?[A-Za-z_][\w.<>?,]*[ \t]+([A-Za-z_$][\w$]*)[ \t]*\(", code), MAX_SYMBOLS))
+    symbols.discard("main")
+    return symbols
+
+
+def dart_test_candidates(path, package, root):
+    """Find existing mirrored tests for a library, including the common lib/src layout."""
+    lib = package / "lib"
+    if not path.is_relative_to(lib):
+        return
+    relative = path.relative_to(lib).with_name(path.stem + "_test.dart")
+    names = [relative]
+    if relative.parts[0] == "src":
+        names.append(relative.relative_to("src"))
+    for directory in ("test", "integration_test"):
+        for name in names:
+            candidate = _inside(package / directory / name, root)
+            if candidate and candidate.is_relative_to(package / directory) and candidate.is_file():
+                yield candidate
+
+
 def _go(scan, source):
     source = _without_comments(source)
     # Go files in one package share declarations without explicit imports.
@@ -454,6 +590,8 @@ def analyze(path: Path, source: str, root: Path, cache=None) -> tuple[set[str], 
     language = language_for(path)
     if language == "python":
         symbols = _python(scan, source)
+    elif language == "dart":
+        symbols = _dart(scan, source)
     elif language in {"javascript", "typescript", "vue", "svelte"}:
         if language in {"vue", "svelte"}:
             source = "\n".join(m.group(1) for m in re.finditer(r"<script\b[^>]*>([\s\S]*?)</script\s*>", source, re.I))

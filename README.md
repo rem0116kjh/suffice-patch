@@ -1,6 +1,6 @@
 한국어 · [English](README.en.md)
 
-# SufficePatch v5.0.1
+# SufficePatch v5.5.0
 
 **코드를 고치기 전에, 필요한 파일부터 모으세요.**
 
@@ -11,7 +11,7 @@ Git 변경 내역을 제한된 범위로 모아 주는 스킬입니다. 요청�
 작은 버그 수정부터 모노레포의 패키지별 작업까지 사용할 수 있습니다. 수집기는 읽기
 전용으로 동작하며, 코드 수정과 테스트 실행은 AI 에이전트가 프로젝트의 도구로 수행합니다.
 
-[v5.0.1 설치 ZIP](dist/suffice-patch-v5.0.1.zip) · [실제 프로젝트 비교](evals/V5_EXTERNAL_20261015.md) · [기능 검증](evals/V5_20261015.md) · [CLI·JSON 안내](references/cli.md) · [프로젝트 웹페이지](https://rem0116kjh.github.io/suffice-patch/)
+[v5.5.0 설치 ZIP](dist/suffice-patch-v5.5.0.zip) · [실제 프로젝트 비교](evals/V5_EXTERNAL_20261015.md) · [기능 검증](evals/V5_20261015.md) · [CLI·JSON 안내](references/cli.md) · [프로젝트 웹페이지](https://rem0116kjh.github.io/suffice-patch/)
 
 ## 어떤 작업에 유용한가요?
 
@@ -31,7 +31,7 @@ Git 변경 내역을 제한된 범위로 모아 주는 스킬입니다. 요청�
 실행에는 **Python 3.9 이상, Git, ripgrep(`rg`)**이 필요합니다. 대상 프로젝트가 Python일
 필요는 없으며, 별도 Python 패키지나 프로젝트 의존성을 설치하지 않습니다.
 
-[설치 ZIP](dist/suffice-patch-v5.0.1.zip)을 풀고 `suffice-patch` 폴더 안에서 아래 명령을
+[설치 ZIP](dist/suffice-patch-v5.5.0.zip)을 풀고 `suffice-patch` 폴더 안에서 아래 명령을
 실행하면 Codex에 설치됩니다. 지침·도우미 3개·CLI 참조 문서, 총 5파일을 함께 복사합니다.
 
 ```sh
@@ -40,7 +40,7 @@ cp SKILL.md "$HOME/.agents/skills/suffice-patch/SKILL.md"
 cp scripts/*.py "$HOME/.agents/skills/suffice-patch/scripts/"
 cp references/cli.md "$HOME/.agents/skills/suffice-patch/references/"
 python3 -B "$HOME/.agents/skills/suffice-patch/scripts/collect_context.py" --version
-# SufficePatch 5.0.1
+# SufficePatch 5.5.0
 ```
 
 Claude Code에 설치할 때는 위 경로의 `.agents/skills`를 `.claude/skills`로 바꿉니다.
@@ -83,6 +83,7 @@ python3 -B scripts/collect_context.py --version
 | 대상 | 수집 방식 |
 |---|---|
 | Python | AST 기반 로컬 import, src 레이아웃, 상대 import, 정의 심볼 |
+| Flutter·Dart | 상대 경로와 저장소 안의 `package:` import, export·part, 단위·위젯·통합 테스트 후보 |
 | JS/TS·JSX/TSX·Vue/Svelte | 상대 import·export·require·문자열 dynamic import, TS 확장자와 index 후보 |
 | Go | go.mod 안의 로컬 패키지와 같은 패키지의 소스 후보 |
 | Rust | mod 및 crate/self/super 경로의 로컬 모듈 후보 |
@@ -99,6 +100,8 @@ Vue/Svelte의 의존성 탐색은 inline script 범위다. 다른 언어의 테�
 python3 -B scripts/collect_context.py . --scope packages/web
 # 실제 파일·의존성·참조·테스트 수집
 python3 -B scripts/collect_context.py packages/web/src/cart.ts --scope packages/web
+# Flutter 패키지의 lib와 test를 함께 탐색
+python3 -B scripts/collect_context.py apps/shop/lib/src/cart.dart --scope apps/shop
 # 연결된 두 패키지를 함께 검색하고 특정 심볼로 좁히기
 python3 -B scripts/collect_context.py services/api/main.go --scope services/api --scope packages/shared --symbol Calculate
 ```
@@ -222,6 +225,8 @@ python3 -B -m unittest evals.test_inspect evals.test_multilang evals.test_v5 -v
 성능 우위나 모든 변경 영향의 발견을 보장하지 않는다.
 
 ## 업데이트 기록
+
+- **2026-11-19 · v5.5.0** — Flutter·Dart의 로컬 의존성과 관련 테스트를 수집한다. `pubspec.yaml`로 현재 패키지를 식별하고, Dart 패키지 설정이 있으면 저장소 안의 경로 의존성도 따라간다. [사용법과 탐색 범위](references/cli.md)
 
 - **2026-11-19 · v5.0.1** — 디렉터리와 `--scope`를 함께 지정하면 두 범위가 겹치는 폴더에서만 파일을 찾는다. 목록 한도도 이 범위 안에서 적용한다. [회귀 테스트](evals/test_v5.py)
 

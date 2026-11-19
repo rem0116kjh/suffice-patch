@@ -17,13 +17,13 @@ import threading
 
 # A sibling module keeps language heuristics separate from traversal and budgets.
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from context_languages import AnalysisCache, analyze, discover_manifests, language_for, SUPPORTED_SUFFIXES
+from context_languages import AnalysisCache, analyze, dart_test_candidates, discover_manifests, language_for, SUPPORTED_SUFFIXES
 from context_git import changed_files, prepare_git
 
-VERSION = '5.0.1'
+VERSION = '5.5.0'
 
 EXCLUDED_DIRS = ('.git', '.agents', '.claude', 'node_modules', 'vendor', '.venv', 'venv',
-                 '__pycache__', '.next', '.nuxt', '.cache', 'dist', 'build', 'target',
+                 '__pycache__', '.next', '.nuxt', '.cache', '.dart_tool', '.pub-cache', 'dist', 'build', 'target',
                  'coverage', 'Pods', '.gradle', 'bin', 'obj')
 GENERIC_NAMES = {'index', 'main', 'lib', 'mod', '__init__', 'package', 'config', 'test', 'tests'}
 
@@ -247,8 +247,13 @@ def main():
             if not directory.is_relative_to(root):
                 break
             add(directory / 'AGENTS.md', 'project instructions')
-        for manifest in discover_manifests(target, root):
+        manifests = discover_manifests(target, root)
+        for manifest in manifests:
             add(manifest, 'project manifest; inspect declared checks without executing it')
+        if target.suffix == '.dart' and manifests:
+            for test in dart_test_candidates(target, manifests[0].parent, root):
+                if not scopes or any(test.is_relative_to(scope) for scope in scopes):
+                    add(test, 'Dart test candidate')
 
     def drain():
         nonlocal remaining

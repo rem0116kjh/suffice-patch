@@ -1,17 +1,18 @@
 {
-  "version": "5.0.1",
+  "version": "5.5.0",
   "schema_version": 1,
   "date": "2026-11-19",
   "files": {
-    "SKILL.md": "dbd1c5f23c58780e7b34956350812f6b70e2df5b054d971b8828027f384d5d7b",
-    "scripts/collect_context.py": "cc9963683352a15ae30141c781429a345f3cf3f80aba77df35286d854fe315f3",
+    "SKILL.md": "b8da976394c4af12f3c72fceb4b05c630bfe9d485938f3d1b18332b2ef0451de",
+    "scripts/collect_context.py": "d68ef243d9bc3ea303447b2ab3143a0c9d325a20d429adfda0f5b81e0bc380c9",
     "scripts/context_git.py": "96ab689b7805b22f7d4bb941b6382c84d0e389e223433f7b08f94e41b4d74105",
-    "scripts/context_languages.py": "45fd7ff67b94177e75df4a5cb684f4f6c04591b5babc934aa21be1aed5fc3276",
-    "references/cli.md": "eaf5edbf608c4e9e0be2d7bc68ebe97bd686e3b358e7970fbc885696ca212312"
+    "scripts/context_languages.py": "da4cde3ec09f6c4541ed2de7f72be836d311b2dc044871491e370257cf38bae1",
+    "references/cli.md": "7e5b53c886bc9c352944884ad111b89f1cc16377a33cb2c0b02a1e507d4df661"
   },
   "archives": {
+    "suffice-patch-v5.5.0.zip": "bb3910ad34d4cbe81c0ab8f1b1873919438d0dec7ab80cfa0120819c8de0bd71",
+    "suffice-patch.zip": "bb3910ad34d4cbe81c0ab8f1b1873919438d0dec7ab80cfa0120819c8de0bd71",
     "suffice-patch-v5.0.1.zip": "526589413ea0efe1063db9a359b7716065fbbe4c6348253d610140a87601acb3",
-    "suffice-patch.zip": "526589413ea0efe1063db9a359b7716065fbbe4c6348253d610140a87601acb3",
     "suffice-patch-v5.0.0.zip": "576accefd47677269d074b5de14ff2ee7fa5e39aa6cb3b7f85945ba1af7f7438",
     "suffice-patch-v4.zip": "c7f11aa2797684514c4396e22eb0b77e2eeb9f61b0d1d7ee0d616bee24e599ff"
   }

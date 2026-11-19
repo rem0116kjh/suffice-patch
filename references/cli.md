@@ -1,4 +1,4 @@
-# CLI and structured output (v5.0.1)
+# CLI and structured output (v5.5.0)
 
 Run `python3 -B <skill-dir>/scripts/collect_context.py --help` for all flags,
 or `--version` to identify the installed helper. Python 3.9+, Git and ripgrep
@@ -34,6 +34,28 @@ requested directories with the selected scopes. Disjoint paths yield an empty ma
 Selection retains at most `--max-search-matches` complete records;
 truncation/timeouts are reported. Source limits remain 16 files / 40,000 bytes by
 default. Path search is sorted before its candidate cap for repeatable selection.
+
+## Flutter and Dart
+
+From a repository root, include the package's test directories in the search scope.
+
+```sh
+python3 -B <skill-dir>/scripts/collect_context.py apps/shop/lib/src/cart.dart --scope apps/shop
+```
+
+The inspector follows relative `import`, `export`, `part` and URI-form `part of`
+directives. For conditional imports and exports it collects the literal alternatives
+as candidates. It reads the nearest available `.dart_tool/package_config.json`
+to locate packages inside the read root, including local path dependencies.
+The current package's `pubspec.yaml` name and `lib/` directory also work before
+`pub get`. SDK libraries and external package-cache sources are skipped.
+[Dart package configuration](https://github.com/dart-lang/language/blob/main/accepted/2.8/language-versioning/package-config-file-v2.md)
+
+For `lib/src/cart.dart`, it checks `test/src/cart_test.dart`, `test/cart_test.dart`
+and the same paths under `integration_test/`. Other filenames can be found by
+textual reference. Named test candidates respect `--scope` and the source budget.
+`.dart_tool/`, `.pub-cache/` and `build/` are excluded from file maps and
+reference searches. [Flutter test layout](https://docs.flutter.dev/cookbook/testing/unit/introduction)
 
 ## Summary and JSON
 

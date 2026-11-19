@@ -1,6 +1,6 @@
 [한국어](README.md) · English
 
-# SufficePatch v5.0.1
+# SufficePatch v5.5.0
 
 **Collect the files you need before changing the code.**
 
@@ -11,7 +11,7 @@ and reference/test candidates to help the agent decide what to read and check ne
 Use it for focused bug fixes or package-level work in a monorepo. The inspector is read-only;
 the AI agent performs edits and runs checks using the project's own tools.
 
-[Download v5.0.1](dist/suffice-patch-v5.0.1.zip) · [Real-project comparison](evals/V5_EXTERNAL_20261015.en.md) · [Functional validation](evals/V5_20261015.md) · [CLI and JSON guide](references/cli.md) · [Project website](https://rem0116kjh.github.io/suffice-patch/?lang=en)
+[Download v5.5.0](dist/suffice-patch-v5.5.0.zip) · [Real-project comparison](evals/V5_EXTERNAL_20261015.en.md) · [Functional validation](evals/V5_20261015.md) · [CLI and JSON guide](references/cli.md) · [Project website](https://rem0116kjh.github.io/suffice-patch/?lang=en)
 
 ## When to use it
 
@@ -31,7 +31,7 @@ parts, then run integration checks when a change affects multiple packages.
 The inspector needs **Python 3.9+, Git and ripgrep (`rg`)**. Your project does not need to use
 Python. No additional Python packages or project dependencies are required.
 
-Extract the [installation ZIP](dist/suffice-patch-v5.0.1.zip), enter its `suffice-patch` folder,
+Extract the [installation ZIP](dist/suffice-patch-v5.5.0.zip), enter its `suffice-patch` folder,
 and run these commands to install for Codex. Copy all five files: the skill instructions,
 three Python helpers and CLI reference.
 
@@ -41,7 +41,7 @@ cp SKILL.md "$HOME/.agents/skills/suffice-patch/SKILL.md"
 cp scripts/*.py "$HOME/.agents/skills/suffice-patch/scripts/"
 cp references/cli.md "$HOME/.agents/skills/suffice-patch/references/"
 python3 -B "$HOME/.agents/skills/suffice-patch/scripts/collect_context.py" --version
-# SufficePatch 5.0.1
+# SufficePatch 5.5.0
 ```
 
 For Claude Code, replace `.agents/skills` with `.claude/skills` in the paths above.
@@ -83,6 +83,7 @@ and diffs before editing.
 | Target | Collection method |
 |---|---|
 | Python | AST-based local and relative imports, `src` layouts, defined symbols |
+| Flutter and Dart | Relative and in-repository `package:` imports, exports, parts, and unit, widget and integration test candidates |
 | JS/TS, JSX/TSX, Vue/Svelte | Relative imports, exports, `require`, string-literal dynamic imports, TypeScript extension and index-file candidates |
 | Go | Local packages within a `go.mod` module and source candidates in the same package |
 | Rust | Local module candidates from `mod` and `crate`/`self`/`super` paths |
@@ -100,6 +101,8 @@ run them.
 python3 -B scripts/collect_context.py . --scope packages/web
 # Collect files, dependencies, references, and tests
 python3 -B scripts/collect_context.py packages/web/src/cart.ts --scope packages/web
+# Include both library code and tests in a Flutter package
+python3 -B scripts/collect_context.py apps/shop/lib/src/cart.dart --scope apps/shop
 # Search two connected packages and narrow references to a specific symbol
 python3 -B scripts/collect_context.py services/api/main.go --scope services/api --scope packages/shared --symbol Calculate
 ```
@@ -231,6 +234,8 @@ Staying within collection limits does not establish better performance on large 
 or guarantee discovery of every affected dependency.
 
 ## Update history
+
+- **2026-11-19 · v5.5.0** — Added Flutter and Dart dependency and test discovery. The inspector identifies the current package from `pubspec.yaml` and follows local path dependencies when Dart package configuration is available. [Usage and search boundaries](references/cli.md)
 
 - **2026-11-19 · v5.0.1** — Directory maps search the overlap between requested directories and `--scope` before applying the candidate limit. [Regression tests](evals/test_v5.py)
 
